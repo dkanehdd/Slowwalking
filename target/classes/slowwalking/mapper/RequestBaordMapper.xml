@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="advertisement.RequestBoardImpl">
+	<select id="requestBoard" resultType="advertisement.RequestBoardDTO">
+		SELECT * FROM requestBoard
+			WHERE id = 'kosmo'  
+	</select>
+	<select id="requestBoardView" resultType="advertisement.RequestBoardDTO">
+		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, R.disability_grade, R.warning, R.image, R.age, R.idx, B.name
+		    FROM requestBoard R inner join member B
+		    on R.id = B.id
+		    WHERE idx = #{0};
+	</select>
+
+</mapper>
