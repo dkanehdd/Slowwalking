@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
 </head>
 <body>
-      texttsetssdflkjas;dflksadjfl;kasdf
-      <h1>깃허브 협엽테스트</h1>
+      <h2>안녕하세요</h2>
+      안녕못해~
 </body>
 </html>
