@@ -9,7 +9,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
 </head>
 <body>
-      texttsetssdflkjas;dflksadjfl;kasdf
-      <h2>we can do it!</h2>
+      <h2>안녕하세요</h2>
 </body>
 </html>
