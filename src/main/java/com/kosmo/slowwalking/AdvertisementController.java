@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import advertisement.RequestBoardDTO;
 import advertisement.RequestBoardImpl;
+import member.SitterImpl;
+import member.SitterMemberDTO;
 
 
 @Controller
@@ -114,7 +116,11 @@ public class AdvertisementController {
 	
 	//시터 리스트 보기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/SitterBoard_list")
-	public String SitterBoardList() {
+	public String SitterBoardList(Model model) {
+		
+		ArrayList<SitterMemberDTO> lists = sqlSession.getMapper(SitterImpl.class).list();
+		
+		model.addAttribute("lists", lists);
 		return "advertisement/SitterBorad_list";
 	}
 	
