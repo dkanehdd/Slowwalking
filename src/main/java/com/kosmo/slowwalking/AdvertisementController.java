@@ -1,8 +1,10 @@
 package com.kosmo.slowwalking;
 
+import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+
 import advertisement.RequestBoardDTO;
 import advertisement.RequestBoardImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
+
 
 @Controller
 public class AdvertisementController {
@@ -44,6 +49,14 @@ public class AdvertisementController {
 		RequestBoardDTO requestBoarddto = sqlSession.getMapper(RequestBoardImpl.class)
 				.requestBoardView(index);
 		
+		System.out.println("dto의 regular_short : " + requestBoarddto.getRegular_short());
+		if(requestBoarddto.getRegular_short().equals("regular")) {
+			requestBoarddto.setRegular_short("정기적");
+		}
+		else if(requestBoarddto.getRegular_short().equals("short")) {
+			requestBoarddto.setRegular_short("단기");
+		}
+		
 		model.addAttribute("dto", requestBoarddto);
 		
 		return "advertisement/RequestBoard_view";
@@ -64,14 +77,35 @@ public class AdvertisementController {
 	
 	//구인의뢰서 쓰기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/requestBoard_write")
-	public String ReqeustBoardWrite() {
+	public String ReqeustBoardWrite(Principal principal, Model model) {
+		
+		String user_id="";
+		try {
+			user_id = principal.getName();
+			System.out.println("user_id="+user_id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("user_id", user_id);
+		
+		
 		return "advertisement/RequestBoard_write";
 	}
 	
 	//구인의뢰서 쓰기  요청명(메소드)
 	@RequestMapping("/advertisement/requestBoardAction_write")
-	public String ReqeustBoardWriteAction() {
-		return "advertisement/RequestBoard_list";
+	public String ReqeustBoardWriteAction(Model model, HttpServletRequest req,
+			HttpSession session) {
+		
+		
+		
+		String advertise =  req.getParameter("advertise");
+		 
+		System.out.println("광고 보이기 파라미터로 넘어온 값 : " + advertise);
+		
+		
+		return "redirect:requestBoard_view";
 	}
 	
 	//구인의뢰서 삭제  요청명(메소드)
