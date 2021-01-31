@@ -13,6 +13,13 @@ public class MemberDTO {
 	private String email;
 	private int starrate;
 	private String flag;
+	private int enabled;
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
 	public String getId() {
 		return id;
 	}

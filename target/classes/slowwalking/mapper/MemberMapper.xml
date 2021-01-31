@@ -16,7 +16,12 @@
 		SELECT count(*) from member where id=#{id}
 	</select>
 	
-	<insert id=""></insert>
+	<insert id="insertMember">
+		INSERT INTO member
+		(id, pw, name, image_path, phone, gender, birthday, regidate, email, starrate,  flag, enabled)
+    VALUES(#{id}, #{pw},#{name}, '' ,
+    #{phone}, #{gender}, #{birthday},sysdate, #{email}, 0 , #{flag}, 1)
+	</insert>
 	
 	<select id="flagValidate" resultType="String">
 		SELECT flag FROM member WHERE id=#{0}
@@ -25,4 +30,18 @@
 		SELECT * FROM sitterMember WHERE sitter_id=#{0}
 	</select>
 	
+	<update id="insertImage">
+		UPDATE member
+			SET image_path=#{1}
+			WHERE id=#{0}
+	</update>
+	
+	<select id="getImage" resultType="String">
+		SELECT image_path FROM member where id=#{0}
+	</select>
+	
+	
+	<select id="getGu" resultType="String">
+		select distinct gugun from zipcode where sido=#{0}
+	</select>
 </mapper>

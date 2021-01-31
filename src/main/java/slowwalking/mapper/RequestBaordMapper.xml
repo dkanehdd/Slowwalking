@@ -5,14 +5,15 @@
 
 <mapper namespace="advertisement.RequestBoardImpl">
 	<select id="requestBoard" resultType="advertisement.RequestBoardDTO">
-		SELECT * FROM requestBoard
-			WHERE id = 'kosmo'  
+		SELECT * FROM requestBoard  
 	</select>
 	<select id="requestBoardView" resultType="advertisement.RequestBoardDTO">
-		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, R.disability_grade, R.warning, R.image, R.age, R.idx, B.name
+		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, 
+				R.disability_grade, R.warning, R.image, R.age, R.idx, R.regular_short, B.name,
+				R.content
 		    FROM requestBoard R inner join member B
 		    on R.id = B.id
-		    WHERE idx = #{0};
+		    WHERE idx = #{0}
 	</select>
 
 </mapper>
