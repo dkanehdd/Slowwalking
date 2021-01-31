@@ -15,5 +15,6 @@
 	
 	<p><a href="../mypage/proEdit" target="iframe">정보수정</a></p>
 	<iframe src="" name="iframe" width="600" height="600" seamless></iframe>
+	<a href="../advertisement/requestBoard_write">의뢰서 쓰기로 이동</a>
 </body>
 </html>
