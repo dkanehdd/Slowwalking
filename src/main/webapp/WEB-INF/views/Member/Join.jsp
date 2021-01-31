@@ -12,9 +12,8 @@
 <body>
 	<h2>회원가입 페이지</h2>
 	
-	
-	<a href="./parentsjoin">부모회원으로 가입하기</a>
-	<a href="./sitterjoin">시터회원으로 가입하기</a>
+	<a href="./memberjoin?flag=parents">부모회원으로 가입하기</a>
+	<a href="./memberjoin?flag=sitter">시터회원으로 가입하기</a>
 	
 </body>
 </html>
