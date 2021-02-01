@@ -17,8 +17,36 @@ public class SitterMemberDTO {
 	private String advertise;
 	private String premium;
 	private int career;
+	private String name;
+	private String image_path;
+	private int starrate;
+	private int age;
 	
 	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getImage_path() {
+		return image_path;
+	}
+	public void setImage_path(String image_path) {
+		this.image_path = image_path;
+	}
+	public int getStarrate() {
+		return starrate;
+	}
+	public void setStarrate(int starrate) {
+		this.starrate = starrate;
+	}
 	public String getSitter_id() {
 		return sitter_id;
 	}

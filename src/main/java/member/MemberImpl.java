@@ -12,4 +12,11 @@ public interface MemberImpl {
 	
 	public String flagValidate(String id);
 	public SitterMemberDTO sitMem(String id);
+	
+	public String getImage(String id);
+	public int insertImage(String id, String image);
+	
+	
+	public ArrayList<String> getGu(String sido);
+
 }

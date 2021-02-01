@@ -18,12 +18,13 @@
 					class="nav-link smoothScroll">시터리스트</a></li>
 				<li class="nav-item"><a href="../advertisement/requestBoard_list"
 					class="nav-link smoothScroll">의뢰리스트</a></li>
-				<li class="nav-item"><a href="multiBoard/notice"
+				<li class="nav-item"><a href="../multiBoard/notice"
 					class="nav-link">공지사항</a></li>
-				<li class="nav-item"><a href="multiBoard/FAQ" class="nav-link">FAQ</a>
+				<li class="nav-item"><a href="../multiBoard/FAQ" class="nav-link">FAQ</a>
 				</li>
-				
-				<li class="nav-item"><a href="member/login"
+
+				<li class="nav-item"><a href="../member/login"
+
 					class="nav-link contact">로그인</a></li>
 			</ul>
 		</div>
