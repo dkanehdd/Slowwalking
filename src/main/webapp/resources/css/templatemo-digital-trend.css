@@ -11,9 +11,6 @@
     --link-color:           #404040;
     --p-color:              #666262;
 
-    --base-font-family:     'Plain-Light', sans-serif;
-    --title-font-family:    'Plain-Regular', sans-serif;
-    --font-bold-family:     'Plain-Bold', sans-serif;
     --font-weight-bold:     bold;
 
     --h1-font-size:         42px;
@@ -172,6 +169,10 @@ a:hover, a:active, a:focus {
 	width: 100%;
 }
 
+ol, ul {
+    list-style: none;
+    margin:0px; padding:0px;
+}
 
 /*---------------------------------------
     MENU             
@@ -678,19 +679,143 @@ a:hover, a:active, a:focus {
 }
 
 /*---------------------------------------
-	추가            
+	추가: 폼 양식(loginBox)
   -----------------------------------------*/
-.loginBox button {
-	color: var(--primary-color);
-	font-weight: normal;
-	text-decoration: none;
+
+
+.loginContainer{
+	width: 100%;
+	padding: 8% 0 0;
+	margin: auto;
 }
 
-.loginBox button:hover {
-	color: var(--secondary-color);
+.loginContainer button {
+	width:100%;
+	background-color: var(--primary-color);
+	font-weight: normal;
+	text-decoration: none;
+	margin-bottom: 15px;
+}
+
+.loginContainer button:hover {
+	color: var(--dark-color);
+	background-color: var(--secondary-color);
 	outline: none;
 	text-decoration: none;
 }
+
+.form {
+	width: 500px;
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 100%;
+	min-width: 300px;
+	margin: 0 auto 100px;
+	padding: 100px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input[type="text"], .form input[type="password"]{
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form label{
+	font-size:12px;
+	line-height:12px;
+	vertical-align:middle;
+}
+.clear{
+	clear:both;
+}
+.form ul li{
+	display:inline;
+}
+.form ul li::after{
+	content:" |";
+	
+}
+.form ul li.non-af::after{
+	content:"";
+}
+.form ul li a{
+	color:--dark-color;
+	font-size:12px;
+}
+.form .lc_top{
+	
+	width:100%;
+	height:120px;
+	margin-bottom:30px;
+}
+.lc_top .errTxt{
+	font-size: 12px;
+	color: var(--primary-color);
+}
+.lc_top .lct_img{
+	width:110px;
+	height:110px;
+	margin: 0 auto 5px;
+	background-image:url("../images/login.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+/*****FAQ 아코디언******/
+/*****NOTICE 공지게시판 ******/
+
+.subPimgBg{
+	width:100%;
+	height:150px;	
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: right;
+}
+.faqImg{
+	background-image:url("../images/faq.png");
+}
+.noticeImg{
+	background-image:url("../images/notice.png");
+}
+
+#accordion .card-header{
+	vertical-align:middle;
+}
+#accordion a{
+	padding-top:10px;
+	display:block;
+	margin: auto 0;
+}
+.subPTitle, .table th{
+	color: var(--primary-color);
+	font-size: 1.1em;
+	font-weight:500;
+}
+.table th{
+	background-color:#f7f7f7;
+	text-align:center;
+}
+.table td{
+	background-color:var(--white-color);
+	text-align:center;	
+}
+
+.table td:nth-child(2){
+	text-align:left;
+}
+.table td a{
+	text-decoration :none;
+	color: var(--dark-color);
+}
+.table td a:hover{
+	color: var(--primary-color);
+}
+/*****사이드메뉴*****/
 
 
 /*---------------------------------------
