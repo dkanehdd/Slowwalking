@@ -15,5 +15,14 @@
 		    on R.id = B.id
 		    WHERE idx = #{0}
 	</select>
+	
+	<insert id="insertRequestBoard">
+	insert into requestBoard(idx, id, title, children_name, advertise, age, pay,
+				region, request_time, disability_grade, warning,
+				regular_short, start_work, content, image)
+			values(seq_requestBoard_idx.nextval, #{0}, #{1}, #{2}, #{3},
+					#{4}, #{5}, #{6}, #{7}, #{8}, #{9}, #{10}, to_date(#{11},'YYYY-MM-DD'), #{12},
+					#{13})
+	</insert>
 
 </mapper>
