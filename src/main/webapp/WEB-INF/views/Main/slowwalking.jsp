@@ -5,12 +5,12 @@
 <html>
 <head>
 <!-- css, js 파일링크 등 묶음-->
-<%@ include file="./links/linkOnly.jsp"%>
+<%@ include file="../links/linkOnly2dot.jsp"%>
 <title>느린걸음</title>
 </head>
 <body>
 	<!-- Top메뉴 -->
-	<%@ include file="./include/top.jsp"%>
+	<%@ include file="../include/top.jsp"%>
 
 	<div id="video-container">
 		<div class="video-overlay"></div>
@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<video autoplay loop muted>
-			<source src="./resources/video/vid.mp4" type="video/mp4" />
+			<source src="../resources/video/vid.mp4" type="video/mp4" />
 		</video>
 	</div>
 
@@ -46,7 +46,7 @@
 
 					<div class="about-image" data-aos="fade-up" data-aos-delay="200">
 
-						<img src="./resources/images/working-girl.png" class="img-fluid"
+						<img src="../resources/images/working-girl.png" class="img-fluid"
 							alt="office">
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 					<div class="owl-carousel owl-theme" id="project-slide">
 						<div class="item project-wrapper" data-aos="fade-up"
 							data-aos-delay="100">
-							<img src="./resources/images/project/project-image01.jpg"
+							<img src="../resources/images/project/project-image01.jpg"
 								class="img-fluid" alt="project image">
 
 							<div class="project-info">
@@ -84,7 +84,7 @@
 						</div>
 
 						<div class="item project-wrapper" data-aos="fade-up">
-							<img src="./resources/images/project/project-image02.jpg"
+							<img src="../resources/images/project/project-image02.jpg"
 								class="img-fluid" alt="project image">
 
 							<div class="project-info">
@@ -99,7 +99,7 @@
 						</div>
 
 						<div class="item project-wrapper" data-aos="fade-up">
-							<img src="./resources/images/project/project-image03.jpg"
+							<img src="../resources/images/project/project-image03.jpg"
 								class="img-fluid" alt="project image">
 
 							<div class="project-info">
@@ -114,7 +114,7 @@
 						</div>
 
 						<div class="item project-wrapper" data-aos="fade-up">
-							<img src="./resources/images/project/project-image04.jpg"
+							<img src="../resources/images/project/project-image04.jpg"
 								class="img-fluid" alt="project image">
 
 							<div class="project-info">
@@ -129,7 +129,7 @@
 						</div>
 
 						<div class="item project-wrapper" data-aos="fade-up">
-							<img src="./resources/images/project/project-image05.jpg"
+							<img src="../resources/images/project/project-image05.jpg"
 								class="img-fluid" alt="project image">
 
 							<div class="project-info">
@@ -159,21 +159,21 @@
                     <p>내용입니다 내용입니다 내용입니다</p>
                     <ul>
                         <li>
-                            <img src="./resources/images/icon/about-icon-01.png" alt="">
+                            <img src="../resources/images/icon/about-icon-01.png" alt="">
                             <div class="text">
                                 <h6>제목입니다1</h6>
                                 <p>내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다</p>
                             </div>
                         </li>
                         <li>
-                            <img src="./resources/images/icon/about-icon-02.png" alt="">
+                            <img src="../resources/images/icon/about-icon-02.png" alt="">
                             <div class="text">
                                 <h6>제목입니다1</h6>
                                 <p>내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다</p>
                             </div>
                         </li>
                         <li>
-                            <img src="./resources/images/icon/about-icon-03.png" alt="">
+                            <img src="../resources/images/icon/about-icon-03.png" alt="">
                             <div class="text">
                                 <h6>제목입니다1</h6>
                                 <p>내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다</p>
@@ -182,7 +182,7 @@
                     </ul>
                 </div>
                 <div class="right-image col-lg-7 col-md-12 col-sm-12 mobile-bottom-fix-big" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
-                    <img src="./resources/images/icon/right-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
+                    <img src="../resources/images/icon/right-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
                 </div>
             </div>
         </div>
@@ -197,7 +197,7 @@
 				<div class="col-lg-6 col-md-5 col-12">
 					<div class="contact-image" data-aos="fade-up">
 
-						<img src="./resources/images/female-avatar.png" class="img-fluid"
+						<img src="../resources/images/female-avatar.png" class="img-fluid"
 							alt="website">
 					</div>
 				</div>
@@ -223,7 +223,7 @@
 	</section>
 
 	<!-- Footer메뉴 -->
-	<%@ include file="./include/footer.jsp"%>
+	<%@ include file="../include/footer.jsp"%>
 	
 	<!-- 스크립트 
 	<script src="./resources/js/jquery.min.js"></script>
