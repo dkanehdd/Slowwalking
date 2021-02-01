@@ -28,7 +28,7 @@
 			</c:when>
 			<c:otherwise>
 				alert('${message }');
-				location.href="../";
+				location.href="/slowwalking/";
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
@@ -42,6 +42,8 @@
                enctype="multipart/form-data" onsubmit="return checkImg();">
         <label for="image_path">이미지선택하기</label>
         <input type="hid`den" name="id" value="${id }" />
+        <input type="hid`den" name="flag" id="flag" value="${flag }" />
+        <input type="hid`den" name="mode" id="mode" value="${mode }" />
         <div><input type="file" id="image_path" name="image_path"/></div>
 		
 		<button type="submit">등록하기</button><button type="button" onclick="skip();">건너뛰기</button>
@@ -64,7 +66,20 @@ function checkImg() {
 
 function skip(){
 	alert('마이페이지에서 사진을 등록하실 수 있습니다.');
-	location.href='../';
+	var flag = document.getElementById("flag");
+	var mode = document.getElementById("mode");
+	if(mode.value=='join'){
+		if(flag.value=='sitter'){
+			location.href='../member/SitterJoin';
+		}
+		else if(flag.value=='parents'){
+			location.href='../member/ParentsJoin';
+		}
+		
+	}
+	else{
+		location.href="/slowwalking/";
+	}
 }
 	
 </script>
