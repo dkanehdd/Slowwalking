@@ -193,7 +193,6 @@
 	<section class="testimonial section-padding" style="background-color:var(--project-bg);">
 		<div class="container">
 			<div class="row">
-
 				<div class="col-lg-6 col-md-5 col-12">
 					<div class="contact-image" data-aos="fade-up">
 
@@ -209,9 +208,10 @@
 					<div class="quote" data-aos="fade-up" data-aos-delay="200"></div>
 
 					<h2 class="mb-4" data-aos="fade-up" data-aos-delay="300" style="line-height:1.4em;">
-					방문베이비시터서비스들은 많으나 시터들의 전공이나 경력이 단순히 아이를 좋아하는 대학생, 일반보육교사인 경우가 많습니다.
+
+					방문 베이비 시터 서비스들은 많으나 시터들의 전공이나 경력이 단순히 아이를 좋아하는 대학생, 일반보육교사인 경우가 많습니다.
 					장애가 있는 아이인경우 보다 전문적인 지식을 가진 사람들, 아이가 문제가 생겼을때 대처를 할 수 있는 보호자가 필요합니다.
-					느린걸음은 믿을 수 있는 사람에게 우리 아이들을 맡길 수 있기를 바라는 마음으로 시작되었습니다.(팀장님이 한 말 인용)</h2>
+					느린걸음은 믿을 수 있는 사람에게 우리 아이들을 맡길 수 있기를 바라는 마음으로 시작되었습니다.s</h2>
 
 					<p data-aos="fade-up" data-aos-delay="400">
 						<strong>○○○</strong> <span class="mx-1">/</span> <small>느린걸음 대표</small>
