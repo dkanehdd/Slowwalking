@@ -10,11 +10,32 @@ public class RequestBoardDTO {
 	private String disability_grade;
 	private String warning;
 	private String image;
-	private int idx;
 	private String age;
 	private String title;
+	private String regular_short;
+	private java.sql.Date start_work;
+	private String content;
+	private int idx;
 	
 	
+	public String getRegular_short() {
+		return regular_short;
+	}
+	public void setRegular_short(String regular_short) {
+		this.regular_short = regular_short;
+	}
+	public java.sql.Date getStart_work() {
+		return start_work;
+	}
+	public void setStart_work(java.sql.Date start_work) {
+		this.start_work = start_work;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	//회원 정보를 받기위한 변수
 	private String name;
 	
