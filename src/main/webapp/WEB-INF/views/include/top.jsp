@@ -1,8 +1,8 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg">
 	<div class="container">
-		<a class="navbar-brand nonHover" href="../main/main"> <i
+		<a class="navbar-brand nonHover" href="#"> <i
 			class="fa fa-slideshare"></i> 느린걸음
 		</a>
 

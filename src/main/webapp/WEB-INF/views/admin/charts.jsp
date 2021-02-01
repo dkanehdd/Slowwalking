@@ -2,13 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <head>
 
     <meta charset="utf-8">
@@ -17,29 +15,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>SB Admin 2 - Charts</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+   <!-- Custom fonts for this template-->
+    <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-      
-        <!-- Custom styles for this template -->
-    <link href="../resources/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-<script>
-function deleteRow(id){
-	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?id="+ id;
-	}
-}
-</script>
+    <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -49,7 +37,7 @@ function deleteRow(id){
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -63,7 +51,7 @@ function deleteRow(id){
 
             <!-- Heading -->
             <div class="sidebar-heading">
-               	Management
+               	관리
             </div>
 
 
@@ -72,12 +60,6 @@ function deleteRow(id){
                 <a class="nav-link" href="charts">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>회원정보</span></a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="adminnotice?flag=notice">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>공지사항</span></a>
             </li>
 
             <!-- Divider -->
@@ -101,11 +83,9 @@ function deleteRow(id){
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
                     <!-- Topbar Search -->
                     <form
@@ -222,7 +202,7 @@ function deleteRow(id){
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">Hi there! I am wondering if you can help me with a
                                             problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                        <div class="small text-gray-500">Emily Fowler Â· 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -234,7 +214,7 @@ function deleteRow(id){
                                     <div>
                                         <div class="text-truncate">I have the photos that you ordered last month, how
                                             would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                        <div class="small text-gray-500">Jae Chun Â· 1d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -246,7 +226,7 @@ function deleteRow(id){
                                     <div>
                                         <div class="text-truncate">Last month's report looks great, I am very happy with
                                             the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                        <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -258,7 +238,7 @@ function deleteRow(id){
                                     <div>
                                         <div class="text-truncate">Am I a good boy? The reason I ask is because someone
                                             told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                        <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -307,7 +287,7 @@ function deleteRow(id){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
+                    <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
                     <p class="mb-4">회원정보를 확인합니다 </p>
 
                     <!-- DataTales Example -->
@@ -331,13 +311,11 @@ function deleteRow(id){
                                             <th>이메일</th>
                                             <th>별점</th>
                                             <th>회원식별</th>
-                                            <th>회원수정</th>
-                                            <th>회원삭제</th>
                                         </tr>
                                     </thead>
-                                  
+                                
                                     <tbody>
-                                         <c:forEach items="${lists }" var="row">		
+                                  <c:forEach items="${lists }" var="row">		
 										<tr>
                                             <th>${row.id }</th>
                                             <th>${row.pw }</th>
@@ -350,38 +328,18 @@ function deleteRow(id){
                                             <th>${row.email }</th>
                                             <th>${row.starrate }</th>
                                             <th>${row.flag }</th>
-                                            <th> <button class="btn btn-primary" 
-							onclick="location.href='chartsmodify?id=${row.id}';">수정</button></th>
-                                            <th><button class="btn btn-danger" 
-							onclick="javascript:deleteRow('${row.id}');">삭제</button></th>
                                         </tr>
-								</c:forEach>
-                                     
-                                        
+	</c:forEach>
+                                
                                     </tbody>
                                 </table>
-                               
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
         <!-- End of Content Wrapper -->
 
     </div>
@@ -400,7 +358,7 @@ function deleteRow(id){
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">Ã</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -413,21 +371,22 @@ function deleteRow(id){
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../resources/vendor/jquery/jquery.min.js"></script>
-    <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../resources/js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../resources/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../resources/js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
 
 </body>
 

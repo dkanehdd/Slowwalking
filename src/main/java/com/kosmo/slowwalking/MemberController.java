@@ -1,4 +1,3 @@
-
 package com.kosmo.slowwalking;
 
 import java.security.Principal;
@@ -45,7 +44,6 @@ public class MemberController {
 		return "Member/Join";
 	}
 	
-	
 	//회원가입 처리후 마이페이지로 이동하는 요청명(메소드)
 	/*
 	회원가입 한 후 바로 로그인이 된 상태로 처리할지 아님 한번더 로그인을 할지 결정 한후 어떤 페이지로 이동할지 다시 결정
@@ -88,11 +86,6 @@ public class MemberController {
          
          mv.setViewName("Member/MypageParents");
       }
-      
-      else if(flag.equals("admin")) {
-          
-          mv.setViewName("redirect:../admin/index");
-       }
       
       return mv;
    }

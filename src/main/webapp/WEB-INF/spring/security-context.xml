@@ -22,10 +22,8 @@
 	<http>
 		<intercept-url pattern="/member/login"
 			access="permitAll"/>
-		<intercept-url pattern="/admin"
-			access="permitAll"/>
 		<intercept-url pattern="/admin/**"
-			access="hasRole('admin')"/>
+			access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/**"
 			access="permitAll"/>
 			
@@ -37,8 +35,6 @@
 			password-parameter="pass"
 		/>
 		<logout/>
-		<access-denied-handler
-			error-page="/admin/denided"/>
 	</http>
 	<!-- 각 권한을 획득하기 위한 설정 부분 -->
 	<authentication-manager>

@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	@RequestMapping("/main/main")
+	@RequestMapping("/")
 	public String home() {
 
-		return "Main/slowwalking";
+		return "slowwalking";
 	}
 	
 }
