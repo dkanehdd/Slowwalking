@@ -17,13 +17,15 @@
 			<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
 				<div class="text-center">
 					<h2>구직 신청 의뢰서를 작성해주세요.</h2>
-					<div class="custom-control custom-switch">
-						<input type="checkbox" class="custom-control-input" id="switch1"
-							name="advertise"> <label class="custom-control-label"
-							for="switch1">의뢰서 보이기</label>
-					</div>
-					<form action="requestBoardAction_write" method="post"
-						name="requestBoard" enctype="multipart/form-data">
+					<form
+						action="requestBoardAction_write?${_csrf.parameterName}=${_csrf.token}"
+						method="post" name="requestBoard" enctype="multipart/form-data">
+						<div class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input" id="switch1"
+								name="advertise"> <label class="custom-control-label"
+								for="switch1">의뢰서 보이기</label>
+						</div>
+
 						<div class="text-center">
 
 							<table class="table table-bordered">
@@ -31,7 +33,7 @@
 									<col width="40%" />
 									<col width="*" />
 								</colgroup>
-								<input type="hid-den" value="${user_id }" />
+								<input type="hid-den" name="id" value="${user_id }" />
 								<tbody>
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">신청서의
@@ -84,13 +86,13 @@
 											<div class="form-check-inline">
 												<label class="form-check-label" for="radio1"> <input
 													type="radio" class="form-check-input" id="serious"
-													name="optradio" value="중증" checked>중증
+													name="disability_grade" value="serious" checked>중증
 												</label>
 											</div>
 											<div class="form-check-inline">
 												<label class="form-check-label" for="radio2"> <input
 													type="radio" class="form-check-input" id="slight"
-													name="optradio" value="경증">경증
+													name="disability_grade" value="slight">경증
 												</label>
 											</div>
 										</td>
@@ -108,13 +110,13 @@
 											<div class="form-check-inline">
 												<label class="form-check-label" for="radio1"> <input
 													type="radio" class="form-check-input" id="short"
-													name="optradio" value="short" checked>단기
+													name="regular_short" value="short" checked>단기
 												</label>
 											</div>
 											<div class="form-check-inline">
 												<label class="form-check-label" for="radio2"> <input
 													type="radio" class="form-check-input" id="regular"
-													name="optradio" value="regular">정기적
+													name="regular_short" value="regular">정기적
 												</label>
 											</div>
 										</td>
@@ -123,7 +125,7 @@
 										<th class="text-center" style="vertical-align: middle;">시터가
 											일을 시작했으면 하는 날짜를 적어주세요</th>
 										<td><input type="text" class="form-control"
-											placeholder="o월/o일" style="width: 400px;" name="start_work" />
+											placeholder="2021-03-01" style="width: 400px;" name="start_work" />
 										</td>
 									</tr>
 									<tr>
