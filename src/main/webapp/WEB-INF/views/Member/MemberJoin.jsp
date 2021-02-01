@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +19,16 @@
 <body>
 	<div class="container">
 		<h1>부모회원가입 페이지</h1>
-		<form action="./joinAction" name="regiform" method="post" enctype="m">
+		<c:url value="/member/joinAction" var="joinURL" />
+		<form:form action="${joinURL }" name="regiform" method="post" onsubmit="return checkIT();">
 			<table class="table">
 				<colgroup>
 					<col style="width: 150px">
 					<col>
 				</colgroup>
-				<input type='hidden' name='flag' id='idchktype' value="${flag }">
+				<input type="hid`den" id="smsck" value=""/>
+				<input type='hid den' name='flag' id='idchktype' value="${flag }">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td><input type="text" name="phone" id='phone' value=""
@@ -32,8 +37,9 @@
 						<div style='display: inline-block;'>
 							<button type="button" id='sendPhoneNumber'>본인인증</button>
 						</div>
+						
 						<div style='display: none;' id="phonecheck" >
-						<input  type="text" name="userida" id='inputCertifiedNumber' maxlength="4" value=""><button type="button" id='checkBtn'>확인</button></div>
+						<input  type="text" name="userida" id='inputCertifiedNumber' maxlength="6" value=""><button type="button" id='checkBtn'>확인</button></div>
 					</td>
 				</tr>
 				<tr>
@@ -97,15 +103,11 @@
                           <input type="text" name="birthday" id="birthday" value="" />
                          </td>
                     </tr>
-                    <th>프로필사진</th> 
-                        <td>
-                          <input type="file" name="image_path" id="birthday" value="" />
-                         </td>
-                    </tr>
+                    <tr>
 			</table>
-			<button type="submit">회원가입</button>
-		</form>
-	</div>
+			<button type="submit" class="btn btn-danger">회원가입</button>
+		</form:form>
+		</div>
 </body>
 
 <script>
@@ -145,8 +147,7 @@ $(function(){
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
 				if(d.ckeck==1){
-					$('#idCheck').html(d.message);
-					$('#idCheck').css('color','red');
+					$('#idCheck').html(d.message).css('color','red');
 				}
 				else{
 					$('#idCheck').css('display','inline');
@@ -158,9 +159,7 @@ $(function(){
 			}
 		});
 	});
-	/**************************************************
-	■ 한글만 입력 가능하도록 처리 하는 부분
-	**************************************************/
+	//한글만 입력 가능하도록 처리 하는 부분
     $("#name").keyup(function (event) {
 	regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
     v = $(this).val();
@@ -169,19 +168,18 @@ $(function(){
 			$(this).val(v.replace(regexp, ''));
         }
     });
-	/**************************************************
-	■ 한글입력금지
-	**************************************************/
+	//아이디에 한글입력금지
     $("#id").keyup(function (event) {
-	regexp = /[\ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+	regexp = /[\ㄱ-ㅎㅏ-ㅣ가-힣|\s]/g;
     v = $(this).val();
 		if (regexp.test(v)) {
-			alert("한글은 입력이 불가능합니다.");
+			alert("한글과 공백은 입력이 불가능합니다.");
 			$(this).val("");
 			$(this).focus();
         }
 		
     });
+	//인증번호 발송하기
 	$('#sendPhoneNumber').click(function() {
 		var phoneNumber = $('#phone').val();
 		if(phoneNumber.length<11){
@@ -202,13 +200,14 @@ $(function(){
 						Swal.fire('인증성공!', '휴대폰 인증이 정상적으로 완료되었습니다.', 'success');
 						$('#phonecheck').css('display','none');
 						$('#phone').attr("readonly",true);
+						$('#smsck').val('1');
 						// 인증성공후 요청명 기입
 						//location.href='regiform'
 					} else {
 						Swal.fire({
 							icon : 'error',
 							title : '인증오류',
-							text : '인증번호가 올바르지 않습니다!',
+							text : '인증번호가 올바르지 않습니다!'
 						})
 					}
 				})
@@ -219,6 +218,7 @@ $(function(){
 			}
 		})
 	});
+	//핸드폰번호에 숫자외 다른문자 금지
 	$("#phone").keyup(function (event) {
 		regexp = /[^0-9]/gi;
 		v = $(this).val();
@@ -260,6 +260,14 @@ $(function(){
 	
 });
 
+function checkIT() {
+	var d=document.regiform;
+	if(!d.smsck.value) { alert('본인인증을 해 주세요.'); d.phone.focus(); return false; }	
+	if(!d.id.value){ alert("아이디를 입력하세요"); d.id.focus(); return false;}
+	if(!d.name.value) { alert('성함을 입력하세요'); d.name.focus(); return false; }
+	if(!d.pw.value) { alert('비밀번호를 입력하세요'); d.pw.focus(); return false; }
+	if(!d.email.value||!d.email2.value) { alert('이메일을 입력하세요'); d.email.focus(); return false; }
+}
 function emailSelect(obj) {
 	var email1 = document.getElementById("email1");
     var domain = document.getElementById("email2");

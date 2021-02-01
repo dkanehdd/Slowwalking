@@ -30,12 +30,14 @@
 		<form-login
 			login-page="/member/login"
 			default-target-url="/member/LoginAction"
+			authentication-failure-url="/member/login?error"
 			login-processing-url="/loginAction"
 			username-parameter="id"
 			password-parameter="pass"
 		/>
 		<logout/>
 	</http>
+	
 	<!-- 각 권한을 획득하기 위한 설정 부분 -->
 	<authentication-manager>
 		<authentication-provider>
@@ -51,4 +53,5 @@
 			/>
 		</authentication-provider>
 	</authentication-manager>
+	
 </beans:beans>

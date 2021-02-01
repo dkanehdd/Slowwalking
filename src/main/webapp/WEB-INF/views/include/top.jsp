@@ -22,7 +22,9 @@
 					class="nav-link">공지사항</a></li>
 				<li class="nav-item"><a href="../multiBoard/FAQ" class="nav-link">FAQ</a>
 				</li>
+
 				<li class="nav-item"><a href="../member/login"
+
 					class="nav-link contact">로그인</a></li>
 			</ul>
 		</div>
