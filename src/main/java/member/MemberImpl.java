@@ -11,5 +11,5 @@ public interface MemberImpl {
 	public int insertMember(MemberDTO memberDTO);
 	
 	public String flagValidate(String id);
-	   public SitterMemberDTO sitMem(String id);
+	public SitterMemberDTO sitMem(String id);
 }

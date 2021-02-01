@@ -63,7 +63,7 @@ public class MemberController {
 	
 	//로그인 처리후 마이페이지로 이동하는 요청명(메소드)
    @RequestMapping("/member/LoginAction")
-   public ModelAndView MemberLoginAction(Principal principal, Model model, HttpServletRequest req, HttpSession session) {
+   public ModelAndView MemberLoginAction(Principal principal, Model model) {
       
       System.out.println("로그인액션");
       String user_id = principal.getName();
