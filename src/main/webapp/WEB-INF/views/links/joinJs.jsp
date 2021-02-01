@@ -172,7 +172,7 @@ function checkIT() {
 	if(!d.pw.value) { alert('비밀번호를 입력하세요'); d.pw.focus(); return false; }
 	if(!d.email.value||!d.email2.value) { alert('이메일을 입력하세요'); d.email.focus(); return false; }
 	//약관 검증
-	if(!d.chkAll.value||!d.chk1.value||!d.chk2.value){alert('약정 동의가 필요합니다'); d.chkAll.focus(); return false;}
+	if(!d.chkAll.checked||!d.chk1.checked||!d.chk2.checked){alert('약정 동의가 필요합니다'); d.chkAll.focus(); return false;}
 }
 function emailSelect(obj) {
 	var email1 = document.getElementById("email1");
