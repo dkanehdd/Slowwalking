@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg">
 	<div class="container">
-		<a class="navbar-brand nonHover" href="#"> <i
+		<a class="navbar-brand nonHover" href="../main/main"> <i
 			class="fa fa-slideshare"></i> 느린걸음
 		</a>
 
