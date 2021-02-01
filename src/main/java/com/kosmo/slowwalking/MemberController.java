@@ -55,33 +55,34 @@ public class MemberController {
 	
 	
 	/*
-	회원가입 한 후 바로 로그인이 된 상태로 처리할지 아님 한번더 로그인을 할지 결정 한후 어떤 페이지로 이동할지 다시 결정
+	 * 회원가입 한 후 바로 로그인이 된 상태로 처리할지 아님 한번더 로그인을 할지 결정 한후 어떤 페이지로 이동할지 다시 결정
 	 */
-	@RequestMapping(value = "/member/joinAction", method=RequestMethod.POST)
-	public String MemberJoinAction(Model model, MemberDTO memberDTO) {
-		
+	@RequestMapping(value = "/member/joinAction", method = RequestMethod.POST)
+	public String MemberJoinAction(Model model, MemberDTO memberDTO, HttpSession session) {
+
 		System.out.println(memberDTO.getName());
 		System.out.println(memberDTO.getEmail());
 		System.out.println(memberDTO.getPw());
 		System.out.println(memberDTO.getId());
-		
+
 		int sucOrFail = sqlSession.getMapper(MemberImpl.class).insertMember(memberDTO);
-		//모델객체에 맵? 컬렉션을 저장한 후 뷰로 전달
-		if(sucOrFail==1) {
-			model.addAttribute("id", memberDTO.getFlag());
+		// 모델객체에 맵? 컬렉션을 저장한 후 뷰로 전달
+		if (sucOrFail == 1) {
+			model.addAttribute("id", memberDTO.getId());
 			model.addAttribute("sucOrFail", sucOrFail);
 			model.addAttribute("mode", "join");
 			model.addAttribute("flag", memberDTO.getFlag());
 			model.addAttribute("message", "회원가입이 완료되었습니다. \n추가 정보를 작성해주세요.");
-		}
-		else {
+			session.setAttribute("user_id", memberDTO.getId());
+		} else {
 			model.addAttribute("id", memberDTO.getFlag());
 			model.addAttribute("sucOrFail", sucOrFail);
 			model.addAttribute("message", "회원가입이 취소되었습니다.");
 		}
-		//회원가입 완료후 이미지 등록
+		// 회원가입 완료후 이미지 등록
 		return "Member/Image";
 	}
+	
 	public static String getUuid() {
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("생성된UUID-1:"+uuid);
@@ -97,33 +98,33 @@ public class MemberController {
 	}
 	
 	//로그인 처리후 마이페이지로 이동하는 요청명(메소드)
-   @RequestMapping("/member/LoginAction")
-   public ModelAndView MemberLoginAction(Principal principal, Model model) {
-      
-      System.out.println("로그인액션");
-      String user_id = principal.getName();
-      String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
-      
-      System.out.println(flag);
-      
-      ModelAndView mv = new ModelAndView();
-      
-      if(flag.equals("sitter")) {
-         System.out.println("시터회원 인증완료");
-         SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
-         
-         System.out.println(dto);
-         model.addAttribute("dto", dto);
-         
-         mv.setViewName("Member/MypageSitter");
-      }
-      else if(flag.equals("parents")) {
-         
-         mv.setViewName("Member/MypageParents");
-      }
-      
-      return mv;
-   }
+	@RequestMapping("/member/LoginAction")
+	public ModelAndView MemberLoginAction(Principal principal, Model model, HttpSession session) {
+
+		System.out.println("로그인액션");
+		String user_id = principal.getName();
+		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
+
+		System.out.println(flag);
+
+		ModelAndView mv = new ModelAndView();
+
+		if (flag.equals("sitter")) {
+			System.out.println("시터회원 인증완료");
+			SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
+
+			System.out.println(dto);
+			model.addAttribute("dto", dto);
+
+			mv.setViewName("Member/MypageSitter");
+		} else if (flag.equals("parents")) {
+
+			mv.setViewName("Member/MypageParents");
+		}
+		session.setAttribute("user_id", user_id);
+		return mv;
+	}
+	
     //기본정보입력 회원가입
     @RequestMapping("/member/memberjoin")
     public String MemberJoin(HttpServletRequest req, Model model) {

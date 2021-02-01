@@ -4,16 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Join.jsp</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
+<%@ include file="../links/linkOnly2dot.jsp"%>
+<title>Login.jsp</title>
 </head>
 <body>
-	<h2>회원가입 페이지</h2>
-	
-	<a href="./memberjoin?flag=parents">부모회원으로 가입하기</a>
-	<a href="./memberjoin?flag=sitter">시터회원으로 가입하기</a>
-	
+	<!-- Top메뉴 -->
+	<%@ include file="../include/top.jsp"%>
+	<section class="section-padding" style="background-color:#eee;">
+		<div class="container">
+			<div class="section_title">
+				<h1 class="mb-5"><strong>Join</strong> 가입하기</h1>
+			</div>
+			<div class="loginContainer input-group mb-3" data-aos="fade-up" data-aos-delay="400">
+				<div class="form joinFrm">
+					<a class="float-left" href="./memberjoin?flag=parents"><i class="fa fa-users" aria-hidden="true"></i>부모회원으로 가입하기</a>
+					<a class="float-right"href="./memberjoin?flag=sitter"><i class="fa fa-address-card" aria-hidden="true"></i>시터회원으로 가입하기</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer메뉴 -->
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>
