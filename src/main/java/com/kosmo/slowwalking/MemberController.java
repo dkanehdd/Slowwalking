@@ -70,6 +70,8 @@ public class MemberController {
 		if(sucOrFail==1) {
 			model.addAttribute("id", memberDTO.getFlag());
 			model.addAttribute("sucOrFail", sucOrFail);
+			model.addAttribute("mode", "join");
+			model.addAttribute("flag", memberDTO.getFlag());
 			model.addAttribute("message", "회원가입이 완료되었습니다. \n추가 정보를 작성해주세요.");
 		}
 		else {
@@ -223,6 +225,7 @@ public class MemberController {
 		String view = "";
 		String user_id = principal.getName();
 		
+		model.addAttribute("mode", "edit");
 	    model.addAttribute("id", user_id);
          
 		return "/Member/Image";
@@ -293,8 +296,18 @@ public class MemberController {
   		catch (Exception e) {
   			e.printStackTrace();
   		}
-	    		
-		return "redirect:/";
+	    if(req.getParameter("mode").equals("join")) {
+	    	if(req.getParameter("flag").equals("sitter")) {
+	    		view = "Member/SitterJoin";
+	    	}
+	    	else {
+	    		view = "Member/ParentsJoin";
+	    	}
+	    }
+	    else {
+	    	view="redirect:/";
+	    }
+		return view;
 	}
 	@RequestMapping(value="/member/sitterjoinaction", method=RequestMethod.POST)
 	public String InsertSitter(Model model, MultipartHttpServletRequest req) {
