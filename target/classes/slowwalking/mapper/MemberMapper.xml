@@ -44,4 +44,42 @@
 	<select id="getGu" resultType="String">
 		select distinct gugun from zipcode where sido=#{0}
 	</select>
+	
+	<!-- 어드민 회원 정보 수정 -->
+	<select id="view" resultType="member.MemberDTO">
+		SELECT * FROM member where id=#{id}
+	</select>
+	
+	<!-- 어드민 회원 정보 수정 처리 -->
+	<update id="modify" parameterType="member.MemberDTO">
+		UPDATE member 
+		SET pw=#{pw}, name=#{name}, 
+		phone=#{phone} ,gender=#{gender} ,flag=#{flag}
+		WHERE id=#{id}
+	</update>
+	
+	<!-- 어드민 회원 정보 삭제 처리 -->
+	<delete id="delete">
+		DELETE FROM member WHERE id=#{id}
+	</delete>
+	
+	
+	<!--공지사항 리스트 출력  -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) from multi_board
+	</select>
+	<select id="listPage" resultType="mutiBoard.MultiBoardDTO">
+		select * from multi_board where flag='notice'
+	</select>
+	
+	<!--공지사항 내용 보기  -->
+	<select id="contentPage" resultType="mutiBoard.MultiBoardDTO">
+		select * from multi_board where idx=#{idx}
+	</select>
+	
+	<!-- 공지사항 조횟수 증가 -->
+	<update id="contentCount" >
+		UPDATE multi_board SET visitcount = visitcount+1 WHERE idx=#{idx}
+	</update>
+	
 </mapper>

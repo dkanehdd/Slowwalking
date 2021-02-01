@@ -2,6 +2,8 @@ package member;
 
 import java.util.ArrayList;
 
+import mutiBoard.MultiBoardDTO;
+
 public interface MemberImpl {
 
 	public ArrayList<MemberDTO> list();
