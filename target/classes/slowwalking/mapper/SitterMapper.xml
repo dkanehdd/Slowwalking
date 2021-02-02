@@ -21,6 +21,7 @@
             inner join member m
                on s.sitter_id=m.id WHERE advertise='T' ORDER BY s.premium
 	</select>
+	
 	<!-- 트렁크가 나이 구하는 쿼리문 -->
 	<select id="adminSitterlist" resultType="member.SitterMemberDTO">
 		SELECT s.*, m.name, m.image_path, m.starrate,
@@ -31,6 +32,7 @@
 	</select>
 	
 	
+
 	<select id="selectSitter" resultType="member.SitterMemberDTO">
 		SELECT s.*, m.name, m.image_path, m.starrate, m.gender, m.phone,
 			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
@@ -38,4 +40,6 @@
             inner join member m
                on s.sitter_id=m.id WHERE m.id=#{id}
 	</select>
+	
+
 </mapper>
