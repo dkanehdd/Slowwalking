@@ -39,6 +39,8 @@ $(document).ready(
 	<%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color:#eee;">
 		<div class="container">
+			<!-- Side메뉴 -->
+			<%@ include file="../include/side.jsp"%>
 			<div class="section_title subPimgBg faqImg">
 				<h1 class="mb-5"><strong>FAQ</strong> 자주 묻는 질문</h1>
 			</div>
