@@ -43,10 +43,7 @@ function deleteRow(id){
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-       <%@ include file="./sidebar.jsp"%>
-        <!-- End of Sidebar -->
-
+		<%@ include file="./sidebar.jsp"%>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 

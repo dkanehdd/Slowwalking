@@ -81,7 +81,6 @@ public class AdminController {
 		
 			return "redirect:../admin/charts";
 		}
-		
 		//삭제처리
 		@RequestMapping("/admin/delete")
 		public String delete(HttpServletRequest req)

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import member.MemberDTO;
 import member.AdminMemberImpl;
 import mutiBoard.MultiBoardDTO;
@@ -36,11 +37,6 @@ public class AdminBoardController {
 		int totalRecordCount = sqlSession.getMapper(AdminMemberImpl.class).getTotalCount(memberDTO);
 		// Mapper 호출
 		ArrayList<MultiBoardDTO> lists = sqlSession.getMapper(AdminMemberImpl.class).listPage(memberDTO);
-
-		// MyBatis 기본쿼리출력
-		String sql = sqlSession.getConfiguration().getMappedStatement("listPage").getBoundSql(memberDTO).getSql();
-		System.out.println("sql=" + sql);
-
 		model.addAttribute("lists", lists);
 
 		return "admin/adminnotice";

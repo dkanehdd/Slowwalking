@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import member.AdminMemberImpl;
 import member.AdminSitterImpl;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
-import mutiBoard.MultiBoardDTO;
+
 
 @Controller
 public class AdminSitter {
@@ -29,15 +31,15 @@ public class AdminSitter {
 	@Autowired
 	public SqlSession sqlSession;
 	
-	//admin sitter 회원 목록 처리
+	//admin 회원 목록 처리
 		@RequestMapping("/admin/member")
 		public String List(Model model, HttpServletRequest req) {
-			SitterMemberDTO sitterMemberDTO = new SitterMemberDTO();
 
 			//Mapper 호출
 			ArrayList<SitterMemberDTO> lists =
 				sqlSession.getMapper(SitterImpl.class)
 					.adminSitterlist();
+
 			
 			model.addAttribute("lists", lists);
 			return "admin/member";

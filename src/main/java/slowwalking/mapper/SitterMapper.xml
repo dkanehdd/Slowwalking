@@ -32,4 +32,14 @@
 	</select>
 	
 	
+
+	<select id="selectSitter" resultType="member.SitterMemberDTO">
+		SELECT s.*, m.name, m.image_path, m.starrate, m.gender, m.phone,
+			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
+		from sittermember s
+            inner join member m
+               on s.sitter_id=m.id WHERE m.id=#{id}
+	</select>
+	
+
 </mapper>

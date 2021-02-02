@@ -8,12 +8,19 @@
 <title>Join.jsp</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
+<!-- css, js 파일링크 등 묶음-->
+<%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
 <body>
+<%@ include file="../include/top.jsp"%>
+<div class="container">
 	<h2>회원가입 페이지</h2>
 	
 	<a href="./memberjoin?flag=parents">부모회원으로 가입하기</a>
 	<a href="./memberjoin?flag=sitter">시터회원으로 가입하기</a>
 	
+</div>
+
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

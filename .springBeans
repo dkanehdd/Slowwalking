@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/java/slowwalking/mapper/MemberMapper.xml</config>
 		<config>src/main/java/slowwalking/mapper/SitterMapper.xml</config>
+		<config>src/main/java/slowwalking/mapper/ProductMapper.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

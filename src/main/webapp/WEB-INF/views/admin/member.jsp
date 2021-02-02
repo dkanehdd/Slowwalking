@@ -41,7 +41,6 @@ function editRow(sitter_id){
 }
 </script>
 
-
 </head>
 <body id="page-top">
 
@@ -51,6 +50,7 @@ function editRow(sitter_id){
         <!-- Sidebar -->
         <%@ include file="./sidebar.jsp"%>
         <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -270,6 +270,7 @@ function editRow(sitter_id){
                      <h1 class="h3 mb-2 text-gray-800">시터 회원 정보</h1>
                     <p class="mb-4">시터 회원 가입승인 및 파일 다운로드 </p>
 
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -298,6 +299,7 @@ function editRow(sitter_id){
                                             <th>별점</th>
                                             <th>나이</th>
                                             <th>가입승인</th>
+
                                         </tr>
                                     </thead>
                                   
@@ -306,25 +308,20 @@ function editRow(sitter_id){
 										<tr>
                                             <th>${row.sitter_id }</th>
                                             <th>${row.cctv_agree }</th>
-
                                             <th>
 													<a href="../fileUpload/download.do?fileName=${row.personality_check }&oriFileName=${row.personality_check }">
 														${row.personality_check }
 													</a>
                                             </th>
-                                            
-                                            
-                                            
-                                            
                                              <th>
 												<a href="../fileUpload/download.do?fileName=${row.license_check }&oriFileName=${row.license_check }">
 													${row.license_check }
 												</a>
 											
                                             </th>
-                                            
-                                            
-                                            
+                                            <th>${row.introduction }</th>
+                                            <th>${row.personality_check }</th>
+                                            <th>${row.license_check }</th>
                                             <th>${row.activity_time }</th>
                                             <th>${row.residence1 }</th>
                                             <th>${row.residence2 }</th>

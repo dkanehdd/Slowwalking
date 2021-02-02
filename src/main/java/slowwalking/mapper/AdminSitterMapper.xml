@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
+
 <mapper namespace="member.AdminSitterImpl">
 
 <!-- 공지사항 수정 처리 -->
@@ -11,6 +12,7 @@
 		SET  permission='T'
 		WHERE sitter_id=#{0}
 	</update>
+
 
 	
 </mapper>
