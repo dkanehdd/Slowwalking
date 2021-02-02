@@ -54,11 +54,8 @@ public class MemberController {
 	}
 	
 	
-	/*
-	회원가입 한 후 바로 로그인이 된 상태로 처리할지 아님 한번더 로그인을 할지 결정 한후 어떤 페이지로 이동할지 다시 결정
-	 */
 	@RequestMapping(value = "/member/joinAction", method=RequestMethod.POST)
-	public String MemberJoinAction(Model model, MemberDTO memberDTO) {
+	public String MemberJoinAction(Model model, MemberDTO memberDTO, HttpSession session) {
 		
 		System.out.println(memberDTO.getName());
 		System.out.println(memberDTO.getEmail());
@@ -68,11 +65,12 @@ public class MemberController {
 		int sucOrFail = sqlSession.getMapper(MemberImpl.class).insertMember(memberDTO);
 		//모델객체에 맵? 컬렉션을 저장한 후 뷰로 전달
 		if(sucOrFail==1) {
-			model.addAttribute("id", memberDTO.getFlag());
+			model.addAttribute("id", memberDTO.getId());
 			model.addAttribute("sucOrFail", sucOrFail);
 			model.addAttribute("mode", "join");
 			model.addAttribute("flag", memberDTO.getFlag());
 			model.addAttribute("message", "회원가입이 완료되었습니다. \n추가 정보를 작성해주세요.");
+			session.setAttribute("user_id", memberDTO.getId());
 		}
 		else {
 			model.addAttribute("id", memberDTO.getFlag());
@@ -90,6 +88,14 @@ public class MemberController {
 		return uuid;
 	}
 	
+	//로그아웃
+	@RequestMapping("/member/logout")
+    public String Logout(HttpSession session) {
+      
+       session.setAttribute("user_id", null);
+       return "redirect:../main/main";
+    }
+	
 	//로그인 페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/login")
 	public String Login() {
@@ -98,7 +104,7 @@ public class MemberController {
 	
 	//로그인 처리후 마이페이지로 이동하는 요청명(메소드)
    @RequestMapping("/member/LoginAction")
-   public ModelAndView MemberLoginAction(Principal principal, Model model) {
+   public ModelAndView MemberLoginAction(Principal principal, Model model, HttpSession session) {
       
       System.out.println("로그인액션");
       String user_id = principal.getName();
@@ -121,6 +127,9 @@ public class MemberController {
          
          mv.setViewName("Member/MypageParents");
       }
+      
+      session.setAttribute("user_id", user_id);
+      
       
       return mv;
    }

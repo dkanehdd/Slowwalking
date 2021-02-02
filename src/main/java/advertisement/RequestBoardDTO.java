@@ -13,7 +13,7 @@ public class RequestBoardDTO {
 	private String age;
 	private String title;
 	private String regular_short;
-	private java.sql.Date start_work;
+	private String start_work;
 	private String content;
 	private int idx;
 	
@@ -24,10 +24,10 @@ public class RequestBoardDTO {
 	public void setRegular_short(String regular_short) {
 		this.regular_short = regular_short;
 	}
-	public java.sql.Date getStart_work() {
+	public String getStart_work() {
 		return start_work;
 	}
-	public void setStart_work(java.sql.Date start_work) {
+	public void setStart_work(String start_work) {
 		this.start_work = start_work;
 	}
 	public String getContent() {

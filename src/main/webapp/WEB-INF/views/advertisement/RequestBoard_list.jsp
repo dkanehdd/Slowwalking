@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +33,19 @@
 		<input type="submit" value="검색" />
 	</form>
 	</div>
-	<div class="text-center">
+	<div class="d-flex flex-column">
 	<c:forEach items="${lists }" var="row">		
-		<div class="border mt-2 mb-2">
-			<div class="media">
-				<div class="media-left mr-3">
-					<img src="../resources/images/${row.image }" class="media-object" style="width:100px; height:100px">
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading"><a href="requestBoard_view?idx=${row.idx }">제목 : ${row.title }</a></h4>
-					<p>아이 이름 : ${row.children_name }</p>
-					<p>돌봄 시간 : ${row.request_time }</p>
-				</div>	  
+		<div id="back" class="text-center">
+			<div>
+				<img src="../resources/images/${row.image }" class="media-object rounded-circle" style="width:100px; height:100px">
 			</div>
-		</div>
+			<div>
+				<h2><a href="requestBoard_view?idx=${row.idx }&list_flag=${list_flag}">${row.title }</a></h4>
+				<p>아이 이름 : ${row.children_name }</p> 
+				<p>돌봄 시간 : ${row.request_time }</p>  
+			</div>	  
+		</div> 
+		<br/><br/><br/>
 	</c:forEach>
 	</div>
 	</div>
@@ -67,7 +65,13 @@
 <script src="../resources/js/custom.js"></script>
 </body>
 </html>
-
+<style>
+#back{
+	background: #ffe4d6;
+	width: 500px;
+	text-align: center;
+} 
+</style>
 
 
 <!-- 작성자 본인에게만 수정/삭제 버튼 보임처리 

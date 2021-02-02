@@ -11,5 +11,8 @@
 </head>
 <body>
 	<h2>parents</h2>
+	<a href="../advertisement/requestBoard_Mylist">내의뢰서 보기</a>
+	<br/><br/>
+	<a href="../advertisement/requestBoard_write">의뢰서 쓰기</a>
 </body>
 </html>

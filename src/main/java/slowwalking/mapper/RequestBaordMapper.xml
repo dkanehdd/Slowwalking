@@ -5,16 +5,24 @@
 
 <mapper namespace="advertisement.RequestBoardImpl">
 	<select id="requestBoard" resultType="advertisement.RequestBoardDTO">
-		SELECT * FROM requestBoard  
+		SELECT * FROM requestBoard
+			WHERE advertise = 'on'
 	</select>
+	
+	<select id="myRequestBoard" resultType="advertisement.RequestBoardDTO">
+		SELECT * FROM requestBoard 
+			WHERE id = #{0} 
+	</select>
+	
 	<select id="requestBoardView" resultType="advertisement.RequestBoardDTO">
-		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, 
+		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, R.start_work,
 				R.disability_grade, R.warning, R.image, R.age, R.idx, R.regular_short, B.name,
 				R.content
 		    FROM requestBoard R inner join member B
 		    on R.id = B.id
 		    WHERE idx = #{0}
 	</select>
+	
 	
 	<insert id="insertRequestBoard">
 	insert into requestBoard(idx, id, title, children_name, advertise, age, pay,
@@ -24,5 +32,38 @@
 					#{4}, #{5}, #{6}, #{7}, #{8}, #{9}, #{10}, to_date(#{11},'YYYY-MM-DD'), #{12},
 					#{13})
 	</insert>
+	
+	<select id="getImage" resultType="string">
+		select image from requestBoard
+    		where idx=#{0}
+	</select>
+	
+	<update id="updateRequestBoard" parameterType="advertisement.RequestBoardDTO">
+		UPDATE requestBoard
+			SET pay=#{pay}, region=#{region}, request_time=#{request_time}, advertise=#{advertise},
+			children_name=#{children_name}, warning=#{warning}, image=#{image}, age=#{age},
+			title=#{title}, regular_short=#{regular_short}, start_work=to_date(#{start_work},'YYYY-MM-DD'), content=#{content}
+			WHERE idx=#{idx}
+	</update>
+	
+	<update id="noImageUpdateRequestBoard" parameterType="advertisement.RequestBoardDTO">
+		UPDATE requestBoard
+			SET pay=#{pay}, region=#{region}, request_time=#{request_time}, advertise=#{advertise},
+			children_name=#{children_name}, warning=#{warning}, age=#{age},
+			title=#{title}, regular_short=#{regular_short}, start_work=to_date(#{start_work},'YYYY-MM-DD'), content=#{content}
+			WHERE idx=#{idx}
+	</update>
+	
+	
+	
+	<select id="flag" resultType="string">
+		SELECT flag FROM member
+    		WHERE id=#{0}
+	</select>
+	
+	<delete id="deleteRequestBoard">
+		DELETE FROM requestBoard
+			WHERE idx=#{0}
+	</delete>
 
 </mapper>

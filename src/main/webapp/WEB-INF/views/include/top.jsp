@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>  
 <nav class="navbar navbar-expand-lg">
 	<div class="container">
 		<a class="navbar-brand nonHover" href="../main/main"> <i
@@ -22,9 +22,20 @@
 					class="nav-link">공지사항</a></li>
 				<li class="nav-item"><a href="../multiBoard/FAQ" class="nav-link">FAQ</a>
 				</li>
-				
-				<li class="nav-item"><a href="../member/login"
-					class="nav-link contact">로그인</a></li>
+				<c:choose>
+					<c:when test="${not empty sessionScope.user_id }">
+						<li class="nav-item"><a href="../member/mypage"
+						class="nav-link contact">${sessionScope.user_id }님의 마이페이지</a></li>
+						<li class="nav-item"><a href="../member/logout"
+                  		class="nav-link contact">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a href="../member/login"
+							class="nav-link contact">로그인</a></li>
+						<li class="nav-item"><a href="../member/join"
+							class="nav-link contact">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
