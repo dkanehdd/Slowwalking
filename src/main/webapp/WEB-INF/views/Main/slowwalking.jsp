@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <html>
 <head>
+<title>느린걸음</title>
 <!-- css, js 파일링크 등 묶음-->
 <%@ include file="../links/linkOnly2dot.jsp"%>
-<title>느린걸음</title>
 </head>
 <body>
 	<!-- Top메뉴 -->

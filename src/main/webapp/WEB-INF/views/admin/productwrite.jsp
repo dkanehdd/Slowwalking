@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -30,15 +28,13 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
 </head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <%@ include file="./sidebar.jsp"%>
-
+		<%@ include file="./sidebar.jsp"%>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -187,8 +183,6 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -253,16 +247,13 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                
-                <form name="writeFrm" method="post" 
-		onsubmit="return writeValidate(this);"
-		action="<c:url value="/admin/modifyAction" />" >
-									<input type="hidden"
-	name="${_csrf.parameterName}"
-	value="${_csrf.token}"/>
+ <form name="writeFrm" method="post" 
+	 enctype="multipart/form-data"
+		action="../admin/productWriteAction?${_csrf.parameterName}=${_csrf.token}" >
+		
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
-                    <p class="mb-4">회원정보를 확인합니다 </p>
+                     <h1 class="h3 mb-2 text-gray-800">상품등록</h1>
+                    <p class="mb-4">상품등록 </p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -271,70 +262,60 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+          
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <input type="hid den" name="id" value="${dto.id }"/>
-                                    
-                                    <tbody>
-                                         <tr>
+                       
+									     <colgroup>
+											<col width="20%"/>
+											<col width="*"/>
+											<col width="*"/>
+										</colgroup>
+										<tbody>
+											<tr>
 												<th class="text-center" 
-													style="vertical-align:middle;">Password</th>
+													style="vertical-align:middle;">상품이름</th>
 												<td>
-													<input type="text" class="form-control" 
-														style="width:100px;" name="pw" 
-															value="${dto.pw }" />
+													<input type="text" name="product_name" value="" />
 												</td>
 											</tr>
 											<tr>
 												<th class="text-center" 
-													style="vertical-align:middle;">이름</th>
+													style="vertical-align:middle;">내용</th>
 												<td>
 													<textarea rows="10" class="form-control" 
-													name="name">${dto.name }</textarea>
+													name="content"></textarea>
+												</td>
+											</tr>	
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">가격</th>
+												<td>
+													<input type="number" name="price" />
 												</td>
 											</tr>
-											
 											<tr>
 												<th class="text-center" 
-													style="vertical-align:middle;">전화번호</th>
+													style="vertical-align:middle;">이미지등록</th>
 												<td>
-													<textarea rows="10" class="form-control" 
-													name="phone">${dto.phone }</textarea>
+													<input type="file" name="image" value="" />
 												</td>
-											</tr>		
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">성별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="gender">${dto.gender }</textarea>
-												</td>
-											</tr>	
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">회원식별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="flag">${dto.flag }</textarea>
-												</td>
-											</tr>	
-                                     
-                                        
-                                    </tbody>
-                                </table>
-                                <div class="row text-center" style="">
-									<!-- 각종 버튼 부분 -->		
-									<button type="submit" class="btn btn-danger">전송하기</button>
-									<button type="button" class="btn btn-warning" 
-										onclick="location.href='charts';">리스트보기</button>
+											</tr>
+										</tbody>
+                   						</table>
+                              	<div class="row text-center" style="">
+								<!-- 각종 버튼 부분 -->		
+								<button type="submit" class="btn btn-danger">전송하기</button>
+								<button type="reset" class="btn">Reset</button>
+								<button type="button" class="btn btn-warning" 
+									onclick="location.href='adminnotice';">리스트보기</button>
 								</div>
-								</form> 
-                                
-                                
+                   					
+                   						
                             </div>
+                           
                         </div>
                     </div>
+</form>
                 </div>
                 <!-- /.container-fluid -->
 

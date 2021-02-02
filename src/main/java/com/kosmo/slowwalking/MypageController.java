@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import member.ImageTplDAO;
 import member.MemberDTO;
 import member.MypageImpl;
 
@@ -64,15 +63,9 @@ public class MypageController {
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
 
 		if(file != null && !file.isEmpty()) {
-			if(req.getParameter(image_path)!=null) {
-				//삭제하는 거
-			}
-			
 			//파일명에서 확장자를 가져온다.
-			String ext =
-					originalName.substring(originalName.lastIndexOf('.'));
 			//UUID를 통해 생성된 문자열과 확장자를 합쳐서 파일명을 완성한다.
-			String saveFileName = getUuid() + ext;
+			String saveFileName = getUuid();
 			//물리적 경로에 새롭게 생성된 파일명으로 파일 저장
 			File serverFullName =
 					new File(path + File.separator + saveFileName);
@@ -125,20 +118,10 @@ public class MypageController {
 				
 				mfile.transferTo(serverFullName);
 				
-				Map file = new HashMap();
-				//원본 파일명
-				file.put("originalName", originalName);
-				//저장된 파일명
-				file.put("saveFileName", saveFileName);
-				//서버의 전체경로
-				file.put("serverFullName", serverFullName);
-				//제목
-				file.put("title", title);
 				
 				//위 4가지 정보를 저장한 Map을 ArrayList에 저장한다.
 				resultList.add(file);
 			}
-			returnObj.put("files", resultList);
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -146,9 +129,6 @@ public class MypageController {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//모델객체에 리스트 컬렉션을 저장한 후 뷰로 전달
-		model.addAttribute("returnObj", returnObj);
 		return "Mypage/proEdit";
 	}
 	

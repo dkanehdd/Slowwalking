@@ -253,16 +253,13 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                
-                <form name="writeFrm" method="post" 
-		onsubmit="return writeValidate(this);"
-		action="<c:url value="/admin/modifyAction" />" >
-									<input type="hidden"
-	name="${_csrf.parameterName}"
-	value="${_csrf.token}"/>
+ <form name="writeFrm" method="post" 
+		onsubmit="return writeValidate(this);" enctype="multipart/form-data"
+		action="../admin/adminmodifyAction?${_csrf.parameterName}=${_csrf.token}" >
+		
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
-                    <p class="mb-4">회원정보를 확인합니다 </p>
+                     <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+                    <p class="mb-4">공지사항 수정 및 삭제 관리 </p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -271,70 +268,53 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+          
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <input type="hid den" name="id" value="${dto.id }"/>
-                                    
-                                    <tbody>
-                                         <tr>
+                                <input type="hid den" name="idx" value="${dto.idx }"/>
+                                
+                       
+									     <colgroup>
+											<col width="20%"/>
+											<col width="*"/>
+											<col width="*"/>
+										</colgroup>
+										<tbody>
+											<tr>
 												<th class="text-center" 
-													style="vertical-align:middle;">Password</th>
+													style="vertical-align:middle;">제목</th>
 												<td>
 													<input type="text" class="form-control" 
-														style="width:100px;" name="pw" 
-															value="${dto.pw }" />
+														style="width:1000px;" name="title" 
+															value="${dto.title }" />
 												</td>
 											</tr>
 											<tr>
 												<th class="text-center" 
-													style="vertical-align:middle;">이름</th>
+													style="vertical-align:middle;">내용</th>
 												<td>
 													<textarea rows="10" class="form-control" 
-													name="name">${dto.name }</textarea>
+													name="content">${dto.content }</textarea>
 												</td>
 											</tr>
 											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">전화번호</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="phone">${dto.phone }</textarea>
-												</td>
-											</tr>		
+												
 											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">성별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="gender">${dto.gender }</textarea>
-												</td>
-											</tr>	
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">회원식별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="flag">${dto.flag }</textarea>
-												</td>
-											</tr>	
-                                     
-                                        
-                                    </tbody>
-                                </table>
-                                <div class="row text-center" style="">
-									<!-- 각종 버튼 부분 -->		
-									<button type="submit" class="btn btn-danger">전송하기</button>
-									<button type="button" class="btn btn-warning" 
-										onclick="location.href='charts';">리스트보기</button>
+										</tbody>
+                              	<div class="row text-center" style="">
+								<!-- 각종 버튼 부분 -->		
+								<button type="submit" class="btn btn-danger">전송하기</button>
+								<button type="reset" class="btn">Reset</button>
+								<button type="button" class="btn btn-warning" 
+									onclick="location.href='adminnotice';">리스트보기</button>
 								</div>
-								</form> 
-                                
-                                
+                   						</table>
+                   					
+                   						
                             </div>
+                           
                         </div>
                     </div>
+</form>
                 </div>
                 <!-- /.container-fluid -->
 

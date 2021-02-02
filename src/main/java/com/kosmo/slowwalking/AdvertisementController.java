@@ -236,7 +236,14 @@ public class AdvertisementController {
 	
 	//시터 리스트 상세보기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/SitterBoard_view")
-	public String SitterBoardView() {
+	public String SitterBoardView(HttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		
+		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
+		
+		model.addAttribute("dto", dto);
+		
 		return "advertisement/SitterBorad_view";
 	}
 	
