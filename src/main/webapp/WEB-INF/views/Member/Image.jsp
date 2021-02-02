@@ -70,10 +70,11 @@ function skip(){
 	var mode = document.getElementById("mode");
 	if(mode.value=='join'){
 		if(flag.value=='sitter'){
-			location.href='../member/SitterJoin';
+			location.href='../member/sitterjoin';
 		}
 		else if(flag.value=='parents'){
-			location.href='../member/ParentsJoin';
+			alert('신청서를 작성해주세요');
+			location.href='../member/mypage';
 		}
 		
 	}

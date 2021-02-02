@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -32,9 +30,10 @@
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 <script>
-function deleteRow(id){
+function deleteRow(idx){
+	
 	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?idx="+ idx;
+		location.href="../admin/adminnoticedelete?idx="+ idx;
 	}
 }
 </script>
@@ -45,51 +44,7 @@ function deleteRow(id){
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">관리자페이지</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-      
-
-           <!-- Heading -->
-            <div class="sidebar-heading">
-               	Management
-            </div>
-
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>회원정보</span></a>
-            </li>
-            
-           <li class="nav-item">
-                <a class="nav-link" href="adminnotice?flag=notice">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>공지사항</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
+        <%@ include file="./sidebar.jsp"%>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -215,8 +170,6 @@ function deleteRow(id){
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -318,7 +271,7 @@ function deleteRow(id){
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                
+                                	
                        
                                     <thead>
                                         <tr>
@@ -345,19 +298,19 @@ function deleteRow(id){
                                             <th>${row.visitcount }</th>
 											<th>${row.attachedfile }</th>
                                             <th> <button class="btn btn-primary" 
-							onclick="location.href='chartsmodify?id=${row.idx}';">수정</button></th>
+							onclick="location.href='adminnoticemodify?idx=${row.idx}';">수정</button></th>
                                             <th><button class="btn btn-danger" 
 							onclick="javascript:deleteRow('${row.idx}');">삭제</button></th>
                                         </tr>
 								</c:forEach>
                                      
                                         
-                                    </tbody>
-                                </table>
                                 <div class="row text-center" style="">
                                 <button class="btn btn-warning" 
-							onclick="location.href='chartsmodify?idx=${row.idx}';">등록</button>
+							onclick="location.href='adminnoticewrite';">등록</button>
                                 </div>
+                                    </tbody>
+                                </table>
                                 
                                
                             </div>

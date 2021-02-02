@@ -36,7 +36,7 @@
 						</div>
 					<ul>
 						<li><a href="#" id="idFind" name="idFind">아이디 찾기</a></li>
-						<li><a href="#" id="pwFind" name="idFind">아이디 찾기</a></li>
+						<li><a href="#" id="pwFind" name="idFind">비밀번호 찾기</a></li>
 						<li><a href="../member/join" id="signUp" name="signUp">회원가입</a></li>
 					</ul>
 					</div>

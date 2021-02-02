@@ -31,13 +31,21 @@
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
+<script>
+function deleteRow(id){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		location.href="delete?id="+ id;
+	}
+}
+</script>
+
 </head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <%@ include file="./sidebar.jsp"%>
+       <%@ include file="./sidebar.jsp"%>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -253,13 +261,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                
-                <form name="writeFrm" method="post" 
-		onsubmit="return writeValidate(this);"
-		action="<c:url value="/admin/modifyAction" />" >
-									<input type="hidden"
-	name="${_csrf.parameterName}"
-	value="${_csrf.token}"/>
+
                     <!-- Page Heading -->
                      <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
                     <p class="mb-4">회원정보를 확인합니다 </p>
@@ -272,69 +274,61 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <input type="hid den" name="id" value="${dto.id }"/>
-                                    
+                                    <thead>
+                                        <tr>
+                                            <th>시터 ID</th>
+                                            <th>cctv 동의</th>
+                                            <th>자기소개</th>
+                                            <th>인적성검사서</th>
+                                            <th>자격증 인증서</th>
+                                            <th>활동기간</th>
+                                            <th>활동가능지역1</th>
+                                            <th>활동가능지역2</th>
+                                            <th>활동가능지역3</th>
+                                            <th>희망시급</th>
+                                            <th>포인트</th>
+                                            <th>가입승인</th>
+                                            <th>결제회원</th>
+                                            <th>활동시간</th>
+                                            <th>이름</th>
+                                            <th>프로필사진</th>
+                                            <th>나이</th>
+                                        </tr>
+                                    </thead>
+                                  
                                     <tbody>
-                                         <tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">Password</th>
-												<td>
-													<input type="text" class="form-control" 
-														style="width:100px;" name="pw" 
-															value="${dto.pw }" />
-												</td>
-											</tr>
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">이름</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="name">${dto.name }</textarea>
-												</td>
-											</tr>
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">전화번호</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="phone">${dto.phone }</textarea>
-												</td>
-											</tr>		
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">성별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="gender">${dto.gender }</textarea>
-												</td>
-											</tr>	
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">회원식별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="flag">${dto.flag }</textarea>
-												</td>
-											</tr>	
+                                         <c:forEach items="${lists }" var="row">		
+										<tr>
+                                            <th>${row.sitter_id }</th>
+                                            <th>${row.cctv_agree }</th>
+                                            <th>${row.introduction }</th>
+                                            <th>${row.personality_check }</th>
+                                            <th>${row.license_check }</th>
+                                            <th>${row.activity_time }</th>
+                                            <th>${row.residence1 }</th>
+                                            <th>${row.residence2 }</th>
+                                            <th>${row.residence3 }</th>
+                                            <th>${row.pay }</th>
+                                            <th>${row.point }</th>
+                                            <th>${row.permission }</th>
+                                            <th>${row.premium }</th>
+                                            <th>${row.career }</th>
+                                            <th>${row.name }</th>
+                                            <th>${row.image_path }</th>
+                                            <th>${row.starrate }</th>
+                                            <th>${row.age }</th>
+                                            
+                                            
+								</c:forEach>
                                      
                                         
                                     </tbody>
                                 </table>
-                                <div class="row text-center" style="">
-									<!-- 각종 버튼 부분 -->		
-									<button type="submit" class="btn btn-danger">전송하기</button>
-									<button type="button" class="btn btn-warning" 
-										onclick="location.href='charts';">리스트보기</button>
-								</div>
-								</form> 
-                                
-                                
+                               
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 
