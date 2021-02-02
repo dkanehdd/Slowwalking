@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@ include file="../links/linkOnly2dot.jsp"%>
-<title>Login.jsp</title>
+<title>회원가입 선택</title>
 </head>
 <body>
 	<!-- Top메뉴 -->

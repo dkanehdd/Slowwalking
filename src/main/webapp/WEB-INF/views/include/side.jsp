@@ -7,7 +7,7 @@
 		<li><a href="../advertisement/requestBoard_list" class="ripple"><i class="fa fa-address-card" aria-hidden="true"></i><span>의뢰</span></a></li>
 		<li><a href="../multiBoard/notice" class="ripple"><i class="fa fa-list" aria-hidden="true"></i><span>공지</span></a></li>
 		<li><a href="#" class="ripple"><i class="fa fa-cart-plus" aria-hidden="true"></i><span>샵</span></a></li>
-		<li><a href="#" class="ripple"><i class="fa fa-comments" aria-hidden="true"></i><span>1:1</span></a></li>
+		<li><a href="../" class="ripple"><i class="fa fa-comments" aria-hidden="true"></i><span>1:1</span></a></li>
 		<li><a href="#" class="ripple"><i class="fa fa-arrow-up" aria-hidden="true"></i><span>TOP</span></a></li>
 	</ul>
 	<div class="menu-bg"></div>

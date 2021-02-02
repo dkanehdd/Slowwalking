@@ -24,15 +24,15 @@
 			</div>
 			<c:url value="/member/joinAction" var="joinURL" />
 			<form:form action="${joinURL }" name="regiform" method="post"
-				onsubmit="return checkIT();">
-				<table class="table form joinF" data-aos="fade-up" data-aos-delay="400">
+				onsubmit="return checkIT();"  data-aos="fade-up" data-aos-delay="400">
+				<table class="table form joinF">
 					<colgroup>
 						<col style="width: 20%">
 						<col style="">
 					</colgroup>
-					<input type="hid-den" id="smsck" value="" />
-					<input type='hid-den' name='flag' id='idchktype' value="${flag }">
-					<input type="hid-den" name="${_csrf.parameterName}"
+					<input type="hidden" id="smsck" value="" />
+					<input type='hidden' name='flag' id='idchktype' value="${flag }">
+					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<tr>
 						<th scope="row" style="vertical-align:middle;">휴대폰</th>
@@ -83,7 +83,9 @@
 						<td><input type="text" name="email1" id="email1" value=""
 							id="eamil1" /> @ <input type="text" name="email2" id="email2"
 							value="" style="width:150px;"/> <select name="last_email_check2"
-							onChange="emailSelect(this);" style="width:150px; margin-left:5px; display:inline-block;" class="pass form-control flaot-right" id="last_email_check2">
+							onChange="emailSelect(this);" 
+							style="width:150px; margin-left:5px; display:inline-block;" 
+							class="pass form-control flaot-right" id="last_email_check2">
 								<option selected="" value="">선택해주세요</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="hanmail.net">hanmail.net</option>
@@ -92,7 +94,7 @@
 								<option value="">직접입력</option>
 						</select>
 					</tr>
-					<input type="hid-den" name="email" id="email" value="" />
+					<input type="hidden" name="email" id="email" value="" />
 					<tr>
 						<th style="vertical-align:middle;">생년월일</th>
 						<td><input type="text" name="birthday" id="birthday" value="" />
@@ -106,22 +108,31 @@
 									<input class="checkbox" type="checkbox" name="chkAll" id="chkAll">
 									<label for="chkAll">전체동의</label><br>
 									
-									<input class="checkbox" type="checkbox" name="chk1" id="chk1">
-									<label for="chk1">이용 약관(필수)</label><br>
-									<textarea class="form-control noresize" name="" id="">이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. </textarea><br>
-									
-									<input class="checkbox" type="checkbox" name="chk2" id="chk2">
-									<label for="chk2">개인정보 수집 및 이용에 대한 안내(필수)</label><br>
-			       					<textarea class="form-control noresize" name="" id="">개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. </textarea>
+									<div class="termsBox">
+										<div class="tbx1 float-left">
+											<input class="checkbox" type="checkbox" name="chk1" id="chk1">
+											<label for="chk1">이용 약관(필수)</label><br>
+											<textarea class="form-control noresize" name="" id="">이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. </textarea><br>
+										</div>
+										<div class="tbx2">
+											<input class="checkbox" type="checkbox" name="chk2" id="chk2">
+											<label for="chk2">개인정보 수집 및 이용에 대한 안내(필수)</label><br>
+					       					<textarea class="form-control noresize" name="" id="">개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. </textarea>
+										</div>
+									</div>
 								</form>
 							</div>
 						</td>
 					</tr>
 				</table>
-				<button type="submit" class="btn btn-danger">회원가입</button>
+				<div class="btnBelow">
+					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
+					<button type="submit" class="btn btn-danger">회원가입</button>
+				</div>
 			</form:form>
 		</div>
 	</section>
+	<%@ include file="../include/footer.jsp"%>
 </body>
 <%@ include file="../links/joinJs.jsp"%> 
 </html>

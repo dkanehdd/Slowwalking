@@ -25,7 +25,7 @@
             <c:choose>
                <c:when test="${not empty sessionScope.user_id }">
                   <li class="nav-item"><a href="../member/mypage"
-                  class="nav-link contact">${sessionScope.user_id }님의 마이페이지</a></li>
+                  class="nav-link mypgBtn"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; ${sessionScope.user_id }님의 마이페이지</a></li>
                   <li class="nav-item"><a href="#"
                   class="nav-link contact">로그아웃</a></li>
                </c:when>
