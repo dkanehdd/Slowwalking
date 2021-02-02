@@ -32,9 +32,11 @@
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 <script>
-function deleteRow(id){
-	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?id="+ id;
+function editRow(sitter_id){
+	
+	if(confirm("가입승인을 하시겠습니까??")){
+		console.log(sitter_id);
+		location.href="../admin/permmisionAction?id="+sitter_id;
 	}
 }
 </script>
@@ -45,7 +47,10 @@ function deleteRow(id){
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-       <%@ include file="./sidebar.jsp"%>
+        <!-- Sidebar -->
+        <%@ include file="./sidebar.jsp"%>
+        <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -261,10 +266,10 @@ function deleteRow(id){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
-                    <p class="mb-4">회원정보를 확인합니다 </p>
+                     <h1 class="h3 mb-2 text-gray-800">시터 회원 정보</h1>
+                    <p class="mb-4">시터 회원 가입승인 및 파일 다운로드 </p>
+
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -278,7 +283,6 @@ function deleteRow(id){
                                         <tr>
                                             <th>시터 ID</th>
                                             <th>cctv 동의</th>
-                                            <th>자기소개</th>
                                             <th>인적성검사서</th>
                                             <th>자격증 인증서</th>
                                             <th>활동기간</th>
@@ -292,7 +296,10 @@ function deleteRow(id){
                                             <th>활동시간</th>
                                             <th>이름</th>
                                             <th>프로필사진</th>
+                                            <th>별점</th>
                                             <th>나이</th>
+                                            <th>가입승인</th>
+
                                         </tr>
                                     </thead>
                                   
@@ -301,6 +308,17 @@ function deleteRow(id){
 										<tr>
                                             <th>${row.sitter_id }</th>
                                             <th>${row.cctv_agree }</th>
+                                            <th>
+													<a href="../fileUpload/download.do?fileName=${row.personality_check }&oriFileName=${row.personality_check }">
+														${row.personality_check }
+													</a>
+                                            </th>
+                                             <th>
+												<a href="../fileUpload/download.do?fileName=${row.license_check }&oriFileName=${row.license_check }">
+													${row.license_check }
+												</a>
+											
+                                            </th>
                                             <th>${row.introduction }</th>
                                             <th>${row.personality_check }</th>
                                             <th>${row.license_check }</th>
@@ -317,8 +335,24 @@ function deleteRow(id){
                                             <th>${row.image_path }</th>
                                             <th>${row.starrate }</th>
                                             <th>${row.age }</th>
+												 <c:choose>
+												
+												<c:when test="${row.permission eq 'F'}"> 
+												 <th><button class="btn btn-danger" 
+												onclick="javascript:editRow('${row.sitter_id}');">가입승인</button>
+												</th>
+												
+												 </c:when>
+												
+												<c:otherwise> <th> 가입승인확인 </th> </c:otherwise>
+												
+												</c:choose>
+                                            
+                               
                                             
                                             
+                                            
+                                        </tr>
 								</c:forEach>
                                      
                                         
@@ -328,7 +362,6 @@ function deleteRow(id){
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

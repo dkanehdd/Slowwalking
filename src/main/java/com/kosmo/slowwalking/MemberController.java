@@ -96,12 +96,14 @@ public class MemberController {
 	public String Login() {
 		return "Member/Login";
 	}
+
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {
 		
 		session.setAttribute("user_id", null);
 		return "redirect:../main/main";
 	}
+
 
 	// 로그인 처리후 마이페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/LoginAction")
@@ -126,13 +128,13 @@ public class MemberController {
 		} else if (flag.equals("parents")) {
 
 			mv.setViewName("Member/MypageParents");
-		}else if (flag.equals("admin")) {
+		} else if (flag.equals("admin")) {
 
-	         mv.setViewName("redirect:../admin/index");
-	      }
-		
+			mv.setViewName("redirect:../admin/index");
+		}
 		session.setAttribute("user_id", user_id);
 		return mv;
+
 	}
 
 	// 기본정보입력 회원가입
@@ -150,6 +152,7 @@ public class MemberController {
 	@RequestMapping("/member/sitterjoin")
 	public String SitterJoin(Principal principal, Model model) {
 		String user_id = principal.getName();
+
 
 		model.addAttribute("id", user_id);
 

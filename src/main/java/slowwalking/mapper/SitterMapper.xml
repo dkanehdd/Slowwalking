@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="member.SitterImpl">
+
 	<insert id="insertSitter">
 		INSERT INTO sittermember
 		(sitter_id,cctv_agree,introduction,personality_check,license_check,activity_time,residence1,
@@ -21,6 +22,17 @@
                on s.sitter_id=m.id WHERE advertise='T' ORDER BY s.premium
 	</select>
 	
+	<!-- 트렁크가 나이 구하는 쿼리문 -->
+	<select id="adminSitterlist" resultType="member.SitterMemberDTO">
+		SELECT s.*, m.name, m.image_path, m.starrate,
+			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
+		from sittermember s
+            inner join member m
+               on s.sitter_id=m.id
+	</select>
+	
+	
+
 	<select id="selectSitter" resultType="member.SitterMemberDTO">
 		SELECT s.*, m.name, m.image_path, m.starrate, m.gender, m.phone,
 			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
@@ -29,4 +41,5 @@
                on s.sitter_id=m.id WHERE m.id=#{id}
 	</select>
 	
+
 </mapper>
