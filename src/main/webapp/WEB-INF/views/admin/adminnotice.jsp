@@ -32,9 +32,10 @@
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 <script>
-function deleteRow(id){
+function deleteRow(idx){
+	
 	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?idx="+ idx;
+		location.href="../admin/adminnoticedelete?idx="+ idx;
 	}
 }
 </script>
@@ -46,49 +47,7 @@ function deleteRow(id){
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">관리자페이지</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-      
-
-           <!-- Heading -->
-            <div class="sidebar-heading">
-               	Management
-            </div>
-
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>회원정보</span></a>
-            </li>
-            
-           <li class="nav-item">
-                <a class="nav-link" href="adminnotice?flag=notice">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>공지사항</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+        <%@ include file="./sidebar.jsp"%>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -318,7 +277,7 @@ function deleteRow(id){
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                
+                                	
                        
                                     <thead>
                                         <tr>
@@ -345,19 +304,19 @@ function deleteRow(id){
                                             <th>${row.visitcount }</th>
 											<th>${row.attachedfile }</th>
                                             <th> <button class="btn btn-primary" 
-							onclick="location.href='chartsmodify?id=${row.idx}';">수정</button></th>
+							onclick="location.href='adminnoticemodify?idx=${row.idx}';">수정</button></th>
                                             <th><button class="btn btn-danger" 
 							onclick="javascript:deleteRow('${row.idx}');">삭제</button></th>
                                         </tr>
 								</c:forEach>
                                      
                                         
-                                    </tbody>
-                                </table>
                                 <div class="row text-center" style="">
                                 <button class="btn btn-warning" 
-							onclick="location.href='chartsmodify?idx=${row.idx}';">등록</button>
+							onclick="location.href='adminnoticewrite';">등록</button>
                                 </div>
+                                    </tbody>
+                                </table>
                                 
                                
                             </div>

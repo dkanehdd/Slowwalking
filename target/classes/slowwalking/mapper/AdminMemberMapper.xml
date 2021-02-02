@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member.AdminMemberImpl">
+
+	<!-- 어드민 회원 정보 수정 -->
+	<select id="view" resultType="member.MemberDTO">
+		SELECT * FROM member where id=#{id}
+	</select>
+	
+	<!-- 어드민 회원 정보 수정 처리 -->
+	<update id="modify" parameterType="member.MemberDTO">
+		UPDATE member 
+		SET pw=#{pw}, name=#{name}, 
+		phone=#{phone} ,gender=#{gender} ,flag=#{flag}
+		WHERE id=#{id}
+	</update>
+	
+	<!-- 어드민 회원 정보 삭제 처리 -->
+	<delete id="delete">
+		DELETE FROM member WHERE id=#{id}
+	</delete>
+	
+	
+	<!--공지사항 리스트 출력  -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) from multi_board
+	</select>
+	<select id="listPage" resultType="mutiBoard.MultiBoardDTO">
+		select * from multi_board where flag='notice'
+	</select>
+	
+	<!--공지사항 내용 보기  -->
+	<select id="contentPage" parameterType="int" resultType="mutiBoard.MultiBoardDTO">
+		select * from multi_board where idx=#{idx}
+	</select>
+	
+	<!-- 공지사항 조횟수 증가 -->
+	<update id="contentCount" parameterType="mutiBoard.MultiBoardDTO">
+		UPDATE multi_board SET visitcount = visitcount+1 WHERE idx=#{idx}
+	</update>
+	
+	<!--공지사항 글등록  -->
+	<insert id="write" parameterType="mutiBoard.MultiBoardDTO">
+		INSERT INTO multi_board (idx,title,content,id,visitcount,flag)
+		VALUES
+		(seq_board_idx.nextval, #{title}, #{content}, #{id}, 0,  #{flag})	
+	</insert>
+	
+	
+	<!-- 어드민 회원 정보 수정 -->
+	<select id="noticeview" resultType="mutiBoard.MultiBoardDTO">
+		SELECT * FROM multi_board  where idx=#{idx}
+	</select>
+	
+	
+	<!-- 공지사항 수정 처리 -->
+	<update id="noticemodify" parameterType="mutiBoard.MultiBoardDTO">
+		UPDATE multi_board 
+		SET title=#{title}, content=#{content}
+		WHERE idx=#{idx}
+	</update>
+	
+	<!-- 어드민 회원 정보 삭제 처리 -->
+	<delete id="noticedelete">
+		DELETE FROM multi_board WHERE idx=#{idx}
+	</delete>
+	
+	
+	
+</mapper>
