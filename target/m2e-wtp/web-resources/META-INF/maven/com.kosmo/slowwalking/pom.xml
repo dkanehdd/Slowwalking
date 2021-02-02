@@ -190,12 +190,6 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
 		</dependency> 
-		<!-- 주소를 위도 경도로 변환해주는 지오코딩 의존설정 -->
-		<dependency>
-		  <groupId>com.google.code.geocoder-java</groupId>
-		  <artifactId>geocoder-java</artifactId>
-		  <version>0.16</version>
-		</dependency>
 	</dependencies>
     <build>
         <plugins>
