@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -30,22 +28,16 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-<script>
-function deleteRow(id){
-	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?idx="+ idx;
-	}
-}
-</script>
-
 </head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+        <!-- Sidebar -->
         <%@ include file="./sidebar.jsp"%>
+        <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -171,8 +163,6 @@ function deleteRow(id){
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -263,8 +253,8 @@ function deleteRow(id){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
-                    <p class="mb-4">공지사항 수정 및 삭제 관리 </p>
+                     <h1 class="h3 mb-2 text-gray-800">상품결제관리</h1>
+                    <p class="mb-4">상품의 결제 상세정보 </p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -274,46 +264,33 @@ function deleteRow(id){
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                	
+                       
+                                    <thead>
+                                        <tr>
+                                            <th>신청폼 일련번호</th>
+                                            <th>결제한회원 아이디</th>
+                                            <th>상품 일련번호</th>
+                                            <th>결제방식</th>
+                                            <th>상품 정보</th>
+                                            <th>전체가격</th>
+                                            <th>결제한 날짜</th>    
+                                        </tr>
+                                    </thead>
+                                  
                                     <tbody>
-                        <input type="hid den" name="idx" value="${dto.idx }"/>	
-                        
-									<tr>
-						<th class="text-center table-active align-middle">작성자</th>
-						<td>${dto.id }</td>
-						<th class="text-center table-active align-middle">작성일</th>
-						<td>${dto.postdate }</td>
-					</tr>
-					<tr>
-						<th class="text-center table-active align-middle">조회수</th>
-						<td>${dto.visitcount }</td>
-					</tr>
-					<tr>
-						<th class="text-center table-active align-middle">제목</th>
-						<td colspan="3">
-							${dto.title }
-						</td>
-					</tr>
-					<tr>
-						<th class="text-center table-active align-middle">내용</th>
-						<td colspan="3" class="align-middle" style="height:200px;">
-							${dto.content }
-						</td>
-					</tr>
-					<tr>
-						<th class="text-center table-active align-middle">첨부파일</th>
-						<td colspan="3">
-<c:if test="${not empty dto.attachedfile }">
-	${dto.attachedfile }
-	<a href="./Download?filename=${dto.attachedfile }&idx=${dto.idx}">
-		[다운로드]
-	</a>		
-</c:if>		
-						</td>
-					</tr>
-                                     
-                                        
+                                     <tr>
+                                            <th>${row.idx }</th>
+                                            <th>${row.id }</th>
+                                            <th>${row.product_idx }</th>
+                                            <th>${row.payment }</th>
+                                            <th>${row.info }</th>
+                                            <th>${row.total_price }</th>
+                                            <th>${row.regidate }</th>  
+                                        </tr>                              
                                     </tbody>
                                 </table>
+                                
                                
                             </div>
                         </div>

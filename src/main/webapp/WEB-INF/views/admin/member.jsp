@@ -31,14 +31,6 @@
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
-<script>
-function editRow(sitter_id){
-	
-	if(confirm("가입승인을 하시겠습니까??")){
-		console.log(sitter_id);
-		location.href="../admin/permmisionAction?id="+sitter_id;
-	}
-}
 </script>
 
 </head>
@@ -234,7 +226,7 @@ function editRow(sitter_id){
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -318,10 +310,7 @@ function editRow(sitter_id){
 													${row.license_check }
 												</a>
 											
-                                            </th>
-                                            <th>${row.introduction }</th>
-                                            <th>${row.personality_check }</th>
-                                            <th>${row.license_check }</th>
+                                            </th>                                    
                                             <th>${row.activity_time }</th>
                                             <th>${row.residence1 }</th>
                                             <th>${row.residence2 }</th>

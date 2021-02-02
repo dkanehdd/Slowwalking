@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import member.MemberDTO;
+import member.MemberImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
+import mutiBoard.OrderDTO;
 import mutiBoard.ProductDTO;
 import mutiBoard.ProductImpl;
 
@@ -88,4 +93,22 @@ public class AdminProductController {
 		return "redirect:../admin/productList";
 	}
 
+	
+	//결제관리 테이블 리스트
+
+	//admin 회원 목록 처리
+	@RequestMapping("/admin/orderList")
+	public String orderList(Model model, HttpServletRequest req) {
+		OrderDTO orderDTO = new OrderDTO();
+
+		//Mapper 호출
+		ArrayList<OrderDTO> lists =
+			sqlSession.getMapper(ProductImpl.class)
+				.orderList();
+		
+		model.addAttribute("lists", lists);
+		return "redirect:../admin/orderList";
+	}
+	
+	
 }

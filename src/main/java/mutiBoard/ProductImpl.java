@@ -8,4 +8,9 @@ public interface ProductImpl {
 	public ProductDTO contentPage(String idx);
 	
 	public int insertProduct(ProductDTO productDTO);
+	
+	
+	
+	// 상품결제관리 리스트
+	public ArrayList<OrderDTO> orderList();
 }
