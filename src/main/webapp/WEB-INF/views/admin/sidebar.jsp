@@ -46,6 +46,14 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>상품관리</span></a>
     </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="../admin/orderList">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>상품결제관리</span></a>
+    </li>
+    
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

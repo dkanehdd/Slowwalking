@@ -21,4 +21,9 @@
 	</insert>
 
 
+<!--상품결제관리 리스트  -->
+	<select id="orderList" resultType="mutiBoard.OrderDTO">
+		SELECT * FROM shop_order
+	</select>
+
 </mapper>
