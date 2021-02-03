@@ -10,7 +10,6 @@
 
 </head> 
 <body>
-	<%@ include file="../include/top.jsp"%>
 
 <script type="text/javascript">
 	function deleteRow(idx) {
@@ -40,7 +39,7 @@
 				<img src="../resources/images/${row.image }" class="media-object rounded-circle" style="width:100px; height:100px">
 			</div>
 			<div>
-				<h2><a href="requestBoard_view?idx=${row.idx }&list_flag=${list_flag}">${row.title }</a></h4>
+				<h2><a href="../advertisement/requestBoard_view?idx=${row.idx }&list_flag=${list_flag}">${row.title }</a></h4>
 				<p>아이 이름 : ${row.children_name }</p> 
 				<p>돌봄 시간 : ${row.request_time }</p>  
 			</div>	  
@@ -53,8 +52,6 @@
 	
 </div>
 </section>
-<!-- Footer메뉴 -->
-<%@ include file="../include/footer.jsp"%>
 
 <!-- 스크립트 -->
 <script src="../resources/js/jquery.min.js"></script>

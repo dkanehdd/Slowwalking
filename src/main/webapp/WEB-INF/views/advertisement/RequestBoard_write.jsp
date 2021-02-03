@@ -45,9 +45,6 @@ function checkform() {
 	return result;
 }
 </script>
-
-<!-- css, js 파일링크 등 묶음-->
-<%@ include file="../links/linkOnly2dot.jsp"%>
 <meta charset="UTF-8">
 <title>느린걸음</title>
 <link rel="stylesheet"
@@ -55,7 +52,6 @@ function checkform() {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<%@ include file="../include/top.jsp"%>
 <body>
 	<section class="testimonial section-padding"
 		style="background-color: var(- -project-bg);">
@@ -64,7 +60,7 @@ function checkform() {
 				<div class="text-center">
 					<h2>구직 신청 의뢰서를 작성해주세요.</h2>
 					<form
-						action="requestBoardAction_write?${_csrf.parameterName}=${_csrf.token}"
+						action="../advertisement/requestBoardAction_write?${_csrf.parameterName}=${_csrf.token}"
 						method="post" name="requestBoard" enctype="multipart/form-data"
 						onsubmit="return checkform();">
 						<div class="custom-control custom-switch">
@@ -567,10 +563,6 @@ function workday_make() {
 	
 	</script>
 
-
-
-	<!-- Footer메뉴 -->
-	<%@ include file="../include/footer.jsp"%>
 
 	<!-- 스크립트 -->
 	<script src="../resources/js/jquery.min.js"></script>
