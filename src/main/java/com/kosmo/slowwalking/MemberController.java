@@ -126,6 +126,11 @@ public class MemberController {
 
 			mv.setViewName("Member/MypageSitter");
 		} else if (flag.equals("parents")) {
+			System.out.println("부모회원 인증완료");
+          		ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(user_id);
+          
+        		System.out.println(dto);
+          		model.addAttribute("dto", dto);
 
 			mv.setViewName("Member/MypageParents");
 		} else if (flag.equals("admin")) {
@@ -133,6 +138,8 @@ public class MemberController {
 			mv.setViewName("redirect:../admin/index");
 		}
 		session.setAttribute("user_id", user_id);
+		session.setAttribute("flag", flag);
+
 		return mv;
 
 	}
