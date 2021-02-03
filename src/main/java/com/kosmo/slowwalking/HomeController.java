@@ -1,8 +1,11 @@
 package com.kosmo.slowwalking;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -20,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@RequestMapping("/main/main")
-	public String home() {
-
+	public String home(HttpSession session) {
+		
 		return "Main/slowwalking";
 	}
 	

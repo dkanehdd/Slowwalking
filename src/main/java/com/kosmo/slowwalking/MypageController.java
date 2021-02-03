@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import advertisement.InterviewDTO;
 import advertisement.RequestBoardDTO;
+
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
@@ -213,7 +214,6 @@ public class MypageController {
 
 		
 		return map;
-	}
 	
 	//인터뷰 목록 리스트
 	@RequestMapping("/mypage/interList")

@@ -54,21 +54,18 @@ public class MemberController {
 	public String MemberJoin() {
 		return "Member/Join";
 	}
-
-	/*
-	 * 회원가입 한 후 바로 로그인이 된 상태로 처리할지 아님 한번더 로그인을 할지 결정 한후 어떤 페이지로 이동할지 다시 결정
-	 */
-	@RequestMapping(value = "/member/joinAction", method = RequestMethod.POST)
+	
+	
+	@RequestMapping(value = "/member/joinAction", method=RequestMethod.POST)
 	public String MemberJoinAction(Model model, MemberDTO memberDTO, HttpSession session) {
-
 		System.out.println(memberDTO.getName());
 		System.out.println(memberDTO.getEmail());
 		System.out.println(memberDTO.getPw());
 		System.out.println(memberDTO.getId());
 
 		int sucOrFail = sqlSession.getMapper(MemberImpl.class).insertMember(memberDTO);
-		// 모델객체에 맵? 컬렉션을 저장한 후 뷰로 전달
-		if (sucOrFail == 1) {
+		//모델객체에 맵? 컬렉션을 저장한 후 뷰로 전달
+		if(sucOrFail==1) {
 			model.addAttribute("id", memberDTO.getId());
 			model.addAttribute("sucOrFail", sucOrFail);
 			model.addAttribute("mode", "join");
@@ -91,14 +88,13 @@ public class MemberController {
 		System.out.println("생성된UUID-2:" + uuid);
 		return uuid;
 	}
-
-	// 로그인 페이지로 이동하는 요청명(메소드)
+	
+	//로그인 페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/login")
 	public String Login() {
 		return "Member/Login";
 	}
-
-
+	//로그아웃
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {
 		
