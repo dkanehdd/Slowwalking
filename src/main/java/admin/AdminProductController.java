@@ -93,7 +93,7 @@ public class AdminProductController {
 			e.printStackTrace();
 		}
 
-		return "redirect:../admin/productList";
+		return "redirect:../admin/product";
 	}
 
 	// 결제관리 테이블 리스트
