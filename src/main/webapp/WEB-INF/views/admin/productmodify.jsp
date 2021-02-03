@@ -30,15 +30,6 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-<script>
-function editRow(id){
-   
-   if(confirm("가입승인 하시겠습니까?")){
-      location.href="../admin/permissionAction?id="+ id;
-   }
-}
-</script>
-
 
 </head>
 <body id="page-top">
@@ -46,10 +37,7 @@ function editRow(id){
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
         <%@ include file="./sidebar.jsp"%>
-        <!-- End of Sidebar -->
-
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -265,10 +253,13 @@ function editRow(id){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+ <form name="writeFrm" method="post" 
+		onsubmit="return writeValidate(this);" enctype="multipart/form-data"
+		action="../admin/productmodifyAction?${_csrf.parameterName}=${_csrf.token}" >
+		
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">시터 회원 정보</h1>
-                    <p class="mb-4">시터 회원 가입승인 및 파일 다운로드 </p>
-
+                    <h1 class="h3 mb-2 text-gray-800">상품관리</h1>
+                    <p class="mb-4">상품등록 수정 및 삭제 관리 </p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -276,82 +267,73 @@ function editRow(id){
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-                            <div class="">
+                            <div class="table-responsive">
+          
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>시터 ID</th>
-                                            <th>cctv 동의</th>
-                                            <th>인적성검사서</th>
-                                            <th>자격증 인증서</th>
-                                            <th>활동기간</th>
-                                            <th>희망시급</th>
-                                            <th>포인트</th>
-                                            <th>가입승인</th>
-                                            <th>결제회원</th>
-                                            <th>활동시간</th>
-                                            <th>이름</th>
-                                            <th>프로필사진</th>
-                                            <th>별점</th>
-                                            <th>나이</th>
-                                            <th>가입승인</th>
-
-                                        </tr>
-                                    </thead>
-                                  
-                                    <tbody>
-                                         <c:forEach items="${lists }" var="row">		
-										<tr>
-                                            <th>${row.sitter_id }</th>
-                                            <th>${row.cctv_agree }</th>
-                                            <th>
-													<a href="../fileUpload/download.do?fileName=${row.personality_check }&oriFileName=${row.personality_check }">
-														${row.personality_check }
-													</a>
-                                            </th>
-                                             <th>
-												<a href="../fileUpload/download.do?fileName=${row.license_check }&oriFileName=${row.license_check }">
-													${row.license_check }
-												</a>
+                                <input type="hid den" name="idx" value="${dto.idx }"/>
+                                
+                       
+									     <colgroup>
+											<col width="20%"/>
+											<col width="*"/>
+											<col width="*"/>
+										</colgroup>
+										<tbody>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">상품이름</th>
+												<td>
+													<input type="text" name="product_name" value="${dto.product_name }" />
+												</td>
+											</tr>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">내용</th>
+												<td>
+													<textarea rows="10" class="form-control" 
+													name="content">${dto.content }</textarea>
+												</td>
+											</tr>	
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">가격</th>
+												<td>
+													<input type="number" name="price" value="${dto.price }"/>
+												</td>
+											</tr>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">원본이미지</th>
+												<td>
+													<input type="text" name="originalfile" value="${dto.image }"  readonly="readonly"/>
+												</td>
+											</tr>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">이미지수정</th>
+												<td>
+													<input type="file" name="image" value="" />
+												</td>
+											</tr>
 											
-                                            </th>                                    
-                                            <th>${row.activity_time }</th>
-                                            <th>${row.pay }</th>
-                                            <th>${row.point }</th>
-                                            <th>${row.permission }</th>
-                                            <th>${row.premium }</th>
-                                            <th>${row.career }</th>
-                                            <th>${row.name }</th>
-                                            <th>${row.image_path }</th>
-                                            <th>${row.starrate }</th>
-                                            <th>${row.age }</th>
-												 <c:choose>
 												
-												<c:when test="${row.permission eq 'F'}"> 
-												 <th><button class="btn btn-danger" 
-												onclick="javascript:editRow('${row.sitter_id}');">가입승인</button>
-												</th>
-												
-												 </c:when>
-												
-												<c:otherwise> <th> 가입승인확인 </th> </c:otherwise>
-												
-												</c:choose>
-                                            
-                               
-                                            
-                                            
-                                            
-                                        </tr>
-								</c:forEach>
-                                     
-                                        
-                                    </tbody>
-                                </table>
-                               
+											
+										</tbody>
+                              	<div class="row text-center" style="">
+								<!-- 각종 버튼 부분 -->		
+								<button type="submit" class="btn btn-danger">전송하기</button>
+								<button type="reset" class="btn">Reset</button>
+								<button type="button" class="btn btn-warning" 
+									onclick="location.href='adminnotice';">리스트보기</button>
+								</div>
+                   						</table>
+                   					
+                   						
                             </div>
+                           
                         </div>
                     </div>
+</form>
                 </div>
                 <!-- /.container-fluid -->
 

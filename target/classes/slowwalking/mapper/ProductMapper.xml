@@ -19,7 +19,15 @@
 		INSERT INTO shop_products (idx,product_name,price,content,image)
 		VALUES(seq_product_idx.nextval, #{product_name}, #{price},#{content}, #{image})
 	</insert>
-
+	
+	<update id="updateProduct" parameterType="mutiBoard.ProductDTO">
+		UPDATE shop_products SET product_name=#{product_name}, price=#{price}, content=#{content}, image=#{image}
+		where idx=#{idx}
+	</update>
+	
+	<delete id="deleteProduct" parameterType="String">
+		DELETE FROM shop_products where idx=#{idx}
+	</delete>
 
 <!--상품결제관리 리스트  -->
 	<select id="orderList" resultType="mutiBoard.OrderDTO">

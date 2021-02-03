@@ -33,7 +33,7 @@
 function deleteRow(idx){
 	
 	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="../admin/adminnoticedelete?idx="+ idx;
+		location.href="../admin/productdelete?idx="+ idx;
 	}
 }
 </script>
@@ -271,7 +271,7 @@ function deleteRow(idx){
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 	
                        
@@ -294,19 +294,19 @@ function deleteRow(idx){
                                             <th>${row.price}</th>
                                             <th>${row.image}</th>
                                             <th> <button class="btn btn-primary" 
-							onclick="location.href='adminnoticemodify?idx=${row.idx}';">수정</button></th>
+							onclick="location.href='productmodify?idx=${row.idx}';">수정</button></th>
                                             <th><button class="btn btn-danger" 
 							onclick="javascript:deleteRow('${row.idx}');">삭제</button></th>
                                         </tr>
 								</c:forEach>
                                      
                                         
-                                <div class="row text-center" style="">
+                                    </tbody>
+                                </table>
+                                <div class="text-right">
                                 <button class="btn btn-warning" 
 							onclick="location.href='productWrite';">등록</button>
                                 </div>
-                                    </tbody>
-                                </table>
                                 
                                
                             </div>
