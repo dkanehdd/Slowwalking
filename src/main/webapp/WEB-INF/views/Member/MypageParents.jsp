@@ -56,8 +56,8 @@ $(function(){
        		</li>
         </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2">의뢰서 작성</li>
-         	<li class="list-group-item">내 의뢰서</li>
+         	<li class="list-group-item mt-2"><a href="../advertisement/requestBoard_write" >의뢰서 작성</a></li>
+         	<li class="list-group-item"><a href="../advertisement/requestBoard_Mylist" >내 의뢰서 보기</a></li>
           	<li class="list-group-item" id="interview">내 구인현황</li>
           	<li class="list-group-item" id="2">후기관리</li>
         </ul>
