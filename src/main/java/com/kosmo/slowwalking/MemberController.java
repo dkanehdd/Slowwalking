@@ -305,6 +305,7 @@ public class MemberController {
 		}
 		if (req.getParameter("mode").equals("join")) {
 			if (req.getParameter("flag").equals("sitter")) {
+				model.addAttribute("id",user_id);
 				view = "Member/SitterJoin";
 			} else {
 				view = "redirect:/member/mypage";

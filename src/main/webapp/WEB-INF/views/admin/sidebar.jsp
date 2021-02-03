@@ -41,6 +41,18 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>공지사항</span></a>
     </li>
+    
+     <li class="nav-item">
+        <a class="nav-link" href="../admin/requestBoard">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>의뢰 신청서 관리</span></a>
+    </li>
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Product Management
+    </div>
+    
+
     <li class="nav-item">
         <a class="nav-link" href="../admin/product">
             <i class="fas fa-fw fa-chart-area"></i>

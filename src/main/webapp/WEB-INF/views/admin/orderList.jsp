@@ -262,7 +262,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 	
                        
@@ -275,10 +275,12 @@
                                             <th>상품 정보</th>
                                             <th>전체가격</th>
                                             <th>결제한 날짜</th>    
+                                               
                                         </tr>
                                     </thead>
                                   
                                     <tbody>
+                                     <c:forEach items="${lists }" var="row">
                                      <tr>
                                             <th>${row.idx }</th>
                                             <th>${row.id }</th>
@@ -287,7 +289,8 @@
                                             <th>${row.info }</th>
                                             <th>${row.total_price }</th>
                                             <th>${row.regidate }</th>  
-                                        </tr>                              
+                                        </tr>     
+                                        </c:forEach>                         
                                     </tbody>
                                 </table>
                                 

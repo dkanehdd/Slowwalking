@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -30,16 +28,6 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-<script>
-function editRow(id){
-	
-	if(confirm("가입승인 하시겠습니까?")){
-		location.href="../admin/permissionAction?id="+ id;
-	}
-}
-</script>
-
 </head>
 <body id="page-top">
 
@@ -175,8 +163,6 @@ function editRow(id){
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -265,10 +251,10 @@ function editRow(id){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">시터 회원 정보</h1>
-                    <p class="mb-4">시터 회원 가입승인 및 파일 다운로드 </p>
 
+                    <!-- Page Heading -->
+                     <h1 class="h3 mb-2 text-gray-800">의뢰신청서</h1>
+                    <p class="mb-4">부모 의뢰 신청서 상세보기</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -278,86 +264,39 @@ function editRow(id){
                         <div class="card-body">
                             <div class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                	
+                       
                                     <thead>
-                                        <tr>
-                                            <th>시터 ID</th>
-                                            <th>cctv 동의</th>
-                                            <th>인적성검사서</th>
-                                            <th>자격증 인증서</th>
-                                            <th>활동기간</th>
-<!--                                             <th>활동가능지역1</th> -->
-<!--                                             <th>활동가능지역2</th> -->
-<!--                                             <th>활동가능지역3</th> -->
-                                            <th>희망시급</th>
-                                            <th>포인트</th>
-                                            <th>가입승인</th>
-                                            <th>결제회원</th>
-                                            <th>활동시간</th>
-                                            <th>이름</th>
-                                            <th>프로필사진</th>
-                                            <th>별점</th>
-                                            <th>나이</th>
-                                            <th>가입승인</th>
-
-                                        </tr>
-                                    </thead>
-                                  
-                                    <tbody>
-                                         <c:forEach items="${lists }" var="row">		
-										<tr>
-                                            <th>${row.sitter_id }</th>
-                                            <th>${row.cctv_agree }</th>
-                                            <th>
-													<a href="../fileUpload/download.do?fileName=${row.personality_check }&oriFileName=${row.personality_check }">
-														${row.personality_check }
-													</a>
-                                            </th>
-                                             <th>
-												<a href="../fileUpload/download.do?fileName=${row.license_check }&oriFileName=${row.license_check }">
-													${row.license_check }
-												</a>
-											
-                                            </th>                                    
-                                            <th>${row.activity_time }</th>
-<%--                                             <th>${row.residence1 }</th> --%>
-<%--                                             <th>${row.residence2 }</th> --%>
-<%--                                             <th>${row.residence3 }</th> --%>
-                                            <th>${row.pay }</th>
-                                            <th>${row.point }</th>
-                                            <th>${row.permission }</th>
-                                            <th>${row.premium }</th>
-                                            <th>${row.career }</th>
-                                            <th>${row.name }</th>
-                                            <th>${row.image_path }</th>
-                                            <th>${row.starrate }</th>
-                                            <th>${row.age }</th>
-												 <c:choose>
-												
-												<c:when test="${row.permission eq 'F'}"> 
-												 <th><button class="btn btn-danger" 
-												onclick="javascript:editRow('${row.sitter_id}');">가입승인</button>
-												</th>
-												
-												 </c:when>
-												
-												<c:otherwise> <th> 가입승인확인 </th> </c:otherwise>
-												
-												</c:choose>
-                                            
-                               
-                                            
-                                            
-                                            
-                                        </tr>
-								</c:forEach>
-                                     
-                                        
-                                    </tbody>
+                     <tr>
+						<th class="text-center table-active align-middle">작성자</th>
+						<td>${dto.id }</td>
+						<th class="text-center table-active align-middle">아이사진</th>
+						<td>${dto.image }</td>
+					</tr>
+					<tr>
+						<th class="text-center table-active align-middle">아이이름</th>
+						<td>${dto.children_name }</td>
+						<th class="text-center table-active align-middle">신청서 제목</th>
+						<td colspan="1">
+							${dto.title }
+						</td>
+					</tr>
+					<tr>
+						<th class="text-center table-active align-middle">내용</th>
+						<td colspan="3" class="align-middle" style="height:200px;">
+							${dto.content }
+						</td>
+					</tr>
+					
+					<button type="button" class="btn btn-warning" 
+									onclick="location.href='requestBoard';">리스트보기</button>
                                 </table>
+                                
                                
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 

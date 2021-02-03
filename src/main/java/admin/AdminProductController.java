@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import advertisement.RequestBoardDTO;
+import advertisement.RequestBoardImpl;
+import member.AdminMemberImpl;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
+import mutiBoard.MultiBoardDTO;
 import mutiBoard.OrderDTO;
 import mutiBoard.ProductDTO;
 import mutiBoard.ProductImpl;
@@ -107,8 +111,10 @@ public class AdminProductController {
 				.orderList();
 		
 		model.addAttribute("lists", lists);
-		return "redirect:../admin/orderList";
+		return "admin/orderList";
 	}
+	
+	
 	
 	
 }

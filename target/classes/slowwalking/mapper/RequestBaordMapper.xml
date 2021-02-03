@@ -25,4 +25,9 @@
 					#{13})
 	</insert>
 
+
+	<!--의뢰서 삭제  -->
+	<delete id="requestBoardDelete">
+		DELETE FROM requestBoard WHERE idx=#{idx}
+	</delete>
 </mapper>
