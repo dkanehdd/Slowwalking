@@ -6,23 +6,27 @@
 <head>
 <meta charset="UTF-8" />
 <%@ include file="../links/linkOnly2dot.jsp"%>
-<title>MyPage.jsp</title>
+<title>느린걸음-마이페이지</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
 <script type="text/javascript">
 $(function(){
 	$("#profile").on("click",function(){
-		$("#ihateiframes").load("../mypage/proEdit");
-		window.alert("출력1");
+		$("#innerPage").load("../mypage/proEdit");
+	});
+	$("#image").on("click",function(){
+		$("#innerPage").load("../mypage/getImage");
+	});
+	$("#interview").on("click",function(){
+		$("#innerPage").load("../mypage/interList");
 	});
 });
-
-
 </script>
 <style>
 .box { position:relate;}
-.in { position:absolute; top:0; left:175px;}
-.in img {width:40px;}
+.box img {width:200px; height:200px;}
+.in { position:absolute; top:10px; left:175px;}
+.in img {width:30px;}
 </style>
 </head>
 <body>
@@ -31,10 +35,17 @@ $(function(){
     <div class="row mt-5 ml-5">
       <div class="col-2" id="menu">
 		<div class="box">
-		<img src="../resources/images/img_avatar5.png" style="width:200px;">
+			<c:choose>
+				<c:when test="${not empty image_path }">
+					<img src="../resources/images/${image_path }"/>
+				</c:when>
+				<c:otherwise>
+					<img src="../resources/images/anonymous-avatar.jpg" style="width:200px;"/>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="in">
-			<img src="../resources/images/female-avatar.png" onclick="window.open('../mypage/getImage', 'rm', 'width=400, height=400, location=no, status=no,scrollbars=yes')">
+			<img src="../resources/images/photo-camera.png" id="image">
 		</div>
 		<div class="bg-dark text-light" style="width:200px;">
           	&nbsp;${dto.sitter_id}&nbsp;<small>님</small>
@@ -43,11 +54,11 @@ $(function(){
          	<li class="list-group-item mt-2" id="profile">
           	프로필 수정
        		</li>
-          	<li class="list-group-item" id="2">임시</li>
         </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2">신청서 수정</li>
-          	<li class="list-group-item" id="2">내 구인현황</li>
+         	<li class="list-group-item mt-2">신청서 작성</li>
+         	<li class="list-group-item">내 신청서</li>
+          	<li class="list-group-item" id="interview">내 구직현황</li>
           	<li class="list-group-item" id="2">후기관리</li>
         </ul>
         <ul class="list-group list-group-flush">
@@ -56,7 +67,7 @@ $(function(){
         </ul>
       </div>
       <div class="col-10">
-      <div id="ihateiframes">
+      <div id="innerPage">
         <h3>마이페이지</h3>
 
           <div class="container">
