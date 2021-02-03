@@ -961,6 +961,7 @@ ol, ul {
 	height:100px;
 	resize: none;
 }
+#idCheck{color:red}
 .termsBox div{
 	width:48%;
 	display:inline-block;
