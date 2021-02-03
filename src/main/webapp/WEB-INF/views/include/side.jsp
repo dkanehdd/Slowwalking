@@ -11,9 +11,6 @@
         });
     });
 </script>
-
-
-출처: https://cofs.tistory.com/188 [CofS]
 <nav class="floating-menu">
 	<ul class="main-menu">
 		<li><a href="../advertisement/SitterBoard_list" class="ripple"><i class="fa fa-search" aria-hidden="true"></i><span>시터</span></a></li>
