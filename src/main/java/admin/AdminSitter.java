@@ -46,7 +46,7 @@ public class AdminSitter {
 		}
 	
 		//sitter 가입승인처리
-		@RequestMapping("/admin/permmisionAction")
+		@RequestMapping("/admin/permissionAction")
 		public String modifyAction(Model model, HttpServletRequest req) {
 
 			
