@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,23 +16,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import advertisement.InterviewDTO;
-import advertisement.RequestBoardDTO;
-
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
-import mutiBoard.DiaryDTO;
 
 @Controller
 public class MypageController {
@@ -214,6 +208,7 @@ public class MypageController {
 
 		
 		return map;
+	}
 	
 	//인터뷰 목록 리스트
 	@RequestMapping("/mypage/interList")

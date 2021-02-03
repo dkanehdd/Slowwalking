@@ -320,7 +320,7 @@ public class MemberController {
 
 				view = "Member/SitterJoin";
 			} else {
-				view = "redirect:/member/mypage";
+				view = "redirect:../main/main";
 			}
 		} else {
 			view = "redirect:../main/main";

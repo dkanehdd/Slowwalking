@@ -57,7 +57,7 @@ function checkform() {
 <%@ include file="../include/top.jsp"%>
 <body>
 	<section class="testimonial section-padding"
-		style="background-color: var(- -project-bg);">
+		style="background-color: var(--project-bg);">
 		<div class="container">
 			<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
 				<div class="text-center">

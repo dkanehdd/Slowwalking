@@ -40,10 +40,10 @@ $(function(){
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
 				if(d.ckeck==1){
-					$('#idCheck').html(d.message).css('color','red');
+					$('#idCheck').html(d.message).css('color','blue');
 				}
 				else{
-					$('#idCheck').css('display','inline');
+					$('#idCheck').css('display','inline').css('color','green');
 					$('#idCheck').html(d.message);
 				}
 			},
