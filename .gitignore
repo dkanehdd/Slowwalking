@@ -1,6 +1,9 @@
-.properties
+pom.properties
+MANIFEST.MF
 */target/*
 *.class
 *.class
 *.class
 *.class
+*.class
+target/classes/slowwalking/mapper/Board.xml
