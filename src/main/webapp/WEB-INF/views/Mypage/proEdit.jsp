@@ -9,6 +9,112 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$('#submit').on("click", function() {
+	$.ajax({
+		url : "../mypage/proEditAction?${_csrf.parameterName}=${_csrf.token}", //요청할 경로
+		type : "get", //전송방식
+		//post방식일때의 컨텐츠 타입
+		contentType : "text/html;charset:utf-8;",
+		data : { //서버로 전송할 파라미터(JSON타입)
+			id : $('#id').val(),
+			pw : $('#pw').val(),
+			phone : $('#phone').val(),
+			email : $('#email').val()
+		},
+		dataType : "json", //콜백데이터의 형식
+		success : function() { //콜백메소드
+			$('#pw').val("");
+			$('#pass1').val("");
+			$('#pass2').val("");
+			alert("수정이 완료되었습니다.");
+		},
+		error : function() {
+			alert("수정이 실패하였습니다.");
+		}
+	});
+});
+
+</script>
+</head>
+<body>
+<div class="ml-2">
+<h3>회원정보수정</h3>
+</div>
+<div class="container">
+<form action="../mypage/proEditAction?${_csrf.parameterName}=${_csrf.token}" method="post" id="editFrm" 
+	onsubmit="return pwValidate(this);">
+	<input type="hid-den" name="id" id="id" value="${user_id }" />
+	<table class="table">
+	<tbody>
+		<tr>
+			<th>이름</th>
+			<td><input type="text" id="${dto.name }" value="${dto.name }" readonly/></td>
+		</tr>
+		<tr>
+			<th>현재 비밀번호</td>
+			<td><input type="password" name="oriPw" id="pass1"/></td>
+		</tr>
+		<tr>
+			<th>새 비밀번호</th>
+			<td><input type="password" name="pw" id="pw" onblur="checkPw(this.value);" >&nbsp;&nbsp;<span id="pw1">* 4자 이상 12자 이내의 영문/숫자/특수문자 조합</span></td>
+		</tr>
+		<tr>
+			<th>비밀번호 확인</th>
+			<td><input type="password" name="pw2" id="pass2" class="join_input" onblur="checkPw2(this.value);" />&nbsp;&nbsp;<span id="pw2" hidden>* 비밀번호가 일치하지 않습니다.</span></td>
+		</tr>
+		<tr>
+			<th scope="row">휴대폰</th>
+			<td><input type="text" name="phone" id='phone' value="${dto.phone }"
+				maxlength='11' class='w50p' placeholder="휴대폰번호"> <input
+				type="hidden" name="hpyn" value="Y" id="hpyn1" checked>
+				<div style='display: inline-block;'>
+					<button type="button" id='sendPhoneNumber'>본인인증</button>
+				</div>
+				<div style='display: none;' id="phonecheck" >
+				<input  type="text" name="userida" id='inputCertifiedNumber' maxlength="4" value=""><button type="button" id='checkBtn'>확인</button></div>
+			</td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td>		
+				<input type="text" name="email1" id="email1"  value="" id="eamil1"/> @ 
+				<input type="text" name="email2" id="email2"  value="" />
+				<select name="last_email_check2" onChange="emailSelect(this);" class="pass" id="last_email_check2" >
+					<option selected="" value="">선택해주세요</option>
+					<option value="" >직접입력</option>
+					<option value="dreamwiz.com" >dreamwiz.com</option>
+					<option value="empal.com" >empal.com</option>
+					<option value="empas.com" >empas.com</option>
+					<option value="freechal.com" >freechal.com</option>
+					<option value="hanafos.com" >hanafos.com</option>
+					<option value="hanmail.net" >hanmail.net</option>
+					<option value="hotmail.com" >hotmail.com</option>
+					<option value="intizen.com" >intizen.com</option>
+					<option value="korea.com" >korea.com</option>
+					<option value="kornet.net" >kornet.net</option>
+					<option value="msn.co.kr" >msn.co.kr</option>
+					<option value="nate.com" >nate.com</option>
+					<option value="naver.com" >naver.com</option>
+					<option value="netian.com" >netian.com</option>
+					<option value="orgio.co.kr" >orgio.co.kr</option>
+					<option value="paran.com" >paran.com</option>
+					<option value="sayclub.com" >sayclub.com</option>
+					<option value="yahoo.co.kr" >yahoo.co.kr</option>
+					<option value="yahoo.com" >yahoo.com</option>
+				</select>
+			</td>
+		</tr>
+		<input type="hid`den" name="email" id="email" value="${dto.email }"/>
+	</tbody>
+</table>
+<div class="container text-center">
+	<button type="button" class="btn btn-info" id="submit">수정하기</button>
+	<button type="button" class="btn btn-dark">취소하기</button>
+</div>
+</form>
+</div>
+</body>
 <script>
 //현재 비밀번호 확인
 function pwValidate(fn){
@@ -179,85 +285,5 @@ $(function(){
   	});  
 	
 });
-
-
 </script>
-</head>
-<body>
-<div class="col-10">
-<h3>회원정보수정</h3>
-</div>
-<div class="container">
-<form action="./proEditAction" method="post" name="editFrm" onsubmit="return pwValidate(this);"
-	enctype="multipart/form-data">
-<table class="table">
-	<tbody>
-		<tr>
-			<th>이름</th>
-			<td><input type="text" id="${dto.name }" value="${dto.name }" readonly/></td>
-		</tr>
-		<tr>
-			<th>현재 비밀번호</td>
-			<td><input type="password" name="oriPw"/></td>
-		</tr>
-		<tr>
-			<th>새 비밀번호</th>
-			<td><input type="password" name="newPw1" id="pw" onblur="checkPw(this.value);" >&nbsp;&nbsp;<span id="pw1">* 4자 이상 12자 이내의 영문/숫자/특수문자 조합</span></td>
-		</tr>
-		<tr>
-			<th>비밀번호 확인</th>
-			<td><input type="password" name="newPw2" value="" class="join_input" onblur="checkPw2(this.value);" />&nbsp;&nbsp;<span id="pw2" hidden>* 비밀번호가 일치하지 않습니다.</span></td>
-		</tr>
-		<tr>
-			<th scope="row">휴대폰</th>
-			<td><input type="text" name="phone" id='phone' value=""
-				maxlength='11' class='w50p' placeholder="휴대폰번호"> <input
-				type="hidden" name="hpyn" value="Y" id="hpyn1" checked>
-				<div style='display: inline-block;'>
-					<button type="button" id='sendPhoneNumber'>본인인증</button>
-				</div>
-				<div style='display: none;' id="phonecheck" >
-				<input  type="text" name="userida" id='inputCertifiedNumber' maxlength="4" value=""><button type="button" id='checkBtn'>확인</button></div>
-			</td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td>		
-				<input type="text" name="email1" id="email1"  value="" id="eamil1"/> @ 
-				<input type="text" name="email2" id="email2"  value="" />
-				<select name="last_email_check2" onChange="emailSelect(this);" class="pass" id="last_email_check2" >
-					<option selected="" value="">선택해주세요</option>
-					<option value="" >직접입력</option>
-					<option value="dreamwiz.com" >dreamwiz.com</option>
-					<option value="empal.com" >empal.com</option>
-					<option value="empas.com" >empas.com</option>
-					<option value="freechal.com" >freechal.com</option>
-					<option value="hanafos.com" >hanafos.com</option>
-					<option value="hanmail.net" >hanmail.net</option>
-					<option value="hotmail.com" >hotmail.com</option>
-					<option value="intizen.com" >intizen.com</option>
-					<option value="korea.com" >korea.com</option>
-					<option value="kornet.net" >kornet.net</option>
-					<option value="msn.co.kr" >msn.co.kr</option>
-					<option value="nate.com" >nate.com</option>
-					<option value="naver.com" >naver.com</option>
-					<option value="netian.com" >netian.com</option>
-					<option value="orgio.co.kr" >orgio.co.kr</option>
-					<option value="paran.com" >paran.com</option>
-					<option value="sayclub.com" >sayclub.com</option>
-					<option value="yahoo.co.kr" >yahoo.co.kr</option>
-					<option value="yahoo.com" >yahoo.com</option>
-				</select>
-			</td>
-		</tr>
-		<input type="hid`den" name="email" id="email" value=""/>
-	</tbody>
-</table>
-<div class="container text-center">
-	<button type="submit" class="btn btn-info">수정하기</button>
-	<button type="button" class="btn btn-dark">취소하기</button>
-</div>
-</form>
-</div>
-</body>
 </html>

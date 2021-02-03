@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import member.MemberDTO;
 import member.MemberImpl;
+import member.ParentsMemberDTO;
 import member.SitterImpl;
 import member.SitterMemberDTO;
 import mms.certificationService;
@@ -82,6 +83,7 @@ public class MemberController {
 		// 회원가입 완료후 이미지 등록
 		return "Member/Image";
 	}
+
 	public static String getUuid() {
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("생성된UUID-1:" + uuid);
@@ -95,6 +97,7 @@ public class MemberController {
 	public String Login() {
 		return "Member/Login";
 	}
+
 
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {
@@ -209,21 +212,24 @@ public class MemberController {
 
 		String view = "";
 		String user_id = principal.getName();
-		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
-
-		if (flag.equals("sitter")) {
-			System.out.println("시터회원 인증완료");
-			SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
-
-			System.out.println(dto);
-			model.addAttribute("dto", dto);
-
-			view = "Member/MypageSitter";
-		} else if (flag.equals("parents")) {
-
-			view = "Member/MypageParents";
-		}
-
+	    String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
+		
+	    if(flag.equals("sitter")) {
+	    	System.out.println("시터회원 인증완료");
+	    	SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
+	    	String image_path = sqlSession.getMapper(MemberImpl.class).getImage(user_id);
+         
+	    	System.out.println(dto);
+			model.addAttribute("image_path", image_path);
+	    	model.addAttribute("dto", dto);
+         
+            view = "Member/MypageSitter";
+        }
+        else if(flag.equals("parents")) {
+         
+        	view = "Member/MypageParents";
+        }
+    
 		return view;
 	}
 

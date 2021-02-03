@@ -14,6 +14,9 @@
 <div class="container">
 <div class="container p-3 my-3 bg-muted">
 	<h3 class="text-center">${dto.title }</h3>
+	<input type="hid-den" id="idx" value="${dto.idx}"/>
+	<input type="hid-den" id="id" value="${dto.id}" />
+	<input type="hid-den" id="request_time" value="${dto.request_time}" />
 	<table class="table table-bordered">
 		<tbody class="text-center">
 			<tr>
@@ -95,10 +98,35 @@
 			</tr>
 		</tbody>
 	</table>
-	<button class="btn btn-success">인터뷰 신청하기</button>
+	<button type="button" class="btn btn-success" id="submit" >인터뷰 신청하기</button>
 	</div>
 </div>
 <!-- Footer메뉴 -->
 <%@ include file="../include/footer.jsp"%>
 </body>
+<script>
+$(function(){
+	$('#submit').on("click", function(){
+		$.ajax({
+			url : "../mypage/addList?${_csrf.parameterName}=${_csrf.token}",
+			type : "GET",
+			data : { 
+				idx : $('#idx').val(),
+				id : $('#id').val(),
+				request_time : $('#request_time').val()
+			},
+			dataType : "json", 
+			contentType : "text/html;charset:utf-8;",
+			success : function(data){
+				alert(data.message);
+			},
+			error : function(){
+				alert("다시 시도해 주세요.");
+			}
+			
+		});
+	});
+
+});
+</script>
 </html>

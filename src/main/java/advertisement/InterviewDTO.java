@@ -7,9 +7,16 @@ public class InterviewDTO {
 	private String request_time;
 	private String parents_agree;
 	private String sitter_agree;
+	private int request_idx;
 	
 	
 	
+	public int getRequest_idx() {
+		return request_idx;
+	}
+	public void setRequest_idx(int request_idx) {
+		this.request_idx = request_idx;
+	}
 	public int getIdx() {
 		return idx;
 	}
