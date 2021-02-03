@@ -66,6 +66,7 @@ public class MemberController {
 		int sucOrFail = sqlSession.getMapper(MemberImpl.class).insertMember(memberDTO);
 		//모델객체에 맵? 컬렉션을 저장한 후 뷰로 전달
 		if(sucOrFail==1) {
+
 			model.addAttribute("id", memberDTO.getId());
 			model.addAttribute("sucOrFail", sucOrFail);
 			model.addAttribute("mode", "join");
@@ -80,7 +81,6 @@ public class MemberController {
 		// 회원가입 완료후 이미지 등록
 		return "Member/Image";
 	}
-
 	public static String getUuid() {
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("생성된UUID-1:" + uuid);
@@ -155,7 +155,6 @@ public class MemberController {
 	@RequestMapping("/member/sitterjoin")
 	public String SitterJoin(Principal principal, Model model) {
 		String user_id = principal.getName();
-
 
 		model.addAttribute("id", user_id);
 
@@ -377,7 +376,6 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return "redirect:../main/main";
 	}
 

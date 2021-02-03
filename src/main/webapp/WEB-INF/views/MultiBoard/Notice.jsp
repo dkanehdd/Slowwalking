@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +11,17 @@
 <body>
 	<!-- Top메뉴 -->
 	<%@ include file="../include/top.jsp"%>
-	<section class="section-padding" style="background-color:#eee;">
+	<section class="section-padding" style="background-color: #eee;">
 		<div class="container">
 			<!-- Side메뉴 -->
 			<%@ include file="../include/side.jsp"%>
 			<div class="section_title subPimgBg noticeImg">
-				<h1 class="mb-5"><strong>NOTICE</strong> 공지사항</h1>
+				<h1 class="mb-5">
+					<strong>NOTICE</strong> 공지사항
+				</h1>
 			</div>
-			<table class="table table-hover" data-aos="fade-up" data-aos-delay="400">
+			<table class="table table-hover" data-aos="fade-up"
+				data-aos-delay="400">
 				<colgroup>
 					<col style="width: 5%">
 					<col style="">
@@ -34,29 +37,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</th>
-						<td><a href="#">[제목입니다] 제목입니다 제목입니다 제목입니다 3</a></td>
-						<td>2021-01-31 11:17 PM</td>
-						<td><i class="fa fa-paperclip" aria-hidden="true"></i></td>
-					</tr>
-					<tr>
-						<td>2</th>
-						<td><a href="#">[제목입니다] 제목입니다 제목입니다 제목입니다 2</a></td>
-						<td>2021-01-30 10:17 PM</td>
-						<td><i class="fa fa-paperclip" aria-hidden="false"></td>
-					</tr>
-					<tr>
-						<td>3</th>
-						<td><a href="#">[제목입니다] 제목입니다 제목입니다 제목입니다 1</a></td>
-						<td>2021-01-11 09:10 AM</td>
-						<td><i class="fa fa-paperclip" aria-hidden="true"></i></td>
-					</tr>
+					<c:forEach items="${lists }" var="row">
+						<tr>
+							<th>${row.idx }</th><!-- 아래있는 요청명 이랑 controller에 있는 @requestMapping 이랑 같아야해요 -->
+							<th><a href="../multiBoard/notice_view?idx=${row.idx }">${row.title }</a>
+							</th>
+							<th>${row.postdate }</th>
+							<th>${row.attachedfile }</th>
+						</tr>
+					</c:forEach>
+
+
 				</tbody>
 			</table>
 		</div>
 	</section>
-	
+
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>

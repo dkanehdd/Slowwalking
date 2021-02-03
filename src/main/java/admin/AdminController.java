@@ -15,27 +15,23 @@ import member.MemberDTO;
 import member.MemberImpl;
 import member.AdminMemberImpl;
 
-
-
-
 @Controller
 public class AdminController {
-	
+
 	@Autowired
 	public SqlSession sqlSession;
-	
 
 	@RequestMapping("/admin")
 	public String AdminIndex() {
 		return "admin/login";
 	}
-	
+
 	@RequestMapping("/admin/index")
 	public String Index() {
 		return "admin/index";
 	}
-	
-	//admin 회원 목록 처리
+
+	// admin 회원 목록 처리
 	@RequestMapping("/admin/charts")
 	public String List(Model model, HttpServletRequest req) {
 		MemberDTO memberDTO = new MemberDTO();
@@ -96,5 +92,4 @@ public class AdminController {
 		public String denided() {
 			return "admin/denided";
 		}
-
 }

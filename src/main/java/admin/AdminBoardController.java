@@ -24,6 +24,7 @@ import mutiBoard.MultiBoardDTO;
 import mutiBoard.OrderDTO;
 import mutiBoard.ProductImpl;
 
+
 @Controller
 public class AdminBoardController {
 
@@ -40,6 +41,7 @@ public class AdminBoardController {
 		int totalRecordCount = sqlSession.getMapper(AdminMemberImpl.class).getTotalCount(memberDTO);
 		// Mapper 호출
 		ArrayList<MultiBoardDTO> lists = sqlSession.getMapper(AdminMemberImpl.class).listPage(memberDTO);
+
 		model.addAttribute("lists", lists);
 
 		return "admin/adminnotice";
@@ -56,13 +58,6 @@ public class AdminBoardController {
 		// Mapper 호출
 		multiBoardDTO = sqlSession.getMapper(AdminMemberImpl.class).contentPage(idx);
 
-		
-		// 조횟수 증가
-//			sql = sqlSession.getConfiguration()
-//					.getMappedStatement("contentCount")
-//					.getBoundSql(multiBoardDTO).getSql();
-
-		
 
 		model.addAttribute("dto", multiBoardDTO);
 
