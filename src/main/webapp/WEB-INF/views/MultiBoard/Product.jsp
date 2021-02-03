@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Notice.jsp</title>
+<title>Product.jsp</title>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
 <body>
@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="section_title subPimgBg noticeImg">
 				<h1 class="mb-5">
-					<strong>NOTICE</strong> 공지사항
+					<strong>PRODUCT</strong> 상품
 				</h1>
 			</div>
 			<table class="table table-hover" data-aos="fade-up"
@@ -28,20 +28,22 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">No</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성시간</th>
-						<th scope="col">첨부파일</th>
+						<th scope="col">상품의 일련번호</th>
+						<th scope="col">상품의 이름</th>
+						<th scope="col">상품의 가격</th>
+						<th scope="col">상품의 정보</th>
+						<th scope="col">상품 이미지</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${lists }" var="row">
 						<tr>
 							<th>${row.idx }</th><!-- 아래있는 요청명 이랑 controller에 있는 @requestMapping 이랑 같아야해요 -->
-							<th><a href="../multiBoard/notice_view?idx=${row.idx }">${row.title }</a>
+							<th><a href="../multiBoard/product_view?idx=${row.idx }">${row.product_name }</a>
 							</th>
-							<th>${row.postdate }</th>
-							<th>${row.attachedfile }</th>
+							<th>${row.price }</th>
+							<th>${row.content }</th>
+							<th>${row.image }</th>
 						</tr>
 					</c:forEach>
 
