@@ -208,32 +208,38 @@ public class MemberController {
 		return numStr;
 	}
 
-	// 마이페이지 진입
-	@RequestMapping("/member/mypage")
-	public String Mypage(Principal principal, Model model) {
-
-		String view = "";
-		String user_id = principal.getName();
-	    String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
-		
-	    if(flag.equals("sitter")) {
-	    	System.out.println("시터회원 인증완료");
-	    	SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
-	    	String image_path = sqlSession.getMapper(MemberImpl.class).getImage(user_id);
+	//마이페이지 진입
+   @RequestMapping("/member/mypage")
+   public String Mypage(Principal principal, Model model) {
+      
+      String view = "";
+      String user_id = principal.getName();
+       String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
+      
+       if(flag.equals("sitter")) {
+          System.out.println("시터회원 인증완료");
+          SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
+          String image_path = sqlSession.getMapper(MemberImpl.class).getImage(user_id);
          
-	    	System.out.println(dto);
-			model.addAttribute("image_path", image_path);
-	    	model.addAttribute("dto", dto);
+          System.out.println(dto);
+         model.addAttribute("image_path", image_path);
+          model.addAttribute("dto", dto);
          
             view = "Member/MypageSitter";
         }
         else if(flag.equals("parents")) {
+           System.out.println("부모회원 인증완료");
+          ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(user_id);
+          String image_path = sqlSession.getMapper(MemberImpl.class).getImage(user_id);
          
-        	view = "Member/MypageParents";
+          System.out.println(dto);
+         model.addAttribute("image_path", image_path);
+          model.addAttribute("dto", dto);
+           view = "Member/MypageParents";
         }
     
-		return view;
-	}
+      return view;
+   }
 
 	// 이미지 등록하기 페이지 진입
 	@RequestMapping("/member/image")

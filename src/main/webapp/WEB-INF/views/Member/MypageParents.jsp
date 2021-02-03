@@ -20,6 +20,12 @@ $(function(){
 	$("#interview").on("click",function(){
 		$("#innerPage").load("../mypage/interList");
 	});
+	$("#myrequest").on("click",function(){
+		$("#innerPage").load("../advertisement/requestBoard_Mylist");
+	});
+	$("#writerequest").on("click",function(){
+		$("#innerPage").load("../advertisement/requestBoard_write");
+	});
 });
 </script>
 <style>
@@ -56,8 +62,8 @@ $(function(){
        		</li>
         </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2">의뢰서 작성</li>
-         	<li class="list-group-item">내 의뢰서</li>
+         	<li class="list-group-item mt-2" id="writerequest">의뢰서 작성</a></li>
+         	<li class="list-group-item" id="myrequest">내 의뢰서 보기</a></li>
           	<li class="list-group-item" id="interview">내 구인현황</li>
           	<li class="list-group-item" id="2">후기관리</li>
         </ul>
