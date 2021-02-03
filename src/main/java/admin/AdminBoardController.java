@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import advertisement.RequestBoardDTO;
+import advertisement.RequestBoardImpl;
 import member.MemberDTO;
 import member.AdminMemberImpl;
 import mutiBoard.MultiBoardDTO;
+import mutiBoard.OrderDTO;
+import mutiBoard.ProductImpl;
 
 @Controller
 public class AdminBoardController {
@@ -53,18 +56,13 @@ public class AdminBoardController {
 		// Mapper 호출
 		multiBoardDTO = sqlSession.getMapper(AdminMemberImpl.class).contentPage(idx);
 
-		// 조횟수 증가
-		int contentCount = sqlSession.getMapper(AdminMemberImpl.class).contentCount(idx);
-
-		// MyBatis 기본쿼리출력
-		String sql = sqlSession.getConfiguration().getMappedStatement("contentPage").getBoundSql(multiBoardDTO)
-				.getSql();
+		
 		// 조횟수 증가
 //			sql = sqlSession.getConfiguration()
 //					.getMappedStatement("contentCount")
 //					.getBoundSql(multiBoardDTO).getSql();
 
-		System.out.println("sql=" + sql);
+		
 
 		model.addAttribute("dto", multiBoardDTO);
 
@@ -131,5 +129,57 @@ public class AdminBoardController {
 
 		return "redirect:../admin/adminnotice";
 	}
+	
+	
+	//어드민 의뢰견적 신청서
+	@RequestMapping("/admin/requestBoard")
+	public String requestBoardList(Model model, HttpServletRequest req) {
+		RequestBoardDTO requestBoardDTO = new RequestBoardDTO();
 
+		//Mapper 호출
+		ArrayList<RequestBoardDTO> lists =
+			sqlSession.getMapper(RequestBoardImpl.class)
+				.requestBoard();
+		
+		model.addAttribute("lists", lists);
+		return "admin/requestBoard";
+	}
+
+	
+	// 의뢰서 내용보기
+			@RequestMapping("/admin/requestBoardView")
+			public String requestBoardView(Model model, HttpServletRequest req) {
+				int idx = Integer.parseInt(req.getParameter("idx"));
+				// 파라미터 저장을 위한 DTO객체 생성
+				// MemberDTO memberDTO = new MemberDTO();
+
+				RequestBoardDTO requestBoardDTO = new RequestBoardDTO();
+				// Mapper 호출
+				requestBoardDTO= sqlSession.getMapper(RequestBoardImpl.class).requestBoardView(idx);
+
+
+				// MyBatis 기본쿼리출력
+				String sql = sqlSession.getConfiguration().getMappedStatement("requestBoardView").getBoundSql(requestBoardDTO)
+						.getSql();
+				// 조횟수 증가
+//					sql = sqlSession.getConfiguration()
+//							.getMappedStatement("contentCount")
+//							.getBoundSql(multiBoardDTO).getSql();
+
+				System.out.println("sql=" + sql);
+
+				model.addAttribute("dto", requestBoardDTO);
+
+				return "admin/requestBoardView";
+			}
+			
+			// 의뢰서 삭제처리
+			@RequestMapping("/admin/requestBoardDelete")
+			public String requestBoardDelete(HttpServletRequest req) {
+				int setIdx = Integer.parseInt(req.getParameter("idx"));
+
+				sqlSession.getMapper(RequestBoardImpl.class).requestBoardDelete(setIdx);
+
+				return "admin/requestBoard";
+			}
 }

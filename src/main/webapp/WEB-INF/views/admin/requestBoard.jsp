@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -30,22 +28,25 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-<script>
-function deleteRow(id){
+    
+    <script>
+function deleteRow(idx){
+	
 	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?id="+ id;
+		location.href="../admin/requestBoardDelete?idx="+ idx;
 	}
 }
 </script>
-
 </head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+        <!-- Sidebar -->
         <%@ include file="./sidebar.jsp"%>
+        <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -171,8 +172,6 @@ function deleteRow(id){
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -263,8 +262,8 @@ function deleteRow(id){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
-                    <p class="mb-4">회원정보를 확인합니다 </p>
+                     <h1 class="h3 mb-2 text-gray-800">의뢰신청서</h1>
+                    <p class="mb-4">부모 의뢰 신청서 상세보기</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -274,48 +273,56 @@ function deleteRow(id){
                         <div class="card-body">
                             <div class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                	
+                       
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Password</th>
-                                            <th>이름</th>
-                                            <th>프로필사진</th>
-                                            <th>전화번호</th>
-                                            <th>성별</th>
-                                            <th>생일</th>
-                                            <th>가입일</th>
-                                            <th>이메일</th>
-                                            <th>별점</th>
-                                            <th>회원식별</th>
-                                            <th>회원수정</th>
-                                            <th>회원삭제</th>
-                                        </tr>
+                                            <th>아이디</th>
+                                            <th>시급</th>
+                                            <th>지역</th>
+                                            <th>일하는 시간</th>
+                                            <th>광고 보임/숨김처리</th>
+                                            <th>아이의 이름</th>
+                                            <th>증상강도</th>    
+                                            <th>주의사항</th>    
+                                            <th>아이의 사진</th>    
+                                            <th>아이의 나이</th>    
+                                            <th>신청서 제목</th>    
+                                            <th>단기,정기</th>    
+                                            <th>일시작날짜</th>    
+                                            <th>신청내용</th>    
+                                            <th>신청일련번호</th>    
+                                            <th>의뢰삭제</th>    
+                                               
+ 	
                                     </thead>
                                   
                                     <tbody>
-                                         <c:forEach items="${lists }" var="row">		
-										<tr>
-                                            <th>${row.id }</th>
-                                            <th>${row.pw }</th>
-                                            <th>${row.name }</th>
-                                            <th>${row.image_path }</th>
-                                            <th>${row.phone }</th>
-                                            <th>${row.gender }</th>
-											<th>${row.birthday }</th>
-                                            <th>${row.regidate }</th>
-                                            <th>${row.email }</th>
-                                            <th>${row.starrate }</th>
-                                            <th>${row.flag }</th>
+                                     <c:forEach items="${lists }" var="row">
+                                     <tr>
+                                          	<th>${row.id }</th>
+                                            <th>${row.pay }</th>
+                                            <th>${row.region }</th>
+                                            <th>${row.request_time }</th>
+                                            <th>${row.advertise }</th>
+                                            <th>${row.children_name }</th>
+                                            <th>${row.disability_grade }</th>    
+                                            <th>${row.warning }</th>    
+                                            <th>${row.image }</th>    
+                                            <th>${row.age }</th>    
+                                            <th>${row.title }</th>    
+                                            <th>${row.regular_short }</th>    
+                                            <th>${row.start_work }</th>    
                                             <th> <button class="btn btn-primary" 
-							onclick="location.href='chartsmodify?id=${row.id}';">수정</button></th>
-                                            <th><button class="btn btn-danger" 
-							onclick="javascript:deleteRow('${row.id}');">삭제</button></th>
-                                        </tr>
-								</c:forEach>
-                                     
-                                        
+							onclick="location.href='requestBoardView?idx=${row.idx}';">내용보기</button></th>   
+                                            <th>${row.idx }</th>  
+                                           <th><button class="btn btn-danger" 
+							onclick="javascript:deleteRow('${row.idx}');">삭제</button></th>
+                                        </tr>     
+                                        </c:forEach>                         
                                     </tbody>
                                 </table>
+                                
                                
                             </div>
                         </div>

@@ -270,7 +270,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <input type="hid den" name="id" value="${dto.id }"/>
                                     

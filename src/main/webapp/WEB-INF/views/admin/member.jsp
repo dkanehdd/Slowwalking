@@ -30,6 +30,7 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
+
 <script>
 function editRow(id){
    

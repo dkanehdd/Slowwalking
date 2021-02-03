@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -30,22 +28,16 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-<script>
-function deleteRow(id){
-	if(confirm("정말로 삭제하시겠습니까?")){
-		location.href="delete?id="+ id;
-	}
-}
-</script>
-
 </head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+        <!-- Sidebar -->
         <%@ include file="./sidebar.jsp"%>
+        <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -171,8 +163,6 @@ function deleteRow(id){
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -263,8 +253,8 @@ function deleteRow(id){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">회원정보</h1>
-                    <p class="mb-4">회원정보를 확인합니다 </p>
+                     <h1 class="h3 mb-2 text-gray-800">의뢰신청서</h1>
+                    <p class="mb-4">부모 의뢰 신청서 상세보기</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -274,48 +264,34 @@ function deleteRow(id){
                         <div class="card-body">
                             <div class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                	
+                       
                                     <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Password</th>
-                                            <th>이름</th>
-                                            <th>프로필사진</th>
-                                            <th>전화번호</th>
-                                            <th>성별</th>
-                                            <th>생일</th>
-                                            <th>가입일</th>
-                                            <th>이메일</th>
-                                            <th>별점</th>
-                                            <th>회원식별</th>
-                                            <th>회원수정</th>
-                                            <th>회원삭제</th>
-                                        </tr>
-                                    </thead>
-                                  
-                                    <tbody>
-                                         <c:forEach items="${lists }" var="row">		
-										<tr>
-                                            <th>${row.id }</th>
-                                            <th>${row.pw }</th>
-                                            <th>${row.name }</th>
-                                            <th>${row.image_path }</th>
-                                            <th>${row.phone }</th>
-                                            <th>${row.gender }</th>
-											<th>${row.birthday }</th>
-                                            <th>${row.regidate }</th>
-                                            <th>${row.email }</th>
-                                            <th>${row.starrate }</th>
-                                            <th>${row.flag }</th>
-                                            <th> <button class="btn btn-primary" 
-							onclick="location.href='chartsmodify?id=${row.id}';">수정</button></th>
-                                            <th><button class="btn btn-danger" 
-							onclick="javascript:deleteRow('${row.id}');">삭제</button></th>
-                                        </tr>
-								</c:forEach>
-                                     
-                                        
-                                    </tbody>
+                     <tr>
+						<th class="text-center table-active align-middle">작성자</th>
+						<td>${dto.id }</td>
+						<th class="text-center table-active align-middle">아이사진</th>
+						<td>${dto.image }</td>
+					</tr>
+					<tr>
+						<th class="text-center table-active align-middle">아이이름</th>
+						<td>${dto.children_name }</td>
+						<th class="text-center table-active align-middle">신청서 제목</th>
+						<td colspan="1">
+							${dto.title }
+						</td>
+					</tr>
+					<tr>
+						<th class="text-center table-active align-middle">내용</th>
+						<td colspan="3" class="align-middle" style="height:200px;">
+							${dto.content }
+						</td>
+					</tr>
+					
+					<button type="button" class="btn btn-warning" 
+									onclick="location.href='requestBoard';">리스트보기</button>
                                 </table>
+                                
                                
                             </div>
                         </div>
