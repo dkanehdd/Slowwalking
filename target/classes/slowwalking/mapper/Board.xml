@@ -2,9 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="member.MemberImpl">
-  
-  
-  
-  </mapper>
+
+<mapper namespace="member.MultiBoardImpl">
+ 
+	<!--공지사항 리스트 출력 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) from
+		multi_board
+	</select>
+	<select id="listPage" resultType="mutiBoard.MultiBoardDTO">
+		select * from multi_board where
+		flag='notice'
+	</select>
+
+	<!--공지사항 내용 보기 -->
+	<select id="contentPage" resultType="mutiBoard.MultiBoardDTO">
+		select * from multi_board
+		where idx=#{idx}
+	</select>
+
+	<!-- 공지사항 조횟수 증가 -->
+	<update id="contentCount">
+		UPDATE multi_board SET visitcount = visitcount+1
+		WHERE idx=#{idx}
+	</update>
+
+</mapper>
