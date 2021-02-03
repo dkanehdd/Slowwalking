@@ -82,7 +82,6 @@ public class MemberController {
 		// 회원가입 완료후 이미지 등록
 		return "Member/Image";
 	}
-
 	public static String getUuid() {
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("생성된UUID-1:" + uuid);
@@ -104,8 +103,6 @@ public class MemberController {
 		return "redirect:../main/main";
 	}
 
-
-	// 로그인 처리후 마이페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/LoginAction")
 	public ModelAndView MemberLoginAction(Principal principal, Model model, HttpSession session) {
 

@@ -2,8 +2,8 @@
    pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg">
    <div class="container">
-      <a class="navbar-brand nonHover" href="../main/main"> <i
-         class="fa fa-slideshare"></i> 느린걸음
+      <a class="navbar-brand nonHover" href="../main/main" style="font-weight:700"> <i
+         class="fa fa-slideshare"></i>&nbsp;느린걸음
       </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -25,7 +25,7 @@
             <c:choose>
                <c:when test="${not empty sessionScope.user_id }">
                   <li class="nav-item"><a href="../member/mypage"
-                  class="nav-link contact">${sessionScope.user_id }님의 마이페이지</a></li>
+                  class="nav-link mypgBtn"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; ${sessionScope.user_id }님의 마이페이지</a></li>
                   <li class="nav-item"><a href="../member/logout"
                   class="nav-link contact">로그아웃</a></li>
                </c:when>

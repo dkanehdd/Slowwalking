@@ -16,7 +16,7 @@
 		<div class="video-content">
 			<div class="inner">
 				<h1>
-					<em>아이와 발 맞춰</em> 느린 걸음
+					<em>아이와 발 맞춰</em> 느린걸음
 				</h1>
 				<p>90%의 부모님이 2시간 안에<br>시터를 구하고 있습니다</p>
 			</div>
@@ -29,8 +29,9 @@
 	<!-- ABOUT -->
 	<section class="about section-padding pb-0" id="about">
 		<div class="container">
+			<!-- Side메뉴 -->
+			<%@ include file="../include/side.jsp"%>
 			<div class="row">
-
 				<div class="col-lg-7 mx-auto col-md-10 col-12">
 					<div class="about-info">
 
@@ -153,7 +154,7 @@
             <div class="row">
                 <div class="left-text col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix">
                     <div class="left-heading">
-                        <h5>느린 걸음의 철학</h5>
+                        <h5><strong>느린걸음</strong>의 철학</h5>
                     </div>
                     <p>내용입니다 내용입니다 내용입니다</p>
                     <ul>
