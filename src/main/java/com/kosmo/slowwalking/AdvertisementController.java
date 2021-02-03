@@ -63,7 +63,7 @@ public class AdvertisementController {
 		model.addAttribute("lists", lists);
 		model.addAttribute("list_flag", "mylist");
 
-		return "advertisement/RequestBoard_list";
+		return "advertisement/RequestBoard_mylist";
 	}
 
 	// 구인의뢰서 상세 보기 페이지 이동 요청명(메소드)

@@ -10,7 +10,6 @@
 
 </head> 
 <body>
-	<%@ include file="../include/top.jsp"%>
 
 <script type="text/javascript">
 	function deleteRow(idx) {
@@ -53,8 +52,6 @@
 	
 </div>
 </section>
-<!-- Footer메뉴 -->
-<%@ include file="../include/footer.jsp"%>
 
 <!-- 스크립트 -->
 <script src="../resources/js/jquery.min.js"></script>
