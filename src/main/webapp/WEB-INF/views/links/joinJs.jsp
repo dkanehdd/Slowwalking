@@ -6,7 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 $(function(){
-	
+	submitBtn = document.getElementById('submitBtn');
 	$("input[type=radio]").checkboxradio({
         icon: false
     });
@@ -52,6 +52,33 @@ $(function(){
 			}
 		});
 	});
+	
+	//이메일 체크 추가 hjkosmo
+	$('#email').keyup(function() {
+		$.ajax({
+			url : "./checkEmail", //요청할 경로
+			type : "get", //전송방식
+			//post방식일때의 컨텐츠 타입
+			contentType : "text/html;charset:utf-8;",
+			data : { //서버로 전송할 파라미터(JSON타입)
+				email : $('#email').val()
+			},
+			dataType : "json", //콜백데이터의 형식
+			success : function(d) { //콜백메소드
+				if(d.ckeck==1){
+					$('#emailCheck').css('display','inline').css('color','blue');
+					$('#emailCheck').html(d.message)
+				}
+				else{
+					$('#emailCheck').css('display','inline').css('color','green');
+					$('#emailCheck').html(d.message);
+				}
+			},
+			error : function(e) {
+				alert("실패"+e);
+			}
+		});
+	});
 	//한글만 입력 가능하도록 처리 하는 부분
     $("#name").keyup(function (event) {
 	regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
@@ -61,16 +88,27 @@ $(function(){
 			$(this).val(v.replace(regexp, ''));
         }
     });
-	//아이디에 한글입력금지
+	//아이디에 한글, 특수문자 입력금지(hjkosmo 추가)
     $("#id").keyup(function (event) {
-	regexp = /[\ㄱ-ㅎㅏ-ㅣ가-힣|\s]/g;
+	regexp = /[\ㄱ-ㅎㅏ-ㅣ가-힣|\s~!@\#$%^&*\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/g;
     v = $(this).val();
 		if (regexp.test(v)) {
-			alert("한글과 공백은 입력이 불가능합니다.");
+			alert("한글, 공백, 특수문자는 입력이 불가능합니다.");
 			$(this).val("");
 			$(this).focus();
         }
 		
+    });
+	
+	//이메일에 한글, 특수문자입력금지
+    $("#email").keyup(function (event) {
+	regexp = /[\ㄱ-ㅎㅏ-ㅣ가-힣|\s~!\#$%^&*\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/g;
+    v = $(this).val();
+		if (regexp.test(v)) {
+			alert("한글, 공백, 특수문자는 입력이 불가능합니다.");
+			$(this).val("");
+			$(this).focus();
+        }
     });
 	//인증번호 발송하기
 	$('#sendPhoneNumber').click(function() {
@@ -166,13 +204,15 @@ $(function(){
 });
 function checkIT() {
 	var d=document.regiform;
-	if(!d.smsck.value) { alert('본인인증을 해 주세요.'); d.phone.focus(); return false; }	
-	if(!d.id.value){ alert("아이디를 입력하세요"); d.id.focus(); return false;}
-	if(!d.name.value) { alert('성함을 입력하세요'); d.name.focus(); return false; }
-	if(!d.pw.value) { alert('비밀번호를 입력하세요'); d.pw.focus(); return false; }
-	if(!d.email.value||!d.email2.value) { alert('이메일을 입력하세요'); d.email.focus(); return false; }
+	
+	if(!d.smsck.value) { alert('본인인증을 해 주세요.'); d.phone.focus();return false; }	
+	if(!d.id.value){ alert("아이디를 입력하세요"); d.id.focus();return false;}
+	if(!d.name.value) { alert('성함을 입력하세요'); d.name.focus();return false; }
+	if(!d.pw.value) { alert('비밀번호를 입력하세요'); d.pw.focus();return false; }
+	if(!d.email.value||!d.email2.value) { alert('이메일을 입력하세요'); d.email.focus();return false; }
 	//약관 검증
-	if(!d.chkAll.checked||!d.chk1.checked||!d.chk2.checked){alert('약정 동의가 필요합니다'); d.chkAll.focus(); return false;}
+	if(!d.chk1.checked||!d.chk2.checked){alert('약정 동의가 필요합니다');d.chkAll.focus(); return false;}
+	
 }
 function emailSelect(obj) {
 	var email1 = document.getElementById("email1");
@@ -249,4 +289,88 @@ function checkPw(pw) {
         return false;
     }
 }
+
+function checkImg() {
+	var f = document.fileFrm;
+	if(!f.image_path.value){
+		Swal.fire({
+			icon : 'error',
+			text : '이미지를 선택하고 등록해주세요'
+		})
+		return false;
+	}
+}
+
+function skip(){
+	alert('마이페이지에서 사진을 등록하실 수 있습니다.');
+	var flag = document.getElementById("flag");
+	var mode = document.getElementById("mode");
+	if(mode.value=='join'){
+		if(flag.value=='sitter'){
+			location.href='../member/sitterjoin';
+		}
+		else if(flag.value=='parents'){
+			alert('신청서를 작성해주세요');
+			location.href='../member/mypage';
+		}
+		
+	}
+	else{
+		location.href="../main/main";
+	}
+}
+
+
+/*  ==========================================
+    SHOW UPLOADED IMAGE
+* ========================================== */
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload').on('change', function () {
+        readURL(input);
+    });
+});
+
+/*  ==========================================
+    이미지 업로드(hjkosmo)
+* ========================================== */
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload').on('change', function () {
+        readURL(input);
+    });
+});
+
+var input = document.getElementById( 'upload' );
+var infoArea = document.getElementById( 'upload-label' );
+input.addEventListener( 'change', showFileName );
+function showFileName( event ) {
+	var input = event.srcElement;
+	var fileName = input.files[0].name;
+	infoArea.textContent = 'File name: ' + fileName;
+}
+
 </script>

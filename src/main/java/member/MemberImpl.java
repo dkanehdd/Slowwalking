@@ -9,6 +9,8 @@ public interface MemberImpl {
 	public ArrayList<MemberDTO> list();
 
 	public int checkId(String id);
+	
+	public int checkEmail(String email); //hjkosmo 추가
 
 	public int insertMember(MemberDTO memberDTO);
 

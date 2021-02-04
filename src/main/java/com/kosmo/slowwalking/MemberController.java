@@ -188,6 +188,25 @@ public class MemberController {
 		}
 		return map;
 	}
+	
+	// 이메일 중복확인(hjkosmo 추가)
+	@RequestMapping("/member/checkEmail")
+	@ResponseBody
+	public Map<String, Object> checkEmail(HttpServletRequest req) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = sqlSession.getMapper(MemberImpl.class).checkEmail(req.getParameter("email"));
+		
+		if (check == 1) {
+			map.put("check", check);
+			map.put("message", "중복된 이메일이 있습니다.");
+		} else {
+			map.put("check", check);
+			map.put("message", "사용가능한 이메일 입니다.");
+		}
+		return map;
+	}
 
 	// 휴대폰 인증
 	@RequestMapping("/check/sendSMS")

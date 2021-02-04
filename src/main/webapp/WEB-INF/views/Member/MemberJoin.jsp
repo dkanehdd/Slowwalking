@@ -93,6 +93,9 @@
 								<option value="hotmail.com">hotmail.com</option>
 								<option value="">직접입력</option>
 						</select>
+						<div style="display: none;" id="emailCheck">
+							</div>
+						</td>
 					</tr>
 					<input type="hidden" name="email" id="email" value="" />
 					<tr>
@@ -109,12 +112,12 @@
 									<label for="chkAll">전체동의</label><br>
 									
 									<div class="termsBox">
-										<div class="tbx1 float-left">
+										<div>
 											<input class="checkbox" type="checkbox" name="chk1" id="chk1">
 											<label for="chk1">이용 약관(필수)</label><br>
 											<textarea class="form-control noresize" name="" id="">이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. </textarea><br>
 										</div>
-										<div class="tbx2">
+										<div>
 											<input class="checkbox" type="checkbox" name="chk2" id="chk2">
 											<label for="chk2">개인정보 수집 및 이용에 대한 안내(필수)</label><br>
 					       					<textarea class="form-control noresize" name="" id="">개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. </textarea>
@@ -127,7 +130,7 @@
 				</table>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="submit" class="btn btn-danger">회원가입</button>
+					<button type="submit" id="submitBtn" class="btn btn-danger">회원가입</button>
 				</div>
 			</form:form>
 		</div>
