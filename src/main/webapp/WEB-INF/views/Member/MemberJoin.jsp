@@ -52,8 +52,10 @@
 					<tr>
 						<th scope="row" style="vertical-align:middle;">아이디</th>
 						<td><input type="text" name="id" id='id' value=""
-							maxlength='15' class='w50p' placeholder="아이디">
-							<div style="display: none;" id="idCheck">
+							 class='w50p' placeholder="아이디" onblur="checkId(this.value);"
+							 pattern="^([a-z0-9_]){4,12}" required="required" 
+							 title="4자 이상 12자 이내의 영문/숫자 조합">
+							<div style="display: none;" id="idCheck" >
 							</div></td>
 					</tr>
 					<tr>
@@ -69,7 +71,7 @@
 					<tr>
 						<th scope="row" style="vertical-align:middle;">비밀번호</th>
 						<td><input type="password" name="pw" id='pw'
-							onblur="checkPw(this.value);">&nbsp;&nbsp;<span id="pw1">*
+							onblur="checkPw(this.value);" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{4,12}$" required="required" title="4자 이상 12자 이내의 영문/숫자/특수문자 조합" >&nbsp;&nbsp;<span id="pw1">*
 								4자 이상 12자 이내의 영문/숫자/특수문자 조합</span></td>
 					</tr>
 					<tr>

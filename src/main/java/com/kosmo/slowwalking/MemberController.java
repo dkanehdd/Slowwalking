@@ -184,7 +184,7 @@ public class MemberController {
 			map.put("message", "중복된 아이디가 있습니다.");
 		} else {
 			map.put("check", check);
-			map.put("message", "사용가능한 아이디 입니다.");
+			map.put("message", "사용 가능한 아이디 입니다.");
 		}
 		return map;
 	}

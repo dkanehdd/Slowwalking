@@ -6,7 +6,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 $(function(){
-	submitBtn = document.getElementById('submitBtn');
 	$("input[type=radio]").checkboxradio({
         icon: false
     });
@@ -28,6 +27,7 @@ $(function(){
          dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
          monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
     });  
+	 
 	$('#id').keyup(function() {
 		$.ajax({
 			url : "./checkId", //요청할 경로
@@ -40,11 +40,18 @@ $(function(){
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
 				if(d.ckeck==1){
-					$('#idCheck').html(d.message).css('color','blue');
+					$('#submitBtn').attr("disabled", true); //submit 버튼 안눌리게-추가 hjkosmo-동작안함..
+					$('#idCheck').html(d.message);
+					$('#idCheck').css('display','inline');
+					$('#idCheck').css('color','#ff0000');
+					
 				}
 				else{
-					$('#idCheck').css('display','inline').css('color','green');
+					$('#submitBtn').attr("disabled", false); //submit 버튼 눌리게-추가 hjkosmo
 					$('#idCheck').html(d.message);
+					$('#idCheck').css('display','inline');
+					$('#idCheck').css('color','#00ff00');
+					
 				}
 			},
 			error : function(e) {
@@ -53,7 +60,7 @@ $(function(){
 		});
 	});
 	
-	//이메일 체크 추가 hjkosmo
+	//이메일 중복 체크 추가 hjkosmo -- 작동안됨..
 	$('#email').keyup(function() {
 		$.ajax({
 			url : "./checkEmail", //요청할 경로
@@ -66,11 +73,11 @@ $(function(){
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
 				if(d.ckeck==1){
-					$('#emailCheck').css('display','inline').css('color','blue');
+					$('#emailCheck').css('display','inline').css('color','#ff0000');
 					$('#emailCheck').html(d.message)
 				}
 				else{
-					$('#emailCheck').css('display','inline').css('color','green');
+					$('#emailCheck').css('display','inline').css('color','#00ff00');
 					$('#emailCheck').html(d.message);
 				}
 			},
@@ -88,6 +95,7 @@ $(function(){
 			$(this).val(v.replace(regexp, ''));
         }
     });
+	
 	//아이디에 한글, 특수문자 입력금지(hjkosmo 추가)
     $("#id").keyup(function (event) {
 	regexp = /[\ㄱ-ㅎㅏ-ㅣ가-힣|\s~!@\#$%^&*\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/g;
@@ -320,28 +328,6 @@ function skip(){
 	}
 }
 
-
-/*  ==========================================
-    SHOW UPLOADED IMAGE
-* ========================================== */
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#imageResult')
-                .attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$(function () {
-    $('#upload').on('change', function () {
-        readURL(input);
-    });
-});
-
 /*  ==========================================
     이미지 업로드(hjkosmo)
 * ========================================== */
@@ -372,5 +358,6 @@ function showFileName( event ) {
 	var fileName = input.files[0].name;
 	infoArea.textContent = 'File name: ' + fileName;
 }
+
 
 </script>

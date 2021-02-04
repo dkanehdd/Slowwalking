@@ -978,7 +978,7 @@ form[name="fileFrm"]  button[type="submit"]
 	width:400px;
 	background-color:var(--primary-color);
 }
-form[name="regiform"] button[type="submit"],
+form[name="regiform"] button[type="submit"]:hover,
 form[name="fileFrm"]  button[type="submit"]:hover{
 	background-color:var(--secondary-color);
 }
