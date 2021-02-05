@@ -34,4 +34,8 @@
 		SELECT * FROM shop_order
 	</select>
 
+	<insert id="insertOrder" parameterType="mutiBoard.OrderDTO">
+		INSERT INTO shop_order (idx, id, product_idx, payment, info, total_price)
+		VALUES(seq_order_idx.nextval, #{id}, ${product_idx},#{payment}, #{info}, ${total_price})
+	</insert>
 </mapper>
