@@ -20,11 +20,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import findMember.MemberFindService;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.ParentsMemberDTO;
@@ -403,5 +405,31 @@ public class MemberController {
 		}
 		return "redirect:../main/main";
 	}
+	
+	@Autowired
+	private MemberFindService findService;
+
+	//아이디 찾기
+	@RequestMapping(value = "/member/FindMemberInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String userIdSearch(@RequestParam("iptName1") String name, 
+			@RequestParam("iptPhone1") String phone) {
+		
+		String result = findService.GetFindId(name, phone);
+
+		return "/member/FindMemberInfo";
+	}	
+	
+	//비밀번호 찾기
+	@RequestMapping(value = "/member/FindMemberInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String userPwSearch(@RequestParam("iptId2") String id, 
+			@RequestParam("iptPhone2") String phone) {
+		
+		String result = findService.GetFindId(id, phone);
+		
+		return "/member/FindMemberInfo";
+	}
+
 
 }

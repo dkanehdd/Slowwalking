@@ -21,6 +21,18 @@
 		SELECT count(*) from member where email=#{email}
 	</select>
 	
+	<!-- 아이디 찾기 hjkosmo 추가 -->
+	<select id="findId" resultType="String">
+		SELECT IFNULL(id, 0) FROM member 
+		WHERE name=#{name} and phone=#{phone}
+	</select>
+	
+	<!-- 비밀번호 찾기 hjkosmo 추가 -->
+	<select id="findPw" resultType="String">
+		SELECT IFNULL(pw, 0) FROM member 
+		WHERE id=#{id} and phone=#{phone}
+	</select>
+	
 	<insert id="insertMember">
 		INSERT INTO member
 		(id, pw, name, image_path, phone, gender, birthday, regidate, email, starrate,  flag, enabled)

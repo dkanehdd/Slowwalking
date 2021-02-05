@@ -52,7 +52,7 @@
 					<tr>
 						<th scope="row" style="vertical-align:middle;">아이디</th>
 						<td><input type="text" name="id" id='id' value=""
-							 class='w50p' placeholder="아이디" onblur="checkId(this.value);"
+							 class='w50p' placeholder="아이디"
 							 pattern="^([a-z0-9_]){4,12}" required="required" 
 							 title="4자 이상 12자 이내의 영문/숫자 조합">
 							<div style="display: none;" id="idCheck" >

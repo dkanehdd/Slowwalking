@@ -23,7 +23,8 @@
 			</div>
 			<form:form method="post" name="payappform" id="payappform"
 				action="../member/sitterjoinaction?${_csrf.parameterName}=${_csrf.token}"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data"
+				onsubmit="return chkSitter();">
 				<input type="hidden" value="${id }" name="sitter_id" />
 				<table class="table form joinF">
 					<colgroup>
@@ -33,7 +34,7 @@
 					<tr>
 						<th scope="row">자격증(필수)<br>
 						<small>&#42; 장애영유아보육교사</small></th>
-						<td style="vertical-align:middle;"><input type="file" name='license_check' /></td>
+						<td style="vertical-align:middle;"><input type="file" id="license_check" name='license_check' /></td>
 					</tr>
 					<tr>
 						<th scope="row">인성검사확인</th>
@@ -223,7 +224,7 @@
 						<br><small>&#42; 원 단위로 입력해주세요.</small></th>
 						<td>
 							<div>
-								시급 : <input type="text" id="paytype" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원"; style="vertical-align:middle;">
+								시급 : <input type="text" id="paytype" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;">
 							</div></td>
 					</tr>
 					<tr>

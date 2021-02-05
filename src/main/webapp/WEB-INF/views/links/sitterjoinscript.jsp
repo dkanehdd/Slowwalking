@@ -102,6 +102,27 @@
 										+ $("#gugun3 option:selected").val());
 					})
 		})
+		
+	/* 폼체크 추가 hjkosmo */
+	function chkSitter(){
+		var d=document.payappform;
+		if(!d.license_check.value){
+			alert('자격증 사진을 업로드해주세요');
+			return false;
+		}
+		if(!d.residence1.value){
+			alert('1순위 희망 지역을 선택해 주세요');
+			return false;
+		}
+		if(!d.activity_time.value){
+			alert('희망 근무요일을 선택해 주세요')
+			return false;
+		}
+		if(!d.pay.value){
+			alert('희망 급여를 지정해 주세요')
+			return false;
+		}
+	}
 	</script>
 	<style>
 #free_open {

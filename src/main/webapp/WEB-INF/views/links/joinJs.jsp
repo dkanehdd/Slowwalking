@@ -40,24 +40,24 @@ $(function(){
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
 				if(d.ckeck==1){
-					$('#submitBtn').attr("disabled", true); //submit 버튼 안눌리게-추가 hjkosmo-동작안함..
 					$('#idCheck').html(d.message);
 					$('#idCheck').css('display','inline');
 					$('#idCheck').css('color','#ff0000');
+					$("button[type='submit']").attr("disabled"); //submit 버튼 안눌리게 hjkosmo
 					
 				}
 				else{
-					$('#submitBtn').attr("disabled", false); //submit 버튼 눌리게-추가 hjkosmo
 					$('#idCheck').html(d.message);
 					$('#idCheck').css('display','inline');
 					$('#idCheck').css('color','#00ff00');
+					$("button[type='submit']").removeAttr("disabled"); //submit 버튼 눌리게 hjkosmo
 					
 				}
 			},
 			error : function(e) {
 				alert("실패"+e);
 			}
-		});
+		});	
 	});
 	
 	//이메일 중복 체크 추가 hjkosmo -- 작동안됨..
@@ -73,12 +73,14 @@ $(function(){
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
 				if(d.ckeck==1){
-					$('#emailCheck').css('display','inline').css('color','#ff0000');
 					$('#emailCheck').html(d.message)
+					$('#emailCheck').css('display','inline').css('color','#ff0000');
+					$("button[type='submit']").attr("disabled");
 				}
 				else{
-					$('#emailCheck').css('display','inline').css('color','#00ff00');
 					$('#emailCheck').html(d.message);
+					$('#emailCheck').css('display','inline').css('color','#00ff00');
+					$("button[type='submit']").removeAttr("disabled");
 				}
 			},
 			error : function(e) {
