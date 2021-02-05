@@ -34,7 +34,6 @@ import org.springframework.web.servlet.ModelAndView;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
-import member.ParentsMemberDTO;
 import member.SitterImpl;
 import member.SitterMemberDTO;
 import mms.certificationService;
@@ -118,7 +117,7 @@ public class MemberController {
 		String view = "";
 		if (flag.equals("sitter")) {
 			System.out.println("시터회원 인증완료");
-			SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(userId);
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
 
 			System.out.println(dto);
 			model.addAttribute("dto", dto);
@@ -126,7 +125,7 @@ public class MemberController {
 			view = "Member/MypageSitter";
 		} else if (flag.equals("parents")) {
 			System.out.println("부모회원 인증완료");
-      		ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(userId);
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
     		System.out.println(dto);
       		model.addAttribute("dto", dto);
 
