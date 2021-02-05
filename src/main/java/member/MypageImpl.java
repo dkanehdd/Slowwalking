@@ -23,6 +23,7 @@ public interface MypageImpl {
 	public int sitAgree(int idx);
 	public int parAgree(int idx);
 	//알림장
-	public int addDiary(int idx, String parents_id, String sitter_id, String content);
-	public DiaryDTO viewDiary(int idx);
+	public int sendDiary(int idx, String parents_id, String sitter_id, String content);
+	public ArrayList<DiaryDTO> sitDiary(String id);
+	public ArrayList<DiaryDTO> parDiary(String id);
 }

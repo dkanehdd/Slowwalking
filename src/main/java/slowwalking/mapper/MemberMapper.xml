@@ -26,12 +26,6 @@
 	<select id="flagValidate" resultType="String">
 		SELECT flag FROM member WHERE id=#{0}
 	</select>
-	<select id="sitMem" resultType="member.SitterMemberDTO">
-		SELECT * FROM sitterMember WHERE sitter_id=#{0}
-	</select>
-	<select id="parMem" resultType="member.ParentsMemberDTO">
-		SELECT * FROM parentsmember WHERE parents_id=#{0}
-	</select>
 	
 	<update id="insertImage">
 		UPDATE member

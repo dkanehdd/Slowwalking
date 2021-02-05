@@ -22,7 +22,6 @@
 	</c:choose>
 </div>
 <div class="container">
-	<input type="hid-den" id="check" />
 	<c:choose>
 		<c:when test="${empty lists}">
 			<div>등록된 인터뷰가 없습니다.</div>
@@ -30,26 +29,28 @@
 		<c:otherwise>
 			<table class="table table-hover">
 				<thead>
-					<th>아이디</th>
+					<th>이름(ID)</th>
+					<th>연락처</th>
 					<th>근무 시간</th>
 					<th>내용</th>
 					<th colspan="2">프로세스</th>
 				</thead>
 				<tbody>
-				<c:forEach var="row" items="${lists }">
+				<c:forEach var="row" items="${lists}">
 					<tr id="box">		
 					<c:choose>
-						<c:when test="${flag eq 'sitter' }"><td>${row.parents_id }</td></c:when>
-						<c:otherwise><td id="sitter_id">${row.sitter_id }</td></c:otherwise>
+						<c:when test="${flag eq 'sitter'}"><td>${dto.name}(${row.parents_id})</td></c:when>
+						<c:otherwise><td id="sitter_id">${dto.name}(${row.sitter_id})</td></c:otherwise>
 					</c:choose>
+						<td>${dto.phone}</td>
 						<td>
-						${row.request_time }
-						<input type="hid-den" id="request_idx" value="${row.request_idx}" />
-						<input type="hid-den" id="idx" value="${row.idx}" />
-						<c:choose>
-							<c:when test="${flag eq 'sitter' }"><input type="hid-den" id="agree" value="${row.sitter_agree}" /></c:when>
-							<c:otherwise><input type="hid-den" id="agree" value="${row.paretns_agree}" /></c:otherwise>
-						</c:choose>
+							${row.request_time }
+							<input type="hid-den" id="request_idx" value="${row.request_idx}" /> <!-- 상세보기를 위한 request_idx -->
+							<input type="hid-den" id="idx" value="${row.idx}" />
+							<c:choose>
+								<c:when test="${flag eq 'sitter' }"><input type="hid-den" id="agree" value="${row.sitter_agree}" /></c:when>
+								<c:otherwise><input type="hid-den" id="agree" value="${row.paretns_agree}" /></c:otherwise>
+							</c:choose>
 						</td>
 						<td><button type="button" class="btn btn-warning" onclick="moveView();">자세히</button></td>
 						<c:choose>
@@ -67,7 +68,7 @@
 							<c:otherwise>
 								<c:choose>
 									<c:when test="${empty check }">
-										<td><button type="button" class="btn btn-info" id="diary" onClick="javascript:openDiary();">알림장</button></td>
+										<td><button type="button" class="btn btn-info" id="diary" onClick="javascript:openCalendar();">알림장</button></td>
 										<td><button type="button" class="btn btn-secondary" >진행</button></td>
 									</c:when>
 									<c:otherwise>
@@ -92,10 +93,9 @@ function moveView(){
 	var idx = document.getElementById("request_idx").value;	
 	location.href="../advertisement/requestBoard_view?idx="+idx;
 }
-function openDiary(){
+function openCalendar(){
 	var idx = document.getElementById("idx").value;	
-	window.open("../mypage/openDiary?idx="+idx, "알림장", 
-	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
+	location.href="../mypage/openCalendar?idx="+idx;
 }
 $(function(){
 	$('#accept').on("click", function(){
@@ -132,7 +132,8 @@ $(function(){
 			dataType : "json", 
 			contentType : "text/html;charset:utf-8;",
 			success : function(data){
-				
+				$('#box').empty();
+				alert(data.message);
 				
 			},
 			error : function(){

@@ -14,11 +14,6 @@ public interface MemberImpl {
 
 	public String flagValidate(String id);
 
-	public SitterMemberDTO sitMem(String id);
-
-	public ParentsMemberDTO parMem(String id);
-	
-
 	public String getImage(String id);
 
 	public int insertImage(String id, String image);

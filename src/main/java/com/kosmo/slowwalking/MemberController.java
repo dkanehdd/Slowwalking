@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import member.MemberDTO;
 import member.MemberImpl;
+import member.MypageImpl;
 import member.ParentsMemberDTO;
 import member.SitterImpl;
 import member.SitterMemberDTO;
@@ -112,21 +113,21 @@ public class MemberController {
 		System.out.println(flag);
 
 		ModelAndView mv = new ModelAndView();
-
+		
 		if (flag.equals("sitter")) {
 			System.out.println("시터회원 인증완료");
-			SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
-
+			
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
 			System.out.println(dto);
 			model.addAttribute("dto", dto);
 
 			mv.setViewName("Member/MypageSitter");
 		} else if (flag.equals("parents")) {
 			System.out.println("부모회원 인증완료");
-          		ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(user_id);
-          
-        		System.out.println(dto);
-          		model.addAttribute("dto", dto);
+
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
+			System.out.println(dto);
+          	model.addAttribute("dto", dto);
 
 			mv.setViewName("Member/MypageParents");
 		} else if (flag.equals("admin")) {
@@ -210,33 +211,32 @@ public class MemberController {
 
 	//마이페이지 진입
    @RequestMapping("/member/mypage")
-   public String Mypage(Principal principal, Model model) {
+   public String Mypage(Principal principal, Model model, HttpSession session) {
       
-      String view = "";
-      String user_id = principal.getName();
-       String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
-      
-       if(flag.equals("sitter")) {
-          System.out.println("시터회원 인증완료");
-          SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(user_id);
-          String image_path = sqlSession.getMapper(MemberImpl.class).getImage(user_id);
-         
-          System.out.println(dto);
-         model.addAttribute("image_path", image_path);
-          model.addAttribute("dto", dto);
-         
-            view = "Member/MypageSitter";
-        }
-        else if(flag.equals("parents")) {
-           System.out.println("부모회원 인증완료");
-          ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(user_id);
-          String image_path = sqlSession.getMapper(MemberImpl.class).getImage(user_id);
-         
-          System.out.println(dto);
-         model.addAttribute("image_path", image_path);
-          model.addAttribute("dto", dto);
-           view = "Member/MypageParents";
-        }
+		String view = "";
+		String user_id = principal.getName();
+		String flag = (String) session.getAttribute("flag");
+  
+		if(flag.equals("sitter")) {
+			
+			System.out.println("시터회원 인증완료");
+			
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
+			System.out.println(dto);
+			
+			model.addAttribute("dto", dto);
+		    view = "Member/MypageSitter";
+		}
+		else if(flag.equals("parents")) {
+			
+			System.out.println("부모회원 인증완료");
+
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
+			System.out.println(dto);
+			
+			model.addAttribute("dto", dto);
+			view = "Member/MypageParents";
+		}
     
       return view;
    }

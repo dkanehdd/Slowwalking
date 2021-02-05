@@ -21,6 +21,9 @@
 	<img src="../resources/images/${dto.image }" class="media-object rounded-circle" style="width:200px; height:200px">
 	<br/><br/>
 	<h3 class="text-center">${dto.title }</h3>  
+	<input type="hid-den" id="idx" value="${dto.idx}"/>
+	<input type="hid-den" id="id" value="${dto.id}" />
+	<input type="hid-den" id="request_time" value="${dto.request_time}" />
 	<hr style="border: solid 3px #DBDBDB ">
 	<h4>${dto.children_name }</smail>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<smail>no.${dto.idx }</smail>
 	<div id="back"> 
@@ -120,7 +123,7 @@
 </style>
 
 </body>
-<script>
+<script type="text/javascript">
 $(function(){
 	$('#submit').on("click", function(){
 		$.ajax({
