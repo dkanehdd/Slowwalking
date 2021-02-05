@@ -98,8 +98,29 @@ function checkform() {
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">아이의
 											현재연령을 알려주세요</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" name="age" /></td>
+										<td><select class="form-control" id="age" name="age">
+										      <option>1</option>
+										      <option>2</option>
+										      <option>3</option>
+										      <option>4</option>
+										      <option>5</option>
+										      <option>6</option>
+										      <option>7</option>
+										      <option>8</option>
+										      <option>9</option>
+										      <option>10</option>
+										      <option>11</option>
+										      <option>12</option>
+										      <option>13</option>
+										      <option>14</option>
+										      <option>15</option>
+										      <option>16</option>
+										      <option>17</option>
+										      <option>18</option>
+										      <option>19</option>
+										      <option>20</option>
+										    </select>
+										    </td>
 									</tr>
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">시터에게
@@ -259,7 +280,7 @@ function checkform() {
 											년도 : <select id="select_year" onchange="javascript:lastday();"></select>
 											월 : <select id="select_month" onchange="javascript:lastday();"></select> 
 											일 : <select id="select_day"></select>
-											<input type="hid-den" id="start_work" name="start_work"/>
+											<input type="hid-den" id="start_work" value="2020/1/1" name="start_work"/>
 										<!-- 최대한 빨리 이런 라디오 하나 넣고싶다. 나중에 시간되면 추가하자 -->
 										</td>
 									</tr>
@@ -460,12 +481,31 @@ $(function() {
 						+ "~"
 						+ $("#endtime1 option:selected").val()
 						+ ",협의 가능";
+				
+				$("#workday_name").val(workday_tyle);
+				
+			}else{
+				var i = 0;
+				var workday_tyle = "";
+				$(".workday_off").each(function() {
+					if ($(this).hasClass("workday_on") == true) {
+						workdaytype = $(this).val();
+						if (i != 0)
+							workday_tyle += ",";
+						workday_tyle += workdaytype;
+						i++;
+					}
+				});
+				workday_tyle += ","
+						+ $("#starttime1 option:selected").val()
+						+ "~"
+						+ $("#endtime1 option:selected").val()
 				if (i == 0) {
 					$("#workday_name").val("");
 				} else {
 					$("#workday_name").val(workday_tyle);
 				}
-			} 
+			}
 		})
 		
 	$('#select_year').change(
@@ -518,11 +558,9 @@ function workday_make() {
 		workday_tyle +=
 			",협의 가능";
 	}
-	if (i == 0) {
-		$("#workday_name").val("");
-	} else {
-		$("#workday_name").val(workday_tyle);
-	}
+
+	$("#workday_name").val(workday_tyle);
+
 }
 </script>
 <!-- 선택한 년과 월에 따라 마지막 일 구하기 --> 

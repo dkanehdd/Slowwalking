@@ -38,4 +38,10 @@ public interface RequestBoardImpl {
 	//이미지 제외 의뢰서 업데이트
 	public int noImageUpdateRequestBoard(RequestBoardDTO dto);
 	
+	//요일 포함 검색해주는 메소드 
+	public ArrayList<RequestBoardDTO> requestSearch(ParameterDTO dto);
+	
+	//요일 없이 검색해주는 메소드
+	public ArrayList<RequestBoardDTO> noTimeRequestSearch(ParameterDTO dto);
+	
 }
