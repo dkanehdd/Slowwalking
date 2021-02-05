@@ -53,7 +53,7 @@ $(function(){
 		var cfm = confirm('전송 후에는 수정이 불가합니다.');
 		if(cfm){
 		$.ajax({
-			url: "../mypage/exchangeDiary",
+			url: "../mypage/sendDiary",
 			type: "GET",
 			data : {
 				idx : $('#idx').val(),
@@ -64,8 +64,8 @@ $(function(){
 			dataType: "json",
 			contentType : "text/html;charset:utf-8;",
 			success : function(data){
-				$('#id', opener.document).val(data.check);
-				openedWindow.close();
+				alert(data.message);
+				 window.open("about:blank","_self").close();
 			},
 			error : function(){
 				alert("다시 시도해 주세요.");

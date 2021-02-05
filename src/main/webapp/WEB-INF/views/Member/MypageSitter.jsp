@@ -20,6 +20,9 @@ $(function(){
 	$("#interview").on("click",function(){
 		$("#innerPage").load("../mypage/interList");
 	});
+	$("#calendar").on("click",function(){
+		location.href="../mypage/diaryCalendar";
+	});
 });
 </script>
 <style>
@@ -36,8 +39,8 @@ $(function(){
       <div class="col-2" id="menu">
 		<div class="box">
 			<c:choose>
-				<c:when test="${not empty image_path }">
-					<img src="../resources/images/${image_path }"/>
+				<c:when test="${not empty dto.image_path }">
+					<img src="../resources/images/${dto.image_path }"/>
 				</c:when>
 				<c:otherwise>
 					<img src="../resources/images/anonymous-avatar.jpg" style="width:200px;"/>
@@ -48,7 +51,7 @@ $(function(){
 			<img src="../resources/images/photo-camera.png" id="image">
 		</div>
 		<div class="bg-dark text-light" style="width:200px;">
-          	&nbsp;${dto.sitter_id}&nbsp;<small>님</small>
+          	&nbsp;${dto.name}&nbsp;<small>님</small>
 		</div>
 		<ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2" id="profile">
@@ -58,7 +61,12 @@ $(function(){
         <ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2">신청서 작성</li>
          	<li class="list-group-item">내 신청서</li>
+        </ul>
+        <ul class="list-group list-group-flush">
           	<li class="list-group-item" id="interview">내 구직현황</li>
+<%--           	<c:if test="${count > 0 }"> --%>
+          		<li class="list-group-item" id="calendar">알림장</li>
+<%--           	</c:if> --%>
           	<li class="list-group-item" id="2">후기관리</li>
         </ul>
         <ul class="list-group list-group-flush">
@@ -80,5 +88,6 @@ $(function(){
       </div>
     </div>
 </div>
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

@@ -2,16 +2,32 @@ package mutiBoard;
 
 public class DiaryDTO {
 	
-	private java.sql.Date regidate;
+	private String regiyear;
+	private String regimonth;
+	private String regidate;
 	private String send_id;
 	private String rece_id;
 	private String content;
 	private String flag;
 	private int idx;
-	public java.sql.Date getRegidate() {
+	
+	
+	public String getRegiyear() {
+		return regiyear;
+	}
+	public void setRegiyear(String regiyear) {
+		this.regiyear = regiyear;
+	}
+	public String getRegimonth() {
+		return regimonth;
+	}
+	public void setRegimonth(String regimonth) {
+		this.regimonth = regimonth;
+	}
+	public String getRegidate() {
 		return regidate;
 	}
-	public void setRegidate(java.sql.Date regidate) {
+	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
 	public String getSend_id() {
