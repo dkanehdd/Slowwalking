@@ -62,7 +62,7 @@ public class MemberController {
 		return "Member/Join";
 	}
 	
-	
+
 	@RequestMapping(value = "/member/joinAction", method=RequestMethod.POST)
 	public String MemberJoinAction(Model model, MemberDTO memberDTO, HttpSession session) {
 		System.out.println(memberDTO.getName());
@@ -98,6 +98,7 @@ public class MemberController {
 	//로그인 페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/login")
 	public String Login() {
+		
 		return "Member/Login";
 	}
 	//로그인폼 거치지 않고 바로 로그인(소셜 로그인)
@@ -135,6 +136,7 @@ public class MemberController {
 		session.setAttribute("flag", flag);
 		return view;
 	}
+
 	
 	//로그아웃
 	@RequestMapping("/member/logout")
@@ -143,6 +145,7 @@ public class MemberController {
 		session.setAttribute("user_id", null);
 		return "redirect:../main/main";
 	}
+	
 
 	@RequestMapping("/member/LoginAction")
 	public ModelAndView MemberLoginAction(Principal principal, Model model, HttpSession session) {

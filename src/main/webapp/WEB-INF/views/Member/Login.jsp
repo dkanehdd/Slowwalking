@@ -19,6 +19,7 @@
 <html>
 <head>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <title>Login.jsp</title>
 </head>
@@ -54,6 +55,9 @@
 						<li><a href="../member/join" id="signUp" class="non-af" name="signUp">회원가입</a></li> 
 					</ul>
 					<a href="<%=apiURL%>"><img height="50" src="../img/naverlogin.png"/></a>
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=e1bfbd13b698ee8d3ecba1e269ed3918&redirect_uri=http://localhost:8080/slowwalking/kakao/callback&response_type=code">
+						<img alt="" src="../img/kakao.png" style="height:50px; width:231px ">
+						</a>
 					</div>
 				</div>
 				

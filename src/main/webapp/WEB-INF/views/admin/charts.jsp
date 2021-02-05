@@ -287,6 +287,9 @@ function deleteRow(id){
                                             <th>이메일</th>
                                             <th>별점</th>
                                             <th>회원식별</th>
+                                            <th>휴면상태</th>
+                                            <th>포인트</th>
+                                            <th>티켓</th>
                                             <th>회원수정</th>
                                             <th>회원삭제</th>
                                         </tr>
@@ -306,6 +309,9 @@ function deleteRow(id){
                                             <th>${row.email }</th>
                                             <th>${row.starrate }</th>
                                             <th>${row.flag }</th>
+                                            <th>${row.enabled }</th>
+                                            <th>${row.point }</th>
+                                            <th>${row.ticket }</th>
                                             <th> <button class="btn btn-primary" 
 							onclick="location.href='chartsmodify?id=${row.id}';">수정</button></th>
                                             <th><button class="btn btn-danger" 

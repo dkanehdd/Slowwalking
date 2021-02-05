@@ -6,7 +6,7 @@
 <mapper namespace="advertisement.RequestBoardImpl">
 	<select id="requestBoard" resultType="advertisement.RequestBoardDTO">
 		SELECT * FROM requestBoard
-			WHERE advertise = 'on'
+			WHERE advertise = 'true'
 	</select>
 	
 	<select id="myRequestBoard" resultType="advertisement.RequestBoardDTO">
