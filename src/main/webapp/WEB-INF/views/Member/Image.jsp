@@ -79,7 +79,7 @@ function skip(){
 		
 	}
 	else{
-		location.href="/slowwalking/";
+		location.href="../main/main";
 	}
 }
 	

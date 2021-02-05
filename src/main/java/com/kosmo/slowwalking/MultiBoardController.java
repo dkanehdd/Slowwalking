@@ -37,12 +37,18 @@ public class MultiBoardController {
 		return "MultiBoard/Notice";
 	}
 
+	@RequestMapping("/multiBoard/FAQ")
+	public String FAQ(Model model, HttpServletRequest req) {
+
+		return "MultiBoard/FAQ";
+	}
+
 	// 공지사항 내용보기
 	@RequestMapping("/multiBoard/notice_view") // 상세보기 눌렀을 때 , 요청명.
 	public String contentview(Model model, HttpServletRequest req) {
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		// 파라미터 저장을 위한 DTO객체 생성
-		
+
 		MultiBoardDTO multiBoardDTO = new MultiBoardDTO();
 		// Mapper 호출
 		multiBoardDTO = sqlSession.getMapper(MultiBoardImpl.class).contentPage(idx); // DTO객체에 쿼리문 실행 결과를 담는다.
