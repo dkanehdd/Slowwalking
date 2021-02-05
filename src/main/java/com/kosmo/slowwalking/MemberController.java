@@ -16,6 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +44,7 @@ public class MemberController {
 
 	@Autowired
 	public SqlSession sqlSession;
-
+	
 	// 테스트용 멤버리스트 가져오기
 	@RequestMapping("/member/list")
 	public String MemberList(Model model) {
@@ -73,7 +79,6 @@ public class MemberController {
 			model.addAttribute("mode", "join");
 			model.addAttribute("flag", memberDTO.getFlag());
 			model.addAttribute("message", "회원가입이 완료되었습니다. \n추가 정보를 작성해주세요.");
-			session.setAttribute("user_id", memberDTO.getId());
 		} else {
 			model.addAttribute("id", memberDTO.getFlag());
 			model.addAttribute("sucOrFail", sucOrFail);
@@ -95,6 +100,42 @@ public class MemberController {
 	public String Login() {
 		return "Member/Login";
 	}
+	//로그인폼 거치지 않고 바로 로그인(소셜 로그인)
+	@RequestMapping("/member/loginWithoutForm")
+	public String loginWithoutForm(HttpServletRequest req, Model model, HttpSession session) {
+		List<GrantedAuthority> roles = new ArrayList<>(1);//ROLE 권한 설정 컬렉션
+		String userId = req.getParameter("id");
+		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(userId);//플레그얻어오기
+		String roleStr = flag.equals("admin") ? "ROLE_admin" : "ROLE_"+flag;
+		roles.add(new SimpleGrantedAuthority(roleStr));//권한 설정해주기
+	  
+		User user = new User(userId, "", roles);//시큐리티에있는 User객체 생성
+	  
+		Authentication auth = new UsernamePasswordAuthenticationToken(user, null, roles);//Authentication 객체 생성
+		SecurityContextHolder.getContext().setAuthentication(auth);//시큐리티에 저장 
+		
+		String view = "";
+		if (flag.equals("sitter")) {
+			System.out.println("시터회원 인증완료");
+			SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(userId);
+
+			System.out.println(dto);
+			model.addAttribute("dto", dto);
+
+			view = "Member/MypageSitter";
+		} else if (flag.equals("parents")) {
+			System.out.println("부모회원 인증완료");
+      		ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(userId);
+    		System.out.println(dto);
+      		model.addAttribute("dto", dto);
+
+			view = "Member/MypageParents";
+		}
+		session.setAttribute("user_id", userId);
+		session.setAttribute("flag", flag);
+		return view;
+	}
+	
 	//로그아웃
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {

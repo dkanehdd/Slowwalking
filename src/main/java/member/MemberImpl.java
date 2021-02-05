@@ -10,6 +10,8 @@ public interface MemberImpl {
 
 	public int checkId(String id);
 
+	public MemberDTO getMember(String id);
+	
 	public int insertMember(MemberDTO memberDTO);
 
 	public String flagValidate(String id);

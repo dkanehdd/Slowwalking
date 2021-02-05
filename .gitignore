@@ -7,3 +7,5 @@ MANIFEST.MF
 *.class
 *.class
 target/classes/slowwalking/mapper/Board.xml
+*.class
+target/m2e-wtp/web-resources/META-INF/maven/com.kosmo/slowwalking/pom.xml

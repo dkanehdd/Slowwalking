@@ -12,6 +12,10 @@
 		SELECT * FROM member
 	</select>
 	
+	<select id="getMember" resultType="member.MemberDTO">
+		SELECT * FROM member where id=#{id}
+	</select>
+	
 	<select id="checkId" resultType="int">
 		SELECT count(*) from member where id=#{id}
 	</select>
