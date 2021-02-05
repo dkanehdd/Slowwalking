@@ -56,7 +56,7 @@
 					</ul>
 					<a href="<%=apiURL%>"><img height="50" src="../img/naverlogin.png"/></a>
 					<a href="https://kauth.kakao.com/oauth/authorize?client_id=e1bfbd13b698ee8d3ecba1e269ed3918&redirect_uri=http://localhost:8080/slowwalking/kakao/callback&response_type=code">
-						<img alt="" src="../img/kakao.png" style="height:50px; width:231px ">
+						<img alt="" src="../img/kakao.png" style="height:60px; width:256px ">
 						</a>
 					</div>
 				</div>
