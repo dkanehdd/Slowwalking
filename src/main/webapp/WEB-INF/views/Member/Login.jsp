@@ -6,6 +6,13 @@
 <html>
 <head>
 <%@ include file="../links/linkOnly2dot.jsp"%>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+</script>
 <title>Login.jsp</title>
 </head>
 <body>
@@ -30,6 +37,11 @@
 						<input type="text" class="form-control" name="id" value="" placeholder="아이디" /> 
 						<input type="password" class="form-control" name="pass" value="" placeholder="비밀번호"/>
 						<button type="submit" class="btn btn-danger">로그인</button><br>
+						
+						
+				
+						
+						
 						<div class="form-check">
 							<input type="checkbox" id="idSave" name="idSave" class="clear form-check-input"/>
 							<label for="idSave" class="form-check-label">아이디 저장</label>
@@ -39,9 +51,30 @@
 						<li><a href="#" id="pwFind" name="pwFind">비밀번호 찾기</a></li>
 						<li><a href="../member/join" id="signUp" name="signUp">회원가입</a></li>
 					</ul>
+					
+					<div>
+					
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=e1bfbd13b698ee8d3ecba1e269ed3918&redirect_uri=http://localhost:8080/slowwalking/kakao/callback&response_type=code">
+	<img alt="" src="../img/kakao.png" style="height50px; width:231px ">
+	</a>
+
+					
+		
+		
+		
+		 
+		
+		
+				</div>
+				
+				
+				
+				
+				
 					</div>
 				</div>
 			</form:form>
+			
 		</div>
 	</section>
 

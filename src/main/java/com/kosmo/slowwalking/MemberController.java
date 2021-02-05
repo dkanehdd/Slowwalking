@@ -16,6 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +61,7 @@ public class MemberController {
 		return "Member/Join";
 	}
 	
-	
+
 	@RequestMapping(value = "/member/joinAction", method=RequestMethod.POST)
 	public String MemberJoinAction(Model model, MemberDTO memberDTO, HttpSession session) {
 		System.out.println(memberDTO.getName());
@@ -92,8 +98,46 @@ public class MemberController {
 	//로그인 페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/login")
 	public String Login() {
+		
 		return "Member/Login";
-	}
+	}	
+	
+	//로그인폼 거치지 않고 바로 로그인(소셜 로그인)
+	   @RequestMapping("/member/loginWithoutForm")
+	   public String loginWithoutForm(HttpServletRequest req, Model model, HttpSession session) {
+	      List<GrantedAuthority> roles = new ArrayList<>(1);//ROLE 권한 설정 컬렉션
+	      String userId = req.getParameter("id");
+	      String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(userId);//플레그얻어오기
+	      String roleStr = flag.equals("admin") ? "ROLE_admin" : "ROLE_"+flag;
+	      roles.add(new SimpleGrantedAuthority(roleStr));//권한 설정해주기
+	     
+	      User user = new User(userId, "", roles);//시큐리티에있는 User객체 생성
+	     
+	      Authentication auth = new UsernamePasswordAuthenticationToken(user, null, roles);//Authentication 객체 생성
+	      SecurityContextHolder.getContext().setAuthentication(auth);//시큐리티에 저장 
+	      
+	      String view = "";
+	      if (flag.equals("sitter")) {
+	         System.out.println("시터회원 인증완료");
+	         SitterMemberDTO dto = sqlSession.getMapper(MemberImpl.class).sitMem(userId);
+
+	         System.out.println(dto);
+	         model.addAttribute("dto", dto);
+
+	         view = "Member/MypageSitter";
+	      } else if (flag.equals("parents")) {
+	         System.out.println("부모회원 인증완료");
+	            ParentsMemberDTO dto = sqlSession.getMapper(MemberImpl.class).parMem(userId);
+	          System.out.println(dto);
+	            model.addAttribute("dto", dto);
+
+	         view = "Member/MypageParents";
+	      }
+	      session.setAttribute("user_id", userId);
+	      session.setAttribute("flag", flag);
+	      return view;
+	   }
+	
 	//로그아웃
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {
@@ -101,6 +145,7 @@ public class MemberController {
 		session.setAttribute("user_id", null);
 		return "redirect:../main/main";
 	}
+	
 
 	@RequestMapping("/member/LoginAction")
 	public ModelAndView MemberLoginAction(Principal principal, Model model, HttpSession session) {

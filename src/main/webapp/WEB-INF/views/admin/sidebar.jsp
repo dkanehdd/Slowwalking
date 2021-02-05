@@ -54,7 +54,7 @@
     
 
     <li class="nav-item">
-        <a class="nav-link" href="../admin/product">
+        <a class="nav-link" href="../admin/productList">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>상품관리</span></a>
     </li>
