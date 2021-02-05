@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import advertisement.ParameterDTO;
 import advertisement.RequestBoardDTO;
 import advertisement.RequestBoardImpl;
 import member.SitterImpl;
@@ -39,31 +40,74 @@ public class AdvertisementController {
 
 	// 구인의뢰서 리스트 보기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/requestBoard_list")
-	public String ReqeustBoardList(Model model) {
-		ArrayList<RequestBoardDTO> lists = sqlSession.getMapper(RequestBoardImpl.class).requestBoard();
+	public String ReqeustBoardList(Model model, HttpServletRequest req, Principal principal, ParameterDTO parameterDTO) {
+		ArrayList<RequestBoardDTO> lists = new ArrayList<RequestBoardDTO>();
+		
+		String search = parameterDTO.getSearch();
+		System.out.println("search : " + search);
+		
+		if("search".equals(search)) {
+			
+			if("".equals(parameterDTO.getRequest_time())) {
+				System.out.println("request_time 파라미터 null인가요? : " + parameterDTO.getRequest_time());
+				lists = sqlSession.getMapper(RequestBoardImpl.class).noTimeRequestSearch(parameterDTO);
+			}else {
+				
+				
+				
+				System.out.println("request_time 파라미터 null이 아닌가요?: " + parameterDTO.getRequest_time());
+				lists = sqlSession.getMapper(RequestBoardImpl.class).requestSearch(parameterDTO);
+			}
+			String list_flag=req.getParameter("list_flag");
+			
+			if(list_flag == null) {
+				model.addAttribute("list_flag", list_flag);
+				model.addAttribute("lists", lists);
+			}
+			
+			for(RequestBoardDTO dto : lists) { 
+				String children_name = dto.getChildren_name();
+				String change_name = children_name.substring(0,1) + 0 + children_name.substring(2);
+				System.out.println("변환된 아이의 이름 : " + change_name);
+				dto.setChildren_name(change_name);
+			}
+			
+			model.addAttribute("list_flag", list_flag);
+			model.addAttribute("lists", lists);
 
-		model.addAttribute("lists", lists);
-
-		return "advertisement/RequestBoard_list";
-	}
-
-	@RequestMapping("/advertisement/requestBoard_Mylist")
-	public String RequestBoardMyList(Model model, HttpServletRequest req, Principal principal) {
-
-		String user_id = "";
-		try {
-			user_id = principal.getName();
-			System.out.println("user_id=" + user_id);
-		} catch (Exception e) {
-			e.printStackTrace();
+			
+		}
+		else {
+			String list_flag=req.getParameter("list_flag");
+			String user_id = "";
+			try {
+				user_id = principal.getName();
+				System.out.println("user_id=" + user_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if(list_flag == null) {
+				lists = sqlSession.getMapper(RequestBoardImpl.class).requestBoard();
+				model.addAttribute("list_flag", list_flag);
+				model.addAttribute("lists", lists);
+			}else {
+				lists = sqlSession.getMapper(RequestBoardImpl.class).myRequestBoard(user_id);
+				model.addAttribute("lists", lists);
+			}
+			
+			for(RequestBoardDTO dto : lists) { 
+				String children_name = dto.getChildren_name();
+				String change_name = children_name.substring(0,1) + 0 + children_name.substring(2);
+				System.out.println("변환된 아이의 이름 : " + change_name);
+				dto.setChildren_name(change_name);
+			}
+			
+			model.addAttribute("list_flag", list_flag);
+			model.addAttribute("lists", lists);
 		}
 
-		ArrayList<RequestBoardDTO> lists = sqlSession.getMapper(RequestBoardImpl.class).myRequestBoard(user_id);
-
-		model.addAttribute("lists", lists);
-		model.addAttribute("list_flag", "mylist");
-
-		return "advertisement/RequestBoard_mylist";
+		return "advertisement/RequestBoard_list";
 	}
 
 	// 구인의뢰서 상세 보기 페이지 이동 요청명(메소드)
@@ -112,9 +156,29 @@ public class AdvertisementController {
 		
 		//시간을 알기 위해 숫자만 추출
 		String time = request_time.replaceAll("[^0-9]", "");
-		//시간 형태로 재배치
-		time = time.substring(0,2) + ":" + time.substring(2,4) + " ~ " + time.substring(4,6) + ":" + time.substring(6,8);
+		String date = null;
 		
+		date += request_time.replaceAll("0", "");
+		date += request_time.replaceAll("1", "");
+		date += request_time.replaceAll("2", "");
+		date += request_time.replaceAll("3", "");
+		date += request_time.replaceAll("4", "");
+		date += request_time.replaceAll("5", "");
+		date += request_time.replaceAll("6", "");
+		date += request_time.replaceAll("7", "");
+		date += request_time.replaceAll("8", "");
+		date += request_time.replaceAll("9", "");
+		
+		System.out.println("숫자가 없어진 date : " + date);
+		
+		//시간 형태로 재배치
+		if(time.equals("")) {
+			System.out.println("조합되기 전  time이 null일때 : " + time);
+			time = "협의가능";
+		}else {
+			System.out.println("조합되기 전  time이 null아닐때 : " + time);		
+			time = time.substring(0,2) + ":" + time.substring(2,4) + " ~ " + time.substring(4,6) + ":" + time.substring(6,8);
+		}
 		System.out.println("재조합된 시간 형태 :" + time);
 	
 		//,로 요일을 배열에 저장함
@@ -229,7 +293,9 @@ public class AdvertisementController {
 			// 파일외에 폼값을 받음.
 			dto.setIdx(Integer.parseInt(req.getParameter("idx")));
 			dto.setId(req.getParameter("id"));
-			dto.setTitle(req.getParameter("title"));
+			String title = req.getParameter("title");
+			title = " " + title;
+			dto.setTitle(title);
 			dto.setChildren_name(req.getParameter("children_name"));
 			
 			
@@ -246,8 +312,12 @@ public class AdvertisementController {
 			dto.setRequest_time(req.getParameter("request_time"));
 			dto.setDisability_grade(req.getParameter("disability_grade"));
 			dto.setWarning(req.getParameter("warning"));
-			dto.setAge(req.getParameter("age"));
-			dto.setRegular_short(req.getParameter("regular_short"));
+			String age = req.getParameter("age");
+			age = " " + age;
+			dto.setAge(age);
+			String regular_short = req.getParameter("regular_short");
+			regular_short = " " + regular_short;
+			dto.setRegular_short(regular_short);
 			dto.setStart_work(req.getParameter("start_work"));
 			dto.setContent(req.getParameter("content"));
 			
@@ -354,6 +424,7 @@ public class AdvertisementController {
 
 		// 서버의 물리적경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/images");
+		System.out.println("서버의 물리적경로 : " + path);
 
 		// 폼값과 파일명을 저장후 view로 전달하기 위한 맵컬렉션
 		Map returnObj = new HashMap();
@@ -367,15 +438,18 @@ public class AdvertisementController {
 			// 파일외에 폼값을 받음.
 			String id = req.getParameter("id");
 			String title = req.getParameter("title");
+			title = " " + title;
 			String children_name = req.getParameter("children_name");
 			String advertise = req.getParameter("advertise");
 			String age = req.getParameter("age");
+			age = " " + age;
 			String pay = req.getParameter("pay");
 			String region = req.getParameter("region");
 			String request_time = req.getParameter("request_time");
 			String disability_grade = req.getParameter("disability_grade");
 			String warning = req.getParameter("warning");
 			String regular_short = req.getParameter("regular_short");
+			regular_short = " " + regular_short;
 			String start_work = req.getParameter("start_work");
 			String content = req.getParameter("content");
 
