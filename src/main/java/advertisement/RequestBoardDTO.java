@@ -16,8 +16,17 @@ public class RequestBoardDTO {
 	private String start_work;
 	private String content;
 	private int idx;
+	private String request_date;
 	
 	
+	
+	
+	public String getRequest_date() {
+		return request_date;
+	}
+	public void setRequest_date(String request_date) {
+		this.request_date = request_date;
+	}
 	public String getRegular_short() {
 		return regular_short;
 	}

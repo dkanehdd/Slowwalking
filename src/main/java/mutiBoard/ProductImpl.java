@@ -12,5 +12,5 @@ public interface ProductImpl {
 	public int deleteProduct(String idx);
 	// 상품결제관리 리스트
 	public ArrayList<OrderDTO> orderList();
-	
+	public int insertOrder(OrderDTO orderDTO);
 }

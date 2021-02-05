@@ -10,14 +10,11 @@ public interface MemberImpl {
 
 	public int checkId(String id);
 
+	public MemberDTO getMember(String id);
+	
 	public int insertMember(MemberDTO memberDTO);
 
 	public String flagValidate(String id);
-
-	public SitterMemberDTO sitMem(String id);
-
-	public ParentsMemberDTO parMem(String id);
-	
 
 	public String getImage(String id);
 

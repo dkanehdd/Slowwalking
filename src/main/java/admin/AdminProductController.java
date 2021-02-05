@@ -3,10 +3,13 @@ package admin;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -94,6 +98,7 @@ public class AdminProductController {
 		}
 
 		return "admin/productList";
+
 	}
 
 	// 결제관리 테이블 리스트
@@ -121,7 +126,7 @@ public class AdminProductController {
 		return "admin/productmodify";
 	}
 
-	// 상품 수정하기
+
 	   @RequestMapping(value = "/admin/productmodifyAction", method = RequestMethod.POST)
 	   public String productmodifyAction(Model model, MultipartHttpServletRequest req) {
 
@@ -175,17 +180,35 @@ public class AdminProductController {
 	      }
 	      return "admin/productList";
 	   }
-	
-	// 상품수정 삭제
-		@RequestMapping("/admin/productdelete")
-		public String productDelete(HttpServletRequest req, Model model) {
 
-			String idx = req.getParameter("idx");
 
-			int dto = sqlSession.getMapper(ProductImpl.class).deleteProduct(idx);
+	// 상품삭제
+	@RequestMapping("/admin/productdelete")
+	public String productDelete(HttpServletRequest req, Model model) {
+
+		String idx = req.getParameter("idx");
+
+
+		int dto = sqlSession.getMapper(ProductImpl.class).deleteProduct(idx);
 
 			return "redirect:../admin/productList";
 		}
 
 
+	//상품결제 모달창 띄우기
+	@RequestMapping("/multiBoard/productModal") // 상세보기 눌렀을때 요청명
+	@ResponseBody
+	public Map<String, Object> productView(Model model, HttpServletRequest req) {
+		String idx = req.getParameter("idx");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		ProductDTO productDTO = new ProductDTO();
+		// Mapper 호출
+		productDTO = sqlSession.getMapper(ProductImpl.class).contentPage(idx); // DTO객체에 쿼리문 실행 결과를 담는다.
+
+		map.put("dto", productDTO);
+
+		return map;
+	}
 }

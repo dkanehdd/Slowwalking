@@ -15,13 +15,13 @@ $(function(){
 		$("#innerPage").load("../mypage/proEdit");
 	});
 	$("#image").on("click",function(){
-		$("#innerPage").load("../mypage/getImage");
+		$("#innerPage").load("../mypage/getImage"); 
 	});
 	$("#interview").on("click",function(){
 		$("#innerPage").load("../mypage/interList");
 	});
 	$("#myrequest").on("click",function(){
-		$("#innerPage").load("../advertisement/requestBoard_Mylist");
+		$("#innerPage").load("../advertisement/requestBoard_list?list_flag=mylist");
 	});
 	$("#writerequest").on("click",function(){
 		$("#innerPage").load("../advertisement/requestBoard_write");
@@ -42,8 +42,8 @@ $(function(){
       <div class="col-2" id="menu">
 		<div class="box">
 			<c:choose>
-				<c:when test="${not empty image_path }">
-					<img src="../resources/images/${image_path }"/>
+				<c:when test="${not empty dto.image_path }">
+					<img src="../resources/images/${dto.image_path }"/>
 				</c:when>
 				<c:otherwise>
 					<img src="../resources/images/anonymous-avatar.jpg" style="width:200px;"/>
@@ -54,7 +54,7 @@ $(function(){
 			<img src="../resources/images/photo-camera.png" id="image">
 		</div>
 		<div class="bg-dark text-light" style="width:200px;">
-          	&nbsp;${dto.parents_id}&nbsp;<small>님</small>
+          	&nbsp;${dto.name}&nbsp;<small>님</small>
 		</div>
 		<ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2" id="profile">

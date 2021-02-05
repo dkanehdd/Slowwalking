@@ -71,4 +71,23 @@
 	<delete id="requestBoardDelete">
 		DELETE FROM requestBoard WHERE idx=#{idx}
 	</delete>
+	
+	
+	<select id="requestSearch" parameterType="advertisement.ParameterDTO" 
+		resultType="advertisement.RequestBoardDTO">
+		SELECT * FROM requestBoard 
+			WHERE request_time = #{request_time} or request_time LIKE '%'|| 협의 가능 || '%' and regular_short LIKE '%'|| #{regular_short} || '%'
+						AND title LIKE '%'||#{title}||'%' AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
+	</select>
+	
+	<select id="noTimeRequestSearch" parameterType="advertisement.ParameterDTO" 
+		resultType="advertisement.RequestBoardDTO">
+		SELECT * FROM requestBoard 
+			WHERE regular_short LIKE '%'||#{regular_short}||'%' AND title LIKE '%'||#{title}||'%'
+				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
+	</select>
+	
+	
+	
+	
 </mapper>

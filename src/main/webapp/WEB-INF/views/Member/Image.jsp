@@ -73,13 +73,13 @@ function skip(){
 			location.href='../member/sitterjoin';
 		}
 		else if(flag.value=='parents'){
-			alert('신청서를 작성해주세요');
-			location.href='../member/mypage';
+			alert('로그인을 해주세요');
+			location.href='../main/main';
 		}
 		
 	}
 	else{
-		location.href="/slowwalking/";
+		location.href="../main/main";
 	}
 }
 	

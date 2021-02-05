@@ -30,7 +30,7 @@
 		SELECT * FROM interview WHERE idx=#{0}
 	</select>
 	<select id="sitInterList" resultType="advertisement.InterviewDTO">
-		SELECT * FROM interview WHERE sitter_id=#{0} ORDER BY idx DESC
+		SELECT *FROM interview WHERE sitter_id=#{0} ORDER BY idx DESC
 	</select>
 	<select id="parInterList" resultType="advertisement.InterviewDTO">
 		SELECT * FROM interview WHERE parents_id=#{0} ORDER BY idx DESC
@@ -46,11 +46,14 @@
 		UPDATE interview SET parents_agree='T' WHERE idx=#{idx}
 	</update>
 	<!-- 알림장 -->
-<!-- 	<insert id="addDiary"> -->
-<!-- 		INSERT INTO diary (regidate, send_id, rece_id, content, flag, idx) -->
-<!-- 			VALUES (to_date(), #{1}, #{2}, #{3}, 'diary', #{0}) -->
-<!-- 	</insert> -->
-	<select id="viewDiary" resultType="mutiBoard.DiaryDTO">
-		SELECT * FROM diary WHERE idx=#{idx}
+ 	<insert id="sendDiary"> -->
+ 		INSERT INTO diary (regidate, send_id, rece_id, content, flag, idx) -->
+ 			VALUES (sysdate, #{1}, #{2}, #{3}, 'diary', #{0}) -->
+	</insert>
+	<select id="sitDiary" resultType="mutiBoard.DiaryDTO">
+		SELECT * FROM diary WHERE send_id=#{0}
+	</select>
+	<select id="parDiary" resultType="mutiBoard.DiaryDTO">
+		SELECT * FROM diary WHERE rece_id=#{0}
 	</select>
 </mapper>
