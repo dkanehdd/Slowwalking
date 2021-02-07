@@ -16,6 +16,10 @@
 		SELECT * FROM member where id=#{id}
 	</select>
 	
+	<select id="getMemberAndoid" resultType="member.MemberDTO" parameterType="member.MemberDTO">
+		SELECT * FROM member where id=#{id} AND pw=#{pw}
+	</select>
+	
 	<select id="checkId" resultType="int">
 		SELECT count(*) from member where id=#{id}
 	</select>
@@ -46,5 +50,11 @@
 		select distinct gugun from zipcode where sido=#{0}
 	</select>
 	
+	<update id="updatePoint">
+		UPDATE member SET point=point+${param1} WHERE id=#{param2}
+	</update>
+	<update id="updateTicket">
+		UPDATE member SET ticket=ticket+${param1} WHERE id=#{param2}
+	</update>
 	
 </mapper>

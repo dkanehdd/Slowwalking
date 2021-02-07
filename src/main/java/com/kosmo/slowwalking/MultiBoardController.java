@@ -116,7 +116,7 @@ public class MultiBoardController {
 	//결제완료후 DB저장
 	@RequestMapping("/multiBoard/order_complete")
 	@ResponseBody
-	public Map<String, Object> Order_complete(HttpServletRequest req) {
+	public Map<String, Object> Order_complete(HttpServletRequest req, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		OrderDTO dto = new OrderDTO();
 		dto.setId(req.getParameter("id"));
@@ -129,7 +129,12 @@ public class MultiBoardController {
 					+ ", 결제방식 : "+ req.getParameter("payment"));
 		
 		int suc = sqlSession.getMapper(ProductImpl.class).insertOrder(dto);
-		
+		ProductDTO productDTO = sqlSession.getMapper(ProductImpl.class).contentPage(req.getParameter("idx"));
+		System.out.println("티켓 : "+productDTO.getTicket()+" 적립금 : "+ productDTO.getPrice()/20);
+		System.out.println("구매자 : "+ req.getParameter("id"));
+		int updateP = sqlSession.getMapper(MemberImpl.class).updatePoint(productDTO.getPrice()/20, req.getParameter("id"));
+		int updateT = sqlSession.getMapper(MemberImpl.class).updateTicket(productDTO.getTicket(), req.getParameter("id"));
+		System.out.println("포인트 결과 : "+ updateP + "티켓 결과 : "+ updateT);
 		map.put("suc", suc);
 		
 		return map;

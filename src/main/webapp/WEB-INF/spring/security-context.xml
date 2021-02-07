@@ -19,6 +19,7 @@
 			authorities-by-username-query : 아이디를 이용하여
 				권한정보를 가져오는 쿼리문을 작성한다.
 	-->
+	<http pattern="/android/**" security="none" />
 	<http>
 		<intercept-url pattern="/member/login"
 			access="permitAll"/>
@@ -58,4 +59,5 @@
 			/>
 		</authentication-provider>
 	</authentication-manager>
+	
 </beans:beans>

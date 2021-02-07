@@ -22,7 +22,7 @@
        var msg;
        
        IMP.request_pay({
-           pg : '${flag }',
+           pg : 'html5_inicis',
            pay_method : 'card',
            merchant_uid : 'merchant_' + new Date().getTime(),
            name : '테스트',

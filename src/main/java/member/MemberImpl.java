@@ -11,6 +11,7 @@ public interface MemberImpl {
 	public int checkId(String id);
 
 	public MemberDTO getMember(String id);
+	public MemberDTO getMemberAndoid(MemberDTO membetDTO);
 	
 	public int insertMember(MemberDTO memberDTO);
 
@@ -21,4 +22,7 @@ public interface MemberImpl {
 	public int insertImage(String id, String image);
 
 	public ArrayList<String> getGu(String sido);
+	
+	public int updateTicket(int ticket, String id);
+	public int updatePoint(int point, String id);
 }
