@@ -105,11 +105,12 @@ function on_pay(pay_flag) {
 										</div>
 										<div class="payment-pay">
 											<div class="price">
-												<span class="num" id="price"></span>원 
+												<span class="num" id="price"></span>원
 											</div>
 										</div>
 									</li>
 									<li class="payment-item">
+									<br />
 									<h3>결제수단을 선택하세요</h3>
 										<div class="row">
 <!-- 											<div class="col-3 mr-2"> -->
@@ -119,7 +120,7 @@ function on_pay(pay_flag) {
 											<div class="col-3 ml-2">
 												<button class="btn rounded-lg btn-light" 
 													onclick="on_pay('kakaopay');">
-													<img src="../img/kakaopay.png" alt="" />카카오페이</button>
+													<img src="../img/card.png" alt="" style="width: 60px; height: 50px;" />카드결제</button>
 											</div>
 										</div>
 									</li>

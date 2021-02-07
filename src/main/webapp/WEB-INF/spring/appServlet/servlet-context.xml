@@ -33,7 +33,7 @@
 	
 	<context:component-scan base-package="com.kosmo.slowwalking" />
 	<context:component-scan base-package="admin" />
-	<context:component-scan base-package="util" />
+	<context:component-scan base-package="android" />
 	<!-- DB연결을 위한 데이터소스 빈 생성 -->	
 	<beans:bean name="dataSource" 
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
