@@ -7,6 +7,14 @@ public class ProductDTO {
 	private int price;
 	private String content;
 	private String image;
+	private int ticket;
+	
+	public int getTicket() {
+		return ticket;
+	}
+	public void setTicket(int ticket) {
+		this.ticket = ticket;
+	}
 	public int getIdx() {
 		return idx;
 	}
