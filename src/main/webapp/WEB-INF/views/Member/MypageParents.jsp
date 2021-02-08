@@ -68,8 +68,8 @@ $(function(){
        		</li>
         </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2" id="writerequest">의뢰서 작성</a></li>
-         	<li class="list-group-item" id="myrequest">내 의뢰서 보기</a></li>
+         	<li class="list-group-item mt-2" id="writerequest">의뢰서 작성</li>
+         	<li class="list-group-item" id="myrequest">내 의뢰서 보기</li>
           	<li class="list-group-item" id="interview">내 구인현황</li>
           	<li class="list-group-item" id="comment">후기관리</li>
         </ul>

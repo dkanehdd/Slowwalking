@@ -14,21 +14,8 @@ public class MemberDTO {
 	private int starrate;
 	private String flag;
 	private int enabled;
+	private int point;
 	private int ticket;
-	
-	
-	public int getTicket() {
-		return ticket;
-	}
-	public void setTicket(int ticket) {
-		this.ticket = ticket;
-	}
-	public int getEnabled() {
-		return enabled;
-	}
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
 	public String getId() {
 		return id;
 	}
@@ -95,9 +82,23 @@ public class MemberDTO {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	
-	
-	
-	
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public int getTicket() {
+		return ticket;
+	}
+	public void setTicket(int ticket) {
+		this.ticket = ticket;
+	}
 	
 }

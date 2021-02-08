@@ -288,35 +288,52 @@
 												<th class="text-center" 
 													style="vertical-align:middle;">이름</th>
 												<td>
-													<textarea rows="10" class="form-control" 
-													name="name">${dto.name }</textarea>
+													<input type="text" name="name" value="${dto.name }" />
 												</td>
 											</tr>
 											
-											<tr>
+												<tr>
 												<th class="text-center" 
 													style="vertical-align:middle;">전화번호</th>
 												<td>
-													<textarea rows="10" class="form-control" 
-													name="phone">${dto.phone }</textarea>
-												</td>
-											</tr>		
-											
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">성별</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="gender">${dto.gender }</textarea>
+													<input type="text" name="phone" value="${dto.phone }" />
 												</td>
 											</tr>	
 											
-											<tr>
+												<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">성별</th>
+												<td>
+													<input type="text" name="gender" value="${dto.gender }" />
+												</td>
+											</tr>
+											
+												<tr>
 												<th class="text-center" 
 													style="vertical-align:middle;">회원식별</th>
 												<td>
-													<textarea rows="10" class="form-control" 
-													name="flag">${dto.flag }</textarea>
+													<input type="text" name="flag" value="${dto.flag }" />
+												</td>
+											</tr>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">휴면상태</th>
+												<td>
+													<input type="text" name="enabled" value="${dto.enabled }" />
+												</td>
+											</tr>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">포인트</th>
+												<td>
+													<input type="text" name="point" value="${dto.point }" />
+												</td>
+											</tr>
+												<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">티켓</th>
+												<td>
+													<input type="text" name="ticket" value="${dto.ticket }" />
 												</td>
 											</tr>	
                                      

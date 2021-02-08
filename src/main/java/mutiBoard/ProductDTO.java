@@ -9,7 +9,6 @@ public class ProductDTO {
 	private String image;
 	private int ticket;
 	
-	
 	public int getTicket() {
 		return ticket;
 	}
