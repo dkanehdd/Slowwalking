@@ -64,7 +64,7 @@
 						<c:choose>
 							<c:when test="${!(row.sitter_agree eq 'T' and row.parents_agree eq 'T')}">
 								<c:choose>
-									<c:when test="${row.sitter_agree eq 'T' || row.parents_agree eq 'T' }">
+									<c:when test="${row.sitter_agree eq 'T' && row.parents_agree eq 'T' }">
 										<td><button type="button" class="btn btn-basic " >대기</button></td>
 									</c:when>
 									<c:otherwise>

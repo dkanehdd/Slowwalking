@@ -142,23 +142,22 @@
 
 	<!--날짜 네비게이션  -->
 	<div class="navigation">
-		<a class="before_after_year" href="../mypage/changeCalendar?year=${today.year}&month=${today.month}&yearIdx=0">
+		<a class="before_after_year" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&yearIdx=0&idx=${idx}">
 			&lt;&lt;
 		<!-- 이전해 -->
 		</a> 
-		<a class="before_after_month" href="../mypage/changeCalendar?year=${today.year}&month=${today.month}&monthIdx=0">
+		<a class="before_after_month" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&monthIdx=0&idx=${idx}">
 			&lt;
 		<!-- 이전달 -->
 		</a> 
 		<span class="this_month">
-			&nbsp;${today.year}. 
-			<c:if test="${today.month<10}">0</c:if>${today.month}
+			&nbsp;${today.year}.${today.month+1}
 		</span>
-		<a class="before_after_month" href="../mypage/changeCalendar?year=${today.year}&month=${today.month}&monthIdx=1">
+		<a class="before_after_month" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&monthIdx=1&idx=${idx}">
 		<!-- 다음달 -->
 			&gt;
 		</a> 
-		<a class="before_after_year" href="../mypage/changeCalendar?year=${today.year}&month=${today.month}&yearIdx=1">
+		<a class="before_after_year" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&yearIdx=1&idx=${idx}">
 			<!-- 다음해 -->
 			&gt;&gt;
 		</a>
@@ -168,75 +167,65 @@
 	<table class="calendar_body">
 		<thead>
 			<tr bgcolor="#CECECE">
-				<td class="day sun" >
+				<th class="day sun" >
 					일
-				</td>
-				<td class="day" >
+				</th>
+				<th class="day" >
 					월
-				</td>
-				<td class="day" >
+				</th>
+				<th class="day" >
 					화
-				</td>
-				<td class="day" >
+				</th>
+				<th class="day" >
 					수
-				</td>
-				<td class="day" >
+				</th>
+				<th class="day" >
 					목
-				</td>
-				<td class="day" >
+				</th>
+				<th class="day" >
 					금
-				</td>
-				<td class="day sat" >
+				</th>
+				<th class="day sat" >
 					토
-				</td>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
+		<c:set var="count" value="0" />
 			<tr>
-			
-			<c:forEach var="dateList" items="${dateList}" varStatus="date_status"> 
-				<c:choose>
-					<c:when test="${dateList.value=='today'}">
-						<td class="today">
-							<div class="date">
-								${dateList.date}
-							</div>
-							<div>
-							</div>
-						</td>
-					</c:when>
-					<c:when test="${date_status.index%7==6}">
-						<td class="sat_day">
-							<div class="sat">
-								${dateList.date}
-							</div>
-							<div>
-							</div>
-						</td>
-					</c:when>
-					<c:when test="${date_status.index%7==0}">
-						</tr>
-						<tr>	
-							<td class="sun_day">
-							<div class="sun">
-								${dateList.date}
-							</div>
-							<div>
-							</div>
-						</td>
-					</c:when>
-				<c:otherwise>
-					<td class="normal_day">
-					<div class="date">
-						${dateList.date}
+			<c:forEach begin="1" end="${today.start-1 }" var="i">
+			<c:set var="count" value="${count + 1}" />
+				<td class="sat_day">
+					<div class="sat">
+						&nbsp;
 					</div>
-					<div>
-					</div>
-					</td>
-				</c:otherwise>
-				</c:choose>
+				</td>
 			</c:forEach>
+			<c:forEach begin="${today.startDay }" end="${today.endDay }"  var="i">
+			<c:set var="count" value="${count + 1}" />	
+				<td class="sat_day">
+					<div class="sat">
+						${i }
+						<c:forEach items="${diaryList }" var="row">
+							<c:set var="date" value="${today.year }-${today.month+1 }-${i }"/>
+							<c:if test="${row.regidate eq date}">
+								<a onclick="diaryOpen();">알림장 보기</a>
+							</c:if>
+						</c:forEach>
+					</div>
+				</td>
+			<c:if test="${count%7 == 0 || i<endDate}">
 			</tr>
+			</c:if>
+			</c:forEach>
+			<c:forEach begin="${count }" end="${count < 34 ? 34: 41 }" var="i">
+			<td class="sat_day">
+					<div class="sat">
+						&nbsp;
+					</div>
+				</td>
+			</c:forEach>
+			
 		</tbody>
 	</table>
 	<c:if test="${flag eq 'sitter' }">
@@ -256,6 +245,12 @@
 function popOpen(){
 	var idx = document.getElementById("idx").value;	
 	window.open("../mypage/openDiary?idx="+idx, "알림장", 
+	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
+}
+
+function diaryOpen(){
+	var idx = document.getElementById("idx").value;	
+	window.open("../mypage/openDiaryView?idx="+idx, "알림장", 
 	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
 }
 </script>

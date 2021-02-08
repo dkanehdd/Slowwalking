@@ -9,8 +9,23 @@ public class InterviewDTO {
 	private String sitter_agree;
 	private int request_idx;
 	
+	///인터뷰을 신청한 부모회원과 시터회원의 이름을 알아오기 위한 맴버변수
+	private String parents_name;
+	private String sitter_name;
 	
 	
+	public String getParents_name() {
+		return parents_name;
+	}
+	public void setParents_name(String parents_name) {
+		this.parents_name = parents_name;
+	}
+	public String getSitter_name() {
+		return sitter_name;
+	}
+	public void setSitter_name(String sitter_name) {
+		this.sitter_name = sitter_name;
+	}
 	public int getRequest_idx() {
 		return request_idx;
 	}

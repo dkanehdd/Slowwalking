@@ -2,7 +2,8 @@ package mutiBoard;
 
 public class DiaryDTO {
 	
-	private java.sql.Date regidate;
+	private int its_idx;//다이어리의 일련번호
+	private String regidate;
 	private String send_id;
 	private String rece_id;
 	private String content;
@@ -12,7 +13,14 @@ public class DiaryDTO {
 	
 	
 	
-	public java.sql.Date getRegidate() {
+	
+	public int getIts_idx() {
+		return its_idx;
+	}
+	public void setIts_idx(int its_idx) {
+		this.its_idx = its_idx;
+	}
+	public String getRegidate() {
 		return regidate;
 	}
 	public void setRegidate(java.sql.Date regidate) {

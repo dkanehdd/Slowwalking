@@ -45,16 +45,20 @@ public class AdvertisementController {
 		
 		String search = parameterDTO.getSearch();
 		System.out.println("search : " + search);
+		System.out.println("parameterdto.request_time : " + parameterDTO.getRequest_time());
 		
 		if("search".equals(search)) {
+			
+			String age = parameterDTO.getAge();
+			
+			if(age.equals("상관없음")) {
+				parameterDTO.setAge("");
+			}
 			
 			if("".equals(parameterDTO.getRequest_time())) {
 				System.out.println("request_time 파라미터 null인가요? : " + parameterDTO.getRequest_time());
 				lists = sqlSession.getMapper(RequestBoardImpl.class).noTimeRequestSearch(parameterDTO);
 			}else {
-				
-				
-				
 				System.out.println("request_time 파라미터 null이 아닌가요?: " + parameterDTO.getRequest_time());
 				lists = sqlSession.getMapper(RequestBoardImpl.class).requestSearch(parameterDTO);
 			}
@@ -158,16 +162,17 @@ public class AdvertisementController {
 		String time = request_time.replaceAll("[^0-9]", "");
 		String date = null;
 		
-		date += request_time.replaceAll("0", "");
-		date += request_time.replaceAll("1", "");
-		date += request_time.replaceAll("2", "");
-		date += request_time.replaceAll("3", "");
-		date += request_time.replaceAll("4", "");
-		date += request_time.replaceAll("5", "");
-		date += request_time.replaceAll("6", "");
-		date += request_time.replaceAll("7", "");
-		date += request_time.replaceAll("8", "");
-		date += request_time.replaceAll("9", "");
+		date = request_time.replaceAll("0", "");
+		date = date.replaceAll("1", "");
+		date = date.replaceAll("2", "");
+		date = date.replaceAll("3", "");
+		date = date.replaceAll("4", "");
+		date = date.replaceAll("5", "");
+		date = date.replaceAll("6", "");
+		date = date.replaceAll("7", "");
+		date = date.replaceAll("8", "");
+		date = date.replaceAll("9", "");
+		date = date.replaceAll(":", "");
 		
 		System.out.println("숫자가 없어진 date : " + date);
 		
@@ -181,8 +186,10 @@ public class AdvertisementController {
 		}
 		System.out.println("재조합된 시간 형태 :" + time);
 	
+		System.out.println("requestBoarddto.getRequest_date() : " + requestBoarddto.getRequest_date());
+		
 		//,로 요일을 배열에 저장함
-		String[] requestTimeArray = request_time.split(",");
+		String[] requestTimeArray = requestBoarddto.getRequest_date().split(",");
 		
 		//model로 보낼 arrayList
 		ArrayList<String> timeArray = new ArrayList<String>();
@@ -310,6 +317,40 @@ public class AdvertisementController {
 			dto.setRegion(req.getParameter("region"));
 			System.out.println("지역 : " + dto.getRegion());
 			dto.setRequest_time(req.getParameter("request_time"));
+			
+			//시간을 알기 위해 숫자만 추출
+			String time = req.getParameter("request_time").replaceAll("[^0-9]", "");
+			String date = null;
+			
+			date = req.getParameter("request_time").replaceAll("0", "");
+			date = date.replaceAll("1", "");
+			date = date.replaceAll("2", "");
+			date = date.replaceAll("3", "");
+			date = date.replaceAll("4", "");
+			date = date.replaceAll("5", "");
+			date = date.replaceAll("6", "");
+			date = date.replaceAll("7", "");
+			date = date.replaceAll("8", "");
+			date = date.replaceAll("9", "");
+			date = date.replaceAll(":", "");
+			
+			System.out.println("숫자가 없어진 date : " + date);
+			
+			//시간 형태로 재배치
+			if(time.equals("")) {
+				System.out.println("조합되기 전  time이 null일때 : " + time);
+				time = "협의가능";
+			}else {
+				System.out.println("조합되기 전  time이 null아닐때 : " + time);		
+				time = time.substring(0,2) + ":" + time.substring(2,4) + " ~ " + time.substring(4,6) + ":" + time.substring(6,8);
+			}
+			System.out.println("재조합된 시간 형태 :" + time);
+		
+			dto.setRequest_date(date);
+			dto.setRequest_time(time);
+			
+			
+			
 			dto.setDisability_grade(req.getParameter("disability_grade"));
 			dto.setWarning(req.getParameter("warning"));
 			String age = req.getParameter("age");
@@ -452,6 +493,40 @@ public class AdvertisementController {
 			regular_short = " " + regular_short;
 			String start_work = req.getParameter("start_work");
 			String content = req.getParameter("content");
+			
+			
+			//시간을 알기 위해 숫자만 추출
+			String time = request_time.replaceAll("[^0-9]", "");
+			String date = null;
+			
+			date = request_time.replaceAll("0", "");
+			date = date.replaceAll("1", "");
+			date = date.replaceAll("2", "");
+			date = date.replaceAll("3", "");
+			date = date.replaceAll("4", "");
+			date = date.replaceAll("5", "");
+			date = date.replaceAll("6", "");
+			date = date.replaceAll("7", "");
+			date = date.replaceAll("8", "");
+			date = date.replaceAll("9", "");
+			date = date.replaceAll(":", "");
+			
+			System.out.println("숫자가 없어진 date : " + date);
+			
+			//시간 형태로 재배치
+			if(time.equals("")) {
+				System.out.println("조합되기 전  time이 null일때 : " + time);
+				time = "협의가능";
+			}else {
+				System.out.println("조합되기 전  time이 null아닐때 : " + time);		
+				time = time.substring(0,2) + ":" + time.substring(2,4) + " ~ " + time.substring(4,6) + ":" + time.substring(6,8);
+			}
+			System.out.println("재조합된 시간 형태 :" + time);
+		
+		
+			
+			
+			
 
 			if (advertise == null) {
 				advertise = "off";
@@ -477,8 +552,8 @@ public class AdvertisementController {
 				// 서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다.
 				if ("".equals(originalName)) {
 					int result = sqlSession.getMapper(RequestBoardImpl.class).insertRequestBoard(id, title, children_name,
-							advertise, age, pay, region, request_time, disability_grade, warning, regular_short, start_work,
-							content, "");
+							advertise, age, pay, region, time, disability_grade, warning, regular_short, start_work,
+							content, "", date);
 					
 					if (result == 1) {
 						System.out.println("레코드가 1행 입력되었습니다.");
@@ -518,8 +593,8 @@ public class AdvertisementController {
 //				System.out.println("파라미터로 넘어온 content : " + content);
 
 				int result = sqlSession.getMapper(RequestBoardImpl.class).insertRequestBoard(id, title, children_name,
-						advertise, age, pay, region, request_time, disability_grade, warning, regular_short, start_work,
-						content, saveFileName);
+						advertise, age, pay, region, time, disability_grade, warning, regular_short, start_work,
+						content, saveFileName, date);
 
 				if (result == 1) {
 					System.out.println("레코드가 1행 입력되었습니다.");
@@ -543,7 +618,8 @@ public class AdvertisementController {
 	// 구인의뢰서 삭제 요청명(메소드)
 	@RequestMapping("/advertisement/requestBoardAction_delete")
 	public ModelAndView ReqeustBoardDeleteAction(HttpServletRequest req) {
-
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/images");
 		String idx = req.getParameter("idx");
 		System.out.println("넘어온 idx" + idx);
 		String list_flag = req.getParameter("list_flag");
@@ -552,6 +628,15 @@ public class AdvertisementController {
 		ModelAndView mv = new ModelAndView();
 
 		int result = sqlSession.getMapper(RequestBoardImpl.class).deleteRequestBoard(idx);
+		String image = sqlSession.getMapper(RequestBoardImpl.class).getImage(Integer.parseInt(idx));
+		
+		System.out.println("찾은 이미지 이름 : " + image);
+		if(image!=null) {
+			File f = new File(path+ File.separator+ image);
+			if(f.exists()) {
+				f.delete();
+			}
+		}
 
 		if (list_flag.equals("mylist")) {
 			mv.setViewName("redirect:requestBoard_Mylist");

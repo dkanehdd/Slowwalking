@@ -24,7 +24,7 @@ public interface RequestBoardImpl {
 	public int insertRequestBoard(String id, String title, String children_name,
 			String advertise, String age, String pay, String region, String request_time,
 			String disability_grade, String warning, String regular_short, String start_work,
-			String content, String saveFileName);
+			String content, String saveFileName, String date);
 	
 	//의뢰서 작세
 	public int deleteRequestBoard(String idx);
@@ -41,7 +41,7 @@ public interface RequestBoardImpl {
 	//요일 포함 검색해주는 메소드 
 	public ArrayList<RequestBoardDTO> requestSearch(ParameterDTO dto);
 	
-	//요일 없이 검색해주는 메소드
+	//요일 없이 검색해주는 메소드 
 	public ArrayList<RequestBoardDTO> noTimeRequestSearch(ParameterDTO dto);
 	
 }

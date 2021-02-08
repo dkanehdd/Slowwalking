@@ -27,7 +27,13 @@
 			VALUES (seq_interview_idx.nextval, #{1}, #{2}, #{3}, 'F', 'F', #{0})
 	</insert>
 	<select id="interList" resultType="advertisement.InterviewDTO">
-		SELECT * FROM interview WHERE idx=#{0}
+		select M.name as parents_name, MM.name as sitter_name 
+			from interview I
+    		join member M
+        		on I.parents_id = M.id
+    		join member MM
+        		on I.sitter_id = MM.id 
+        WHERE idx=#{0}
 	</select>
 	<select id="sitInterList" resultType="advertisement.InterviewDTO">
 		SELECT *FROM interview WHERE sitter_id=#{0} ORDER BY idx DESC
@@ -46,10 +52,10 @@
 		UPDATE interview SET parents_agree='T' WHERE idx=#{idx}
 	</update>
 	<!-- 알림장 -->
- 	<insert id="sendDiary"> -->
- 		INSERT INTO diary (regidate, send_id, rece_id, content, flag, idx) -->
- 			VALUES (sysdate, #{1}, #{2}, #{3}, 'diary', #{0}) -->
-	</insert>
+    <insert id="sendDiary">
+       INSERT INTO diary (its_idx, regidate, send_id, rece_id, content, flag, idx)
+          VALUES (seq_diary_idx.nextval, sysdate, #{1}, #{2}, #{3}, 'diary', #{0})
+   </insert>
 	<select id="sitDiary" resultType="mutiBoard.DiaryDTO">
 		SELECT * FROM diary WHERE send_id=#{0}
 	</select>

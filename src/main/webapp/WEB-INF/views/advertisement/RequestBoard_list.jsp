@@ -46,10 +46,11 @@
 		<button type="button" class="workday_off" value="일">일</button>
 		<br/>
 		<input type="hid den" id="workday_name" name="request_time">
+		<input type="hid den" id="consultation" name="consultation" value="협의 가능">
 		<br/><p style="color: #FFC079">※단기를 원하시는지 정기적으로 일하시기를 원하시는지 알려주세요.</p>
 		<label class="box-radio-input"> <input
 			type="radio" id="short"
-			name="regular_short" value="short" checked><span>단기</span>
+			name="regular_short" value="short" ><span>단기</span>
 		</label>
 		<label class="box-radio-input"> <input
 			type="radio" id="regular"
@@ -57,7 +58,7 @@
 		</label>
 		<label class="box-radio-input"> <input
 			type="radio" id="regular"
-			name="regular_short" value=" "><span>상관없음</span>
+			name="regular_short" value=" " checked><span>상관없음</span>
 		</label>
 		<br/>
 		<br/>
@@ -310,7 +311,7 @@ function workday_make() {
 			i++;
 		}
 	});
-	workday_tyle += ",~,협의 가능"
+	workday_tyle += ",~"
 	if (i == 0) {
 		$("#workday_name").val("");
 	} else {

@@ -19,8 +19,6 @@ public class RequestBoardDTO {
 	private String request_date;
 	
 	
-	
-	
 	public String getRequest_date() {
 		return request_date;
 	}

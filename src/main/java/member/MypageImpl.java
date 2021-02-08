@@ -27,6 +27,7 @@ public interface MypageImpl {
 	public int sendDiary(int idx, String send_id, String rece_id, String content);
 	public ArrayList<DiaryDTO> sitDiary(String id);
 	public ArrayList<DiaryDTO> parDiary(String id);
+
 	//후기
 	public int writeComment(int idx, String send_id, String rece_id, String content);
 	public ArrayList<DiaryDTO> receivedComment(String id, int start, int end);
@@ -40,4 +41,5 @@ public interface MypageImpl {
 	public int getStarrate(String id);
 	//이용권
 	public ArrayList<OrderDTO> purchaseList(String id);
+
 }
