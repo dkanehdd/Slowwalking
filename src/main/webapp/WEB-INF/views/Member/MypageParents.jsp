@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <%@ include file="../links/linkOnly2dot.jsp"%>
-<title>느린걸음-마이페이지</title>
+<title>느린걸음</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
 <script type="text/javascript">
@@ -26,6 +26,12 @@ $(function(){
 	$("#writerequest").on("click",function(){
 		$("#innerPage").load("../advertisement/requestBoard_write");
 	});
+	$("#comment").on("click",function(){
+		$("#innerPage").load("../mypage/myComment");
+	});
+	$("#membership").on("click",function(){
+		$("#innerPage").load("../mypage/membership");
+	});
 });
 </script>
 <style>
@@ -39,7 +45,7 @@ $(function(){
 <%@ include file="../include/top.jsp"%>
  <div class="container-fluid">
     <div class="row mt-5 ml-5">
-      <div class="col-2" id="menu">
+      <div class="col-2">
 		<div class="box">
 			<c:choose>
 				<c:when test="${not empty dto.image_path }">
@@ -58,22 +64,24 @@ $(function(){
 		</div>
 		<ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2" id="profile">
-          	프로필 수정
+          	회원정보수정
        		</li>
         </ul>
         <ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2" id="writerequest">의뢰서 작성</li>
          	<li class="list-group-item" id="myrequest">내 의뢰서 보기</li>
           	<li class="list-group-item" id="interview">내 구인현황</li>
-          	<li class="list-group-item" id="2">후기관리</li>
+          	<li class="list-group-item" id="comment">후기관리</li>
         </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2">이용권</li>
-          	<li class="list-group-item" id="2">포인트</li>
+         	<li class="list-group-item mt-2" id="membership">이용권</li>
+          	<li class="list-group-item" >포인트</li>
         </ul>
+        <br/><br/><br/><br/>
       </div>
+      
       <div class="col-10">
-      <div id="innerPage">
+      <div id="innerPage" class="ml-3 mt-3">
         <h3>마이페이지</h3>
 
           <div class="container">
@@ -86,5 +94,6 @@ $(function(){
       </div>
     </div>
 </div>
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

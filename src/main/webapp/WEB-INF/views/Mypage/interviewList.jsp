@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>느린걸음</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -17,11 +17,19 @@
 <body>
 <div class="ml-2">
 	<c:choose>
-	<c:when test="${flag eq 'sitter' }"><h3>내 구직현황</h3></c:when>
-	<c:otherwise><h3>내 구인현황</h3></c:otherwise>
+		<c:when test="${flag eq 'sitter' }">
+			<div class="ml-3 mt-3">
+			<h3>내 구직현황</h3>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="ml-3 mt-3">
+			<h3>내 구인현황</h3>
+			</div>
+		</c:otherwise>
 	</c:choose>
 </div>
-<div class="container">
+<div class="container mt-5">
 	<c:choose>
 		<c:when test="${empty lists}">
 			<div>등록된 인터뷰가 없습니다.</div>
@@ -49,7 +57,7 @@
 							<input type="hid-den" id="idx" value="${row.idx}" />
 							<c:choose>
 								<c:when test="${flag eq 'sitter' }"><input type="hid-den" id="agree" value="${row.sitter_agree}" /></c:when>
-								<c:otherwise><input type="hid-den" id="agree" value="${row.paretns_agree}" /></c:otherwise>
+								<c:otherwise><input type="hid-den" id="agree" value="${row.parents_agree}" /></c:otherwise>
 							</c:choose>
 						</td>
 						<td><button type="button" class="btn btn-warning" onclick="moveView();">자세히</button></td>
@@ -66,36 +74,30 @@
 								<td><button type="button" class="btn btn-dark" id="refuse">취소</button></td>
 							</c:when>
 							<c:otherwise>
-								<c:choose>
-									<c:when test="${empty check }">
-										<td><button type="button" class="btn btn-info" id="diary" onClick="javascript:openCalendar();">알림장</button></td>
-										<td><button type="button" class="btn btn-secondary" >진행</button></td>
-									</c:when>
-									<c:otherwise>
-										<td><button type="button" class="btn btn-basic" >알림장</button></td>
-										<td><button type="button" class="btn btn-basic">완료</button></td>
-									</c:otherwise>
-								</c:choose>
+								<td><button type="button" class="btn btn-info" id="diary" onClick="javascript:openCalendar();">알림장</button></td>
+								<td><button type="button" class="btn btn-success" onClick="javacript:openComment();">후기</button></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
 				</c:forEach>
-				</tbody>
-					
+				</tbody>	
 			</table>
 		</c:otherwise>
 	</c:choose>
-
 </div>
 </body>
 <script type="text/javascript">
+var idx = document.getElementById("idx").value;	
 function moveView(){
 	var idx = document.getElementById("request_idx").value;	
 	location.href="../advertisement/requestBoard_view?idx="+idx;
 }
 function openCalendar(){
-	var idx = document.getElementById("idx").value;	
 	location.href="../mypage/openCalendar?idx="+idx;
+}
+function openComment(){
+	window.open("../mypage/openComment?idx="+idx, "후기", 
+	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no");
 }
 $(function(){
 	$('#accept').on("click", function(){

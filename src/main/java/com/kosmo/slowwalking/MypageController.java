@@ -33,6 +33,8 @@ import member.MemberImpl;
 import member.MypageImpl;
 import mutiBoard.CalendarDTO;
 import mutiBoard.DiaryDTO;
+import mutiBoard.OrderDTO;
+import util.PagingUtil;
 
 @Controller
 public class MypageController {
@@ -293,6 +295,8 @@ public class MypageController {
 		
 		return map;
 	}
+	
+	//다이어리 팝업창 열기
 	@RequestMapping("/mypage/openDiary")
 	public String openDiary(HttpServletRequest req, Model model) {
 		
@@ -568,7 +572,7 @@ public class MypageController {
 		return "Mypage/diaryCalendar";
 	}
 	
-	//알림장 보내기
+	//알림장 작성하기
 	@RequestMapping("/mypage/sendDiary")
 	@ResponseBody
 	public Map<String, Object> sendDiary(HttpServletRequest req, HttpSession session, Model model) {
@@ -588,7 +592,7 @@ public class MypageController {
 		System.out.println("content:"+content);
 		
 
-		int result = sqlSession.getMapper(MypageImpl.class).sendDiary(idx, parents_id, sitter_id, content);
+		int result = sqlSession.getMapper(MypageImpl.class).sendDiary(idx, sitter_id, parents_id, content);
 		map.put("message", "발송 완료되었습니다.");
 	
 		System.out.println("result:"+result);
@@ -599,4 +603,213 @@ public class MypageController {
 		
 	}
 	
+	//후기 작성 팝업창 열기
+	@RequestMapping("/mypage/openComment")
+	public String commentList(HttpServletRequest req, Model model) {
+		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		System.out.println("idx:"+idx);
+		
+		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
+		model.addAttribute("dto", dto);
+		
+		return "Mypage/commentWrite";
+	}
+	
+	//후기 작성하기
+	@RequestMapping("/mypage/writeComment")
+	@ResponseBody
+	public Map<String, Object> writeComment(HttpServletRequest req, HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		System.out.println("sendDiary");
+		
+		String flag = (String)session.getAttribute("flag");
+		String parents_id = req.getParameter("parents_id");
+		String sitter_id = req.getParameter("sitter_id");
+		String content = req.getParameter("content");
+		int newrate = Integer.parseInt(req.getParameter("newrate"));
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		System.out.println("parents_id:"+parents_id);
+		System.out.println("sitter_id:"+sitter_id);
+		System.out.println("content:"+content);
+		System.out.println("newrate:"+newrate);
+		
+		
+		if(flag.equals("sitter")) {
+			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(parents_id);
+			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, sitter_id, parents_id, content);
+			System.out.println("원래별점:"+starrate);
+			
+			if(starrate==0) {
+				starrate = newrate;
+			}
+			else {
+				starrate = (newrate + starrate) / 2;
+			}
+			System.out.println("최종별점:"+starrate);
+			
+			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(parents_id, starrate);
+			
+			
+		}
+		else {
+			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(sitter_id);
+			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, parents_id, sitter_id, content);
+			System.out.println("원래별점:"+starrate);
+			
+			if(starrate==0) {
+				starrate = starrate;
+			}
+			else {
+				starrate = (newrate + starrate) / 2;
+			}
+			System.out.println("최종별점:"+starrate);
+			
+			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(sitter_id, starrate);
+
+		}
+
+		return map;	
+	}
+	
+	//후기관리 페이지 이동
+	@RequestMapping("/mypage/myComment")
+	public String myComment(HttpSession session, HttpServletRequest req, Model model) {
+		
+		String id = (String)session.getAttribute("user_id");
+		
+		MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(id);
+		
+		model.addAttribute("dto", dto);
+		
+		return "Mypage/comment";
+	}
+	//받은 후기
+	@RequestMapping("/mypage/commentList")
+	public String commentList(HttpSession session, HttpServletRequest req, Model model) {
+		
+		String id = (String)session.getAttribute("user_id");
+		String mode = req.getParameter("mode");
+		
+		System.out.println("mode: "+mode);
+		
+		MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(id);
+		
+		//내 후기 총 개수 구하기
+		int totalCount = sqlSession.getMapper(MypageImpl.class).receCount(id);
+		System.out.println("totalCount="+totalCount);
+		
+		if(mode.equals("send")) {
+			int sendCount = sqlSession.getMapper(MypageImpl.class).sendCount(id);
+			totalCount = sendCount;
+		}
+
+		//한 페이지에 나타낼 레코드 수
+		int pageSize = 4;
+		//한 페이지에 나타낼 이동 가능한 페이지 개수
+		int blockPage = 2;
+		//전체페이지수 계산
+		int totalPage =
+				(int)Math.ceil((double)totalCount/pageSize);
+		//현재페이지 변호 가져오기
+		int nowPage = req.getParameter("nowPage")==null ? 1 :
+			Integer.parseInt(req.getParameter("nowPage"));
+		//select할 게시물의 구간을 계산
+		int start = (nowPage-1) * pageSize + 1;
+		int end = nowPage * pageSize;
+		
+		//리스트 페이지에 출력할 게시물 가져오기
+
+		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).receivedComment(id, start, end);
+
+		//페이지 번호 처리
+		String pagingImg = 
+				PagingUtil.pagingImg(totalCount, pageSize, blockPage,
+						nowPage, req.getContextPath()+"/mypage/commentList?mode=receive&");
+		
+		if(mode.equals("send")) {
+			ArrayList<DiaryDTO> sendLists = sqlSession.getMapper(MypageImpl.class).sendedComment(id, start, end);
+			String paging = 
+					PagingUtil.pagingImg(totalCount, pageSize, blockPage,
+							nowPage, req.getContextPath()+"/mypage/commentList?mode=send&");
+			lists = sendLists;
+			pagingImg = paging;
+		}
+		
+		//게시물의 줄바꿈 처리
+		for(DiaryDTO diary : lists) {
+			String temp = diary.getContent().replace("\r\n", "<br/>");
+			diary.setContent(temp);
+		}
+		
+
+		model.addAttribute("pagingImg", pagingImg);
+		model.addAttribute("lists", lists);
+		model.addAttribute("count", totalCount);
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", mode);
+		
+				
+		return "Mypage/commentList";
+	}
+	
+	@RequestMapping("/mypage/editComment")
+	public String editComment(HttpServletRequest req, Model model) {
+		
+		DiaryDTO dto = sqlSession.getMapper(MypageImpl.class).edit(Integer.parseInt(req.getParameter("idx")));
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", req.getParameter("mode"));
+		
+		return "Mypage/commentEdit";
+	}
+	
+	@RequestMapping("/mypage/editAction")
+	public String editAction(HttpServletRequest req, Model model) {
+		
+		int result = sqlSession.getMapper(MypageImpl.class).editAction(Integer.parseInt(req.getParameter("idx")), 
+				req.getParameter("content"));
+
+		if(result==1) {	
+			model.addAttribute("message", "수정이 완료되었습니다.");
+		}
+		else {
+			model.addAttribute("message", "다시 시도해 주세요.");
+		}
+		
+		return "forward:commentList";
+	}
+	
+	@RequestMapping("mypage/delComment")
+	public String deleteAction(HttpServletRequest req, Model model) {
+		
+		int result = sqlSession.getMapper(MypageImpl.class).delAction(Integer.parseInt(req.getParameter("idx")));
+		if(result==1) {	
+			model.addAttribute("message", "삭제가 완료되었습니다.");
+		}
+		else {
+			model.addAttribute("message", "다시 시도해 주세요.");
+		}
+		return "forward:commentList";
+	}
+	
+	@RequestMapping("mypage/membership")
+	public String membership(HttpSession session, Model model, HttpServletRequest req) {
+		
+		String id = (String) session.getAttribute("user_id");
+		
+		MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(id);
+		ArrayList<OrderDTO> lists = sqlSession.getMapper(MypageImpl.class).purchaseList(id);
+		
+		System.out.println("lists:"+lists);
+				
+		model.addAttribute("dto", dto);
+		model.addAttribute("lists", lists);
+		
+		return "Mypage/membership";
+	}
 }

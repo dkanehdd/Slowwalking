@@ -23,10 +23,16 @@ $(function(){
 	$("#calendar").on("click",function(){
 		location.href="../mypage/diaryCalendar";
 	});
+	$("#comment").on("click",function(){
+		$("#innerPage").load("../mypage/myComment");
+	});
+	$("#membership").on("click",function(){
+		$("#innerPage").load("../mypage/membership");
+	});
 });
 </script>
 <style>
-.box { position:relate;}
+.box { position:relate; }
 .box img {width:200px; height:200px;}
 .in { position:absolute; top:10px; left:175px;}
 .in img {width:30px;}
@@ -36,7 +42,7 @@ $(function(){
 <%@ include file="../include/top.jsp"%>
  <div class="container-fluid">
     <div class="row mt-5 ml-5">
-      <div class="col-2" id="menu">
+      <div class="col-2">
 		<div class="box">
 			<c:choose>
 				<c:when test="${not empty dto.image_path }">
@@ -55,7 +61,7 @@ $(function(){
 		</div>
 		<ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2" id="profile">
-          	프로필 수정
+          	회원정보수정
        		</li>
         </ul>
         <ul class="list-group list-group-flush">
@@ -64,18 +70,16 @@ $(function(){
         </ul>
         <ul class="list-group list-group-flush">
           	<li class="list-group-item" id="interview">내 구직현황</li>
-<%--           	<c:if test="${count > 0 }"> --%>
-          		<li class="list-group-item" id="calendar">알림장</li>
-<%--           	</c:if> --%>
-          	<li class="list-group-item" id="2">후기관리</li>
+          	<li class="list-group-item" id="comment">후기관리</li>
         </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2">이용권</li>
-          	<li class="list-group-item" id="2">포인트</li>
+         	<li class="list-group-item mt-2" id="membership">이용권</li>
+          	<li class="list-group-item">포인트</li>
         </ul>
+        <br/><br/><br/><br/>
       </div>
       <div class="col-10">
-      <div id="innerPage">
+      <div id="innerPage" class="ml-3 mt-3">
         <h3>마이페이지</h3>
 
           <div class="container">

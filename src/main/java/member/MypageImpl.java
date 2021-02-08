@@ -5,6 +5,7 @@ import java.util.Map;
 
 import advertisement.InterviewDTO;
 import mutiBoard.DiaryDTO;
+import mutiBoard.OrderDTO;
 
 public interface MypageImpl {
 	
@@ -16,14 +17,27 @@ public interface MypageImpl {
 	public ArrayList<InterviewDTO> sitInterList(String id);
 	public ArrayList<InterviewDTO> parInterList(String id);
 	//인터뷰 요청 목록(내 구인/구직현황)
-	public int addInterList(int idx, String parents_id, String sitter_id, String request_time );
+	public int addInterList(int idx, String my_id, String your_id, String request_time );
 	public int delInterList(int idx);
 	public InterviewDTO interList(int idx);
 	//수락
 	public int sitAgree(int idx);
 	public int parAgree(int idx);
 	//알림장
-	public int sendDiary(int idx, String parents_id, String sitter_id, String content);
+	public int sendDiary(int idx, String send_id, String rece_id, String content);
 	public ArrayList<DiaryDTO> sitDiary(String id);
 	public ArrayList<DiaryDTO> parDiary(String id);
+	//후기
+	public int writeComment(int idx, String send_id, String rece_id, String content);
+	public ArrayList<DiaryDTO> receivedComment(String id, int start, int end);
+	public ArrayList<DiaryDTO> sendedComment(String id, int start, int end);
+	public DiaryDTO edit(int idx);
+	public int editAction(int idx, String content);
+	public int delAction(int idx);
+	public int receCount(String id);
+	public int sendCount(String id);
+	public int setStarrate(String id, int rate);
+	public int getStarrate(String id);
+	//이용권
+	public ArrayList<OrderDTO> purchaseList(String id);
 }
