@@ -82,8 +82,8 @@
 					</tr>
 					<tr>
 						<th style="vertical-align:middle;">이메일</th>
-						<td><input type="text" name="email1" id="email1" value=""
-							id="eamil1" /> @ <input type="text" name="email2" id="email2"
+						<td><input type="email" name="email1" id="email1" value=""/> @ 
+						<input type="email" name="email2" id="email2"
 							value="" style="width:150px;"/> <select name="last_email_check2"
 							onChange="emailSelect(this);" 
 							style="width:150px; margin-left:5px; display:inline-block;" 
@@ -95,8 +95,7 @@
 								<option value="hotmail.com">hotmail.com</option>
 								<option value="">직접입력</option>
 						</select>
-						<div style="display: none;" id="emailCheck">
-							</div>
+						<button type="button" id='emailChk' class="btn btn-primary" style="margin-left:5px; vertical-align: top;">중복확인</button>
 						</td>
 					</tr>
 					<input type="hidden" name="email" id="email" value="" />

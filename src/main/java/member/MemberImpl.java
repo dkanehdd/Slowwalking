@@ -14,9 +14,8 @@ public interface MemberImpl {
 	
 	public int checkEmail(String email); //hjkosmo 추가
 	
-	public String findId(@Param("name")String name, @Param("phone")String phone); // 유저 ID 찾기 hjkosmo 추가
-	public String findPw(@Param("id")String id, @Param("phone")String phone); // 유저 PW 찾기 hjkosmo 추가
-
+	public String idFind(String phone); //hjkosmo 추가
+	
 	public int insertMember(MemberDTO memberDTO);
 
 	public String flagValidate(String id);

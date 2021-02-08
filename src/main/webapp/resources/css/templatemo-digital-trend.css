@@ -725,7 +725,8 @@ ol, ul {
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input[type="text"], .form input[type="password"]{
+.form input[type="text"], .form input[type="password"]
+, .joinF input[type="email"]{
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -939,7 +940,9 @@ ol, ul {
 	font-size:1.1em;
 }
 /***/
-.joinF input[type="text"], .joinF input[type="password"]{
+.joinF input[type="text"], .joinF input[type="password"]
+, .joinF input[type="email"]{
+	
 	width: 300px;
 	margin:0;
 	padding:9px;

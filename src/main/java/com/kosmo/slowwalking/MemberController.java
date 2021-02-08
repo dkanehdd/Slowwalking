@@ -2,16 +2,17 @@ package com.kosmo.slowwalking;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import findMember.MemberFindService;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.ParentsMemberDTO;
@@ -184,7 +184,8 @@ public class MemberController {
 		if (check == 1) {
 			map.put("check", check);
 			map.put("message", "중복된 아이디가 있습니다.");
-		} else {
+		}
+		else {
 			map.put("check", check);
 			map.put("message", "사용 가능한 아이디 입니다.");
 		}
@@ -194,7 +195,7 @@ public class MemberController {
 	// 이메일 중복확인(hjkosmo 추가)
 	@RequestMapping("/member/checkEmail")
 	@ResponseBody
-	public Map<String, Object> checkEmail(HttpServletRequest req) {
+	public Map<String, Object> CheckEmail(HttpServletRequest req) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -203,13 +204,42 @@ public class MemberController {
 		if (check == 1) {
 			map.put("check", check);
 			map.put("message", "중복된 이메일이 있습니다.");
-		} else {
+		}
+		else {
 			map.put("check", check);
-			map.put("message", "사용가능한 이메일 입니다.");
+			map.put("message", "사용 가능한 이메일 입니다.");
 		}
 		return map;
 	}
 
+	@RequestMapping("/member/findid")
+	public String FindIdPage() {
+		
+		return "member/findid";
+	}
+	
+	//아이디 찾기
+	@RequestMapping(value = "/member/findIdAction", method=RequestMethod.POST)
+	public String IdFind(HttpServletResponse response, 
+			@RequestParam("phone") String phone, Model md) throws Exception{
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String id = sqlSession.getMapper(MemberImpl.class).idFind(phone);
+		
+		if (id == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} 
+		else {
+			return id;
+		}
+	}
+	
 	// 휴대폰 인증
 	@RequestMapping("/check/sendSMS")
 	@ResponseBody
@@ -405,31 +435,4 @@ public class MemberController {
 		}
 		return "redirect:../main/main";
 	}
-	
-	@Autowired
-	private MemberFindService findService;
-
-	//아이디 찾기
-	@RequestMapping(value = "/member/FindMemberInfo", method = RequestMethod.POST)
-	@ResponseBody
-	public String userIdSearch(@RequestParam("iptName1") String name, 
-			@RequestParam("iptPhone1") String phone) {
-		
-		String result = findService.GetFindId(name, phone);
-
-		return "/member/FindMemberInfo";
-	}	
-	
-	//비밀번호 찾기
-	@RequestMapping(value = "/member/FindMemberInfo", method = RequestMethod.POST)
-	@ResponseBody
-	public String userPwSearch(@RequestParam("iptId2") String id, 
-			@RequestParam("iptPhone2") String phone) {
-		
-		String result = findService.GetFindId(id, phone);
-		
-		return "/member/FindMemberInfo";
-	}
-
-
 }

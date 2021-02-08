@@ -27,11 +27,11 @@
 		WHERE name=#{name} and phone=#{phone}
 	</select>
 	
-	<!-- 비밀번호 찾기 hjkosmo 추가 -->
+	<!-- 비밀번호 찾기 hjkosmo 추가 
 	<select id="findPw" resultType="String">
 		SELECT IFNULL(pw, 0) FROM member 
 		WHERE id=#{id} and phone=#{phone}
-	</select>
+	</select>-->
 	
 	<insert id="insertMember">
 		INSERT INTO member

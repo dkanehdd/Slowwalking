@@ -34,11 +34,11 @@
 							<input type="checkbox" id="idSave" name="idSave" class="clear form-check-input"/>
 							<label for="idSave" class="form-check-label">아이디 저장</label>
 						</div>
-					<ul>
-						<li><a href="#" id="idFind" name="idFind">아이디 찾기</a></li>
-						<li><a href="#" id="pwFind" name="pwFind">비밀번호 찾기</a></li>
-						<li><a href="../member/join" id="signUp" class="non-af" name="signUp">회원가입</a></li> 
-					</ul>
+						<ul>
+							<li><a href="../member/findid" id="findId" name="findId">아이디 찾기</a></li>
+							<li><a href="#" id="findPw" name="findPw">비밀번호 찾기</a></li>
+							<li class="non-af"><a href="../member/join" id="signUp" name="signUp">회원가입</a></li> 
+						</ul>
 					</div>
 				</div>
 			</form:form>

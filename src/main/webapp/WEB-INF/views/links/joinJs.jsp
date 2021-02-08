@@ -39,17 +39,17 @@ $(function(){
 			},
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
-				if(d.ckeck==1){
+				if(d.ckeck==1){//중복일 때
 					$('#idCheck').html(d.message);
 					$('#idCheck').css('display','inline');
 					$('#idCheck').css('color','#ff0000');
-					$("button[type='submit']").attr("disabled"); //submit 버튼 안눌리게 hjkosmo
+					$("button[type='submit']").attr("disabled","disabled"); //submit 버튼 안눌리게 hjkosmo
 					
 				}
-				else{
+				else{//사용가능
 					$('#idCheck').html(d.message);
 					$('#idCheck').css('display','inline');
-					$('#idCheck').css('color','#00ff00');
+					$('#idCheck').css('color','#00aa00');
 					$("button[type='submit']").removeAttr("disabled"); //submit 버튼 눌리게 hjkosmo
 					
 				}
@@ -60,8 +60,8 @@ $(function(){
 		});	
 	});
 	
-	//이메일 중복 체크 추가 hjkosmo -- 작동안됨..
-	$('#email').keyup(function() {
+	//이메일 중복 체크 추가 hjkosmo
+	$('#emailChk').click(function() {
 		$.ajax({
 			url : "./checkEmail", //요청할 경로
 			type : "get", //전송방식
@@ -72,15 +72,17 @@ $(function(){
 			},
 			dataType : "json", //콜백데이터의 형식
 			success : function(d) { //콜백메소드
-				if(d.ckeck==1){
-					$('#emailCheck').html(d.message)
-					$('#emailCheck').css('display','inline').css('color','#ff0000');
-					$("button[type='submit']").attr("disabled");
+				if(d.ckeck==1){ //중복일 때
+					alert(d.message)
+					//$("#email1").val("");					
+					//$("button[type='submit']").attr("disabled","disabled");
 				}
 				else{
-					$('#emailCheck').html(d.message);
-					$('#emailCheck').css('display','inline').css('color','#00ff00');
-					$("button[type='submit']").removeAttr("disabled");
+					alert(d.message);//중복 아닐 때
+					//$("#email1").attr("readonly",true);
+					//$("#email2").attr("readonly",true);
+					//$("#last_email_check2").attr("disabled","disabled");
+					//$("button[type='submit']").removeAttr("disabled");
 				}
 			},
 			error : function(e) {
@@ -88,6 +90,7 @@ $(function(){
 			}
 		});
 	});
+	
 	//한글만 입력 가능하도록 처리 하는 부분
     $("#name").keyup(function (event) {
 	regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
@@ -222,7 +225,6 @@ function checkIT() {
 	if(!d.email.value||!d.email2.value) { alert('이메일을 입력하세요'); d.email.focus();return false; }
 	//약관 검증
 	if(!d.chk1.checked||!d.chk2.checked){alert('약정 동의가 필요합니다');d.chkAll.focus(); return false;}
-	
 }
 function emailSelect(obj) {
 	var email1 = document.getElementById("email1");

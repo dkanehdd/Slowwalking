@@ -1,68 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../links/linkOnly2dot.jsp"%>    
+<%@ include file="../links/linkOnly2dot.jsp"%>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-	function search_check(num) {
-		if (num == '1') {
-			document.getElementById("searchP").style.display = "none";
-			document.getElementById("searchI").style.display = "";	
-		} else {
-			document.getElementById("searchI").style.display = "none";
-			document.getElementById("searchP").style.display = "";
-		}
-	}
-	
-	$(document).ready(function() {
-		
-		$('#searchBtn').click(function() {
-			$('#background_modal').show();
-		});
-		
-		$('.close').on('click', function() {
-			$('#background_modal').hide();
-		});
-		
-		$(window).on('click', function() {
-			if (event.target == $('#background_modal').get(0)) {
-	            $('#background_modal').hide();
-	         }
-		});
+//아이디검색 추가 hjkosmo
+$(function(){
+	$('#id').click(function() {
+		$.ajax({
+			url : "./checkId", //요청할 경로
+			type : "get", //전송방식
+			//post방식일때의 컨텐츠 타입
+			contentType : "text/html;charset:utf-8;",
+			data : { //서버로 전송할 파라미터(JSON타입)
+				phone : $('#phone').val()
+			},
+			dataType : "json", //콜백데이터의 형식
+			success : function(d) { //콜백메소드
+				if(d.ckeck==1){//중복일 때
+					alert(d.message)
+				}
+				else{//사용가능
+					alert(d.message)
+				}
+			},
+			error : function(e) {
+				alert("실패"+e);
+			}
+		});	
 	});
-	
-	var idV = "";
-	var pwV = "";
-	
-	var idSearch_click = function(){
-		$.ajax({
-			type:"POST",
-			url:"${pageContext.request.contextPath}/member/FindMemberInfo?iptName1="
-					+$('#iptName1').val()+"&iptName1="+$('#iptPhone1').val(),
-			success:function(data){
-				if(data == 0){
-					$('#id_value').text("회원 정보를 확인해주세요");	
-				} 
-				else {
-					$('#id_value').text(data);
-					idV = data;
-				}
-			}
-		});
-	}
-	
-	var pwSearch_click = function(){
-		$.ajax({
-			type:"POST",
-			url:"${pageContext.request.contextPath}/member/FindMemberInfo?iptId2="
-					+$('#iptId2').val()+"&iptId2="+$('#iptPhone2').val(),
-			success:function(data){
-				if(data == 0){
-					$('#pw_value').text("회원 정보를 확인해주세요");	
-				} 
-				else {
-					$('#pw_value').text(data);
-					pwV = data;
-				}
-			}
-		});
-	}
+}
 </script>
