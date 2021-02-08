@@ -38,6 +38,8 @@ import member.SitterMemberDTO;
 import mutiBoard.CalendarDTO;
 import mutiBoard.DiaryDTO;
 import mutiBoard.OrderDTO;
+import mutiBoard.ProductDTO;
+import mutiBoard.ProductImpl;
 import util.PagingUtil;
 
 @Controller
@@ -869,5 +871,18 @@ public class MypageController {
 		map.put("suc", suc);
 		
 		return map;
+	}
+	
+	@RequestMapping("/mypage/premium")
+	public String premium (Model model,Principal principal) {
+		String id= principal.getName();
+		
+		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).premiumList();
+		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
+		
+		
+		model.addAttribute("lists", lists);
+		model.addAttribute("dto", dto);
+		return "Mypage/premium";
 	}
 }

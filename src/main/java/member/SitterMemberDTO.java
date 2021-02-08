@@ -16,6 +16,7 @@ public class SitterMemberDTO {
 	private String permission;
 	private String advertise;
 	private String premium;
+	private String premiumdate;
 	private int career;
 	private String name;
 	private String image_path;
@@ -25,6 +26,13 @@ public class SitterMemberDTO {
 	private String phone;
 	
 	
+	
+	public String getPremiumdate() {
+		return premiumdate;
+	}
+	public void setPremiumdate(String premiumdate) {
+		this.premiumdate = premiumdate;
+	}
 	public String getGender() {
 		return gender;
 	}

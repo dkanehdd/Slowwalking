@@ -121,7 +121,8 @@ public class MemberController {
 		if (flag.equals("sitter")) {
 			System.out.println("시터회원 인증완료");
 			dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
-
+			SitterMemberDTO sdto = sqlSession.getMapper(SitterImpl.class).selectSitter(userId);
+			model.addAttribute("sdto", sdto);
 			System.out.println(dto);
 			model.addAttribute("dto", dto);
 
@@ -167,7 +168,8 @@ public class MemberController {
 			dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
 			System.out.println(dto);
 			model.addAttribute("dto", dto);
-
+			SitterMemberDTO sdto = sqlSession.getMapper(SitterImpl.class).selectSitter(user_id);
+			model.addAttribute("sdto", sdto);
 			mv.setViewName("Member/MypageSitter");
 		} else if (flag.equals("parents")) {
 			System.out.println("부모회원 인증완료");
