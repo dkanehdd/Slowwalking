@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member.MemberImpl">
+<!--  
+	Mapper에서 파라미터를 처리하는 두번재 방법으로 
+	전달되는 순서대로 index형태로 사용한다. 0부터 시작한다. 
+-->
+	<select id="list" resultType="member.MemberDTO">
+		SELECT * FROM member
+	</select>
+	
+	<select id="checkId" resultType="int">
+		SELECT count(*) from member where id=#{id}
+	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO member
+		(id, pw, name, image_path, phone, gender, birthday, regidate, email, starrate,  flag, enabled)
+    VALUES(#{id}, #{pw},#{name}, '' ,
+    #{phone}, #{gender}, #{birthday},sysdate, #{email}, 0 , #{flag}, 1)
+	</insert>
+	
+	<select id="flagValidate" resultType="String">
+		SELECT flag FROM member WHERE id=#{0}
+	</select>
+	
+	<update id="insertImage">
+		UPDATE member
+			SET image_path=#{1}
+			WHERE id=#{0}
+	</update>
+	
+	<select id="getImage" resultType="String">
+		SELECT image_path FROM member where id=#{0}
+	</select>
+	
+	
+	<select id="getGu" resultType="String">
+		select distinct gugun from zipcode where sido=#{0}
+	</select>
+	
+	
+</mapper>

@@ -17,7 +17,7 @@
 	<select id="requestBoardView" resultType="advertisement.RequestBoardDTO">
 		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, R.start_work,
 				R.disability_grade, R.warning, R.image, R.age, R.idx, R.regular_short, B.name,
-				R.content
+				R.content, R.request_date
 		    FROM requestBoard R inner join member B
 		    on R.id = B.id
 		    WHERE idx = #{0}
@@ -27,10 +27,10 @@
 	<insert id="insertRequestBoard">
 	insert into requestBoard(idx, id, title, children_name, advertise, age, pay,
 				region, request_time, disability_grade, warning,
-				regular_short, start_work, content, image)
+				regular_short, start_work, content, image, request_date)
 			values(seq_requestBoard_idx.nextval, #{0}, #{1}, #{2}, #{3},
 					#{4}, #{5}, #{6}, #{7}, #{8}, #{9}, #{10}, to_date(#{11},'YYYY-MM-DD'), #{12},
-					#{13})
+					#{13}, #{14})
 	</insert>
 	
 	<select id="getImage" resultType="string">
@@ -75,10 +75,15 @@
 	
 	<select id="requestSearch" parameterType="advertisement.ParameterDTO" 
 		resultType="advertisement.RequestBoardDTO">
-		SELECT * FROM requestBoard 
-			WHERE request_time = #{request_time} or request_time LIKE '%'|| 협의 가능 || '%' and regular_short LIKE '%'|| #{regular_short} || '%'
-						AND title LIKE '%'||#{title}||'%' AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
+		SELECT * FROM requestBoard
+			WHERE request_date = #{request_time} or request_date LIKE '%'||#{consultation}||'%' 
+				AND regular_short LIKE '%'||#{regular_short}||'%' AND title LIKE '%'||#{title}||'%'
+				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
 	</select>
+	<!-- 형님 위에 쿼리가 에러가 나는겁니다! 오키 ㅋㅋㅋㅋ  or차이긴 한데... 아니 형님 왜 ''인데 검색이 되죠? ''이니까 
+	????? ㅋㅋㅋㅋㅋㅋㅋ || 이거 쓰면 ''이여도 검색되지
+	date는 ||이거 없는뎅아  이해해씁니당 or때문에~ 안되네요 ㅠㅠ 되는겁니다!!! 날짜만 선택하고 검색하는거??? 다 할수 있어요! 하나만 해도 되고 두개만 해도 되고
+	3개 해되고 다해도 되요!그걸 쿼리문을 다 만든거야????? 넹ㅋㅋㅋㅋㅋㅋㅋ 대단하네 그거 수업시간에 했었지 않아?? 그랬어요? 몰라요!-->
 	
 	<select id="noTimeRequestSearch" parameterType="advertisement.ParameterDTO" 
 		resultType="advertisement.RequestBoardDTO">

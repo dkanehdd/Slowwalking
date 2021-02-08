@@ -49,14 +49,14 @@
 							<input type="hid-den" id="idx" value="${row.idx}" />
 							<c:choose>
 								<c:when test="${flag eq 'sitter' }"><input type="hid-den" id="agree" value="${row.sitter_agree}" /></c:when>
-								<c:otherwise><input type="hid-den" id="agree" value="${row.paretns_agree}" /></c:otherwise>
+								<c:otherwise><input type="hid-den" id="agree" value="${row.parents_agree}" /></c:otherwise>
 							</c:choose>
 						</td>
 						<td><button type="button" class="btn btn-warning" onclick="moveView();">자세히</button></td>
 						<c:choose>
 							<c:when test="${!(row.sitter_agree eq 'T' and row.parents_agree eq 'T')}">
 								<c:choose>
-									<c:when test="${row.sitter_agree eq 'T' || row.parents_agree eq 'T' }">
+									<c:when test="${row.sitter_agree eq 'T' && row.parents_agree eq 'T' }">
 										<td><button type="button" class="btn btn-basic " >대기</button></td>
 									</c:when>
 									<c:otherwise>

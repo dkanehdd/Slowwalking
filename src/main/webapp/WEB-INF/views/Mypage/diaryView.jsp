@@ -27,55 +27,14 @@ p {font-size: 14px;}
 	<input type="hidden" id="idx" value="${dto.idx }"/>
 	<div class="item">
 		<h3>알림장</h3>
-		<p class="s-font">${dto.parents_name } 님께 보내는 우리 아이의 하루<p>
 	</div>
 	<div class="item" id="sitter">
 		<p>오늘의 선생님 : ${dto.sitter_name }</p>
 	</div>
 	<div class="item" id="textarea">
-		<textarea class="noresize" rows="7" id="content" placeholder="내용을 입력해 주세요(최대 1000자)"></textarea></div>
-	
-	<!-- 버튼만들기 -->
-	<div class="text-center mt-3">
-		<button class="btn btn-warning" id="send">보내기</button>
-		<button class="btn btn-secondary">취소하기</button>
-	</div>
+		<textarea class="noresize" rows="7" id="content">
+		dto내용
+		</textarea></div>
 </div>
 </body>
-<script>
-$(function(){
-	$('#content').on('keyup', function(){
-	if($(this).val().length>1000){
-		$(this).val($(this).val().substring(0,1000));
-	}
-	});
-	$('#send').on('click', function(){
-		var cfm = confirm('전송 후에는 수정이 불가합니다.');
-		if(cfm){
-		$.ajax({
-			url: "../mypage/sendDiary",
-			type: "GET",
-			data : {
-				idx : $('#idx').val(),
-				parents_id : $('#parents_id').val(),
-				sitter_id : $('#sitter_id').val(),
-				content : $('#content').val()
-			},
-			dataType: "json",
-			contentType : "text/html;charset:utf-8;",
-			success : function(data){
-				alert(data.message);
-				 window.open("about:blank","_self").close();
-			},
-			error : function(){
-				alert("다시 시도해 주세요.");
-			}
-		});
-		}
-		else{
-			return;
-		}
-	})
-});
-</script>
 </html>

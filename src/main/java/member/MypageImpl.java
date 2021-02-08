@@ -26,4 +26,6 @@ public interface MypageImpl {
 	public int sendDiary(int idx, String parents_id, String sitter_id, String content);
 	public ArrayList<DiaryDTO> sitDiary(String id);
 	public ArrayList<DiaryDTO> parDiary(String id);
+
+
 }

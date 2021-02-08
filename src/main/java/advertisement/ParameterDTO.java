@@ -9,9 +9,16 @@ public class ParameterDTO {
 	private String title;
 	private String region;
 	private String age;
+	private String consultation;
 	
 	
 	
+	public String getConsultation() {
+		return consultation;
+	}
+	public void setConsultation(String consultation) {
+		this.consultation = consultation;
+	}
 	public String getSearch() {
 		return search;
 	}

@@ -2,8 +2,7 @@ package mutiBoard;
 
 public class DiaryDTO {
 	
-	private String regiyear;
-	private String regimonth;
+	private int its_idx;//다이어리의 일련번호
 	private String regidate;
 	private String send_id;
 	private String rece_id;
@@ -12,17 +11,13 @@ public class DiaryDTO {
 	private int idx;
 	
 	
-	public String getRegiyear() {
-		return regiyear;
+	
+	
+	public int getIts_idx() {
+		return its_idx;
 	}
-	public void setRegiyear(String regiyear) {
-		this.regiyear = regiyear;
-	}
-	public String getRegimonth() {
-		return regimonth;
-	}
-	public void setRegimonth(String regimonth) {
-		this.regimonth = regimonth;
+	public void setIts_idx(int its_idx) {
+		this.its_idx = its_idx;
 	}
 	public String getRegidate() {
 		return regidate;

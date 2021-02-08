@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.databind.type.ArrayType;
+
 import advertisement.InterviewDTO;
 import member.MemberDTO;
 import member.MemberImpl;
@@ -293,8 +295,9 @@ public class MypageController {
 		
 		return map;
 	}
+	
 	@RequestMapping("/mypage/openDiary")
-	public String openDiary(HttpServletRequest req, Model model) {
+	public String openDiary(HttpServletRequest req, Model model) {	
 		
 		int idx = Integer.parseInt(req.getParameter("idx"));
 		
@@ -305,9 +308,25 @@ public class MypageController {
 		
 		return "Mypage/diary";
 	}
-	@RequestMapping("/mypage/openCalendar")
-	public String openCalendar(HttpServletRequest req, HttpSession session, Model model, CalendarDTO calendarDTO) {
+	
+	@RequestMapping("/mypage/openDiaryView")
+	public String openDiaryView(HttpServletRequest req, Model model) {
 		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		System.out.println("idx:"+idx);
+		
+		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
+		model.addAttribute("dto", dto);
+		
+		return "Mypage/diaryView";
+	}
+	
+
+	@RequestMapping("/mypage/openCalendar")
+	public String openCalendar(HttpServletRequest req, HttpSession session, Principal principal, Model model, CalendarDTO calendarDTO) {
+		
+		//flag가 뭔가용
 		String flag = (String)session.getAttribute("flag");
 
 		int idx = Integer.parseInt(req.getParameter("idx"));
@@ -317,52 +336,149 @@ public class MypageController {
 		model.addAttribute("idx", idx);
 		model.addAttribute("flag", flag);
 		
-		//////////////////////////////////////////////////////////////////////
-		Map<String, Integer> today_data = new HashMap<String, Integer>();
-		Calendar cal = Calendar.getInstance();
-		CalendarDTO calendarData;
-	
-		//검색 날짜
-		if(calendarDTO.getDate().equals("")&&calendarDTO.getMonth().equals("")){
-			calendarDTO = new CalendarDTO(String.valueOf(cal.get(Calendar.YEAR)),
-					String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
+		//사용자가 부모회원인지 시터회원인지 구별하고 모달에 알림장 데이터를 저장한다.
+		
+		String user_id = principal.getName();
+		ArrayList<DiaryDTO> diaryList = new ArrayList<>();
+		
+		String user_flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
+		
+		if("parents".equals(user_flag)) {
+			diaryList = sqlSession.getMapper(MypageImpl.class).parDiary(user_id);
+		}else if("sitter".equals(user_flag)) {
+			diaryList = sqlSession.getMapper(MypageImpl.class).sitDiary(user_id);
 		}
 		
 		
-		cal.set(Integer.parseInt(calendarDTO.getYear()), Integer.parseInt(calendarDTO.getMonth()), 1);
+		System.out.println("user_flag : " + user_flag);
 		
-		//해당 월의 첫날
-		int startDay = cal.getMinimum(java.util.Calendar.DATE);
-		//해당 월의 마지막 날
-		int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-		//1일의 요일
-		int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
+		//날짜를 맞는 형식으로 검색해 날짜에 맞게 출력하기 위해 날짜 형식을 바꿔준다.
+		for(DiaryDTO dto : diaryList) {
+			System.out.println("변경전 시간 : " + dto.getRegidate());
+			String regidate = dto.getRegidate();
+			regidate = regidate.substring(0,10);
+			dto.setRegidate(regidate);
+			System.out.println("regidate의 5번째 문자열 : " + regidate.charAt(5));
+			if('0' == regidate.charAt(5)) {
+				regidate = regidate.substring(0,5) + regidate.substring(6);
+				System.out.println("regidate의 7번째 문자열 : " + regidate.charAt(7));
+				if('0' == regidate.charAt(7)) {
+					regidate = regidate.substring(0,7) + regidate.substring(8);
+				}
+			}else if('0' == regidate.charAt(8)){
+				regidate = regidate.substring(0,8) + regidate.substring(9);
+			}
+			
+			//데이터가 어떻게 출력되는지 확인
+			System.out.println("변경된 후 시간 : " + regidate);
+			
+			dto.setRegidate(regidate);
+		}
 		
-		System.out.println(startDay+endDay+start);
+		model.addAttribute("diaryList", diaryList);
+		
+		///////////////////////////////////////////////////////////////////////
+		
+		
+		
+		//////////////////////////////////////////////////////////////////////
+		Map<String, Object> today_data = new HashMap<String, Object>();
+		Calendar cal = Calendar.getInstance();
+		//CalendarDTO calendarData;
+	
+		//검색 날짜
+		
+		
+//		 if(calendarDTO.getDate().equals("")&&calendarDTO.getMonth().equals("")){
+//			 
+//			 calendarDTO = new CalendarDTO(String.valueOf(cal.get(Calendar.YEAR)),
+//					 String.valueOf(cal.get(Calendar.MONTH)),
+//					 String.valueOf(cal.get(Calendar.DATE)),null); 
+//		}
+		
+		String year = req.getParameter("year");
+		String month = req.getParameter("month");
+		String yearIdx = req.getParameter("yearIdx");
+		String monthIdx = req.getParameter("monthIdx");
+		
+		System.out.println("넘어온 년 : " + year);
+		System.out.println("넘어온 월  : " + month);
+		
+		if(yearIdx == null && monthIdx == null) {
+			year = Integer.toString(cal.get(Calendar.YEAR));
+			month = Integer.toString(cal.get(Calendar.MONTH));
+		}else if("0".equals(yearIdx)) {
+			year = Integer.toString(Integer.parseInt(year)-1); 
+		}else if("0".equals(monthIdx)) {
+			if(month.equals("0")) {
+				month = "11";
+				year = Integer.toString(Integer.parseInt(year)-1); 
+			}else {
+				month = Integer.toString(Integer.parseInt(month)-1); 
+				System.out.println("변경된 월 : " + month);
+			}
+		}else if("1".equals(yearIdx)) {
+			year = Integer.toString(Integer.parseInt(year)+1); 
+		}else if("1".equals(monthIdx)) {
+			if(month.equals("11")) {
+				month = "0";
+				year = Integer.toString(Integer.parseInt(year)+1); 
+			}else {
+				month = Integer.toString(Integer.parseInt(month)+1); 
+				System.out.println("변경된 월 : " + month);
+			}
+		}
+			
+		
+		
+		
+		//System.out.println(year+"년" + month + "월");
+		//해당 년도와 날자를 set해줌 
+		cal.set(Integer.parseInt(year), Integer.parseInt(month), 1);
+		
+		
+		 //해당 월의 첫날 
+		 int startDay = cal.getMinimum(java.util.Calendar.DATE); //해당 월의
+		 //마지막 날 
+		 int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
+		 //1일의 요일 
+		 int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
+		 
+		
+		
+		//System.out.println(startDay+endDay+start);
 		
 		//오늘 날짜 정보
 		Calendar todayCal = Calendar.getInstance();
 		SimpleDateFormat yearFrm = new SimpleDateFormat("yyyy");
 		SimpleDateFormat monthFrm = new SimpleDateFormat("M");
 
-		int today_year = Integer.parseInt(yearFrm.format(todayCal.getTime()));
-		int today_month = Integer.parseInt(monthFrm.format(todayCal.getTime()));
 		
-		System.out.println("오늘: "+today_year+"년"+today_month+"월");
+		
+		//System.out.println("오늘: "+today_year+"년"+today_month+"월");
 		
 	
-		int year = Integer.parseInt(calendarDTO.getYear());
-		int month = Integer.parseInt(calendarDTO.getMonth())+1;
+		//int year = Integer.parseInt(calendarDTO.getYear());
+		//int month = Integer.parseInt(calendarDTO.getMonth())+1;
 		
 		System.out.println("년도: "+year);
 		System.out.println("월: "+month );
+		System.out.println("해당 월의 첫날 : "+startDay );
+		System.out.println("마지막 날 : " + endDay);
+		System.out.println("1일의 요일 : " + start);
 		
 		
-		int today = -1;
-		if (today_year==year && today_month == month) {
-			SimpleDateFormat dayFrm = new SimpleDateFormat("dd");
-			today = Integer.parseInt(dayFrm.format(todayCal.getTime()));
-		}
+		
+		int today = cal.get(Calendar.DATE);
+		
+		System.out.println("오늘 날짜 : " + today);
+		/*
+		 * if (today_year==year && today_month == month) { SimpleDateFormat dayFrm = new
+		 * SimpleDateFormat("dd"); today =
+		 * Integer.parseInt(dayFrm.format(todayCal.getTime())); }
+		 */
+		
+		
 		
 		// 캘린더 함수 end
 		today_data.put("start", start);
@@ -370,203 +486,54 @@ public class MypageController {
 		today_data.put("endDay", endDay);
 		today_data.put("today", today);
 		today_data.put("year", year);
-		today_data.put("month", month);
+		int monthInt = Integer.parseInt(month);
+		today_data.put("month", monthInt);
 		
-		List<CalendarDTO> dateList = new ArrayList<CalendarDTO>();
+		
+		
+		
+		
+		//List<CalendarDTO> dateList = new ArrayList<CalendarDTO>();
 		
 		//실질적인 달력 데이터 리스트에 데이터 삽입 시작.
 		//일단 시작 인덱스까지 아무것도 없는 데이터 삽입
-		for(int i=1; i<start; i++){
-			calendarData= new CalendarDTO(null, null, null, null);
-			dateList.add(calendarData);
-		}
-		
-		//날짜 삽입
-		for (int i = startDay; i <= endDay; i++) {
-			if(i==today){
-				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
-						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "today");
-			}else{
-				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
-						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "normal_date");
-			}
-			dateList.add(calendarData);
-		}
-
-		//달력 빈곳 빈 데이터로 삽입
-		int index = 7-dateList.size()%7;
-		
-		if(dateList.size()%7!=0){
-			
-			for (int i = 0; i < index; i++) {
-				calendarData= new CalendarDTO(null, null, null, null);
-				dateList.add(calendarData);
-			}
-		}
+//		for(int i=1; i<start; i++){
+//			calendarData= new CalendarDTO(null, null, null, null);
+//			dateList.add(calendarData);
+//		}
+//		
+//		//날짜 삽입
+//		for (int i = startDay; i <= endDay; i++) {
+//			if(i==today){
+//				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
+//						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "today");
+//			}else{
+//				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
+//						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "normal_date");
+//			}
+//			dateList.add(calendarData);
+//		}
+//
+//		//달력 빈곳 빈 데이터로 삽입
+//		int index = 7-dateList.size()%7;
+//		
+//		if(dateList.size()%7!=0){
+//			
+//			for (int i = 0; i < index; i++) {
+//				calendarData= new CalendarDTO(null, null, null, null);
+//				dateList.add(calendarData);
+//			}
+//		}
 		
 		//배열에 담음
-		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
+		//model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today", today_data);
 		
 		return "Mypage/diaryCalendar";
 	
 	}
 	
-	@RequestMapping("/mypage/changeCalendar")
-	public String changeCalendar(HttpServletRequest req, Model model, HttpSession session, CalendarDTO calendarDTO) {
-		
-		String flag = (String)session.getAttribute("flag");
-
-		
-		///////////////////////////////////////////////////////////////
-
-		String user_id = (String)session.getAttribute("user_id");
-		
-		if(flag.equals("sitter")) {
-			System.out.println("리스트출력준비");
-			ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).sitDiary(user_id);
-			System.out.println("lists:"+lists);
-			model.addAttribute("lists", lists);
-		}
-		else {
-			ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).parDiary(user_id);
-			
-			model.addAttribute("lists", lists);
-		}
-		
-		Map<String, Integer> todayData = new HashMap<String, Integer>();
-		Calendar cal = Calendar.getInstance();
-		CalendarDTO calendarData;
-		
-		String yearIdx = req.getParameter("yearIdx");
-		String monthIdx = req.getParameter("monthIdx");
-		
-		System.out.println("yearIdx:"+yearIdx+" monthIdx:"+monthIdx);
-
 	
-		//검색 날짜
-		if(calendarDTO.getDate().equals("")&&calendarDTO.getMonth().equals("")){
-			calendarDTO = new CalendarDTO(String.valueOf(cal.get(Calendar.YEAR)),
-					String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
-		}
-		
-		cal.set(Integer.parseInt(calendarDTO.getYear()), Integer.parseInt(calendarDTO.getMonth()), 1);
-		
-		//해당 월의 첫날
-		int startDay = cal.getMinimum(java.util.Calendar.DATE);
-		//해당 월의 마지막 날
-		int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-		//1일의 요일
-		int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
-		
-		//오늘 날짜 정보
-		Calendar todayCal = Calendar.getInstance();
-		SimpleDateFormat yearFrm = new SimpleDateFormat("yyyy");
-		SimpleDateFormat monthFrm = new SimpleDateFormat("M");
-
-		int today_year = Integer.parseInt(yearFrm.format(todayCal.getTime()));
-		int today_month = Integer.parseInt(monthFrm.format(todayCal.getTime()));
-		
-		System.out.println("오늘: "+today_year+"년"+today_month+"월");
-		
-		int year = Integer.parseInt(req.getParameter("year"));
-		int month = Integer.parseInt(req.getParameter("month"))+1;
-		
-		int today = -1;
-		if (today_year==year && today_month == month) {
-			SimpleDateFormat dayFrm = new SimpleDateFormat("dd");
-			today = Integer.parseInt(dayFrm.format(todayCal.getTime()));
-		}
-		
-		month = month-1;
-		
-		System.out.println("파라미터 연도: "+year);
-		System.out.println("파라미터 월: "+month );
-		
-		if(monthIdx==null){
-			month = month;
-		}
-		else if(monthIdx.equals("0")){
-		   if(month > 1){
-			   System.out.println("진입");
-			  month =  month - 1;
-		   }
-		   else{
-			  year = year- 1;
-			  month = 12;
-		   }
-		}
-		else if(monthIdx.equals("1")){
-		   if(month < 12){
-			  month =  month + 1;
-		   }
-		   else{
-			  year = year+ 1;
-			  month = 1;
-		   }
-		}
-		
-		if(yearIdx==null) {
-			year = year;
-		}
-		else if(yearIdx.equals("0")){
-		   year = year- 1;
-		}else if(yearIdx.equals("1")){
-		   year = year+ 1;
-		}
-		System.out.println("year: "+year);
-		System.out.println("month: "+month);
-		
-		
-		// 캘린더 함수 end
-		todayData.put("start", start);
-		todayData.put("startDay", startDay);
-		todayData.put("endDay", endDay);
-		todayData.put("today", today);
-		todayData.put("year", year);
-		todayData.put("month", month);
-		
-		System.out.println("해당월의첫날:"+startDay+"해당월의마지막날"+endDay+"오늘:"+today+"그리고"+year+"년"+month+"월");
-		
-		List<CalendarDTO> dateList = new ArrayList<CalendarDTO>();
-		
-		//실질적인 달력 데이터 리스트에 데이터 삽입 시작.
-		//일단 시작 인덱스까지 아무것도 없는 데이터 삽입
-		for(int i=1; i<start; i++){
-			calendarData= new CalendarDTO(null, null, null, null);
-			dateList.add(calendarData);
-		}
-		
-		//날짜 삽입
-		for (int i = startDay; i <= endDay; i++) {
-			if(i==today){
-				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
-						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "today");
-			}else{
-				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
-						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "normal_date");
-			}
-			dateList.add(calendarData);
-		}
-
-		//달력 빈곳 빈 데이터로 삽입
-		int index = 7-dateList.size()%7;
-		
-		if(dateList.size()%7!=0){
-			
-			for (int i = 0; i < index; i++) {
-				calendarData= new CalendarDTO(null, null, null, null);
-				dateList.add(calendarData);
-			}
-		}
-		System.out.println(dateList);
-		//배열에 담음
-		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
-		model.addAttribute("today", todayData);
-
-		
-		return "Mypage/diaryCalendar";
-	}
 	
 	//알림장 보내기
 	@RequestMapping("/mypage/sendDiary")
@@ -588,7 +555,7 @@ public class MypageController {
 		System.out.println("content:"+content);
 		
 
-		int result = sqlSession.getMapper(MypageImpl.class).sendDiary(idx, parents_id, sitter_id, content);
+		int result = sqlSession.getMapper(MypageImpl.class).sendDiary(idx, sitter_id, parents_id, content);
 		map.put("message", "발송 완료되었습니다.");
 	
 		System.out.println("result:"+result);
