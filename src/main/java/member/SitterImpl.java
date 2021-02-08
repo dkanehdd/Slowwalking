@@ -9,4 +9,8 @@ public interface SitterImpl {
 	public int insertSitter(SitterMemberDTO sitterMemberDTO);
 	
 	public SitterMemberDTO selectSitter(String id);
+	
+	public int updateSitter(SitterMemberDTO sitterMemberDTO);
+	public int updateLicense(String filename, String id);
+	public int updateAdvertise(String advertise, String id);
 }

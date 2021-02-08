@@ -41,7 +41,7 @@
 							<c:if test="${param.login != null }">
 								<p>로그아웃 하였습니다.</p>
 							</c:if>
-						</div>						
+						</div>				
 						<input type="text" class="form-control" name="id" value="" placeholder="아이디" /> 
 						<input type="password" class="form-control" name="pass" value="" placeholder="비밀번호"/>
 						<button type="submit" class="btn btn-danger">로그인</button><br>

@@ -300,6 +300,13 @@
 													<input type="file" name="image" value="" />
 												</td>
 											</tr>
+											<tr>
+												<th class="text-center" 
+													style="vertical-align:middle;">플레그(ticket, premium)</th>
+												<td>
+													<input type="text" name="flag" />
+												</td>
+											</tr>
 										</tbody>
                    						</table>
                               	<div class="row text-center" style="">

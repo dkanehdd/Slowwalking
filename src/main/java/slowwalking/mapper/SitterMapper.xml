@@ -41,5 +41,25 @@
                on s.sitter_id=m.id WHERE m.id=#{id}
 	</select>
 	
+	<update id="updateSitter" parameterType="member.SitterMemberDTO">
+		UPDATE sittermember
+			SET residence1=#{residence1}, residence2=#{residence2}, residence3=#{residence3},
+				activity_time=#{activity_time}, cctv_agree=#{cctv_agree}, pay=#{pay},
+				introduction=#{introduction}
+			WHERE sitter_id=#{sitter_id}
+	</update>
+	
+	<update id="updateLicense" parameterType="String">
+		UPDATE sittermember
+			SET personality_check=#{0}
+			WHERE sitter_id=#{1}
+	</update>
+	<update id="updateAdvertise" parameterType="String">
+		UPDATE sittermember
+			SET advertise=#{0}
+			WHERE sitter_id=#{1}
+	</update>
+	
+	
 
 </mapper>
