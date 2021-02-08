@@ -16,7 +16,7 @@ public class MemberFindService {
 
 		mImpl= sqlSession.getMapper(MemberImpl.class);
 		
-		String result="";
+		String result=""; 
 		try {
 			result = mImpl.findId(name, phone);
 		} 

@@ -9,22 +9,12 @@ public class DiaryDTO {
 	private String content;
 	private String flag;
 	private int idx;
-	private int its_idx;
 	
-	
-	
-	
-	public int getIts_idx() {
-		return its_idx;
-	}
-	public void setIts_idx(int its_idx) {
-		this.its_idx = its_idx;
+	public void setRegidate(String regidate) {
+		this.regidate = regidate;
 	}
 	public String getRegidate() {
 		return regidate;
-	}
-	public void setRegidate(java.sql.Date regidate) {
-		this.regidate = regidate;
 	}
 	public int getIts_idx() {
 		return its_idx;

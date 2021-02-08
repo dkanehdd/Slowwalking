@@ -15,6 +15,7 @@ public interface MemberImpl {
 	public MemberDTO getMember(String id);
 	public MemberDTO getMemberAndoid(MemberDTO membetDTO);
 	
+	public String findId(String id, String phone); //hjkosmo 추가
 	public int checkEmail(String email); //hjkosmo 추가
 	
 	public int insertMember(MemberDTO memberDTO);

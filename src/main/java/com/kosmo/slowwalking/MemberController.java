@@ -7,6 +7,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -105,7 +106,7 @@ public class MemberController {
 	//로그인폼 거치지 않고 바로 로그인(소셜 로그인)
 	@RequestMapping("/member/loginWithoutForm")
 	public String loginWithoutForm(HttpServletRequest req, Model model, HttpSession session) {
-		List<GrantedAuthority> roles = new ArrayList<>(1);//ROLE 권한 설정 컬렉션
+		List<GrantedAuthority> roles = new ArrayList<>(1);//ROLE 권한 설정 컬렉션 
 		String userId = req.getParameter("id");
 		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(userId);//플레그얻어오기
 		String roleStr = flag.equals("admin") ? "ROLE_admin" : "ROLE_"+flag;
@@ -265,11 +266,12 @@ public class MemberController {
 	//아이디 찾기
 	@RequestMapping(value = "/member/findIdAction", method=RequestMethod.POST)
 	public String IdFind(HttpServletResponse response, 
-			@RequestParam("phone") String phone, Model md) throws Exception{
+			@RequestParam("phone") String phone, Model md ) throws Exception{
 		
 		response.setContentType("text/html;charset=utf-8");
+		String name = "코스모";
 		PrintWriter out = response.getWriter();
-		String id = sqlSession.getMapper(MemberImpl.class).idFind(phone);
+		String id = sqlSession.getMapper(MemberImpl.class).findId(name, phone);
 		
 		if (id == null) {
 			out.println("<script>");
