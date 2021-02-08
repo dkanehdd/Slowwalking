@@ -695,7 +695,6 @@ ol, ul {
 
 .loginContainer{
 	width: 100%;
-	padding: 8% 0 0;
 	margin: auto;
 }
 
@@ -726,7 +725,8 @@ ol, ul {
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input[type="text"], .form input[type="password"]{
+.form input[type="text"], .form input[type="password"]
+, .joinF input[type="email"]{
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -912,18 +912,18 @@ ol, ul {
 }
 /*****Join hjkosmo******/
 .joinFrm{
+	width:70%;
+	margin:0 auto;
 	padding:25px;
 }
 .joinFrm a{
-	height:160px;
+	height:250px;
+	padding:70px;
 	border-radius:5px;
 	background-color:var(--primary-color);
 	color:var(--white-color);
 	display:block;
 	width:48%;
-}
-.joinFrm a{
-	padding:30px;
 }
 .joinFrm a:hover{
 	color:var(--white-color);
@@ -940,7 +940,9 @@ ol, ul {
 	font-size:1.1em;
 }
 /***/
-.joinF input[type="text"], .joinF input[type="password"]{
+.joinF input[type="text"], .joinF input[type="password"]
+, .joinF input[type="email"]{
+	
 	width: 300px;
 	margin:0;
 	padding:9px;
@@ -958,17 +960,10 @@ ol, ul {
 .joinF textarea.noresize{
 	
 	width:100%;
-	height:100px;
+	height:200px;
 	resize: none;
 }
 #idCheck{color:red}
-.termsBox div{
-	width:48%;
-	display:inline-block;
-}
-.termsBox div:first-child{
-	margin-right:5px;
-}
 
 .btnBelow{
 	text-align:center;
@@ -979,11 +974,15 @@ ol, ul {
 	height:70px;
 	font-size: 1.2em;
 }
-form[name="regiform"] button[type="submit"], form[name="payappform"]  button[type="submit"]{
+form[name="regiform"] button[type="submit"],
+form[name="payappform"]  button[type="submit"],
+form[name="fileFrm"]  button[type="submit"]
+{
 	width:400px;
 	background-color:var(--primary-color);
 }
-form[name="regiform"] button[type="submit"]:hover{
+form[name="regiform"] button[type="submit"]:hover,
+form[name="fileFrm"]  button[type="submit"]:hover{
 	background-color:var(--secondary-color);
 }
 .btn-cc{
@@ -999,6 +998,54 @@ form[name="regiform"] button[type="submit"]:hover{
 	margin-right: 6px;
 	margin-bottom: 6px;
 }
+/* image 이미지 업로드 */
+/* #image_path{ */
+/* 	width:87%; */
+/* } */
+
+.upload {
+    display:none;
+}
+
+.btnUp{
+	width:400px;
+	height:70px;
+	color:var(--white-color);
+	
+}
+.btnUp span{
+	display:inline-block;
+	font-weight: 700;
+	font-size:1.2em;
+	vertical-align:middle;
+	margin: 12px 0;
+}
+
+.image-area {
+	width:50%;
+	min-height:400px;
+	margin-left: auto;
+	margin-right: auto;
+    border: 2px dashed var(--secondary-color);
+    padding: 1rem;
+    position: relative;
+}
+
+.image-area::before {
+    content: '이미지 미리보기';
+    color: var(--secondary-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.image-area img {	
+    z-index: 2;
+    position: relative;
+}
+/***/
 
 /**chat 채팅**/
 #center-text {          

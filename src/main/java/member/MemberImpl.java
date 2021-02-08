@@ -2,6 +2,8 @@ package member;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import mutiBoard.MultiBoardDTO;
 
 public interface MemberImpl {
@@ -12,6 +14,8 @@ public interface MemberImpl {
 
 	public MemberDTO getMember(String id);
 	public MemberDTO getMemberAndoid(MemberDTO membetDTO);
+	
+	public int checkEmail(String email); //hjkosmo 추가
 	
 	public int insertMember(MemberDTO memberDTO);
 
