@@ -2,7 +2,6 @@ package com.kosmo.slowwalking;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +12,6 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,7 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -257,33 +254,67 @@ public class MemberController {
 		return map;
 	}
 
+	// 아이디 찾기 페이지(hjkosmo 추가)
 	@RequestMapping("/member/findid")
 	public String FindIdPage() {
 		
-		return "member/findid";
+		return "Member/findId";
 	}
 	
-	//아이디 찾기
-	@RequestMapping(value = "/member/findIdAction", method=RequestMethod.POST)
-	public String IdFind(HttpServletResponse response, 
-			@RequestParam("phone") String phone, Model md ) throws Exception{
+	
+	//sqlSession 쿼리문 통해 DB에서 자동주입
+	// 아이디 찾기(hjkosmo)
+	//HttpServletRequest req로 파라미터 가져오기
+	@RequestMapping("/member/findIdAction")
+	@ResponseBody
+	public Map<String, Object> userIdSearch(HttpServletRequest req){
+	
+		//map -> {키, 값}, view로 가서 map.키-> value 불러올 수 있음
+		Map<String, Object> map=new HashMap<String, Object>(); //Object는 id
+	
 		
-		response.setContentType("text/html;charset=utf-8");
-		String name = "코스모";
-		PrintWriter out = response.getWriter();
-		String id = sqlSession.getMapper(MemberImpl.class).findId(name, phone);
+		String userName=req.getParameter("name");
+		String userPhone=req.getParameter("phone");
+		String userId=sqlSession.getMapper(MemberImpl.class).findId(userName, userPhone);
+		System.out.println("넘어온 userName: "+userName);
+		System.out.println("넘어온 userPhone: "+userPhone);
+		System.out.println("검색된 userId: "+userId);
 		
-		if (id == null) {
-			out.println("<script>");
-			out.println("alert('가입된 아이디가 없습니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-			return null;
-		} 
-		else {
-			return id;
-		}
+		map.put("id", userId);		
+		
+		return map;
+		//(HttpServletRequest req, Model model) 로 하는 경우
+		//model("id", userId);로, jstl로 내보낼수 있음 위 방식은 ajax를 쓸 때 사용
+	}
+	
+	// 비밀번호 찾기 페이지(hjkosmo 추가)
+	@RequestMapping("/member/temppw")
+	public String FindPwPage() {
+		
+		return "Member/tempPw";
+	}
+	
+	// 임시 비밀번호 발급(hjkosmo)
+	@RequestMapping("/member/tempPwAction")
+	@ResponseBody
+	public Map<String, Object> userPwSearch(HttpServletRequest req){
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		
+		String userId=req.getParameter("id");
+		String userName=req.getParameter("name");
+		String userPhone=req.getParameter("phone");
+		String tempPw=sqlSession.getMapper(MemberImpl.class).tempPw(userId, userPhone);
+		String updatePw=sqlSession.getMapper(MemberImpl.class).updatePw(userId, userPhone);
+		System.out.println("넘어온 userId: "+userId);
+		System.out.println("넘어온 userPhone: "+userPhone);
+		System.out.println("생성된 임시 tempPw: "+tempPw);//sql에서 난수생성
+		System.out.println("유저에게 전달할 updatePw: "+updatePw);
+		
+		map.put("pw", updatePw);		
+		
+		return map;
 	}
 	
 	// 휴대폰 인증

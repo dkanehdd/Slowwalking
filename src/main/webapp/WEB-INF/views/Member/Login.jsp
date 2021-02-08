@@ -42,7 +42,7 @@
 								<p>로그아웃 하였습니다.</p>
 							</c:if>
 						</div>						
-						<input type="text" class="form-control" name="id" value="" placeholder="아이디" /> 
+						<input type="text" class="form-control" id="id" name="id" value="" placeholder="아이디" /> 
 						<input type="password" class="form-control" name="pass" value="" placeholder="비밀번호"/>
 						<button type="submit" class="btn btn-danger">로그인</button><br>
 						<div class="form-check">
@@ -50,8 +50,8 @@
 							<label for="idSave" class="form-check-label">아이디 저장</label>
 						</div>
 					<ul>
-						<li><a href="#" id="findId" name="findId" >아이디 찾기</a></li>
-	                    <li><a href="#" id="findPw" name="findPw" >비밀번호 찾기</a></li>
+						<li><a href="../member/findid" id="findId" name="findId" >아이디 찾기</a></li>
+	                    <li><a href="../member/temppw" id="findPw" name="findPw" >비밀번호 찾기</a></li>
 	                    <li class="non-af"><a href="../member/join" id="signUp" name="signUp">회원가입</a></li> 
 					</ul>
 					<a href="<%=apiURL%>"><img height="50" src="../img/naverlogin.png"/></a>
@@ -64,7 +64,8 @@
 			</form:form>
 		</div>
 	</section>
-
+	<!-- Js -->
+	<%@ include file="../links/IdSaveJs.jsp"%>
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>
