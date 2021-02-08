@@ -2,24 +2,32 @@ package com.kosmo.slowwalking;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -28,7 +36,6 @@ import org.springframework.web.servlet.ModelAndView;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
-import member.ParentsMemberDTO;
 import member.SitterImpl;
 import member.SitterMemberDTO;
 import mms.certificationService;
@@ -38,7 +45,7 @@ public class MemberController {
 
 	@Autowired
 	public SqlSession sqlSession;
-
+	
 	// 테스트용 멤버리스트 가져오기
 	@RequestMapping("/member/list")
 	public String MemberList(Model model) {
@@ -56,7 +63,7 @@ public class MemberController {
 		return "Member/Join";
 	}
 	
-	
+
 	@RequestMapping(value = "/member/joinAction", method=RequestMethod.POST)
 	public String MemberJoinAction(Model model, MemberDTO memberDTO, HttpSession session) {
 		System.out.println(memberDTO.getName());
@@ -73,7 +80,6 @@ public class MemberController {
 			model.addAttribute("mode", "join");
 			model.addAttribute("flag", memberDTO.getFlag());
 			model.addAttribute("message", "회원가입이 완료되었습니다. \n추가 정보를 작성해주세요.");
-			session.setAttribute("user_id", memberDTO.getId());
 		} else {
 			model.addAttribute("id", memberDTO.getFlag());
 			model.addAttribute("sucOrFail", sucOrFail);
@@ -93,8 +99,46 @@ public class MemberController {
 	//로그인 페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/login")
 	public String Login() {
+		
 		return "Member/Login";
 	}
+	//로그인폼 거치지 않고 바로 로그인(소셜 로그인)
+	@RequestMapping("/member/loginWithoutForm")
+	public String loginWithoutForm(HttpServletRequest req, Model model, HttpSession session) {
+		List<GrantedAuthority> roles = new ArrayList<>(1);//ROLE 권한 설정 컬렉션
+		String userId = req.getParameter("id");
+		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(userId);//플레그얻어오기
+		String roleStr = flag.equals("admin") ? "ROLE_admin" : "ROLE_"+flag;
+		roles.add(new SimpleGrantedAuthority(roleStr));//권한 설정해주기
+	  
+		User user = new User(userId, "", roles);//시큐리티에있는 User객체 생성
+	  
+		Authentication auth = new UsernamePasswordAuthenticationToken(user, null, roles);//Authentication 객체 생성
+		SecurityContextHolder.getContext().setAuthentication(auth);//시큐리티에 저장 
+		
+		String view = "";
+		if (flag.equals("sitter")) {
+			System.out.println("시터회원 인증완료");
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
+
+			System.out.println(dto);
+			model.addAttribute("dto", dto);
+
+			view = "Member/MypageSitter";
+		} else if (flag.equals("parents")) {
+			System.out.println("부모회원 인증완료");
+			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
+    		System.out.println(dto);
+      		model.addAttribute("dto", dto);
+
+			view = "Member/MypageParents";
+		}
+		session.setAttribute("user_id", userId);
+		session.setAttribute("flag", flag);
+		return view;
+	}
+
+	
 	//로그아웃
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {
@@ -102,6 +146,7 @@ public class MemberController {
 		session.setAttribute("user_id", null);
 		return "redirect:../main/main";
 	}
+	
 
 	@RequestMapping("/member/LoginAction")
 	public ModelAndView MemberLoginAction(Principal principal, Model model, HttpSession session) {
@@ -183,13 +228,62 @@ public class MemberController {
 		if (check == 1) {
 			map.put("check", check);
 			map.put("message", "중복된 아이디가 있습니다.");
-		} else {
+		}
+		else {
 			map.put("check", check);
-			map.put("message", "사용가능한 아이디 입니다.");
+			map.put("message", "사용 가능한 아이디 입니다.");
+		}
+		return map;
+	}
+	
+	// 이메일 중복확인(hjkosmo 추가)
+	@RequestMapping("/member/checkEmail")
+	@ResponseBody
+	public Map<String, Object> CheckEmail(HttpServletRequest req) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = sqlSession.getMapper(MemberImpl.class).checkEmail(req.getParameter("email"));
+		
+		if (check == 1) {
+			map.put("check", check);
+			map.put("message", "중복된 이메일이 있습니다.");
+		}
+		else {
+			map.put("check", check);
+			map.put("message", "사용 가능한 이메일 입니다.");
 		}
 		return map;
 	}
 
+	@RequestMapping("/member/findid")
+	public String FindIdPage() {
+		
+		return "member/findid";
+	}
+	
+	//아이디 찾기
+	@RequestMapping(value = "/member/findIdAction", method=RequestMethod.POST)
+	public String IdFind(HttpServletResponse response, 
+			@RequestParam("phone") String phone, Model md) throws Exception{
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String id = sqlSession.getMapper(MemberImpl.class).idFind(phone);
+		
+		if (id == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} 
+		else {
+			return id;
+		}
+	}
+	
 	// 휴대폰 인증
 	@RequestMapping("/check/sendSMS")
 	@ResponseBody
@@ -384,5 +478,4 @@ public class MemberController {
 		}
 		return "redirect:../main/main";
 	}
-
 }

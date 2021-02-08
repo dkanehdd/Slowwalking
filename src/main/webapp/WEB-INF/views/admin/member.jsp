@@ -287,7 +287,6 @@ function editRow(id){
                                             <th>자격증 인증서</th>
                                             <th>활동기간</th>
                                             <th>희망시급</th>
-                                            <th>포인트</th>
                                             <th>가입승인</th>
                                             <th>결제회원</th>
                                             <th>활동시간</th>
@@ -318,7 +317,6 @@ function editRow(id){
                                             </th>                                    
                                             <th>${row.activity_time }</th>
                                             <th>${row.pay }</th>
-                                            <th>${row.point }</th>
                                             <th>${row.permission }</th>
                                             <th>${row.premium }</th>
                                             <th>${row.career }</th>

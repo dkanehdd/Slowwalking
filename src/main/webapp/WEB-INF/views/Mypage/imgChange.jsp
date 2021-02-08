@@ -25,8 +25,8 @@
 <div class="container">
 	<form:form action="../mypage/imgChange?${_csrf.parameterName}=${_csrf.token}" name="fileFrm" method="post" 
                enctype="multipart/form-data" onsubmit="return checkImg();">
-		<input type="hid-den"  name="id"  value="${user_id }">
-		<input type="hid`den" name="flag" id="flag" value="${dto.flag }" />
+		<input type="hidden"  name="id"  value="${user_id }">
+		<input type="hidden" name="flag" id="flag" value="${dto.flag }" />
 		<c:choose>
 			<c:when test="${not empty dto.image_path }">
 			<img src="../resources/images/${dto.image_path }" alt="" />

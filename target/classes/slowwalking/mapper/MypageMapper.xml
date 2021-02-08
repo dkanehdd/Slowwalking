@@ -62,6 +62,4 @@
 	<select id="parDiary" resultType="mutiBoard.DiaryDTO">
 		SELECT * FROM diary WHERE rece_id=#{0}
 	</select>
-	
-	
 </mapper>

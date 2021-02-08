@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보수정</title>
+<title>느린걸음</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -38,13 +38,13 @@ $('#submit').on("click", function() {
 </script>
 </head>
 <body>
-<div class="ml-2">
+<div class="ml-3 mt-3">
 <h3>회원정보수정</h3>
 </div>
-<div class="container">
+<div class="container mt-5">
 <form action="../mypage/proEditAction?${_csrf.parameterName}=${_csrf.token}" method="post" id="editFrm" 
 	onsubmit="return pwValidate(this);">
-	<input type="hid-den" name="id" id="id" value="${user_id }" />
+	<input type="hidden" name="id" id="id" value="${user_id }" />
 	<table class="table">
 	<tbody>
 		<tr>
@@ -105,7 +105,7 @@ $('#submit').on("click", function() {
 				</select>
 			</td>
 		</tr>
-		<input type="hid`den" name="email" id="email" value="${dto.email }"/>
+		<input type="hidden" name="email" id="email" value="${dto.email }"/>
 	</tbody>
 </table>
 <div class="container text-center">

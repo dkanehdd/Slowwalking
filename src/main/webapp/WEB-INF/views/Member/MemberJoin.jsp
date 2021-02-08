@@ -52,8 +52,10 @@
 					<tr>
 						<th scope="row" style="vertical-align:middle;">아이디</th>
 						<td><input type="text" name="id" id='id' value=""
-							maxlength='15' class='w50p' placeholder="아이디">
-							<div style="display: none;" id="idCheck">
+							 class='w50p' placeholder="아이디"
+							 pattern="^([a-z0-9_]){4,12}" required="required" 
+							 title="4자 이상 12자 이내의 영문/숫자 조합">
+							<div style="display: none;" id="idCheck" >
 							</div></td>
 					</tr>
 					<tr>
@@ -69,7 +71,7 @@
 					<tr>
 						<th scope="row" style="vertical-align:middle;">비밀번호</th>
 						<td><input type="password" name="pw" id='pw'
-							onblur="checkPw(this.value);">&nbsp;&nbsp;<span id="pw1">*
+							onblur="checkPw(this.value);" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{4,12}$" required="required" title="4자 이상 12자 이내의 영문/숫자/특수문자 조합" >&nbsp;&nbsp;<span id="pw1">*
 								4자 이상 12자 이내의 영문/숫자/특수문자 조합</span></td>
 					</tr>
 					<tr>
@@ -80,8 +82,8 @@
 					</tr>
 					<tr>
 						<th style="vertical-align:middle;">이메일</th>
-						<td><input type="text" name="email1" id="email1" value=""
-							id="eamil1" /> @ <input type="text" name="email2" id="email2"
+						<td><input type="email" name="email1" id="email1" value=""/> @ 
+						<input type="email" name="email2" id="email2"
 							value="" style="width:150px;"/> <select name="last_email_check2"
 							onChange="emailSelect(this);" 
 							style="width:150px; margin-left:5px; display:inline-block;" 
@@ -93,6 +95,8 @@
 								<option value="hotmail.com">hotmail.com</option>
 								<option value="">직접입력</option>
 						</select>
+						<button type="button" id='emailChk' class="btn btn-primary" style="margin-left:5px; vertical-align: top;">중복확인</button>
+						</td>
 					</tr>
 					<input type="hidden" name="email" id="email" value="" />
 					<tr>
@@ -109,12 +113,12 @@
 									<label for="chkAll">전체동의</label><br>
 									
 									<div class="termsBox">
-										<div class="tbx1 float-left">
+										<div>
 											<input class="checkbox" type="checkbox" name="chk1" id="chk1">
 											<label for="chk1">이용 약관(필수)</label><br>
 											<textarea class="form-control noresize" name="" id="">이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. 이용 약관 입니다. </textarea><br>
 										</div>
-										<div class="tbx2">
+										<div>
 											<input class="checkbox" type="checkbox" name="chk2" id="chk2">
 											<label for="chk2">개인정보 수집 및 이용에 대한 안내(필수)</label><br>
 					       					<textarea class="form-control noresize" name="" id="">개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. 개인정보 수집 및 이용에 대한 안내 입니다. </textarea>
@@ -127,7 +131,7 @@
 				</table>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="submit" class="btn btn-danger">회원가입</button>
+					<button type="submit" id="submitBtn" class="btn btn-danger">회원가입</button>
 				</div>
 			</form:form>
 		</div>

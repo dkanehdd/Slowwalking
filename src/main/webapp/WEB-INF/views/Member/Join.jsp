@@ -5,6 +5,8 @@
 <html>
 <head>
 <%@ include file="../links/linkOnly2dot.jsp"%>
+
+
 <title>회원가입 선택</title>
 </head>
 <body>
@@ -19,8 +21,14 @@
 				<div class="form joinFrm">
 					<a class="float-left" href="./memberjoin?flag=parents"><i class="fa fa-users" aria-hidden="true"></i>부모회원으로 가입하기</a>
 					<a class="float-right"href="./memberjoin?flag=sitter"><i class="fa fa-address-card" aria-hidden="true"></i>시터회원으로 가입하기</a>
+
+					
+					
 				</div>
 			</div>
+							
+			
+			
 		</div>
 	</section>
 

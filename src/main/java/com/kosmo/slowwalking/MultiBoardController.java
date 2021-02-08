@@ -1,18 +1,25 @@
 package com.kosmo.slowwalking;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import member.MemberDTO;
+import member.MemberImpl;
 import member.MultiBoardImpl;
 import mutiBoard.MultiBoardDTO;
+import mutiBoard.OrderDTO;
 import mutiBoard.ProductDTO;
 import mutiBoard.ProductImpl;
 
@@ -86,5 +93,50 @@ public class MultiBoardController {
 		model.addAttribute("dto", productDTO); // model에 저장해서 view로 전달해주는 객체 dto
 
 		return "MultiBoard/Product_view";
+	}
+	
+	//결제페이지 이동
+	@RequestMapping("/multiBoard/order")
+	public String order(HttpServletRequest req, Model model,HttpSession session) {
+		String idx = req.getParameter("idx");
+		String flag = req.getParameter("flag");
+		
+		MemberDTO memberDTO = sqlSession.getMapper(MemberImpl.class).getMember(session.getAttribute("user_id").toString());
+		
+		ProductDTO dto = sqlSession.getMapper(ProductImpl.class).contentPage(idx);
+		System.out.println(dto.getPrice());
+		
+		model.addAttribute("memberDTO", memberDTO);
+		model.addAttribute("dto", dto);
+		model.addAttribute("flag", flag);
+		
+		return "MultiBoard/order";
+	}
+	
+	//결제완료후 DB저장
+	@RequestMapping("/multiBoard/order_complete")
+	@ResponseBody
+	public Map<String, Object> Order_complete(HttpServletRequest req, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		OrderDTO dto = new OrderDTO();
+		dto.setId(req.getParameter("id"));
+		dto.setProduct_idx(Integer.parseInt(req.getParameter("idx")));
+		System.out.println("상품 일련번호 : "+ req.getParameter("idx"));
+		dto.setTotal_price(Integer.parseInt(req.getParameter("price")));
+		dto.setPayment(req.getParameter("payment"));
+		dto.setInfo("구매자 : "+ req.getParameter("id")
+					+ ", 금액 : "+req.getParameter("price")
+					+ ", 결제방식 : "+ req.getParameter("payment"));
+		
+		int suc = sqlSession.getMapper(ProductImpl.class).insertOrder(dto);
+		ProductDTO productDTO = sqlSession.getMapper(ProductImpl.class).contentPage(req.getParameter("idx"));
+		System.out.println("티켓 : "+productDTO.getTicket()+" 적립금 : "+ productDTO.getPrice()/20);
+		System.out.println("구매자 : "+ req.getParameter("id"));
+		int updateP = sqlSession.getMapper(MemberImpl.class).updatePoint(productDTO.getPrice()/20, req.getParameter("id"));
+		int updateT = sqlSession.getMapper(MemberImpl.class).updateTicket(productDTO.getTicket(), req.getParameter("id"));
+		System.out.println("포인트 결과 : "+ updateP + "티켓 결과 : "+ updateT);
+		map.put("suc", suc);
+		
+		return map;
 	}
 }
