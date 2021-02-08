@@ -9,6 +9,12 @@ public class OrderDTO {
 	private String info;
 	private int total_price;
 	private java.sql.Date regidate;
+	
+	//shop_products 컬럼 가져오기
+	private String product_name;
+	private int ticket;
+	
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -45,11 +51,23 @@ public class OrderDTO {
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
-	public java.sql.Date getregidate() {
+	public java.sql.Date getRegidate() {
 		return regidate;
 	}
-	public void setregidate(java.sql.Date regidate) {
+	public void setRegidate(java.sql.Date regidate) {
 		this.regidate = regidate;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public int getTicket() {
+		return ticket;
+	}
+	public void setTicket(int ticket) {
+		this.ticket = ticket;
 	}
 	
 	

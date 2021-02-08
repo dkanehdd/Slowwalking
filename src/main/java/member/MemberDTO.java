@@ -14,6 +14,15 @@ public class MemberDTO {
 	private int starrate;
 	private String flag;
 	private int enabled;
+	private int ticket;
+	
+	
+	public int getTicket() {
+		return ticket;
+	}
+	public void setTicket(int ticket) {
+		this.ticket = ticket;
+	}
 	public int getEnabled() {
 		return enabled;
 	}

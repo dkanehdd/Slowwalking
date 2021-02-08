@@ -124,28 +124,34 @@
 	<!-- 의뢰서 리스트 -->
 	<c:forEach items="${lists }" var="row">
 	<table class="table table-borderless">
-		<thead>
-	      <tr>
-			<a href="../advertisement/requestBoard_view?list_flag=${listflag }&idx=${row.idx}">${row.title }</h2></a>
-		  </tr>
-		</thead>
+		<colgroup>
+			<col width="20%"/>
+			<col width="*"/>
+		</colgroup>
 		<tbody>
 			<tr>
-			<img src="../resources/images/${row.image }" style="width:100px; height:100px">
+				<td>
+					<img src="../resources/images/${row.image }" class="media-object rounded-circle" style="width:100px; height:100px;">
+				</td>
+				<td rowspan="2" class="rightcontent" style="vertical-align:middle;">
+					<a id="title" href="../advertisement/requestBoard_view?list_flag=${listflag }&idx=${row.idx}">${row.title }</a>
+					<br/>${row.id }
+					<br/>${row.region }
+					<br/>희망시급 : ${row.pay }
+				</td>
 			</tr>
 			<tr>
-				<td>
-				<span style="font-size: 20px;">${row.age}살의${row.children_name }입니다</span>
-				</td>
-				<td>
-				<span style="font-size: 20px; color: red;">${row.warning}</span>
+				<td>	
+					<span id="childInfo">${row.age}살 ∥ ${row.children_name }</span><br/>
+						<c:if test="${not empty row.warning }">
+							<span id="warning">※ 주의사항 참고</span>
+						</c:if>
 				</td>
 			</tr>
 		</tbody>
 		</table>
-		<br/><br/><br/>
-		
 	</c:forEach>
+	<br/>
 	</div>
 	
 </div>
@@ -157,6 +163,31 @@
 </c:if>
 
 <style>
+table{
+	border: 1px solid #EAEAEA;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+#title {
+	font-size: 20px;
+	font-weight : bold;
+}
+.rightcontent{
+	vertical-align: middle;
+	font-size: 12px;
+}
+span#childInfo {
+	background-color: #DC5C05;
+	border-radius : 10px;
+	padding:0 10px;
+	color: white;
+	font-size: 12px;
+}
+span#warning{
+	color: #930000;
+	font-size: 12px;
+	vertical-align: text-top;
+}
 div#back{
 	width: 1000px;
 	text-align: center;
@@ -214,6 +245,10 @@ div#search{
 
 .box-radio-input input[type="radio"]:checked + span{
   background: #FFC079;
+}
+.rightcontent {
+	text-align: left;
+	font-size: 14px;
 }
 </style>
 <script>
