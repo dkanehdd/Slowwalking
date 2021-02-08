@@ -18,6 +18,7 @@
 <!-- css, js 파일링크 등 묶음-->
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <style type="text/css">
+/* 화면 아래에 인터뷰 신청하기 div css */
 ._1nW60 {
 	min-height: 50px;
 	-ms-flex-direction: row;
@@ -91,6 +92,10 @@
 					</tr>
 					<tr>
 						<td style="text-align: left">3순위 ${dto.residence3 }</td>
+					</tr>
+					<tr>
+						<td>활동 가능 시간</td>
+						<td>${dto.activity_time }</td>
 					</tr>
 					<tr>
 						<td>간단 자기소개</td>
