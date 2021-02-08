@@ -8,7 +8,14 @@ public class ProductDTO {
 	private String content;
 	private String image;
 	private int ticket;
+	private String flag;
 	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 	public int getTicket() {
 		return ticket;
 	}

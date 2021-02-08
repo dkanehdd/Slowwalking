@@ -5,10 +5,16 @@
 
 <mapper namespace="mutiBoard.ProductImpl">
 
-	<select id="productList" resultType="mutiBoard.ProductDTO">
+	<select id="adminproductList" resultType="mutiBoard.ProductDTO">
 		SELECT * FROM shop_products
 	</select>
 
+	<select id="productList" resultType="mutiBoard.ProductDTO">
+		SELECT * FROM shop_products where flag='ticket'
+	</select>
+	<select id="premiumList" resultType="mutiBoard.ProductDTO">
+		SELECT * FROM shop_products where flag='premium'
+	</select>
 	<!-- 상품 내용 보기 -->
 	<select id="contentPage" resultType="mutiBoard.ProductDTO">
 		select * from shop_products
@@ -16,8 +22,8 @@
 	</select>
 	
 	<insert id="insertProduct" parameterType="mutiBoard.ProductDTO">
-		INSERT INTO shop_products (idx,product_name,price,content,image)
-		VALUES(seq_product_idx.nextval, #{product_name}, #{price},#{content}, #{image})
+		INSERT INTO shop_products (idx,product_name,price,content,image, flag)
+		VALUES(seq_product_idx.nextval, #{product_name}, #{price},#{content}, #{image},#{flag})
 	</insert>
 	
 	<update id="updateProduct" parameterType="mutiBoard.ProductDTO">
