@@ -11,7 +11,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#profile").on("click", function() {
@@ -37,6 +36,9 @@
 		});
 		$("#sitterEdit").on("click", function() {
 			$("#innerPage").load("../mypage/sitterEdit");
+		});
+		$("#premium").on("click", function() {
+			$("#innerPage").load("../mypage/premium");
 		});
 	});
 </script>
@@ -90,7 +92,7 @@ li:hover {
 				<div class="bg-dark text-light" style="width: 200px;">
 					&nbsp;${dto.name}&nbsp;<small>님</small>
 				</div>
-				<span>
+				<div>
 					리스트에 공개 
 					<label class="switch">
 					
@@ -105,7 +107,7 @@ li:hover {
 					<span
 						class="slider round"></span>
 					</label>
-				</span>
+				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item mt-2" id="profile">회원정보수정</li>
 				</ul>
@@ -120,7 +122,7 @@ li:hover {
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item mt-2" id="membership">이용권</li>
 					<li class="list-group-item">포인트</li>
-					<li class="list-group-item">프리미엄권</li>
+					<li class="list-group-item" id="premium">프리미엄권</li>
 				</ul>
 				<br />
 				<br />
