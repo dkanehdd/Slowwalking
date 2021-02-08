@@ -977,14 +977,14 @@ ol, ul {
 form[name="regiform"] button[type="submit"],
 form[name="payappform"]  button[type="submit"],
 form[name="fileFrm"]  button[type="submit"],
-#findBtn
+#findBtn, #tempPwBtn
 {
 	width:400px;
 	background-color:var(--primary-color);
 }
 form[name="regiform"] button[type="submit"]:hover,
 form[name="fileFrm"]  button[type="submit"]:hover,
-#findBtn:hover{
+#findBtn:hover, #tempPwBtn:hover{
 	background-color:var(--secondary-color);
 }
 .btn-cc{

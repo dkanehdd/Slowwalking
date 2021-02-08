@@ -12,7 +12,7 @@
 	<!-- Top메뉴 -->
 	<%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color:#eee;">
-		<div class="container">
+		<div class="container"  data-aos="fade-up" data-aos-delay="400">
 			<div class="form" style="width: 60%">				
 			<div class="section_title">
 				<h1 class="mb-5"><strong>Temporary Password</strong><br />임시 비밀번호 발급</h1>
@@ -46,7 +46,7 @@
 				dataType: "json",
 				contentType: "text/html;charset:utf-8",
 				success: function(d){
-					confirm("당신의 비밀번호는"+d.pw+"입니다");
+					confirm("회원님의 임시 비밀번호는 [ "+d.pw+" ] 입니다.\n비밀번호를 변경해주세요");
 					document.location = '../member/login';
 				},
 				error: function(){

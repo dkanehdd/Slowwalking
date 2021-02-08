@@ -12,7 +12,7 @@
 	<!-- Top메뉴 -->
 	<%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color:#eee;">
-		<div class="container">
+		<div class="container" data-aos="fade-up" data-aos-delay="400">
 			<div class="form" style="width: 60%">				
 			<div class="section_title">
 				<h1 class="mb-5"><strong>Find ID</strong> 아이디 찾기</h1>
@@ -47,7 +47,7 @@
 				contentType: "text/html;charset:utf-8",
 				success: function(d){
 					if(d.id!=null){
-						confirm("당신의 ID는"+d.id+"입니다");
+						confirm("회원님의 ID는 [ "+d.id+" ] 입니다");
 						document.location = '../member/temppw';
 					}
 					else{
