@@ -19,7 +19,7 @@
 			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
 		from sittermember s
             inner join member m
-               on s.sitter_id=m.id WHERE advertise='T' and permission='T' ORDER BY s.premium
+               on s.sitter_id=m.id WHERE advertise='T' and permission='T' ORDER BY s.premium DESC
 	</select>
 	
 	<!-- 트렁크가 나이 구하는 쿼리문 -->
@@ -58,6 +58,14 @@
 		UPDATE sittermember
 			SET advertise=#{0}
 			WHERE sitter_id=#{1}
+	</update>
+	
+	<update id="updatePremiumdate">
+		UPDATE sittermember SET premiumdate=sysdate+${param1} where sitter_id=#{param2}
+	</update>
+	
+	<update id="updatePremium"  parameterType="String">
+		UPDATE sittermember SET premium=trunc(premiumdate-sysdate)  where sitter_id=#{param1}
 	</update>
 	
 	

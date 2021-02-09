@@ -89,6 +89,7 @@ div .text {
 					<td>남은날짜 <span>${dto.premium}</span> 일
 						<div class="text mt-2">· 프리미엄권을 구매하면 시터목록에 상단에 위치하게 됩니다.</div>
 						<div class="text">· 이미 구매한 티켓은 취소가 불가능합니다.</div>
+						<div class="text">· 남은 날짜가 있을경우 추가 구매가 불가합니다.</div>
 					</td>
 				</tr>
 			</tbody>

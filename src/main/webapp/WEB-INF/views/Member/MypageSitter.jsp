@@ -62,7 +62,7 @@
 	width: 30px;
 }
 
-li:hover {
+.list-group-item:hover {
 	cursor: pointer;
 	background-color: #ffce7f;
 }

@@ -110,6 +110,10 @@
 			alert('자격증 사진을 업로드해주세요');
 			return false;
 		}
+		if(!d.personality_check.value){
+			alert('인적성 검사증을 등록해주세요');
+			return false;
+		}
 		if(!d.residence1.value){
 			alert('1순위 희망 지역을 선택해 주세요');
 			return false;

@@ -885,4 +885,5 @@ public class MypageController {
 		model.addAttribute("dto", dto);
 		return "Mypage/premium";
 	}
+	
 }
