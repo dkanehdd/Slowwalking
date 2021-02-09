@@ -13,4 +13,7 @@ public interface SitterImpl {
 	public int updateSitter(SitterMemberDTO sitterMemberDTO);
 	public int updateLicense(String filename, String id);
 	public int updateAdvertise(String advertise, String id);
+	
+	public int updatePremiumdate(int ticket, String id);
+	public int updatePremium(String id);
 }
