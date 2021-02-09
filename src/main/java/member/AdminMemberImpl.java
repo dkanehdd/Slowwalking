@@ -2,6 +2,8 @@ package member;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 
 import mutiBoard.MultiBoardDTO;
@@ -40,5 +42,8 @@ public interface AdminMemberImpl {
 	
 	//공지사항 삭제처리
 	public int noticedelete(int idx);
+
+
+
 	
 }

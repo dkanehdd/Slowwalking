@@ -30,4 +30,6 @@ public interface MemberImpl {
 	
 	public int updateTicket(int ticket, String id);
 	public int updatePoint(int point, String id);
+	
+	public int deletePoint(String point, String id);
 }

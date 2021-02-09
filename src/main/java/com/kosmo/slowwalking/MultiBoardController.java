@@ -101,14 +101,34 @@ public class MultiBoardController {
 	public String order(HttpServletRequest req, Model model,HttpSession session) {
 		String idx = req.getParameter("idx");
 		String flag = req.getParameter("flag");
+		int price = Integer.parseInt(req.getParameter("price"));
+		int usepoint = Integer.parseInt(req.getParameter("usepoint"));
 		
 		MemberDTO memberDTO = sqlSession.getMapper(MemberImpl.class).getMember(session.getAttribute("user_id").toString());
 		
-		ProductDTO dto = sqlSession.getMapper(ProductImpl.class).contentPage(idx);
-		System.out.println(dto.getPrice());
-		
+		ProductDTO Pdto = sqlSession.getMapper(ProductImpl.class).contentPage(idx);
+		System.out.println(Pdto.getPrice());
+		Pdto.setPrice(price);
+
+		if(price==0) {
+			int updateT = sqlSession.getMapper(MemberImpl.class).updateTicket(Pdto.getTicket(), memberDTO.getId());
+			OrderDTO dto = new OrderDTO();
+			dto.setId(session.getAttribute("user_id").toString());
+			dto.setProduct_idx(Integer.parseInt(idx));
+			System.out.println("상품 일련번호 : "+ req.getParameter("idx"));
+			dto.setTotal_price(Integer.parseInt(req.getParameter("price")));
+			dto.setPayment("point");
+			dto.setInfo("구매자 : "+ req.getParameter("id")
+						+ ", 금액 : "+req.getParameter("price")
+						+ ", 결제방식 : "+ "point");
+			int suc = sqlSession.getMapper(ProductImpl.class).insertOrder(dto);
+			int point  = sqlSession.getMapper(MemberImpl.class).deletePoint(req.getParameter("usepoint"),memberDTO.getId());
+			return "redirect:../multiBoard/product";
+		}
+	
 		model.addAttribute("memberDTO", memberDTO);
-		model.addAttribute("dto", dto);
+		model.addAttribute("usepoint",usepoint);
+		model.addAttribute("dto", Pdto);
 		model.addAttribute("flag", flag);
 		
 		return "MultiBoard/order";
@@ -119,6 +139,8 @@ public class MultiBoardController {
 	@ResponseBody
 	public Map<String, Object> Order_complete(HttpServletRequest req, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
 		OrderDTO dto = new OrderDTO();
 		dto.setId(req.getParameter("id"));
 		dto.setProduct_idx(Integer.parseInt(req.getParameter("idx")));
@@ -138,6 +160,7 @@ public class MultiBoardController {
 			System.out.println("구매자 : "+ req.getParameter("id"));
 			int updateP = sqlSession.getMapper(MemberImpl.class).updatePoint(productDTO.getPrice()/20, req.getParameter("id"));
 			int updateT = sqlSession.getMapper(MemberImpl.class).updateTicket(productDTO.getTicket(), req.getParameter("id"));
+      int usepoint  = sqlSession.getMapper(MemberImpl.class).deletePoint(req.getParameter("point"),req.getParameter("id"));
 			System.out.println("포인트 결과 : "+ updateP + "티켓 결과 : "+ updateT);
 		}
 		else {
