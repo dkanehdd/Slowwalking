@@ -10,7 +10,7 @@
 <title>느린걸음</title>
 
 </head> 
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 <body>
 <c:if test="${list_flag ne 'mylist' }">
 	<%@ include file="../include/top.jsp"%>

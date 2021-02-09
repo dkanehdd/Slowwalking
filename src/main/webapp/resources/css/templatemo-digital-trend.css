@@ -12,7 +12,6 @@
     --p-color:              #666262;
 
     --font-weight-bold:     bold;
-
     --h1-font-size:         42px;
     --h2-font-size:         32px;
     --h3-font-size:         24px;
@@ -307,7 +306,6 @@ ol, ul {
 	color:var(--primary-color);
 	background-color:var(--white-color);
 }
-
 
 /*---------------------------------------
      video-container   //추가    

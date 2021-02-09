@@ -54,9 +54,9 @@
 	                    <li><a href="../member/temppw" id="findPw" name="findPw" >비밀번호 찾기</a></li>
 	                    <li class="non-af"><a href="../member/join" id="signUp" name="signUp">회원가입</a></li> 
 					</ul>
-					<a href="<%=apiURL%>"><img height="50" src="../img/naverlogin.png"/></a>
+					<a href="<%=apiURL%>"><img src="../img/naverlogin.png" style="width:100%; margin-bottom:5px;"/></a>
 					<a href="https://kauth.kakao.com/oauth/authorize?client_id=e1bfbd13b698ee8d3ecba1e269ed3918&redirect_uri=http://localhost:8080/slowwalking/kakao/callback&response_type=code">
-						<img alt="" src="../img/kakao.png" style="height:60px; width:256px ">
+						<img alt="" src="../img/kakao.png" style="width:100%;"><!-- "height:60px; width:256px " -->
 						</a>
 					</div>
 				</div>

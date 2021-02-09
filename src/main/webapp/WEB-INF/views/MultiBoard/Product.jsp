@@ -49,7 +49,7 @@ function on_pay(pay_flag) {
 		<div class="container">
 			<div class="section_title subPimgBg noticeImg">
 				<h1 class="mb-5">
-					<strong>PRODUCT</strong> 상품
+					<strong>PASSES</strong> 이용권구매
 				</h1>
 			</div>
 			<table class="table table-hover" data-aos="fade-up"

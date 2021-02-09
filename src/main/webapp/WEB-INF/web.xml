@@ -26,12 +26,14 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- 웹소켓을 위한 설정(비동기지원) -->
+		<async-supported>true</async-supported> 
 	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>	
 	
 	<filter>
 		<filter-name>encodingFilter</filter-name>

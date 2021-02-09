@@ -309,8 +309,7 @@ public class MemberController {
 		String updatePw=sqlSession.getMapper(MemberImpl.class).updatePw(userId, userPhone);
 		System.out.println("넘어온 userId: "+userId);
 		System.out.println("넘어온 userPhone: "+userPhone);
-		System.out.println("생성된 임시 tempPw: "+tempPw);//sql에서 난수생성
-		System.out.println("유저에게 전달할 updatePw: "+updatePw);
+		System.out.println("유저에게 전달할 updatePw: "+updatePw);//sql에서 난수생성
 		
 		map.put("pw", updatePw);		
 		
