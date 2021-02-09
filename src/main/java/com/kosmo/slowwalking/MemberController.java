@@ -172,7 +172,12 @@ public class MemberController {
 			model.addAttribute("dto", dto);
 			int premium = sqlSession.getMapper(SitterImpl.class).updatePremium(user_id);
 			SitterMemberDTO sdto = sqlSession.getMapper(SitterImpl.class).selectSitter(user_id);
-			
+			if(sdto!=null) {
+				if(sdto.getPremium()==null || Integer.parseInt(sdto.getPremium())<=0) {
+					sqlSession.getMapper(SitterImpl.class).resetPremium(user_id);
+					System.out.println("프리미엄 초기화 완료");
+				}
+			}
 			model.addAttribute("sdto", sdto);
 			mv.setViewName("Member/MypageSitter");
 		} else if (flag.equals("parents")) {

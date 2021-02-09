@@ -67,6 +67,9 @@
 	<update id="updatePremium"  parameterType="String">
 		UPDATE sittermember SET premium=trunc(premiumdate-sysdate)  where sitter_id=#{param1}
 	</update>
+	<update id="resetPremium"  parameterType="String">
+		UPDATE sittermember SET premium=0, premiumdate=''  where sitter_id=#{param1}
+	</update>
 	
 	
 
