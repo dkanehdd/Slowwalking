@@ -110,41 +110,25 @@ $(function(){
 		<div class="container">
 			<div class="section_title subPimgBg noticeImg">
 				<h1 class="mb-5">
-					<strong>PRODUCT</strong> 상품
+					<strong>TICKET</strong> 이용권구매하기
 				</h1>
 			</div>
-			<table class="table table-hover" data-aos="fade-up"
-				data-aos-delay="400">
-				<colgroup>
-					<col style="width: 5%">
-					<col style="">
-					<col style="width: 17%">
-					<col style="width: 11%">
-				</colgroup>
-				<thead>
-					<tr>
-						<th scope="col">상품의 일련번호</th>
-						<th scope="col">상품의 이름</th>
-						<th scope="col">상품의 가격</th>
-						<th scope="col">상품의 정보</th>
-						<th scope="col">상품 이미지</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${lists }" var="row">
+			<table class="table mt-3 mb-5"  data-aos="fade-up" data-aos-delay="400">
+				<c:forEach var="row" items="${lists }">
+					<tbody>
 						<tr>
-							<th>${row.idx }</th>
-							<!-- 아래있는 요청명 이랑 controller에 있는 @requestMapping 이랑 같아야해요 -->
-							<th><a href="../multiBoard/product_view?idx=${row.idx }">${row.product_name }</a>
-							</th>
-							<th>${row.price }</th>
-							<th>${row.content }</th>
-							<th>${row.image }</th>
-							<td><button type="button" class="btn btn-primary"
-									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button></td>
+							<td>
+								<div class="card">
+									<div class="card-body">${row.product_name }
+										${row.price }
+										<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
+									</div>
+								</div>
+							</td>
 						</tr>
-					</c:forEach>
-				</tbody>
+					</tbody>
+				</c:forEach>
 			</table>
 		</div>
 		<div id="modal_layer" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">

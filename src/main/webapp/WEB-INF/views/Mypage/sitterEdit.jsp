@@ -15,31 +15,19 @@
 </head>
 <!-- http://localhost:9090/slowwalking/member/sitterjoin -->
 <body>
-<%@ include file="../include/top.jsp"%>
-	<section class="section-padding" style="background-color: #eee;">
+<div class="ml-3 mt-3">
+<h3>시터정보 수정</h3>
+</div>
 		<div class="container">
-			<div class="section_title">
-				<h1 class="mb-5"><strong>시터회원</strong> 추가정보 입력</h1>
-			</div>
 			<form:form method="post" name="payappform" id="payappform"
-				action="../member/sitterjoinaction?${_csrf.parameterName}=${_csrf.token}"
-				enctype="multipart/form-data"
+				action="../mypage/sitterEditAction?${_csrf.parameterName}=${_csrf.token}"
 				onsubmit="return chkSitter();">
-				<input type="hidden" value="${id }" name="sitter_id" />
+				<input type="hidden" value="${dto.sitter_id }" name="sitter_id" />
 				<table class="table form joinF">
 					<colgroup>
 						<col style="width: 20%">
 						<col>
 					</colgroup>
-					<tr>
-						<th scope="row">자격증(필수)<br>
-						<small>&#42; 장애영유아보육교사</small></th>
-						<td style="vertical-align:middle;"><input type="file" id="license_check" name='license_check' /></td>
-					</tr>
-					<tr>
-						<th scope="row">인성검사확인</th>
-						<td><input type="file" name='personality_check' /></td>
-					</tr>
 					<tr>
 						<th scope="row">활동가능지역</th>
 						<td>
@@ -66,7 +54,7 @@
 									style="width: 30%; position: unset; margin: 0"> <select
 									id="gugun1" class="pass form-control">
 										<option value="">-구/군-</option>
-								</select></span> <small style="vertical-align:sub;">1순위 (필수)</small><input type="hidden" name="residence1"
+								</select></span> <small style="vertical-align:sub;">1순위 (필수) 이전선택항목 : ${dto.residence1 }</small> <input type="hidden" name="residence1"
 									id="residence1" />
 							</div>
 							<div id="area_box" style="clear: both;">
@@ -92,7 +80,7 @@
 									style="width: 30%; position: unset; margin: 0"> <select
 									id="gugun2" class="pass form-control">
 										<option value="">-구/군-</option>
-								</select></span> <small style="vertical-align:sub;">2순위 (선택)</small><input type="hidden" name="residence2"
+								</select></span> <small style="vertical-align:sub;">2순위 (선택) 이전선택항목 : ${dto.residence2 }</small>  <input type="hidden" name="residence2"
 									id="residence2" />
 							</div>
 							<div id="area_box" style="clear: both;">
@@ -118,7 +106,7 @@
 									style="width: 30%; position: unset; margin: 0"> <select
 									id="gugun3" class="pass form-control">
 										<option value="">-구/군-</option>
-								</select></span> <small style="vertical-align:sub;">3순위 (선택)</small><input type="hidden" name="residence3"
+								</select></span> <small style="vertical-align:sub;">3순위 (선택) 이전선택항목 : ${dto.residence3 }</small><input type="hidden" name="residence3"
 									id="residence3" />
 							</div> <!--
 						<div id="free_open">
@@ -224,7 +212,7 @@
 						<br><small>&#42; 원 단위로 입력해주세요.</small></th>
 						<td>
 							<div>
-								시급 : <input type="number" id="paytype" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;">
+								시급 : <input type="text" id="paytype" name="pay" value="${dto.pay }" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;">
 							</div></td>
 					</tr>
 					<tr>
@@ -235,18 +223,16 @@
 							<div id="content_table" style="display: none"></div>
 							<div id="content_box">
 								<textarea name="introduction" class="contents noresize" id="contents"
-									style="margin-top: 10px; height:300px;"></textarea>
+									style="margin-top: 10px; height:300px;">${dto.introduction }</textarea>
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="btnBelow">
-					<button type="submit" class="btn btn-danger">작성완료</button>
+					<button type="submit" class="btn btn-danger">수정완료</button>
 				</div>
 			</form:form>
 		</div>
-	</section>
-	<%@ include file="../include/footer.jsp"%>
 </body>
 <%@ include file="../links/sitterjoinscript.jsp"%>	
 </html>

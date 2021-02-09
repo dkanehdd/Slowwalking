@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MultiBoardImpl;
+import member.SitterImpl;
 import mutiBoard.MultiBoardDTO;
 import mutiBoard.OrderDTO;
 import mutiBoard.ProductDTO;
@@ -152,12 +153,26 @@ public class MultiBoardController {
 		
 		int suc = sqlSession.getMapper(ProductImpl.class).insertOrder(dto);
 		ProductDTO productDTO = sqlSession.getMapper(ProductImpl.class).contentPage(req.getParameter("idx"));
-		System.out.println("티켓 : "+productDTO.getTicket()+" 적립금 : "+ productDTO.getPrice()/20);
-		System.out.println("구매자 : "+ req.getParameter("id"));
-		int updateP = sqlSession.getMapper(MemberImpl.class).updatePoint(productDTO.getPrice()/20, req.getParameter("id"));
-		int updateT = sqlSession.getMapper(MemberImpl.class).updateTicket(productDTO.getTicket(), req.getParameter("id"));
-		int usepoint  = sqlSession.getMapper(MemberImpl.class).deletePoint(req.getParameter("point"),req.getParameter("id"));
-		System.out.println("포인트 결과 : "+ updateP + "티켓 결과 : "+ updateT);
+		
+		if(productDTO.getFlag().equals("ticket")) {
+			System.out.println("티켓구매 업데이트");
+			System.out.println("티켓 : "+productDTO.getTicket()+" 적립금 : "+ productDTO.getPrice()/20);
+			System.out.println("구매자 : "+ req.getParameter("id"));
+			int updateP = sqlSession.getMapper(MemberImpl.class).updatePoint(productDTO.getPrice()/20, req.getParameter("id"));
+			int updateT = sqlSession.getMapper(MemberImpl.class).updateTicket(productDTO.getTicket(), req.getParameter("id"));
+      int usepoint  = sqlSession.getMapper(MemberImpl.class).deletePoint(req.getParameter("point"),req.getParameter("id"));
+			System.out.println("포인트 결과 : "+ updateP + "티켓 결과 : "+ updateT);
+		}
+		else {
+			System.out.println("프리미엄권 구매");
+			System.out.println("티켓 : "+productDTO.getTicket()+" 적립금 : "+ productDTO.getPrice()/20);
+			System.out.println("구매자 : "+ req.getParameter("id"));
+			int premiumdate = sqlSession.getMapper(SitterImpl.class).updatePremiumdate(productDTO.getTicket(), req.getParameter("id"));
+			int premium = sqlSession.getMapper(SitterImpl.class).updatePremium(req.getParameter("id"));
+			System.out.println("프리미엄권 구매결과"+premiumdate);
+			System.out.println("프리미엄 날짜 업데이트 "+premium);
+		}
+		
 		map.put("suc", suc);
 		
 		return map;

@@ -153,6 +153,7 @@
 		</table>
 	</c:forEach>
 	<br/>
+	<div><button id="load" class="btn btn-info">더보기</button></div>
 	</div>
 	
 </div>
@@ -251,6 +252,9 @@ div#search{
 	text-align: left;
 	font-size: 14px;
 }
+table{
+	display:none;
+}
 </style>
 <script>
 $(function () {
@@ -326,6 +330,18 @@ function workday_make() {
 <script src="../resources/js/owl.carousel.min.js"></script>
 <script src="../resources/js/smoothscroll.js"></script>
 <script src="../resources/js/custom.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('table').slice(0, 2).show();
+	$('#load').click(function(e) {
+		e.preventDefault();
+		if($('table:hidden').length==0){
+			alert("더이상 게시물이 없습니다.");
+		}
+		$('table:hidden').slice(0, 2).show();
+	});
+});
+</script>
 </body>
 </html>
 

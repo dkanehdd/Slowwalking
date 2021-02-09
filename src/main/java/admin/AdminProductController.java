@@ -43,7 +43,7 @@ public class AdminProductController {
 	@RequestMapping("/admin/productList")
 	public String productList(Model model) {
 
-		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).productList();
+		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).adminproductList();
 
 		model.addAttribute("lists", lists);
 		return "admin/productList";
@@ -62,6 +62,7 @@ public class AdminProductController {
 		ProductDTO productDTO = new ProductDTO();
 		productDTO.setProduct_name(req.getParameter("product_name"));
 		productDTO.setContent(req.getParameter("content"));
+		productDTO.setFlag(req.getParameter("flag"));
 		productDTO.setPrice(Integer.parseInt(req.getParameter("price")));
 		// 서버의 물리적경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/product");
