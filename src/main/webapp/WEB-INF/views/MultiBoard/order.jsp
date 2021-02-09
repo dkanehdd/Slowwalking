@@ -46,7 +46,8 @@
                        id : '${memberDTO.id}',
                        idx : '${dto.idx }',
                        payment : '${flag }',
-                       price : '${dto.price }'
+                       price : '${dto.price }',
+                       point: '${usepoint}'
                    },
                    success: function(res) {
                        console.log(res);
