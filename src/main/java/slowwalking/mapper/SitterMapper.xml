@@ -14,12 +14,13 @@
 	</insert>
 	
 	<!-- 트렁크가 나이 구하는 쿼리문 -->
-	<select id="list" resultType="member.SitterMemberDTO">
+	<select id="list" resultType="member.SitterMemberDTO" parameterType="advertisement.ParameterDTO">
 		SELECT s.*, m.name, m.image_path, m.starrate,
 			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
 		from sittermember s
             inner join member m
                on s.sitter_id=m.id WHERE advertise='T' and permission='T' ORDER BY s.premium
+        
 	</select>
 	
 	<!-- 트렁크가 나이 구하는 쿼리문 -->
@@ -38,7 +39,8 @@
 			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
 		from sittermember s
             inner join member m
-               on s.sitter_id=m.id WHERE m.id=#{id}
+               on s.sitter_id=m.id 
+        WHERE m.id=#{id}
 	</select>
 	
 

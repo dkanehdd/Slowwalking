@@ -74,7 +74,7 @@
 								<td><button type="button" class="btn btn-dark" id="refuse">취소</button></td>
 							</c:when>
 							<c:otherwise>
-								<td><button type="button" class="btn btn-info" id="diary" onClick="javascript:openCalendar();">알림장</button></td>
+								<td><button type="button" class="btn btn-info" id="diary" onClick="javascript:openCalendar(${row.idx});">알림장</button></td>
 								<td><button type="button" class="btn btn-success" onClick="javacript:openComment();">후기</button></td>
 							</c:otherwise>
 						</c:choose>
@@ -88,17 +88,20 @@
 </body>
 <script type="text/javascript">
 var idx = document.getElementById("idx").value;	
+var my_idx;
 function moveView(){
 	var idx = document.getElementById("request_idx").value;	
 	location.href="../advertisement/requestBoard_view?idx="+idx;
 }
-function openCalendar(){
-	location.href="../mypage/openCalendar?idx="+idx;
+function openCalendar(idx_c){
+	location.href="../mypage/openCalendar?idx="+idx_c;
 }
 function openComment(){
 	window.open("../mypage/openComment?idx="+idx, "후기", 
 	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no");
 }
+
+
 $(function(){
 	$('#accept').on("click", function(){
 		$.ajax({

@@ -8,8 +8,16 @@ public class DiaryDTO {
 	private String rece_id;
 	private String content;
 	private String flag;
+	private String name;//시터 이름
 	private int idx;
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}

@@ -30,13 +30,60 @@ span.star-prototype > * {
 
 	<div class="container">
 		<div class="text-center">
-			<form method="get">
-				<select name="searchField">
-					<option value="contents">지역</option>
-					<option value="name">이름</option>
-				</select> <input type="text" name="searchTxt" /> <input type="submit"
-					value="검색" />
-			</form>
+		<br/><br/><br/>
+			<form action="../advertisement/SitterBoard_list?${_csrf.parameterName}=${_csrf.token}"
+				method="post">
+				<input type="hid den" name="search" value="search">
+				<p style="color: #FFC079">※가능한 시간을 체크해주세요 체크하지 않으면 모든 시간이 검색됩니다</p>
+				<button type="button" class="workday_off mr1p"
+					value="월">월</button>
+				<button type="button" class="workday_off mr1p"
+					value="화">화</button>
+				<button type="button" class="workday_off mr1p"
+					value="수">수</button>
+				<button type="button" class="workday_off mr1p"
+					value="목">목</button>
+				<button type="button" class="workday_off mr1p"
+					value="금">금</button>
+				<button type="button" class="workday_off mr1p" value="토">토</button>
+				<button type="button" class="workday_off" value="일">일</button>
+				<button type="button" class="workday_off" id="consultation" value="협의가능">협의가능</button>
+				<br/>
+				<input type="hid den" id="workday_name" name="request_time">
+				<br/><br/>
+				<p style="color: #FFC079">※원하시는 지역을 선택해주세요. 선택하지 않으시면 전체 지역으로 검색됩니다.</p>
+					<select id='sido' class="form-control">
+						<option value="">시/도 선택</option>
+						<option value="서울">서울</option>
+						<option value="강원">강원</option>
+						<option value="경기">경기</option>
+						<option value="경남">경남</option>
+						<option value="경북">경북</option>
+						<option value="광주">광주</option>
+						<option value="대구">대구</option>
+						<option value="대전">대전</option>
+						<option value="부산">부산</option>
+						<option value="울산">울산</option>
+						<option value="인천">인천</option>
+						<option value="전남">전남</option>
+						<option value="전북">전북</option>
+						<option value="제주">제주</option>
+						<option value="충남">충남</option>
+						<option value="충북">충북</option>
+					</select> <span id="catetd1" class="area2ck"
+						style="width: 30%; position: unset; margin: 0"> 
+					<br/>	
+					<select id="gugun" class="form-control">
+							<option value="">-구/군-</option>
+					</select></span><input type="hid`den" name="region"
+						id="region" />
+					<br/><br/>	
+					<p style="color: #FFC079">※최대 시급을 작성해 주세요 희망시급으로 검색됩니다. 작성하지 않으시면 전체 시급으로 검색됩니다.</p>
+					<input type="number" name="pay" class="form-control" />
+					<br/><br/>
+					<button type="submit" class="btn btn-info btn-sm">검색</button>
+			
+		</form>
 		</div>
 		<c:forEach items="${lists }" var="row">
 			<div class="border mt-2 mb-2">
@@ -93,6 +140,122 @@ $('.star-prototype').generateStars();
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>
+<script>
+$(function () {
+	$('#sido').change(function() {
+		$.ajax({
+			url : "../zipcode/gugun",
+			type : 'get',
+			contentType : "text/html;charset:utf-8",
+			data : {
+				sido : $('#sido option:selected').val()
+			},
+			dataType : "json",
+			success : function(d) {
+				var optionStr = "";
+				optionStr += "<option value=''>";
+				optionStr += "-구/군-";
+				optionStr += "</option>";
+				//$.each()통해 반복되는 요소의 인덱스와 요소값을 매개변수로 받을수있다.
+				$.each(d, function(index, data) {
+					optionStr += '<option value="'+data+'">';
+					optionStr += data;
+					optionStr += '</option>';
+				});
+				$('#gugun').html(optionStr);
+			},
+			error : function(e) {
+				alert("오류발생 : " + e.status + " : " + e.statue.Text);
+			}
+		});
+		$('#gugun').change(
+				function() {
+					$('#region').val(
+							$("#sido option:selected").val() + " "
+									+ $("#gugun option:selected").val());
+				})
+		
+	});
+})
+$(function() {
+	$(".workday_off").click(function() {
+		if ($(this).hasClass("workday_on") == false) {
+			if($('#consultation').hasClass("workday_on") == true){
+				//협의 가능이 눌러져있으면 아무것도 눌리지 않는다.
+			}else{
+				$(this).addClass("workday_on");
+			}
+		} else {
+			$(this).removeClass("workday_on");
+		}
+		workday_make()
+	});
+	
+	$('#consultation').click(
+		function() {
+			if ($(this).hasClass("workday_on") == true) {
+				$("#workday_name").val('협의가능');
+				$('.workday_off').removeClass("workday_on");
+				$(this).addClass("workday_on");
+				
+			} else {
+				var i = 0;
+				var workday_tyle = "";
+				$(".workday_off").each(function() {
+					if ($(this).hasClass("workday_on") == true) {
+						workdaytype = $(this).val();
+						if (i != 0)
+							workday_tyle += ",";
+						workday_tyle += workdaytype;
+						i++;
+					}
+				});
+				if (i == 0) {
+					$("#workday_name").val("");
+				} else {
+					$("#workday_name").val(workday_tyle);
+				}
+			}
+		})
+	
+});
+function workday_make() {
+	var i = 0;
+	var workday_tyle = "";
+	$(".workday_off").each(function() {
+		if ($(this).hasClass("workday_on") == true) {
+			workdaytype = $(this).val();
+			if (i != 0)
+				workday_tyle += ",";
+			workday_tyle += workdaytype;
+			i++;
+		}
+	});
+	if (i == 0) {
+		$("#workday_name").val("");
+	} else {
+		$("#workday_name").val(workday_tyle);
+	}
+}
+</script>
+<style>
+.workday_off {
+	border: 1px solid #e0e0e0;
+	background: #fff;
+	margin-top: 7px;
+	width: calc(58%/ 7);
+	color: #595757;
+	padding: 6px 0;
+	text-align: center;
+	font-family: Noto Sans KR, sans-serif !important;
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.workday_on {
+	background: #FFC079;
+}
+</style>
 </html>
 
 

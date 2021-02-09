@@ -27,7 +27,7 @@
 			VALUES (seq_interview_idx.nextval, #{1}, #{2}, #{3}, 'F', 'F', #{0})
 	</insert>
 	<select id="interList" resultType="advertisement.InterviewDTO">
-		select M.name as parents_name, MM.name as sitter_name 
+		select M.name as parents_name, MM.name as sitter_name, I.sitter_id, I.parents_id , I.idx
 			from interview I
     		join member M
         		on I.parents_id = M.id
@@ -58,10 +58,18 @@
  			VALUES (seq_diary_idx.nextval, sysdate, #{1}, #{2}, #{3}, 'diary', #{0})
 	</insert>
 	<select id="sitDiary" resultType="mutiBoard.DiaryDTO">
-		SELECT * FROM diary WHERE send_id=#{0}
+		SELECT * FROM diary WHERE send_id=#{0} AND idx=#{1}
 	</select>
 	<select id="parDiary" resultType="mutiBoard.DiaryDTO">
-		SELECT * FROM diary WHERE rece_id=#{0}
+		SELECT * FROM diary WHERE rece_id=#{0} AND idx=#{1}
+	</select>
+	<select id="diaryView" resultType="mutiBoard.DiaryDTO">
+		select M.name,d.content from diary D
+    		join interview I
+        		on D.idx = I.idx
+		    join member M
+		        on I.sitter_id = M.id
+		    where its_idx=#{0}
 	</select>
 	
 	<!-- 후기 -->

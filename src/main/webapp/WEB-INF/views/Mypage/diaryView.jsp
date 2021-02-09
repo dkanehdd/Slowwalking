@@ -22,19 +22,17 @@ p {font-size: 14px;}
 </head>
 <body>
 <div class="container">
-	<input type="hidden" id="parents_id" value="${dto.parents_id }"/>
-	<input type="hidden" id="sitter_id" value="${dto.sitter_id }"/>
-	<input type="hidden" id="idx" value="${dto.idx }"/>
 	<div class="item">
 		<h3>알림장</h3>
 	</div>
 	<div class="item" id="sitter">
-		<p>오늘의 선생님 : ${dto.sitter_name }</p>
+		<p>오늘의 선생님 : ${dto.name }</p>
 	</div>
 	<div class="item" id="textarea">
-		<textarea class="noresize" rows="7" id="content">
-		dto내용
-		</textarea></div>
+		<textarea class="noresize" rows="7" id="content" readonly="readonly">
+		${dto.content } 
+		</textarea>
+	</div>
 </div>
 </body>
 </html>

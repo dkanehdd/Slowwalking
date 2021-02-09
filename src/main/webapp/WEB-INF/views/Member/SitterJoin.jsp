@@ -224,7 +224,7 @@
 						<br><small>&#42; 원 단위로 입력해주세요.</small></th>
 						<td>
 							<div>
-								시급 : <input type="text" id="paytype" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;">
+								시급 : <input type="number" id="paytype" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;">
 							</div></td>
 					</tr>
 					<tr>

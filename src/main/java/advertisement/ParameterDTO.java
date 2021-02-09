@@ -1,5 +1,8 @@
 package advertisement;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ParameterDTO {
 	
 	private String search;
@@ -10,9 +13,39 @@ public class ParameterDTO {
 	private String region;
 	private String age;
 	private String consultation;
+	private String pay;
+	private String max_age;
+	private String min_age;
+	//시터 검색내용을 저장할 Map
+	private Map<String, String> searchmap;
 	
 	
 	
+	
+	public Map<String, String> getSearchmap() {
+		return searchmap;
+	}
+	public void setSearchmap(Map<String, String> searchmap) {
+		this.searchmap = searchmap;
+	}
+	public String getPay() {
+		return pay;
+	}
+	public void setPay(String pay) {
+		this.pay = pay;
+	}
+	public String getMax_age() {
+		return max_age;
+	}
+	public void setMax_age(String max_age) {
+		this.max_age = max_age;
+	}
+	public String getMin_age() {
+		return min_age;
+	}
+	public void setMin_age(String min_age) {
+		this.min_age = min_age;
+	}
 	public String getConsultation() {
 		return consultation;
 	}

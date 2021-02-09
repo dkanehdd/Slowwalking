@@ -31,7 +31,7 @@
 	<form action="../advertisement/requestBoard_list?${_csrf.parameterName}=${_csrf.token}"
 	method="post">
 		<input type="hid den" name="search" value="search">
-		<p style="color: #FFC079">※가능한 시간을 체크해주세요 체크하지 않으면 모든 시간이 검색됩니다1111.</p>
+		<p style="color: #FFC079">※가능한 시간을 체크해주세요 체크하지 않으면 모든 시간이 검색됩니다</p>
 		<button type="button" class="workday_off mr1p"
 			value="월">월</button>
 		<button type="button" class="workday_off mr1p"
