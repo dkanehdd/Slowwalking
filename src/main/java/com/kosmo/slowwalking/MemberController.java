@@ -11,11 +11,16 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,6 +48,8 @@ public class MemberController {
 
 	@Autowired
 	public SqlSession sqlSession;
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	// 테스트용 멤버리스트 가져오기
 	@RequestMapping("/member/list")
@@ -299,20 +306,30 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, Object> userPwSearch(HttpServletRequest req){
 		
-		Map<String, Object> map=new HashMap<String, Object>();
-		
+		Map<String, Object> map=new HashMap<String, Object>();		
 		
 		String userId=req.getParameter("id");
-		String userName=req.getParameter("name");
-		String userPhone=req.getParameter("phone");
-		String tempPw=sqlSession.getMapper(MemberImpl.class).tempPw(userId, userPhone);
-		String updatePw=sqlSession.getMapper(MemberImpl.class).updatePw(userId, userPhone);
+		String userEmail=req.getParameter("email");
+		sqlSession.getMapper(MemberImpl.class).tempPw(userId, userEmail);
+		String updatePw=sqlSession.getMapper(MemberImpl.class).updatePw(userId, userEmail);
 		System.out.println("넘어온 userId: "+userId);
-		System.out.println("넘어온 userPhone: "+userPhone);
+		System.out.println("넘어온 userEmail: "+userEmail);
 		System.out.println("유저에게 전달할 updatePw: "+updatePw);//sql에서 난수생성
 		
-		map.put("pw", updatePw);		
-		
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = "<h2>안녕하세요 '"+ userId +"' 님</h2><br><br>" 
+				+ "<p>비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다.</p>"
+				+ "<p>임시로 발급 드린 비밀번호는 <h2 style='color : orange'>'" + updatePw +"'</h2>입니다.<br>로그인 후 마이페이지에서 비밀번호를 변경해주세요.</p>";
+		try {
+			mail.setSubject("[느린걸음] "+userId+" 님의 "+"임시 비밀번호가 발급되었습니다", "utf-8");
+			mail.setText(htmlStr, "utf-8", "html");
+			mail.addRecipient(RecipientType.TO, new InternetAddress(userEmail));
+			mailSender.send(mail);
+		} 
+		catch (MessagingException e) { 
+			e.printStackTrace();
+		}	
+		map.put("pw", updatePw);
 		return map;
 	}
 	

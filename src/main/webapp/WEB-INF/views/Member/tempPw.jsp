@@ -20,9 +20,9 @@
 				<div>
 					<input class='w50p' type="text" id="id" name="id" value="" 
 					placeholder="아이디를 입력해주세요" title="아이디를 입력해주세요" required="required" autofocus>
-					<input class='w50p' type="text" id="phone" name="phone" value=""
-					maxlength='11' pattern="(010)\d{3,4}\d{4}" required="required" title="형식  01000000000"
-					placeholder="휴대폰번호를 입력해주세요">					
+					<input class='w50p' type="text" id="email" name="email" value=""
+					pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required="required" title="형식 : OOOO@OOOO.OOO"
+					placeholder="이메일 주소를 입력해주세요">					
 					<label for="tempPwTxt">임시발급 비밀번호</label><div id="tempPwTxt" name="tempPwTxt" style="height:20px"></div>
 				</div>
 				<div class="btnBelow">
@@ -39,7 +39,7 @@
 		var d=document.regiform;
 		
 		if(!d.id.value){ alert("아이디를 입력하세요"); d.id.focus();return false;}
-		if(!d.phone.value) { alert('전화번호를 입력하세요'); d.email.focus();return false; }
+		if(!d.email.value) { alert('이메일주소를 입력하세요'); d.email.focus();return false; }
 	}
 	$(function(){
 		$('#tempPwBtn').on("click", function(){
@@ -48,7 +48,7 @@
 				type: "GET",
 				data: {
 					id : $('#id').val(),
-					phone : $('#phone').val()
+					email : $('#email').val()
 				},
 				dataType: "json",
 				contentType: "text/html;charset:utf-8",

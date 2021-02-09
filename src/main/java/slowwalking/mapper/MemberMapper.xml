@@ -36,14 +36,14 @@
 	</select>
 	
 	<!-- 임시비밀번호발급 hjkosmo 추가 -->
-	<select id="tempPw" resultType="String">
+	<select id="tempPw">
 		UPDATE member SET pw = (SELECT dbms_random.string('A', 20) FROM dual) 
-		WHERE id = #{0} and phone=#{1}
+		WHERE id = #{0} and email=#{1}
 	</select>
 	<!-- 비밀번호 찾기 hjkosmo 추가 -->
 	<select id="updatePw" resultType="String">
-		SELECT pw FROM member  
-		WHERE id=#{0} and phone=#{1}
+		SELECT pw FROM member 
+		WHERE id=#{0} and email=#{1}
 	</select>
 	
 	<insert id="insertMember">

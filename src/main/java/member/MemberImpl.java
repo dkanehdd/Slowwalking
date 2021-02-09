@@ -12,8 +12,8 @@ public interface MemberImpl {
 	public MemberDTO getMemberAndoid(MemberDTO membetDTO);
 	
 	String findId(String name, String phone);//hjkosmo 추가
-	String tempPw(String id, String phone);//hjkosmo 추가
-	String updatePw(String id, String phone);//hjkosmo 추가
+	String tempPw(String id, String email);//hjkosmo 추가
+	String updatePw(String id, String email);//hjkosmo 추가
 	public int checkEmail(String email); //hjkosmo 추가
 	
 	public int insertMember(MemberDTO memberDTO);

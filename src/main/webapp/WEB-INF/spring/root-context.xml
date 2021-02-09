@@ -13,4 +13,20 @@
 		<property name="username" value="slowwalking" />
 		<property name="password" value="1234" />	
 	</bean>	
+	
+	<!-- mail설정 -->
+	<bean id="mailSender2" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+	     <property name="host" value="smtp.gmail.com" />
+	     <property name="port" value="587" />
+	 <property name="username" value="temporary@gmail.com"/><!-- 작동 확인//최종버전에서 이메일 주소 및 비밀번호 입력예정 -->
+	 <property name="password" value="temporary"/><!-- 작동 확인//최종버전에서 이메일 주소 및 비밀번호 입력예정 -->
+	 <!-- 보안연결 TLS과 관련된 설정 -->
+     <property name="javaMailProperties">
+	    <props>
+	       <prop key="mail.smtp.auth">true</prop>
+	       <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+     </property>
+	</bean>
+
 </beans>
