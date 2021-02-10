@@ -28,8 +28,9 @@ public interface MypageImpl {
 	public int parAgree(int idx);
 	//알림장
 	public int sendDiary(int idx, String send_id, String rece_id, String content);
-	public ArrayList<DiaryDTO> sitDiary(String id);
-	public ArrayList<DiaryDTO> parDiary(String id);
+	public ArrayList<DiaryDTO> sitDiary(String id, int idx);
+	public ArrayList<DiaryDTO> parDiary(String id, int idx);
+	public DiaryDTO diaryView(int its_idx);
 
 	//후기
 	public int writeComment(int idx, String send_id, String rece_id, String content);

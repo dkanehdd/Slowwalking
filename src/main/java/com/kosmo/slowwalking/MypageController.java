@@ -333,13 +333,23 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/mypage/openDiaryView")
-	public String openDiaryView(HttpServletRequest req, Model model) {
+	public String openDiaryView(HttpServletRequest req, Model model, Principal principal) {
 		
-		int idx = Integer.parseInt(req.getParameter("idx"));
+		//알림장의 고유 일련번호를 받아온다.
+		int its_idx = Integer.parseInt(req.getParameter("its_idx"));
 		
-		System.out.println("idx:"+idx);
+		System.out.println("its_idx:"+its_idx);
 		
-		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
+		String user_id = principal.getName();
+		//시터이면 수정이 가능하고 부모이면 수정이 불가능하게 하기 위해 flag을 받아온다.
+		String user_flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
+		
+		System.out.println("user_flag : " + user_flag);
+		
+		model.addAttribute("user_flag", user_flag);
+		
+		DiaryDTO dto = sqlSession.getMapper(MypageImpl.class).diaryView(its_idx);
+		
 		model.addAttribute("dto", dto);
 		
 		return "Mypage/diaryView";
@@ -366,10 +376,13 @@ public class MypageController {
 		
 		String user_flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
 		
+		System.out.println("user_flag : " + user_flag);
+		
+		
 		if("parents".equals(user_flag)) {
-			diaryList = sqlSession.getMapper(MypageImpl.class).parDiary(user_id);
+			diaryList = sqlSession.getMapper(MypageImpl.class).parDiary(user_id, idx);
 		}else if("sitter".equals(user_flag)) {
-			diaryList = sqlSession.getMapper(MypageImpl.class).sitDiary(user_id);
+			diaryList = sqlSession.getMapper(MypageImpl.class).sitDiary(user_id, idx);
 		}
 		
 		

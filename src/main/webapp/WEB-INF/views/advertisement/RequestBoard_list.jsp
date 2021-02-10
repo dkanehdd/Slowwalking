@@ -155,16 +155,15 @@
 </c:if>
 <script type="text/javascript">
 $(function() {
-	$('table').slice(0, 2).show();
+	$('table').slice(0, 3).show();
 	$('#load').click(function(e) {
 		e.preventDefault();
 		if($('table:hidden').length==0){
 			alert("더이상 게시물이 없습니다.");
 		}
-		$('table:hidden').slice(0, 2).show();
+		$('table:hidden').slice(0, 3).show();
 	});
 });
 </script>
 </body>
 </html>
-

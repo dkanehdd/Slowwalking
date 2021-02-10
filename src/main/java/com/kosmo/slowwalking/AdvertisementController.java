@@ -411,8 +411,6 @@ public class AdvertisementController {
 				
 				dto.setImage(saveFileName);
 				
-				System.out.println("여기로 옴?");
-				
 				int result = sqlSession.getMapper(RequestBoardImpl.class).updateRequestBoard(dto);
 				
 				if(result == 1) {
@@ -444,7 +442,7 @@ public class AdvertisementController {
 	@RequestMapping("/advertisement/requestBoard_write")
 	public String ReqeustBoardWrite(Principal principal, Model model) {
 
-		String user_id = "";
+		String user_id = ""; 
 		try {
 			user_id = principal.getName();
 			System.out.println("user_id=" + user_id);
@@ -649,9 +647,36 @@ public class AdvertisementController {
 
 	// 시터 리스트 보기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/SitterBoard_list")
-	public String SitterBoardList(Model model) {
-
-		ArrayList<SitterMemberDTO> lists = sqlSession.getMapper(SitterImpl.class).list();
+	public String SitterBoardList(Model model, HttpServletRequest req, ParameterDTO parameterDTO) {
+		//오라클에서 가져온 레코드를 저장하는 lists
+		ArrayList<SitterMemberDTO> lists = new ArrayList<>();
+		//paramterDTO에 map으로 검색자료를 저장할 map
+		Map<String, String> searchmap = new HashMap<String, String>();
+		
+		if(parameterDTO.getSearch() != null) {
+			if(parameterDTO.getRequest_time() != "" && parameterDTO.getRequest_time() != null)
+				searchmap.put("activity_time", parameterDTO.getRequest_time());
+			if(parameterDTO.getRegion() != "" && parameterDTO.getRegion() != null) {
+				searchmap.put("residence1", parameterDTO.getRegion());
+				searchmap.put("residence2", parameterDTO.getRegion());
+				searchmap.put("residence3", parameterDTO.getRegion());
+			}
+			if(parameterDTO.getPay() != "" && parameterDTO.getPay() != null)
+				searchmap.put("pay", parameterDTO.getPay());
+		}
+		
+		Iterator<String> itr = searchmap.keySet().iterator();
+		
+		while(itr.hasNext()) {
+			String key = itr.next();
+			String value = (String)searchmap.get(key);
+			
+			System.out.println(key + " : " + value);
+		}
+		
+		
+		lists = sqlSession.getMapper(SitterImpl.class).list(parameterDTO);
+		
 
 		model.addAttribute("lists", lists);
 		return "advertisement/SitterBorad_list";

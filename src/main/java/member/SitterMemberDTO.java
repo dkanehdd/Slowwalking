@@ -8,6 +8,7 @@ public class SitterMemberDTO {
 	private String personality_check;
 	private String license_check;
 	private String activity_time;
+	private String activity_date;
 	private String residence1;
 	private String residence2;
 	private String residence3;
@@ -25,13 +26,16 @@ public class SitterMemberDTO {
 	private String gender;
 	private String phone;
 	
-	
-	
 	public String getPremiumdate() {
 		return premiumdate;
 	}
 	public void setPremiumdate(String premiumdate) {
 		this.premiumdate = premiumdate;
+	public String getActivity_date() {
+		return activity_date;
+	}
+	public void setActivity_date(String activity_date) {
+		this.activity_date = activity_date;
 	}
 	public String getGender() {
 		return gender;

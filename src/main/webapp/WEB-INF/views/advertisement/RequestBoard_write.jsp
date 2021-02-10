@@ -127,7 +127,7 @@ function checkform() {
 											줄수있는 시급을 적어주세요<br/>
 											<small>※2021년 기준 최저시급 : 8,720원</small>
 										</th>
-										<td><input type="text" class="form-control form-control"
+										<td><input type="number" class="form-control form-control"
 											style="width: 400px;" name="pay" placeholder="12,000원 or 협의 가능"/>
 										</td>
 									</tr>

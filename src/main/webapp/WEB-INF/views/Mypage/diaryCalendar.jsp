@@ -209,7 +209,7 @@
 						<c:forEach items="${diaryList }" var="row">
 							<c:set var="date" value="${today.year }-${today.month+1 }-${i }"/>
 							<c:if test="${row.regidate eq date}">
-								<a onclick="diaryOpen();">알림장 보기</a>
+								<p onclick="diaryOpen(${row.its_idx});">오늘의 알림장</p>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -248,9 +248,8 @@ function popOpen(){
 	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
 }
 
-function diaryOpen(){
-	var idx = document.getElementById("idx").value;	
-	window.open("../mypage/openDiaryView?idx="+idx, "알림장", 
+function diaryOpen(its_idx){	
+	window.open("../mypage/openDiaryView?its_idx="+its_idx, "알림장", 
 	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
 }
 </script>
