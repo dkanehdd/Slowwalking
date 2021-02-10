@@ -25,13 +25,19 @@
         <a class="nav-link" href="charts">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>회원정보</span></a>
-            
+     </li>
      <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="member?flag=sitter">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Sitter 회원정보</span></a>
     </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="memberEmail">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>회원메일 발송</span></a>
+     </li>
     <!-- Heading -->
     <div class="sidebar-heading">
         Board Management

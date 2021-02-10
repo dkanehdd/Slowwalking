@@ -83,8 +83,8 @@
 					</tr>
 					<tr>
 						<th style="vertical-align:middle;">이메일</th>
-						<td><input type="email" name="email1" id="email1" value=""/> @ 
-						<input type="email" name="email2" id="email2"
+						<td><input type="text" name="email1" id="email1" value=""/> @ 
+						<input type="text" name="email2" id="email2"
 							value="" style="width:150px;"/> <select name="last_email_check2"
 							onChange="emailSelect(this);" 
 							style="width:150px; margin-left:5px; display:inline-block;" 

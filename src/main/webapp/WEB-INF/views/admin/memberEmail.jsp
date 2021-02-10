@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -28,13 +30,40 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
+
+
 </head>
+<script type="text/javascript">
+function checkAll(){
+    if( $("#th_checkAll").is(':checked') ){
+      $("input[name=checkRow]").prop("checked", true);
+    }else{
+      $("input[name=checkRow]").prop("checked", false);
+    }
+}
+</script>
+
+<script>
+    function value_check() {
+        var check_count = document.getElementsByName("checkRow").length;
+ 		var email='';
+        for (var i=0; i<check_count; i++) {
+            if (document.getElementsByName("checkRow")[i].checked == true) {
+                email+=document.getElementsByName("checkRow")[i].value+ ",";
+            }
+        }
+        location.href = '../admin/emailsubmit?email='+email;
+    }
+</script>
+
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-		<%@ include file="./sidebar.jsp"%>
+        <%@ include file="./sidebar.jsp"%>
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -183,6 +212,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -247,13 +278,10 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
- <form name="writeFrm" method="post" 
-	 enctype="multipart/form-data"
-		action="../admin/productWriteAction?${_csrf.parameterName}=${_csrf.token}" >
-		
+
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">상품등록</h1>
-                    <p class="mb-4">상품등록 </p>
+                     <h1 class="h3 mb-2 text-gray-800">회원 이메일 전송</h1>
+                    <p class="mb-4">회원에게 이메일전송</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -261,68 +289,50 @@
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-                            <div class="">
-          
+                            <div id="venderProductListForm" class="">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                       
-									     <colgroup>
-											<col width="20%"/>
-											<col width="*"/>
-											<col width="*"/>
-										</colgroup>
-										<tbody>
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">상품이름</th>
-												<td>
-													<input type="text" name="product_name" value="" />
-												</td>
-											</tr>
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">내용</th>
-												<td>
-													<textarea rows="10" class="form-control" 
-													name="content"></textarea>
-												</td>
-											</tr>	
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">가격</th>
-												<td>
-													<input type="number" name="price" />
-												</td>
-											</tr>
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">이미지등록</th>
-												<td>
-													<input type="file" name="image" value="" />
-												</td>
-											</tr>
-											<tr>
-												<th class="text-center" 
-													style="vertical-align:middle;">플레그(ticket, premium)</th>
-												<td>
-													<input type="text" name="flag" />
-												</td>
-											</tr>
-										</tbody>
-                   						</table>
-                              	<div class="row text-center" style="">
-								<!-- 각종 버튼 부분 -->		
-								<button type="submit" class="btn btn-danger">전송하기</button>
-								<button type="reset" class="btn">Reset</button>
-								<button type="button" class="btn btn-warning" 
-									onclick="location.href='adminnotice';">리스트보기</button>
-								</div>
-                   					
-                   						
+                                    <thead>
+                                        <tr>
+                                        	<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
+                                            <th>ID</th>
+                                            <th>이름</th>
+                                            <th>전화번호</th>
+                                            <th>성별</th>
+                                            <th>생일</th>
+                                            <th>가입일</th>
+                                            <th>이메일</th>
+                                            <th>회원식별</th>
+                                            <th>휴면상태</th>
+                                        </tr>
+                                    </thead>
+                                  
+                                    <tbody>
+                                         <c:forEach items="${lists }" var="row">		
+										<tr>
+											<th><input type="checkbox" name="checkRow" value="${row.email }" /></th>
+                                            <th>${row.id }</th>
+                                            <th>${row.name }</th>
+                                            <th>${row.phone }</th>
+                                            <th>${row.gender }</th>
+											<th>${row.birthday }</th>
+                                            <th>${row.regidate }</th>
+                                            <th>${row.email }</th>
+                                            <th>${row.flag }</th>
+                                            <th>${row.enabled }</th>
+								</c:forEach>
+                                     
+                                        
+                                    </tbody>
+                                    <div>
+                                    <button type="button" class="btn btn-danger"
+                                    onclick="value_check()">전송하기</button>
+                                    </div>
+                                </table>
+                               
                             </div>
-                           
                         </div>
                     </div>
-</form>
+
                 </div>
                 <!-- /.container-fluid -->
 

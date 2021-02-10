@@ -120,24 +120,28 @@ public class MemberController {
 	  
 		Authentication auth = new UsernamePasswordAuthenticationToken(user, null, roles);//Authentication 객체 생성
 		SecurityContextHolder.getContext().setAuthentication(auth);//시큐리티에 저장 
-		
+		MemberDTO dto = new MemberDTO();
 		String view = "";
 		if (flag.equals("sitter")) {
 			System.out.println("시터회원 인증완료");
-			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
-
+			dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
+			int premium = sqlSession.getMapper(SitterImpl.class).updatePremium(userId);
+			
+			SitterMemberDTO sdto = sqlSession.getMapper(SitterImpl.class).selectSitter(userId);
+			model.addAttribute("sdto", sdto);
 			System.out.println(dto);
 			model.addAttribute("dto", dto);
 
 			view = "Member/MypageSitter";
 		} else if (flag.equals("parents")) {
 			System.out.println("부모회원 인증완료");
-			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
+			dto = sqlSession.getMapper(MypageImpl.class).profile(userId);
     		System.out.println(dto);
       		model.addAttribute("dto", dto);
 
 			view = "Member/MypageParents";
 		}
+		session.setAttribute("user_name", dto.getName());
 		session.setAttribute("user_id", userId);
 		session.setAttribute("flag", flag);
 		return view;
@@ -159,23 +163,31 @@ public class MemberController {
 		System.out.println("로그인액션");
 		String user_id = principal.getName();
 		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(user_id);
-
+		
 		System.out.println(flag);
-
+		MemberDTO dto = new MemberDTO();
 		ModelAndView mv = new ModelAndView();
 		
 		if (flag.equals("sitter")) {
 			System.out.println("시터회원 인증완료");
 			
-			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
+			dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
 			System.out.println(dto);
 			model.addAttribute("dto", dto);
-
+			int premium = sqlSession.getMapper(SitterImpl.class).updatePremium(user_id);
+			SitterMemberDTO sdto = sqlSession.getMapper(SitterImpl.class).selectSitter(user_id);
+			if(sdto!=null) {
+				if(sdto.getPremium()==null || Integer.parseInt(sdto.getPremium())<=0) {
+					sqlSession.getMapper(SitterImpl.class).resetPremium(user_id);
+					System.out.println("프리미엄 초기화 완료");
+				}
+			}
+			model.addAttribute("sdto", sdto);
 			mv.setViewName("Member/MypageSitter");
 		} else if (flag.equals("parents")) {
 			System.out.println("부모회원 인증완료");
 
-			MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
+			dto = sqlSession.getMapper(MypageImpl.class).profile(user_id); 
 			System.out.println(dto);
           	model.addAttribute("dto", dto);
 
@@ -184,6 +196,7 @@ public class MemberController {
 
 			mv.setViewName("redirect:../admin/index");
 		}
+		session.setAttribute("user_name", dto.getName());
 		session.setAttribute("user_id", user_id);
 		session.setAttribute("flag", flag);
 
@@ -378,6 +391,9 @@ public class MemberController {
 			System.out.println(dto);
 			
 			model.addAttribute("dto", dto);
+			SitterMemberDTO sdto = sqlSession.getMapper(SitterImpl.class).selectSitter(user_id);
+			model.addAttribute("sdto", sdto);
+			
 		    view = "Member/MypageSitter";
 		}
 		else if(flag.equals("parents")) {

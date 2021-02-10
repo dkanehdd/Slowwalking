@@ -2,6 +2,7 @@ package admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,7 +43,7 @@ public class AdminProductController {
 	@RequestMapping("/admin/productList")
 	public String productList(Model model) {
 
-		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).productList();
+		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).adminproductList();
 
 		model.addAttribute("lists", lists);
 		return "admin/productList";
@@ -61,6 +62,7 @@ public class AdminProductController {
 		ProductDTO productDTO = new ProductDTO();
 		productDTO.setProduct_name(req.getParameter("product_name"));
 		productDTO.setContent(req.getParameter("content"));
+		productDTO.setFlag(req.getParameter("flag"));
 		productDTO.setPrice(Integer.parseInt(req.getParameter("price")));
 		// 서버의 물리적경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/product");
@@ -198,17 +200,19 @@ public class AdminProductController {
 	//상품결제 모달창 띄우기
 	@RequestMapping("/multiBoard/productModal") // 상세보기 눌렀을때 요청명
 	@ResponseBody
-	public Map<String, Object> productView(Model model, HttpServletRequest req) {
+	public Map<String, Object> productView(Model model, HttpServletRequest req, Principal principal) {
 		String idx = req.getParameter("idx");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		String id = principal.getName();
 		ProductDTO productDTO = new ProductDTO();
+		MemberDTO memberDTO = new MemberDTO();
 		// Mapper 호출
 		productDTO = sqlSession.getMapper(ProductImpl.class).contentPage(idx); // DTO객체에 쿼리문 실행 결과를 담는다.
-
+		memberDTO = sqlSession.getMapper(MemberImpl.class).getMember(id);
 		map.put("dto", productDTO);
-
+		map.put("member",memberDTO);
 		return map;
 	}
 }

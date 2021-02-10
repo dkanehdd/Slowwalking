@@ -27,14 +27,14 @@
 			VALUES (seq_interview_idx.nextval, #{1}, #{2}, #{3}, 'F', 'F', #{0})
 	</insert>
 	<select id="interList" resultType="advertisement.InterviewDTO">
-		select M.name as parents_name, MM.name as sitter_name 
-			from interview I
-    		join member M
-        		on I.parents_id = M.id
-    		join member MM
-        		on I.sitter_id = MM.id 
+      select M.name as parents_name, MM.name as sitter_name, I.sitter_id, I.parents_id , I.idx
+         from interview I
+          join member M
+              on I.parents_id = M.id
+          join member MM
+              on I.sitter_id = MM.id 
         WHERE idx=#{0}
-	</select>
+   </select>
 	<select id="sitInterList" resultType="advertisement.InterviewDTO">
 		SELECT *FROM interview WHERE sitter_id=#{0} ORDER BY idx DESC
 	</select>
@@ -85,6 +85,10 @@
   		)
   		WHERE rNum BETWEEN #{1} AND #{2}		
 	</select >
+	<select id="CommentList" resultType="mutiBoard.DiaryDTO">
+      SELECT * FROM diary WHERE flag='comment' and rece_id=#{0} ORDER BY its_idx
+      DESC
+   </select>
 	<select id="edit" resultType="mutiBoard.DiaryDTO">
 		SELECT * FROM diary WHERE flag='comment' and its_idx=#{0}
 	</select>

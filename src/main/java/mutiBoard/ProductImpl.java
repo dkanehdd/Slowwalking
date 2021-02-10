@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public interface ProductImpl {
 
 	public ArrayList<ProductDTO> productList();
+	public ArrayList<ProductDTO> adminproductList();
+	public ArrayList<ProductDTO> premiumList();
 	public ProductDTO contentPage(String idx);
 	
 	public int insertProduct(ProductDTO productDTO);

@@ -33,9 +33,13 @@ import advertisement.InterviewDTO;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
+import member.SitterImpl;
+import member.SitterMemberDTO;
 import mutiBoard.CalendarDTO;
 import mutiBoard.DiaryDTO;
 import mutiBoard.OrderDTO;
+import mutiBoard.ProductDTO;
+import mutiBoard.ProductImpl;
 import util.PagingUtil;
 
 @Controller
@@ -775,4 +779,111 @@ public class MypageController {
 		
 		return "Mypage/membership";
 	}
+	
+	
+	////////민우/////////////
+	//시터정보 수정 페이지 진입
+	@RequestMapping("/mypage/sitterEdit")
+	public String sitterEdit (Model model, Principal principal) {
+		String id = principal.getName();
+		
+		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
+		
+		model.addAttribute("dto", dto);
+		
+		return "Mypage/sitterEdit";
+	}
+	//시터정보 수정처리
+	@RequestMapping("/mypage/sitterEditAction")
+	public String sitterEditAction (SitterMemberDTO sitterMemberDTO, Model model) {
+		
+		System.out.println(sitterMemberDTO.getSitter_id());
+		System.out.println(sitterMemberDTO.getIntroduction());
+		System.out.println(sitterMemberDTO.getActivity_time());
+		
+		int suc = sqlSession.getMapper(SitterImpl.class).updateSitter(sitterMemberDTO);
+		
+		model.addAttribute("suc", suc);
+		return "redirect:../member/mypage";
+	}
+	
+	@RequestMapping("/mypage/license")
+	public String license(Model model, Principal principal) {
+		String id = principal.getName();
+		
+		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
+		
+		model.addAttribute("dto", dto);
+		
+		return "Mypage/license";
+	}
+	@RequestMapping("/mypage/updatelicense")
+	public String updatelicense(MultipartHttpServletRequest req) {
+		
+		String id = req.getParameter("sitter_id");
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+		System.out.println(path);
+		try {
+			Iterator itr = req.getFileNames();
+			MultipartFile mfile = null;
+			String fileName = "";
+			File directory = new File(path);
+			if (!directory.isDirectory()) {
+				directory.mkdirs();
+			}
+			while (itr.hasNext()) {
+				// 전송된 파일의 이름을 읽어온다.
+				fileName = (String) itr.next();
+				mfile = req.getFile(fileName);
+				System.out.println("mfile=" + mfile);
+
+				// 한글깨짐방지 처리후 전송된 파일명을 가져옴
+				String originalName = new String(mfile.getOriginalFilename().getBytes(), "UTF-8");
+				
+				// 서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다.
+				if ("".equals(originalName)) {
+					continue;
+				}
+				File serverFullName = new File(path + File.separator + originalName);
+
+				mfile.transferTo(serverFullName);
+				int sitter = sqlSession.getMapper(SitterImpl.class).updateLicense(originalName, id);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:../member/mypage";
+	}
+	@RequestMapping("/mypage/advertise")
+	@ResponseBody
+	public Map<String, Object> advertise(HttpServletRequest req, Principal principal) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String id = principal.getName();
+		String advertise = req.getParameter("check").equals("true")?"T":"F";
+		int suc = sqlSession.getMapper(SitterImpl.class).updateAdvertise(advertise, id);
+		System.out.println(suc);
+		
+		map.put("suc", suc);
+		
+		return map;
+	}
+	
+	@RequestMapping("/mypage/premium")
+	public String premium (Model model,Principal principal) {
+		String id= principal.getName();
+		
+		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).premiumList();
+		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
+		
+		
+		model.addAttribute("lists", lists);
+		model.addAttribute("dto", dto);
+		return "Mypage/premium";
+	}
+	
 }
