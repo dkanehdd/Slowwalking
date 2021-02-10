@@ -116,7 +116,7 @@
 				<br/><br/>
 				<!-- 의뢰서 리스트 -->
 				<c:forEach items="${lists }" var="row">
-				<table class="table table-borderless">
+				<table class="table table-borderless" style="display:none;">
 					<colgroup>
 						<col width="20%"/>
 						<col width="*"/>

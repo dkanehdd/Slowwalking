@@ -15,7 +15,8 @@
 	<section class="section-padding" style="background-color: #eee;">
 		<div class="container">
 			<input type="hidden" name="idx" value="${dto.idx }" />
-			<table>
+			<table class="table table-hover" data-aos="fade-up"
+				data-aos-delay="400">
 				<tr>
 					<th class="text-center table-active align-middle">작성자</th>
 					<td>${dto.id }</td>
@@ -38,6 +39,7 @@
 				</tbody>
 			</table>
 		</div>
+	</section>
 		<!-- Footer메뉴 -->
 		<%@ include file="../include/footer.jsp"%>
 </body>
