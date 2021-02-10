@@ -411,8 +411,6 @@ public class AdvertisementController {
 				
 				dto.setImage(saveFileName);
 				
-				System.out.println("여기로 옴?");
-				
 				int result = sqlSession.getMapper(RequestBoardImpl.class).updateRequestBoard(dto);
 				
 				if(result == 1) {
@@ -444,7 +442,7 @@ public class AdvertisementController {
 	@RequestMapping("/advertisement/requestBoard_write")
 	public String ReqeustBoardWrite(Principal principal, Model model) {
 
-		String user_id = "";
+		String user_id = ""; 
 		try {
 			user_id = principal.getName();
 			System.out.println("user_id=" + user_id);

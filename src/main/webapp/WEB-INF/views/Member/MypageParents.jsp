@@ -23,7 +23,7 @@ $(function(){
 	$("#myrequest").on("click",function(){
 		$("#innerPage").load("../advertisement/requestBoard_list?list_flag=mylist");
 	});
-	$("#writerequest").on("click",function(){
+	$("#writerequest").on("click",function(){ 
 		$("#innerPage").load("../advertisement/requestBoard_write");
 	});
 	$("#comment").on("click",function(){

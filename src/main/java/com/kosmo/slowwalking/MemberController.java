@@ -432,7 +432,24 @@ public class MemberController {
 		sitterMemberDTO.setSitter_id(req.getParameter("sitter_id"));
 		sitterMemberDTO.setCctv_agree(req.getParameter("cctv_agree"));
 		sitterMemberDTO.setIntroduction(req.getParameter("introduction"));
-		sitterMemberDTO.setActivity_time(req.getParameter("activity_time"));
+		
+		String time = req.getParameter("activity_time");
+		
+		String timeArray[] = time.split(" ");
+		
+		if(timeArray[0] != null) {
+			sitterMemberDTO.setActivity_date(timeArray[0]);
+		}
+		if(timeArray.length > 1) {
+			sitterMemberDTO.setActivity_time(timeArray[1]);
+		}else {
+			sitterMemberDTO.setActivity_time("");
+		}
+		for(int i=0; i<timeArray.length; i++) {
+			System.out.println("timArray : " + timeArray[i]);
+		}
+		
+		//sitterMemberDTO.setActivity_time(req.getParameter("activity_time"));
 		sitterMemberDTO.setResidence1(req.getParameter("residence1"));
 		sitterMemberDTO.setResidence2(req.getParameter("residence2"));
 		sitterMemberDTO.setResidence3(req.getParameter("residence3"));

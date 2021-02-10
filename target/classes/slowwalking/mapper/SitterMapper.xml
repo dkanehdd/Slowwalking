@@ -7,9 +7,9 @@
 
 	<insert id="insertSitter">
 		INSERT INTO sittermember
-		(sitter_id,cctv_agree,introduction,personality_check,license_check,activity_time,residence1,
+		(sitter_id,cctv_agree,introduction,personality_check,license_check, activity_date, activity_time,residence1,
 				residence2,residence3,pay,career)
-		values(#{sitter_id}, #{cctv_agree},#{introduction}, #{personality_check},#{license_check},
+		values(#{sitter_id}, #{cctv_agree},#{introduction}, #{personality_check},#{license_check},#{activity_date},
 		#{activity_time},#{residence1},#{residence2},#{residence3},#{pay},0)
 	</insert>
 	
