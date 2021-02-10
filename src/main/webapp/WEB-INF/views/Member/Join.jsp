@@ -15,7 +15,7 @@
 	<section class="section-padding" style="background-color:#eee;">
 		<div class="container">
 			<div class="section_title">
-				<h1 class="mb-5"><strong>Join</strong> 가입하기</h1>
+				<h1 class="mb-5"><strong>JOIN</strong> 가입하기</h1>
 			</div>
 			<div class="loginContainer input-group mb-3" data-aos="fade-up" data-aos-delay="400">
 				<div class="form joinFrm">

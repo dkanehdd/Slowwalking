@@ -31,15 +31,20 @@
 	
 	<!-- 아이디 찾기 hjkosmo 추가 -->
 	<select id="findId" resultType="String">
-		SELECT IFNULL(id, 0) FROM member 
-		WHERE name=#{name} and phone=#{phone}
+		SELECT id FROM member  
+		WHERE name=#{0} and phone=#{1}
 	</select>
 	
-	<!-- 비밀번호 찾기 hjkosmo 추가 
-	<select id="findPw" resultType="String">
-		SELECT IFNULL(pw, 0) FROM member 
-		WHERE id=#{id} and phone=#{phone}
-	</select>-->
+	<!-- 임시비밀번호발급 hjkosmo 추가 -->
+	<select id="tempPw">
+		UPDATE member SET pw = (SELECT dbms_random.string('A', 20) FROM dual) 
+		WHERE id = #{0} and email=#{1}
+	</select>
+	<!-- 비밀번호 찾기 hjkosmo 추가 -->
+	<select id="updatePw" resultType="String">
+		SELECT pw FROM member 
+		WHERE id=#{0} and email=#{1}
+	</select>
 	
 	<insert id="insertMember">
 		INSERT INTO member
@@ -73,12 +78,9 @@
 	<update id="updateTicket">
 		UPDATE member SET ticket=ticket+${param1} WHERE id=#{param2}
 	</update>
-	
 	<update id="deletePoint">
 		UPDATE member SET point=point-${param1} WHERE id=#{param2}
 	</update>
-	
-	
-	
-	
+  
 </mapper>
+

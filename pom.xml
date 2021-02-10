@@ -207,7 +207,7 @@
             <version>2.8.5</version>
          </dependency>
          <!-- 메일보내기  -->
-         <dependency>
+     <dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
 		    <version>${org.springframework-version}</version>
@@ -217,11 +217,10 @@
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.5.1</version>
 		</dependency>
-         
-         
-         
-         
 	</dependencies>
+	
+
+
     <build>
         <plugins>
             <plugin>

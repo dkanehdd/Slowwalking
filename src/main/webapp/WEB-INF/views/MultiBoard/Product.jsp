@@ -110,7 +110,7 @@ $(function(){
 		<div class="container">
 			<div class="section_title subPimgBg noticeImg">
 				<h1 class="mb-5">
-					<strong>TICKET</strong> 이용권구매하기
+					<strong>PASSES</strong> 이용권구매
 				</h1>
 			</div>
 			<table class="table mt-3 mb-5"  data-aos="fade-up" data-aos-delay="400">

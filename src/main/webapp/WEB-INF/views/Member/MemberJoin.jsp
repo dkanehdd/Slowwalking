@@ -60,7 +60,8 @@
 					</tr>
 					<tr>
 						<th scope="row" style="vertical-align:middle;">이름</th>
-						<td><input type="text" name="name" id="name" value="">
+						<td><input type="text" name="name" id="name" value=""
+							pattern="([^가-힣])">
 							<div style="display:inline; margin-left: 5px;">
 								<label for="radio-1">남</label> <input type="radio" name="gender"
 								id="radio-1" value="남" checked> <label for="radio-2">여</label>

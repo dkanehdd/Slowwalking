@@ -5,7 +5,7 @@
 <meta name="keywords" content="">
 <meta name="author" content="">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1"> 
+	content="width=device-width, initial-scale=1, maximum-scale=1, target-densitydpi=device-dpi"> 
 
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
