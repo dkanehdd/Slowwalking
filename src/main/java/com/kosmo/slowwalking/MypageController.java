@@ -608,7 +608,7 @@ public class MypageController {
 		
 		if(flag.equals("sitter")) {
 			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(parents_id);
-			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, sitter_id, parents_id, content);
+			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, sitter_id, parents_id, content, newrate);
 			System.out.println("원래별점:"+starrate);
 			
 			if(starrate==0) {
@@ -625,7 +625,7 @@ public class MypageController {
 		}
 		else {
 			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(sitter_id);
-			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, parents_id, sitter_id, content);
+			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, parents_id, sitter_id, content, newrate);
 			System.out.println("원래별점:"+starrate);
 			
 			if(starrate==0) {

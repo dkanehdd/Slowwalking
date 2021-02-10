@@ -52,8 +52,8 @@
 				<c:forEach var="row" items="${lists }">
 				<tbody>
 					<td>${row.regidate }</td>
-					<td>${row.product_name }</td>
-					<td>${row.ticket }회</td>
+					<td>${row.content }</td>
+					<td>${row.product_name }회</td>
 					<td>${row.total_price}</td>
 				</tbody>
 			</c:forEach>

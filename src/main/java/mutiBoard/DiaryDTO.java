@@ -9,7 +9,15 @@ public class DiaryDTO {
 	private String content;
 	private String flag;
 	private int idx;
+	private int starrate;
 	
+	
+	public int getStarrate() {
+		return starrate;
+	}
+	public void setStarrate(int starrate) {
+		this.starrate = starrate;
+	}
 	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
