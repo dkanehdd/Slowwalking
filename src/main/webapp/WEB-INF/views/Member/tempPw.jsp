@@ -23,7 +23,7 @@
 					<input class='w50p' type="text" id="email" name="email" value=""
 					pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required="required" title="형식 : OOOO@OOOO.OOO"
 					placeholder="이메일 주소를 입력해주세요">					
-					<label for="tempPwTxt">임시발급 비밀번호</label><div id="tempPwTxt" name="tempPwTxt" style="height:20px"></div>
+<!-- 					<label for="tempPwTxt">임시발급 비밀번호</label><div id="tempPwTxt" name="tempPwTxt" style="height:20px"></div> -->
 				</div>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
@@ -57,10 +57,9 @@
 						alert("정보가 일치하는 계정이 없습니다.\n입력란을 확인해주세요");
 					}
 					else{
-						var result=confirm("회원님의 임시 비밀번호는 [ "+d.pw+" ] 입니다.\n비밀번호를 변경해주세요");
+						var result=confirm("임시 비밀번호가 발급되었습니다. "+$('#email').val()+" 메일을 확인해주세요\n확인 버튼을 누르시면 로그인 페이지로 이동합니다.");
 						if(result){ //alert창 확인버튼
-							$('#tempPwTxt').html(d.pw)
-							//document.location = '../member/login';
+							document.location = '../member/login';
 						}
 						else{ //alert창 취소버튼
 							alert("다시 시도해주세요");

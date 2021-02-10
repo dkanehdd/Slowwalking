@@ -317,9 +317,19 @@ public class MemberController {
 		System.out.println("유저에게 전달할 updatePw: "+updatePw);//sql에서 난수생성
 		
 		MimeMessage mail = mailSender.createMimeMessage();
-		String htmlStr = "<h2>안녕하세요 '"+ userId +"' 님</h2><br><br>" 
-				+ "<p>비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다.</p>"
-				+ "<p>임시로 발급 드린 비밀번호는 <h2 style='color : orange'>'" + updatePw +"'</h2>입니다.<br>로그인 후 마이페이지에서 비밀번호를 변경해주세요.</p>";
+		String htmlStr = 
+		"<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>"+
+		"<style>"+
+	    "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');"+
+	    "div{font-family: 'Noto Sans KR', sans-serif;}"+
+		"</style>"+
+		"<div class='container'>"+
+		    "<div class='text-center' style='test-align:center; border: 20px solid #d45d14; padding:20px;'>"+
+		        "<h2>안녕하세요 "+userId+" 님</h2><br>"+
+		        "<p>비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다.</p>"+
+		        "<p>임시로 발급 드린 비밀번호 <h2 style='color : orange'>"+updatePw+"</h2><br>로그인 후 마이페이지에서 비밀번호를 변경해주세요.</p>"+
+		    "</div>"+
+	    "</div>";
 		try {
 			mail.setSubject("[느린걸음] "+userId+" 님의 "+"임시 비밀번호가 발급되었습니다", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
