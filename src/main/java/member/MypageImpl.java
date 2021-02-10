@@ -44,6 +44,8 @@ public interface MypageImpl {
 	public int setStarrate(String id, int rate);
 	public int getStarrate(String id);
 	public int getPoint(String id);
+	
+	public ArrayList<DiaryDTO> CommentList(String id); 
 	//이용권
 	public ArrayList<OrderDTO> purchaseList(String id);
 

@@ -29,8 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
 import advertisement.ParameterDTO;
 import advertisement.RequestBoardDTO;
 import advertisement.RequestBoardImpl;
+import member.AdminMemberImpl;
+import member.MypageImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
+import mutiBoard.DiaryDTO;
+import mutiBoard.MultiBoardDTO;
 
 @Controller
 public class AdvertisementController {
@@ -645,7 +649,7 @@ public class AdvertisementController {
 		return mv;
 	}
 
-	// 시터 리스트 보기 페이지 이동 요청명(메소드)
+	// 시터 리스트 보기 페이지 이동 요청명 (메소드)
 	@RequestMapping("/advertisement/SitterBoard_list")
 	public String SitterBoardList(Model model, HttpServletRequest req, ParameterDTO parameterDTO) {
 		//오라클에서 가져온 레코드를 저장하는 lists
@@ -682,7 +686,7 @@ public class AdvertisementController {
 		return "advertisement/SitterBorad_list";
 	}
 
-	// 시터 리스트 상세보기 페이지 이동 요청명(메소드)
+	// 시터 리스트 상세보기 페이지 이동 요청명 및 후기 보기(메소드)
 	@RequestMapping("/advertisement/SitterBoard_view")
 	public String SitterBoardView(HttpServletRequest req, Model model) {
 		
@@ -690,8 +694,10 @@ public class AdvertisementController {
 		
 		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
 		
-		model.addAttribute("dto", dto);
+		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(id);
 		
+		model.addAttribute("dto", dto);
+		model.addAttribute("lists",lists);
 		return "advertisement/SitterBorad_view";
 	}
 

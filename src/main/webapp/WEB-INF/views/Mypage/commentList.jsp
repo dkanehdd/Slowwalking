@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script type="text/javascript">
-<c:if test="${not empty message}">
+	<c:if test="${not empty message}">
 	alert('${message}');
-</c:if>
+	</c:if>
 </script>
 </head>
 <body>
@@ -79,11 +79,51 @@
 	${pagingImg }
 </ul>
 </body>
+<style type="text/css">
+span.star-prototype, span.star-prototype>* {
+	height: 16px;
+	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+	width: 80px;
+	display: inline-block;
+}
+
+span.star-prototype>* {
+	background-position: 0 0;
+	max-width: 80px;
+}
+</style>
+<script type="text/javascript">
+	$.fn.generateStars = function() {
+		return this.each(function(i, e) {
+			$(e).html($('<span/>').width($(e).text() * 16));
+		});
+	};
+	// 숫자 평점을 별로 변환하도록 호출하는 함수
+	$('.star-prototype').generateStars();
+</script>
 <style>
-body {background-color:#F0F0F0;}
-table {background-color: white; border-radius: 10px;}
-.title {font-size:25px; font-weight: bold;}
-.count {color:#FF7000; font-size:15px; font-weight: bold;}
-.info {color:#888280; }
+body {
+	background-color: #F0F0F0;
+}
+
+table {
+	background-color: white;
+	border-radius: 10px;
+}
+
+.title {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.count {
+	color: #FF7000;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.info {
+	color: #888280;
+}
 </style>
 </html>

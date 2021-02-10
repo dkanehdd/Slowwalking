@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sitter_view.jsp</title>
+<title>SitterBoard_view.jsp</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -52,19 +52,21 @@
 							style="width: 200px; height: 200px"></td>
 					</tr>
 					<tr>
-						<td colspan="2" style="text-align: left; font-size: 1.5em; font-weight: bold;">
-						<c:set var="name" value="${dto.name}" /> 
-						<c:set var="totalLength" value="${fn:length(name) }" /> 
-						<c:set var="first" value="${fn:substring(name, 0, 1) }" /> 
-						<c:set var="last" value="${fn:substring(name, 2, totalLength) }" /> 
-						<c:out	value="${first}○${last}" />(${dto.age }세 , ${dto.gender })&nbsp;&nbsp;&nbsp;
-						<c:choose>
-						<c:when test="${dto.cctv_agree eq 'true' }">
-							<span style="color: #FF7000"><i class='fas fa-video'></i> CCTV 동의함</span>
-						</c:when>
+						<td colspan="2"
+							style="text-align: left; font-size: 1.5em; font-weight: bold;">
+							<c:set var="name" value="${dto.name}" /> <c:set
+								var="totalLength" value="${fn:length(name) }" /> <c:set
+								var="first" value="${fn:substring(name, 0, 1) }" /> <c:set
+								var="last" value="${fn:substring(name, 2, totalLength) }" /> <c:out
+								value="${first}○${last}" />(${dto.age }세 , ${dto.gender })&nbsp;&nbsp;&nbsp;
+							<c:choose>
+								<c:when test="${dto.cctv_agree eq 'true' }">
+									<span style="color: #FF7000"><i class='fas fa-video'></i>
+										CCTV 동의함</span>
+								</c:when>
 								<c:otherwise>
-							<span><i class='fas fa-video'></i> CCTV 동의 안함</span>
-						</c:otherwise>
+									<span><i class='fas fa-video'></i> CCTV 동의 안함</span>
+								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
@@ -110,34 +112,43 @@
 					</tr>
 				</tbody>
 			</table>
+
 			<div class="container">
-				<label>후기</label>
-				<c:choose>
-					<c:when test="${empty comment}">
-						<div>등록된 후기가 없습니다.</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${comment }" var="row">
-							
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+						<h3 style="text-align: center;">
+							<strong>후기</strong> comment 
+						</h3><br />
+						<c:choose>
+							<c:when test="${empty lists}">
+								<div class="card" >등록된 후기가 없습니다.</div>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${lists }" var="row">
+
+									<div class="card col-12" >
+									<div class="card-body">${row.content }</div>
+									</div>
+
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 			</div>
 			<div class="_1nW60 container">
 				<div class="_2KQBU">
 					<div class="_1Lb4l">
 						<div class="_26pci">
-							<c:out value="${first}○${last}" />(${dto.age }세 , ${dto.gender })
+							<c:out value="${first}○${last}" />
+							(${dto.age }세 , ${dto.gender })
 						</div>
 					</div>
-					<div class="_2RUNH">희망시급 :
+					<div class="_2RUNH">
+						희망시급 :
 						<fmt:formatNumber value="${dto.pay }" type="number" />
 						원
 					</div>
 					<div
-						style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
+						style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
 						<button tabindex="0" type="button"
-							style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; quot; Noto Sans KR&amp;quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
+							style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
 							<div>
 								<div
 									style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
@@ -154,7 +165,6 @@
 	</div>
 	<input type="hid-den" id="id" value="${dto.sitter_id }"/>
 	<input type="hid-den" id="activity_time" value="${dto.activity_time }"/>
-	
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>
@@ -177,7 +187,6 @@
 				level : 5
 			// 지도의 확대 레벨
 			};
-			
 
 			var circle = new kakao.maps.Circle({
 				center : new kakao.maps.LatLng(result[0].y, result[0].x), // 원의 중심좌표 입니다 
