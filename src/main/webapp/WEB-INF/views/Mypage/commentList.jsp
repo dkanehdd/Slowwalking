@@ -48,7 +48,8 @@
 					</td>
 					<td>
 						 <span class="info">${row.send_id } | ${row.regidate }</span><br/>
-						${row.content }
+						${row.content } <br />
+						<span class="star-prototype">${row.starrate }</span>
 					</td>
 				</tr>
 			</c:when>
@@ -59,8 +60,9 @@
 				</colgroup>
 				<tr>
 					<td>
-						 <span class="info">${row.rece_id } | ${row.regidate }</span><br/>
-						${row.content }
+						<span class="info">${row.rece_id } | ${row.regidate }</span><br/>
+						${row.content } <br />
+						<span class="star-prototype">${row.starrate }</span>
 					</td>
 					<td style="text-align:right; vertical-align:middle;">
 						<button class="btn btn-warning btn-sm" onclick="location.href='../mypage/editComment?idx=${row.its_idx }&mode=send';">수정</button>
@@ -71,7 +73,6 @@
 		</c:choose>
 	</table>
 	</c:forEach>
-	</form>
 	<br/>
 </div>
 <!-- 방명록 반복 부분 e -->
@@ -80,26 +81,23 @@
 </ul>
 </body>
 <style type="text/css">
-span.star-prototype, span.star-prototype>* {
-	height: 16px;
-	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-	width: 80px;
-	display: inline-block;
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
 }
-
-span.star-prototype>* {
-	background-position: 0 0;
-	max-width: 80px;
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
 }
 </style>
 <script type="text/javascript">
 	$.fn.generateStars = function() {
-		return this.each(function(i, e) {
-			$(e).html($('<span/>').width($(e).text() * 16));
-		});
+    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 	};
-	// 숫자 평점을 별로 변환하도록 호출하는 함수
-	$('.star-prototype').generateStars();
+// 숫자 평점을 별로 변환하도록 호출하는 함수
+$('.star-prototype').generateStars();
 </script>
 <style>
 body {

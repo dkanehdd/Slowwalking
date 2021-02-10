@@ -42,7 +42,6 @@
 							<div style='display: inline-block;'>
 							<button type="button" id='sendPhoneNumber' class="btn btn-primary" style="margin-left:5px;">본인인증</button>
 							</div>
-
 							<div style='display: none;' id="phonecheck">
 								<input type="text" name="userida" id='inputCertifiedNumber'
 									maxlength="6" value="">

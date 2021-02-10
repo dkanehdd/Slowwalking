@@ -35,7 +35,6 @@
 					<td colspan="3" class="align-middle" style="height: 200px;">
 						${dto.content }</td>
 				</tr>
-
 				</tbody>
 			</table>
 		</div>

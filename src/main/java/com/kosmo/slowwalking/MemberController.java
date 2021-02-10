@@ -181,9 +181,12 @@ public class MemberController {
 					sqlSession.getMapper(SitterImpl.class).resetPremium(user_id);
 					System.out.println("프리미엄 초기화 완료");
 				}
+				model.addAttribute("sdto", sdto);
+				mv.setViewName("Member/MypageSitter");
 			}
-			model.addAttribute("sdto", sdto);
-			mv.setViewName("Member/MypageSitter");
+			else {
+				mv.setViewName("redirect:../member/sitterjoin");
+			}
 		} else if (flag.equals("parents")) {
 			System.out.println("부모회원 인증완료");
 

@@ -33,7 +33,7 @@ public interface MypageImpl {
 	public DiaryDTO diaryView(int its_idx);
 
 	//후기
-	public int writeComment(int idx, String send_id, String rece_id, String content);
+	public int writeComment(int idx, String send_id, String rece_id, String content, int starrate);
 	public ArrayList<DiaryDTO> receivedComment(String id, int start, int end);
 	public ArrayList<DiaryDTO> sendedComment(String id, int start, int end);
 	public DiaryDTO edit(int idx);

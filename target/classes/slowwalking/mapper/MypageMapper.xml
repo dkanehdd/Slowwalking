@@ -66,8 +66,8 @@
 	
 	<!-- 후기 -->
 	<insert id="writeComment">
-		INSERT INTO diary (its_idx, regidate, send_id, rece_id, content, flag, idx)
-			VALUES (seq_diary_idx.nextval, sysdate, #{1}, #{2}, #{3}, 'comment', #{0})
+		INSERT INTO diary (its_idx, regidate, send_id, rece_id, content, flag, idx, starrate)
+			VALUES (seq_diary_idx.nextval, sysdate, #{1}, #{2}, #{3}, 'comment', #{0}, #{4})
 	</insert>
 	<select id="receivedComment" resultType="mutiBoard.DiaryDTO">
   		SELECT * FROM (

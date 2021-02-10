@@ -10,13 +10,18 @@ public class DiaryDTO {
 	private String flag;
 	private String name;//시터 이름
 	private int idx;
-	
+	private int starrate;
 	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	public int getStarrate() {
+		return starrate;
+	}
+	public void setStarrate(int starrate) {
+		this.starrate = starrate;
 	}
 	public void setRegidate(String regidate) {
 		this.regidate = regidate;
