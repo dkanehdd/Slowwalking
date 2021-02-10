@@ -137,7 +137,14 @@ $(function(){
 			dataType : "json", 
 			contentType : "text/html;charset:utf-8;",
 			success : function(data){
-				alert(data.message);
+				if(data.message=='success'){
+					alert("인터뷰 요청이 성공했습니다.\n ( 남은 티켓은 "+data.count+"개입니다. )");
+				}
+				else{
+					alert("보유하신 이용권이 없습니다.");
+					location.href="../multiBoard/product";
+				}
+				
 			},
 			error : function(){
 				alert("다시 시도해 주세요.");

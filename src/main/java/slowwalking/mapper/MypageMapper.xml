@@ -22,17 +22,27 @@
 	</select>
 	
 	<!-- 인터뷰 -->
-	<insert id="addInterList">
+	<insert id="sitterApply">
 		INSERT INTO interview (idx, parents_id, sitter_id, request_time, parents_agree, sitter_agree, request_idx)
 			VALUES (seq_interview_idx.nextval, #{1}, #{2}, #{3}, 'F', 'F', #{0})
 	</insert>
+	<insert id="parentsApply">
+		INSERT INTO interview (idx, parents_id, sitter_id, request_time, parents_agree, sitter_agree)
+			VALUES (seq_interview_idx.nextval, #{0}, #{1}, #{2}, 'F', 'F')
+	</insert>
+	<select id="ticketCount" resultType="int">
+		SELECT ticket FROM member WHERE id=#{0}
+	</select>
+	<update id="updateCount">
+		UPDATE member SET ticket=(ticket-1) WHERE id=#{0}
+	</update>
 	<select id="interList" resultType="advertisement.InterviewDTO">
-		select M.name as parents_name, MM.name as sitter_name 
-			from interview I
-    		join member M
-        		on I.parents_id = M.id
-    		join member MM
-        		on I.sitter_id = MM.id 
+      select M.name as parents_name, MM.name as sitter_name, I.sitter_id, I.parents_id , I.idx
+         from interview I
+          join member M
+              on I.parents_id = M.id
+          join member MM
+              on I.sitter_id = MM.id 
         WHERE idx=#{0}
 	</select>
 	<select id="sitInterList" resultType="advertisement.InterviewDTO">
@@ -106,6 +116,10 @@
 	<update id="setStarrate">
 		UPDATE member SET starrate=#{1} WHERE id=#{0}
 	</update>
+	<update id="getPoint">
+		UPDATE member SET point=(point+50) WHERE id=#{0}
+	</update>
+	
 	
 	<!-- 이용권 -->
 	<select id="purchaseList" resultType="mutiBoard.OrderDTO">

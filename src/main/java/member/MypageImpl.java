@@ -17,8 +17,11 @@ public interface MypageImpl {
 	public ArrayList<InterviewDTO> sitInterList(String id);
 	public ArrayList<InterviewDTO> parInterList(String id);
 	//인터뷰 요청 목록(내 구인/구직현황)
-	public int addInterList(int idx, String my_id, String your_id, String request_time );
+	public int sitterApply(int idx, String my_id, String your_id, String request_time );
+	public int parentsApply(String my_id, String your_id, String request_time );
 	public int delInterList(int idx);
+	public int ticketCount(String id);
+	public int updateCount(String id);
 	public InterviewDTO interList(int idx);
 	//수락
 	public int sitAgree(int idx);
@@ -39,6 +42,7 @@ public interface MypageImpl {
 	public int sendCount(String id);
 	public int setStarrate(String id, int rate);
 	public int getStarrate(String id);
+	public int getPoint(String id);
 	//이용권
 	public ArrayList<OrderDTO> purchaseList(String id);
 

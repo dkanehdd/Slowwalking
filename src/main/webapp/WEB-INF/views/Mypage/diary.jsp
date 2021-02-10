@@ -22,9 +22,9 @@ p {font-size: 14px;}
 </head>
 <body>
 <div class="container">
-	<input type="hidden" id="parents_id" value="${dto.parents_id }"/>
-	<input type="hidden" id="sitter_id" value="${dto.sitter_id }"/>
-	<input type="hidden" id="idx" value="${dto.idx }"/>
+	<input type="hid-den" id="parents_id" value="${dto.parents_id }"/>
+	<input type="hid-den" id="sitter_id" value="${dto.sitter_id }"/>
+	<input type="hid-den" id="idx" value="${dto.idx }"/>
 	<div class="item">
 		<h3>알림장</h3>
 		<p class="s-font">${dto.parents_name } 님께 보내는 우리 아이의 하루<p>

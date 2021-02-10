@@ -183,34 +183,52 @@ public class MypageController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("진입:"+req.getParameter("idx"));
-		
 		try {
-			int idx = Integer.parseInt(req.getParameter("idx"));
-			String id = req.getParameter("id");
+			String user_id = (String)session.getAttribute("user_id");
+			String request_time = req.getParameter("request_time");
 			String flag = (String)session.getAttribute("flag");
-			
-			
-			System.out.println("idx:"+idx);
-			System.out.println("id:"+id);
+
+			System.out.println("user_id:"+user_id);
 			System.out.println("flag:"+flag);
-			System.out.println("sitter id = "+ (String)session.getAttribute("user_id")); 
-		
 			
-			if(flag.equals("sitter")) {
-				int result = sqlSession.getMapper(MypageImpl.class).addInterList(idx, id, 
-						(String)session.getAttribute("user_id"), req.getParameter("request_time"));
-				System.out.println("result:"+result);
-				
-				map.put("message", "인터뷰 요청이 성공했습니다.");
+			
+			int ticketCount = sqlSession.getMapper(MypageImpl.class).ticketCount(user_id);
+			System.out.println("티켓 몇개?"+ticketCount);
+			
+			if(0 < ticketCount) {
+				if(flag.equals("sitter")) {
+					int request_idx = Integer.parseInt(req.getParameter("idx"));
+					String parentsBoard_id = req.getParameter("id");
+					
+					System.out.println("idx:"+request_idx);
+					System.out.println("id:"+parentsBoard_id);
+					
+					int result = sqlSession.getMapper(MypageImpl.class).sitterApply(request_idx, parentsBoard_id, user_id, request_time);
+					sqlSession.getMapper(MypageImpl.class).updateCount(user_id);
+					
+					System.out.println("result:"+result);
+					
+					map.put("message", "success");
+					map.put("count", ticketCount-1);
+				}
+				else {
+					String sitterBoard_id = req.getParameter("sitterBoard_id");
+					
+					System.out.println("id:"+sitterBoard_id);
+					
+					int result = sqlSession.getMapper(MypageImpl.class).parentsApply(user_id, sitterBoard_id, request_time);
+					sqlSession.getMapper(MypageImpl.class).updateCount(user_id);
+					
+					System.out.println("result:"+result);
+					map.put("message", "success");
+					map.put("count", ticketCount-1);
+				}	
+			
 			}
 			else {
-				int result = sqlSession.getMapper(MypageImpl.class).addInterList(idx,
-						(String)session.getAttribute("user_id"), id, req.getParameter("request_time"));
-				
-				System.out.println("result:"+result);
-				map.put("message", "인터뷰 요청이 성공했습니다.");
-			}	
+				System.out.println("티켓이 없어요");
+			}
+			
 		}catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
@@ -218,8 +236,6 @@ public class MypageController {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-
-		
 		return map;
 	}
 	
@@ -493,41 +509,6 @@ public class MypageController {
 		today_data.put("month", monthInt);
 		
 		
-		
-		
-		
-		//List<CalendarDTO> dateList = new ArrayList<CalendarDTO>();
-		
-		//실질적인 달력 데이터 리스트에 데이터 삽입 시작.
-		//일단 시작 인덱스까지 아무것도 없는 데이터 삽입
-//		for(int i=1; i<start; i++){
-//			calendarData= new CalendarDTO(null, null, null, null);
-//			dateList.add(calendarData);
-//		}
-//		
-//		//날짜 삽입
-//		for (int i = startDay; i <= endDay; i++) {
-//			if(i==today){
-//				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
-//						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "today");
-//			}else{
-//				calendarData= new CalendarDTO(String.valueOf(calendarDTO.getYear()), 
-//						String.valueOf(calendarDTO.getMonth()), String.valueOf(i), "normal_date");
-//			}
-//			dateList.add(calendarData);
-//		}
-//
-//		//달력 빈곳 빈 데이터로 삽입
-//		int index = 7-dateList.size()%7;
-//		
-//		if(dateList.size()%7!=0){
-//			
-//			for (int i = 0; i < index; i++) {
-//				calendarData= new CalendarDTO(null, null, null, null);
-//				dateList.add(calendarData);
-//			}
-//		}
-		
 		//배열에 담음
 		//model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today", today_data);
@@ -535,6 +516,7 @@ public class MypageController {
 		return "Mypage/diaryCalendar";
 	
 	}
+	
 	//알림장 보내기
 	@RequestMapping("/mypage/sendDiary")
 	@ResponseBody
@@ -575,6 +557,7 @@ public class MypageController {
 		System.out.println("idx:"+idx);
 		
 		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
+		
 		model.addAttribute("dto", dto);
 		
 		return "Mypage/commentWrite";
@@ -615,8 +598,11 @@ public class MypageController {
 			}
 			System.out.println("최종별점:"+starrate);
 			
+			//포인트 50점 지급, 별점 업데이트
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(parents_id, starrate);
+			int check = sqlSession.getMapper(MypageImpl.class).getPoint(sitter_id);
 			
+			System.out.println("success: "+success+", check: "+check);
 			
 		}
 		else {
@@ -631,8 +617,9 @@ public class MypageController {
 				starrate = (newrate + starrate) / 2;
 			}
 			System.out.println("최종별점:"+starrate);
-			
+
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(sitter_id, starrate);
+			int check = sqlSession.getMapper(MypageImpl.class).getPoint(parents_id);
 
 		}
 
