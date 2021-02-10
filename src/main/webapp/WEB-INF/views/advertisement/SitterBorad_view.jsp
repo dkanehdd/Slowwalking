@@ -142,7 +142,7 @@
 								<div
 									style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
 									<span
-										style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;">인터뷰
+										style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;" onClick="applyInter();">인터뷰
 										신청하기</span>
 								</div>
 							</div>
@@ -152,7 +152,8 @@
 			</div>
 		</div>
 	</div>
-	
+	<input type="hid-den" id="id" value="${dto.sitter_id }"/>
+	<input type="hid-den" id="activity_time" value="${dto.activity_time }"/>
 	
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
@@ -194,5 +195,33 @@
 			var map = new kakao.maps.StaticMap(mapContainer, mapOption);
 		}
 	});
+	
+	function applyInter(){
+
+		$.ajax({
+			url : "../mypage/addList?${_csrf.parameterName}=${_csrf.token}",
+			type : "GET",
+			data : { 
+				sitterBoard_id : $('#id').val(),
+				request_time : $('#activity_time').val()
+			},
+			dataType : "json", 
+			contentType : "text/html;charset:utf-8;",
+			success : function(data){
+				if(data.message=='success'){
+					alert("인터뷰 요청이 성공했습니다.\n ( 남은 티켓은 "+data.count+"개입니다. )");
+				}
+				else{
+					alert("보유하신 이용권이 없습니다.");
+					location.href="../multiBoard/product";
+				}
+				
+			},
+			error : function(){
+				alert("다시 시도해 주세요.");
+			}
+			
+		});
+	}
 </script>
 </html>

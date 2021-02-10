@@ -121,7 +121,7 @@
 				</ul>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item mt-2" id="membership">이용권</li>
-					<li class="list-group-item">포인트</li>
+					<li class="list-group-item"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</li>
 					<li class="list-group-item" id="premium">프리미엄권</li>
 				</ul>
 				<br />
@@ -132,7 +132,6 @@
 			<div class="col-10">
 				<div id="innerPage" class="ml-3 mt-3">
 					<h3>마이페이지</h3>
-
 					<div class="container">
 						<div class="row">
 							<div class="col-12"></div>

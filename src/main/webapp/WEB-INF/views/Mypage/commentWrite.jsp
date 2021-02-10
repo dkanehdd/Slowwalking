@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>느린걸음</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -14,16 +14,15 @@
 	<input type="hidden" id="parents_id" value="${dto.parents_id }"/>
 	<input type="hidden" id="sitter_id" value="${dto.sitter_id }"/>
 	<input type="hidden" id="idx" value="${dto.idx }"/>
-	<input type="hidden" id="flag" value="${flag }"/>
 	<input type="hidden" id="newrate" />
 	<div class="item">
 		<h3>후기 작성</h3>
 		<c:choose>
 			<c:when test="${flag eq 'sitter' }">
-				<p class="s-font">${dto.parents_id } 님에 대한 후기를 작성해 보세요.<p>
+				<p class="s-font">${dto.parents_name } 님에 대한 후기를 작성해 보세요.<p>
 			</c:when>
 			<c:otherwise>
-				<p class="s-font">${dto.sitter_id } 님에 대한 후기를 작성해 보세요.<p>
+				<p class="s-font">${dto.sitter_name } 님에 대한 후기를 작성해 보세요.<p>
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -74,7 +73,7 @@ $(function(){
 			dataType: "json",
 			contentType : "text/html;charset:utf-8;",
 			success : function(){
-				alert("작성이 완료되었습니다.");
+				alert("작성이 완료되었습니다.\n포인트 지급 +50");
 				window.open("about:blank","_self").close();
 			},
 			error : function(){

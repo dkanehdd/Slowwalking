@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>느린걸음</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script type="text/javascript">
@@ -17,9 +17,14 @@
 </head>
 <body>
 <div class="ml-3 mt-3">
-	<div>
-		<span class="title">나의 후기</span>&nbsp;<span class="count">${count}개</span>
-	</div>
+	<c:choose>
+		<c:when test="${mode eq 'receive' }">
+			<span class="title">받은 후기</span>&nbsp;<span class="count">${count}개</span>
+		</c:when>
+		<c:otherwise>
+			<span class="title">보낸 후기</span>&nbsp;<span class="count">${count}개</span>
+		</c:otherwise>
+	</c:choose>	
 </div>
 <div class="container mt-3">
 	<c:forEach var="row" items="${lists }">

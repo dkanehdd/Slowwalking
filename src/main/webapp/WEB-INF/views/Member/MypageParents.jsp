@@ -75,7 +75,7 @@ $(function(){
         </ul>
         <ul class="list-group list-group-flush">
          	<li class="list-group-item mt-2" id="membership">이용권</li>
-          	<li class="list-group-item" >포인트</li>
+          	<li class="list-group-item"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</li>
         </ul>
         <br/><br/><br/><br/>
       </div>
