@@ -27,3 +27,8 @@
 <script src="../resources/js/owl.carousel.min.js"></script>
 <script src="../resources/js/smoothscroll.js"></script>
 <script src="../resources/js/custom.js"></script>
+<style>
+	body{
+		font-family: Noto Sans KR, sans-serif !important;
+	}
+</style>

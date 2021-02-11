@@ -20,8 +20,7 @@
 					<strong>NOTICE</strong> 공지사항
 				</h1>
 			</div>
-			<table class="table table-hover" data-aos="fade-up"
-				data-aos-delay="400">
+			<table class="table table-hover" data-aos="fade-up" data-aos-delay="400">
 				<colgroup>
 					<col style="width: 5%">
 					<col style="">
@@ -40,7 +39,8 @@
 					<c:forEach items="${lists }" var="row">
 						<tr>
 							<td>${row.idx }</td><!-- 아래있는 요청명 이랑 controller에 있는 @requestMapping 이랑 같아야해요 -->
-							<td style="padding-left:40px;"><a href="../multiBoard/notice_view?idx=${row.idx }">${row.title }</a>
+							<td style="padding-left:40px;">
+								<a href="../multiBoard/notice_view?idx=${row.idx }">${row.title }</a>
 							</td>
 							<td>${row.postdate }</td>
 							<td>${row.attachedfile }</td>
@@ -52,7 +52,6 @@
 			</table>
 		</div>
 	</section>
-
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>

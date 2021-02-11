@@ -1,3 +1,18 @@
+/* 메뉴 숨김/열림 처리 hjkosmo*/
+$(document).ready(function(){
+	$('.dropMore').click(function(){
+		if($('.dropMore').hasClass('dropMore')){
+			$('.dropMore').addClass('dropClose').removeClass('dropMore');
+			$('.dropMenu').css('display', 'block');
+			$('.fa').addClass('fa-chevron-up').removeClass('fa-chevron-down');
+		}
+		else if($('.dropClose').hasClass('dropClose')){
+			$('.dropClose').addClass('dropMore').removeClass('dropClose');
+			$('.dropMenu').css('display', 'none');
+			$('.fa').addClass('fa-chevron-down').removeClass('fa-chevron-up');
+		}
+	});
+});
 function deleteRow(idx) {
     if(confirm('삭제하시겠습니까?')){
         location.href='requestBoardAction_delete?idx='+idx;

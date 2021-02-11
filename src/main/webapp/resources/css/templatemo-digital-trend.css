@@ -975,14 +975,20 @@ ol, ul {
 form[name="regiform"] button[type="submit"],
 form[name="payappform"]  button[type="submit"],
 form[name="fileFrm"]  button[type="submit"],
-#findBtn, #tempPwBtn
-{
+#findBtn, #tempPwBtn, .btnSch{
 	width:400px;
 	background-color:var(--primary-color);
 }
 form[name="regiform"] button[type="submit"]:hover,
+form[name="payappform"]  button[type="submit"]:hover,
 form[name="fileFrm"]  button[type="submit"]:hover,
-#findBtn:hover, #tempPwBtn:hover{
+#findBtn:hover, #tempPwBtn:hover, .btnSch:hover{
+	background-color:var(--secondary-color);
+}
+.normalSizeBtn{
+	background-color:var(--primary-color);
+}
+.normalSizeBtn:hover{
 	background-color:var(--secondary-color);
 }
 .btn-cc{
@@ -1046,45 +1052,71 @@ form[name="fileFrm"]  button[type="submit"]:hover,
     position: relative;
 }
 /*---------------------------------------
-    RequestBoard STYLES (찬 css)             
-  
-
-table{
+    RequestBoard STYLES     
+ 
+-----------------------------------------*/ 
+/*메뉴 열림/닫힘 JS관련*/
+.drop{
+	padding: 10px;
+	font-size:15px;
+	vertical-align:middle;
+	height: 40px;
+	background-color:#fff;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	text-align:center;
+}
+.drop:hover{
+	cursor:pointer;
+	background-color:#FFC079;	
+}
+.dropMenu{
+	display:none;
+	position:relative;
+}
+/*여닫음 JS관련 끝*/
+.reqFrm{
+	padding:20px;
+	text-align:left;
+}
+.reqDiv table{
 	border: 1px solid #EAEAEA;
 	border-radius: 10px;
 	margin-bottom: 10px;
+	display:none;
 }
-#title {
+.reqDiv #title {
 	font-size: 20px;
-	font-weight : bold;
+	font-weight : bold;	
 }
-.rightcontent{
+.reqDiv .rightcontent{
 	vertical-align: middle;
 	font-size: 12px;
+	border:1px solid red;
 }
-span#childInfo {
+.reqDiv span#childInfo {
 	background-color: #DC5C05;
 	border-radius : 10px;
 	padding:0 10px;
 	color: white;
 	font-size: 12px;
 }
-span#warning{
+.reqDiv span#warning{
 	color: #930000;
 	font-size: 12px;
 	vertical-align: text-top;
 }
-div#back{
+.reqDiv div#back{
 	width: 1000px;
 	text-align: center;
 }
-div#search{
-	background-color: white;
-	width: 80%;
-	margin: 50px auto 0;
-	text-align: center;
+.reqDiv #search{
+	font-size:15px;
+	height:50px;
+	float:left;
+	width: 90%;
 }
-.container-1 .icon{
+
+.reqDiv .container-1 .icon{
   position: absolute;
   top: 55%;
   margin-left: 13px;
@@ -1093,7 +1125,7 @@ div#search{
   color: #4f5b66;
 }
 
-.workday_off {
+.reqDiv .workday_off {
 	border: 1px solid #e0e0e0;
 	background: #fff;
 	margin-top: 7px;
@@ -1106,37 +1138,42 @@ div#search{
 	font-weight: 400;
 }
 
-.workday_on {
-	background: #FFC079;
+.reqDiv .workday_on {
+	background: var(--secondary-color);
 }
-
-.box-radio-input input[type="radio"]{
+.reqDiv .box-radio-input input[type="radio"]{
   display:none;
   padding: 50px;
   text-align: center;
 }
 
-.box-radio-input input[type="radio"] + span{
+.reqDiv .box-radio-input input[type="radio"] + span{
 	border: 1px solid #e0e0e0;
 	background: #fff;
 	width: calc(58%/ 2);
-	color: #595757;
+	color: var(--secondary-color);
 	padding: 10px;
 	text-align: center;
-	font-family: Noto Sans KR, sans-serif !important;
 	font-size: 15px;
-	font-weight: 400;
+	font-weight: 500;
+}
+
+.reqDiv .box-radio-input input[type="radio"]:checked + span{
+  color: var(--white-color);
+  background: var(--secondary-color);
   
 }
 
-.box-radio-input input[type="radio"]:checked + span{
-  background: #FFC079;
+.reqDiv .box-radio-input input[type="radio"]:hover +span{
+	color: var(--white-color);
+	background-color:var(--secondary-color);
+	cursor:pointer;
 }
-.rightcontent {
+
+.reqDiv .rightcontent {
 	text-align: left;
 	font-size: 14px;
 }
------------------------------------------*/
 
 /*---------------------------------------
     RESPONSIVE STYLES              
