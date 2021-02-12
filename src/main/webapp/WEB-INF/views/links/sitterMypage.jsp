@@ -87,7 +87,7 @@ p {
 			},
 			dataType : "json",
 			success : function(d) {
-
+				alert(d.message);
 			},
 			error : function(e) {
 				alert("오류발생:" + e.status + ":" + e.statusText);

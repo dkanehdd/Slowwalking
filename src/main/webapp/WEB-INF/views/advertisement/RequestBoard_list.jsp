@@ -7,6 +7,11 @@
 <!-- css, js 파일링크 등 묶음-->
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <script src="../resources/js/reqBdJs.js"></script>
+<style type="text/css">
+table{
+	display: none;
+}
+</style>
 <title>느린걸음</title>
 </head> 
 
@@ -145,6 +150,7 @@
 					</table>
 				</c:forEach>
 				<br/>
+				<div class="text-center"><button class="btn btn-info">더보기</button></div>
 				</div>
 		</div>
 	</div>

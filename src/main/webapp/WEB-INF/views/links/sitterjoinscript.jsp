@@ -219,7 +219,6 @@
 					function name() {
 						if ($("#time_type").is(":checked")) {
 							$("#workday_name").val('협의가능');
-							
 						} else {
 							var i = 0;
 							var workday_tyle = "";

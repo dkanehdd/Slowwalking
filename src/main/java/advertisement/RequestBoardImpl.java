@@ -29,6 +29,9 @@ public interface RequestBoardImpl {
 	//의뢰서 작세
 	public int deleteRequestBoard(String idx);
 	
+	//의뢰서 안보임 처리
+	public int invisibleBoard(int idx);
+	
 	//의뢰서 이미지 가져오기
 	public String getImage(int idx);
 	

@@ -23,6 +23,7 @@ public interface MypageImpl {
 	public int ticketCount(String id);
 	public int updateCount(String id);
 	public InterviewDTO interList(int idx);
+	public InterviewDTO getAgree(int idx);
 	//수락
 	public int sitAgree(int idx);
 	public int parAgree(int idx);
