@@ -41,7 +41,7 @@
 					</tr>
 				</table>
 				<!-- 아래 버튼은 임시로 만들어 두었습니다. 페이징처리, 목록보기 등의 기능 필요합니다. hjkosmo-->
-				<button onclick="javascript:history.go(-1)" class="btn primary-color normalSizeBtn float-right"
+				<button onclick="javascript:history.go(-1)" class="btn btn-danger float-right"
 				style="background-color:var(--primary-color); color:var(--white-color);">목록보기</button>			
 			</div>
 		</div>

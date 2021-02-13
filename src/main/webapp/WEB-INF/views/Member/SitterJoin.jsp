@@ -241,7 +241,7 @@
 					</tr>
 				</table>
 				<div class="btnBelow">
-					<button type="submit" class="btn btn-danger">작성완료</button>
+					<button type="submit" class="btn btn-danger btn400w">작성완료</button>
 				</div>
 			</form:form>
 		</div>

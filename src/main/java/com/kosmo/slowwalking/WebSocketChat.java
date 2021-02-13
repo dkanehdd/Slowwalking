@@ -56,12 +56,12 @@ public class WebSocketChat {
 	
 	@OnMessage 
 	public void onMessage(String message, Session session) {
-		//String sender = message.split(",")[1];
-		//message = message.split(",")[0];
+		//String sender = message.split(",")[1];//
+		//message = message.split(",")[0];//
 		logger.info("Message From : "+message); 
 		try {
 			final Basic basic=session.getBasicRemote();
-			//basic.sendText(message);
+			//basic.sendText(message);// 주석되어있던 부분 해제
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

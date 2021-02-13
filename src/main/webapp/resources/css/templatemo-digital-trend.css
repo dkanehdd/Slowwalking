@@ -972,24 +972,16 @@ ol, ul {
 	height:70px;
 	font-size: 1.2em;
 }
-form[name="regiform"] button[type="submit"],
-form[name="payappform"]  button[type="submit"],
-form[name="fileFrm"]  button[type="submit"],
-#findBtn, #tempPwBtn, .btnSch{
+.btn-danger{
+	background-color:var(--primary-color);
+	border-color: var(--secondary-color);
+}
+.btn-danger:hover{
+	background-color:var(--secondary-color);
+	border-color: var(--primary-color);
+}
+.btn400w{
 	width:400px;
-	background-color:var(--primary-color);
-}
-form[name="regiform"] button[type="submit"]:hover,
-form[name="payappform"]  button[type="submit"]:hover,
-form[name="fileFrm"]  button[type="submit"]:hover,
-#findBtn:hover, #tempPwBtn:hover, .btnSch:hover{
-	background-color:var(--secondary-color);
-}
-.normalSizeBtn{
-	background-color:var(--primary-color);
-}
-.normalSizeBtn:hover{
-	background-color:var(--secondary-color);
 }
 .btn-cc{
 	width:100px;
@@ -1052,7 +1044,7 @@ form[name="fileFrm"]  button[type="submit"]:hover,
     position: relative;
 }
 /*---------------------------------------
-    RequestBoard STYLES     
+    RequestBoard STYLES  hjkosmo추가   
  
 -----------------------------------------*/ 
 /*메뉴 열림/닫힘 JS관련*/
@@ -1072,6 +1064,7 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 .dropMenu{
 	display:none;
 	position:relative;
+	text-align:center;
 }
 /*여닫음 JS관련 끝*/
 .reqFrm{
@@ -1083,6 +1076,7 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 	border-radius: 10px;
 	margin-bottom: 10px;
 	display:none;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .reqDiv #title {
 	font-size: 20px;
@@ -1091,7 +1085,6 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 .reqDiv .rightcontent{
 	vertical-align: middle;
 	font-size: 12px;
-	border:1px solid red;
 }
 .reqDiv span#childInfo {
 	background-color: #DC5C05;
@@ -1105,8 +1098,7 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 	font-size: 12px;
 	vertical-align: text-top;
 }
-.reqDiv div#back{
-	width: 1000px;
+.reqDiv #back{
 	text-align: center;
 }
 .reqDiv #search{
@@ -1115,8 +1107,7 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 	float:left;
 	width: 90%;
 }
-
-.reqDiv .container-1 .icon{
+.container-1 .icon{
   position: absolute;
   top: 55%;
   margin-left: 13px;
@@ -1125,7 +1116,7 @@ form[name="fileFrm"]  button[type="submit"]:hover,
   color: #4f5b66;
 }
 
-.reqDiv .workday_off {
+.workday_off {
 	border: 1px solid #e0e0e0;
 	background: #fff;
 	margin-top: 7px;
@@ -1133,7 +1124,6 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 	color: #595757;
 	padding: 6px 0;
 	text-align: center;
-	font-family: Noto Sans KR, sans-serif !important;
 	font-size: 15px;
 	font-weight: 400;
 }
@@ -1173,6 +1163,41 @@ form[name="fileFrm"]  button[type="submit"]:hover,
 .reqDiv .rightcontent {
 	text-align: left;
 	font-size: 14px;
+}
+
+.reqDiv .rightcontent span{
+	display:inline-block;
+}
+
+.schArea{
+	margin-bottom: 10px;
+}
+.rightcontent span{
+	vertical-align:middle;
+}
+/**Reqview 쪽(의뢰상세) hjkosmo추가**/
+.upperReqView{
+	margin-bottom:20px;
+	padding-bottom:20px;
+	border-bottom:2px solid #ccc;
+}
+/****SitterBoard_list hjkosmo추가****/
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+/* 마이페이지  hjkosmo*/
+.mypageCont{
+	text-align:left;
+	margin:50px 0;
+	padding: 50px 0;
 }
 
 /*---------------------------------------

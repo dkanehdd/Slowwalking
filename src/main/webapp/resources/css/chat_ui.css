@@ -1,5 +1,7 @@
 *{margin:0;}
-
+.tempP{
+	background-color:red;
+}
 .chat_ui
 {
 	background-color: #9bbad8;
@@ -118,11 +120,6 @@
 .chat_ui .msg .othertalk .box .time
 {
 	float: left;
-}
-
-.chat_ui .sendmsg
-{
-	
 }
 
 .chat_ui .sendmsg .textarea

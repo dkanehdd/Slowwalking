@@ -27,7 +27,7 @@
 	</div>
 
 	<!-- ABOUT -->
-	<section class="about section-padding pb-0" id="about">
+	<section class="about section-padding" id="about">
 		<div class="container">
 			<!-- Side메뉴 -->
 			<%@ include file="../include/side.jsp"%>

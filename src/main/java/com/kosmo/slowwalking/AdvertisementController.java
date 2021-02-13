@@ -445,7 +445,9 @@ public class AdvertisementController {
 	// 구인의뢰서 쓰기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/requestBoard_write")
 	public String ReqeustBoardWrite(Principal principal, Model model) {
-
+		
+		System.out.println("wirte클릭시 콘솔에 출력");
+		
 		String user_id = ""; 
 		try {
 			user_id = principal.getName();
