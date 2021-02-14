@@ -25,6 +25,6 @@
 	    <div class="clear"></div>
 	</div>	
 </div>
-<div id="logWindow" class="border border-danger" style="height:130px; overflow:auto;"></div> 
+<div id="logWindow" class="fab" style="height:130px; overflow:auto;"></div> 
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 //webChatUI.jsp
 var messageWindow;
 var inputMessage;
