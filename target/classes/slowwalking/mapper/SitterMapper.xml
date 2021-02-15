@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member.SitterImpl">
+
+	<insert id="insertSitter">
+		INSERT INTO sittermember
+		(sitter_id,cctv_agree,introduction,personality_check,license_check, activity_date, activity_time,residence1,
+				residence2,residence3,pay,career)
+		values(#{sitter_id}, #{cctv_agree},#{introduction}, #{personality_check},#{license_check},#{activity_date},
+		#{activity_time},#{residence1},#{residence2},#{residence3},#{pay},0)
+	</insert>
+	
+	<!-- 트렁크가 나이 구하는 쿼리문 -->
+	<select id="list" resultType="member.SitterMemberDTO" parameterType="advertisement.ParameterDTO">
+		SELECT s.*, m.name, m.image_path, m.starrate,
+			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
+		from sittermember s
+            inner join member m
+               on s.sitter_id=m.id 
+       WHERE advertise='T' and permission='T' 
+      <if test='request_time != null and !(request_time eq "".toString())'>
+       AND activity_date = #{request_time}
+      </if>
+      <if test='pay != null and !(pay eq "".toString())'>
+      AND pay <![CDATA[<=]]> #{pay}
+      </if>
+      <choose>
+     	<when test='min_age != null and !(min_age eq "".toString()) and max_age != null and !(max_age eq "".toString())'>
+      		AND BIRTHDAY BETWEEN TO_DATE(#{max_age}, 'YYYY/MM/DD') AND TO_DATE(#{min_age}, 'YYYY/MM/DD')
+      	</when>
+      	<when test='min_age != null and !(min_age eq "".toString())'>
+      		AND BIRTHDAY <![CDATA[<=]]> TO_DATE(#{min_age}, 'YYYY/MM/DD')
+      	</when>
+      	<when test='max_age != null and !(max_age eq "".toString())'>
+      		AND BIRTHDAY <![CDATA[>=]]> TO_DATE(#{max_age}, 'YYYY/MM/DD')
+      	</when>
+      </choose>
+	  <if test='region != null and !(region eq "".toString())'>
+       AND residence1 = #{region} or residence2 = #{region} or residence3 = #{region}
+      </if>
+       ORDER BY s.premium DESC
+	</select>
+	
+	<!-- 트렁크가 나이 구하는 쿼리문 -->
+	<select id="adminSitterlist" resultType="member.SitterMemberDTO">
+		SELECT s.*, m.name, m.image_path, m.starrate,
+			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
+		from sittermember s
+            inner join member m
+               on s.sitter_id=m.id
+	</select>
+	
+	
+
+	<select id="selectSitter" resultType="member.SitterMemberDTO">
+		SELECT s.*, m.name, m.image_path, m.starrate, m.gender, m.phone,
+			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
+		from sittermember s
+            inner join member m
+               on s.sitter_id=m.id 
+        WHERE m.id=#{id}
+	</select>
+	
+	<update id="updateSitter" parameterType="member.SitterMemberDTO">
+		UPDATE sittermember
+			SET residence1=#{residence1}, residence2=#{residence2}, residence3=#{residence3},
+				activity_time=#{activity_time}, cctv_agree=#{cctv_agree}, pay=#{pay},
+				introduction=#{introduction}
+			WHERE sitter_id=#{sitter_id}
+	</update>
+	
+	<update id="updateLicense" parameterType="String">
+		UPDATE sittermember
+			SET personality_check=#{0}
+			WHERE sitter_id=#{1}
+	</update>
+	<update id="updateAdvertise" parameterType="String">
+		UPDATE sittermember
+			SET advertise=#{0}
+			WHERE sitter_id=#{1}
+	</update>
+	
+	<update id="updatePremiumdate">
+		UPDATE sittermember SET premiumdate=sysdate+${param1} where sitter_id=#{param2}
+	</update>
+	
+	<update id="updatePremium"  parameterType="String">
+		UPDATE sittermember SET premium=trunc(premiumdate-sysdate)  where sitter_id=#{param1}
+	</update>
+	<update id="resetPremium"  parameterType="String">
+		UPDATE sittermember SET premium=0, premiumdate=''  where sitter_id=#{param1}
+	</update>
+	
+	
+
+</mapper>
