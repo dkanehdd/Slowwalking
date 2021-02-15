@@ -151,8 +151,7 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("/member/logout")
 	public String Logout(HttpSession session) {
-		
-		session.setAttribute("user_id", null);
+		session.invalidate();
 		return "redirect:../main/main";
 	}
 	
@@ -374,7 +373,7 @@ public class MemberController {
 
 		System.out.println("수신자 번호 : " + phoneNumber);
 		System.out.println("인증번호 : " + numStr);
-		certificationService.certifiedPhoneNumber(phoneNumber, numStr);
+		certificationService.certifiedPhoneNumber(phoneNumber, numStr, "join");
 		return numStr;
 	}
 

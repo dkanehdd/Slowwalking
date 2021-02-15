@@ -24,6 +24,9 @@ public interface MypageImpl {
 	public int updateCount(String id);
 	public InterviewDTO interList(int idx);
 	public InterviewDTO getAgree(int idx);
+	public ArrayList<InterviewDTO> andsitInterList(String id);
+	public ArrayList<InterviewDTO> andparInterList(String id);
+	public ArrayList<InterviewDTO> andsitDiaryList(String id);
 	//수락
 	public int sitAgree(int idx);
 	public int parAgree(int idx);

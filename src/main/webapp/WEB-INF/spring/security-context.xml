@@ -25,6 +25,8 @@
 			access="permitAll"/>
 		<intercept-url pattern="/admin"
 			access="permitAll"/>
+		<intercept-url pattern="/multiBoard/product"
+			access="hasAnyRole('sitter, parents')"/>
 		<intercept-url pattern="/admin/**"
 			access="hasRole('admin')"/>
 		<intercept-url pattern="/**"

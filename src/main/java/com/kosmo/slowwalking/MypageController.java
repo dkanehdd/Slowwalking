@@ -37,6 +37,7 @@ import member.MemberImpl;
 import member.MypageImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
+import mms.certificationService;
 import mutiBoard.CalendarDTO;
 import mutiBoard.DiaryDTO;
 import mutiBoard.OrderDTO;
@@ -211,7 +212,10 @@ public class MypageController {
 					
 					int result = sqlSession.getMapper(MypageImpl.class).sitterApply(request_idx, parentsBoard_id, user_id, request_time);
 					sqlSession.getMapper(MypageImpl.class).updateCount(user_id);
-					
+					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
+					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(parentsBoard_id);
+					//나중에 풀어주세요~
+					//certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
 					System.out.println("result:"+result);
 					
 					map.put("message", "success");
@@ -224,6 +228,10 @@ public class MypageController {
 					
 					int result = sqlSession.getMapper(MypageImpl.class).parentsApply(user_id, sitterBoard_id, request_time);
 					sqlSession.getMapper(MypageImpl.class).updateCount(user_id);
+					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(sitterBoard_id);
+					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
+					//나중에 풀어주세요~
+					//certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
 					
 					System.out.println("result:"+result);
 					map.put("message", "success");
