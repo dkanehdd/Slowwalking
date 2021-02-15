@@ -45,8 +45,12 @@ public class WebSocketChat {
 	private void sendAllSessionToMessage(Session self, String message) { 
 		try { 
 			for(Session session : WebSocketChat.sessionList) {
-				if(!self.getId().equals(session.getId())) {
-					session.getBasicRemote().sendText(message);
+					if(roomlist.get(session.getId()).equals(roomlist.get(self.getId()))){
+						System.err.println(message+"*****");
+						session.getBasicRemote().sendText(message); 
+						
+						
+					}
 				}
 			}
 		}catch (Exception e) { 

@@ -12,7 +12,7 @@
 	</select>
 	<select id="listPage" resultType="mutiBoard.MultiBoardDTO">
 		select * from multi_board where
-		flag='notice'
+		flag='notice' 
 	</select>
 
 	<!--공지사항 내용 보기 -->
