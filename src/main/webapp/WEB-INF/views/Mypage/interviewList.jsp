@@ -20,7 +20,7 @@
 <div class="ml-2">
 	<c:choose>
 		<c:when test="${flag eq 'sitter' }">
-			<div class="ml-3 mt-3">
+			<div class="ml-3 mt-3"> 
 			<h3>내 구직현황</h3>
 			</div>
 		</c:when>
