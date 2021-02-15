@@ -1,5 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%> 
+<style>
+#alert{
+padding: 1px;
+border-radius: 200px;
+}
+</style>
+<!-- 알람 확인 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		url : "../mypage/countInterview",
+		type : "GET",
+		dataType : "json",  
+		contentType : "text/html;charset:utf-8;",
+		success : function(data){
+			if(data.interviewCount != 0){
+				$('#alert').text(data.interviewCount);
+				$('#alert').css('border', 'solid 3px red');
+			}
+		},
+		error : function(){
+
+		}
+	});
+})
+</script>
 <nav class="navbar navbar-expand-lg">
    <div class="container">
       <a class="navbar-brand nonHover" href="../main/main" style="font-weight:700">
