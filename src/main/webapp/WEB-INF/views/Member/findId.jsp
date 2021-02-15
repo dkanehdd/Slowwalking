@@ -6,16 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
-<style>
-	#findBtn{
-		background-color:var(--primary-color);
-		border-color: var(--secondary-color);
-	}
-	#findBtn:hover{
-		background-color:var(--secondary-color);
-		border-color: var(--primary-color);
-	}
-</style>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
 <body>
@@ -36,7 +26,7 @@
 				</div>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="button" id='findBtn' class="btn btn-danger btn400w" style="width:200px; margin-left:5px;">아이디 찾기</button>
+					<button type="button" id='findBtn' class="btn btn-danger" style="width:200px; margin-left:5px;">아이디 찾기</button>
 				</div>
 			</div>
 		</div>

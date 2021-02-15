@@ -445,9 +445,7 @@ public class AdvertisementController {
 	// 구인의뢰서 쓰기 페이지 이동 요청명(메소드)
 	@RequestMapping("/advertisement/requestBoard_write")
 	public String ReqeustBoardWrite(Principal principal, Model model) {
-		
-		System.out.println("wirte클릭시 콘솔에 출력");
-		
+
 		String user_id = ""; 
 		try {
 			user_id = principal.getName();
@@ -697,6 +695,7 @@ public class AdvertisementController {
 		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
 		
 		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(id);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("lists",lists);
 		return "advertisement/SitterBorad_view";

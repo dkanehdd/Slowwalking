@@ -30,8 +30,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.databind.type.ArrayType;
 
 import advertisement.InterviewDTO;
-import advertisement.RequestBoardDTO;
-import advertisement.RequestBoardImpl;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
@@ -316,12 +314,6 @@ public class MypageController {
 			map.put("message", "수락 상태가 변경되었습니다.");
 		}
 		
-		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).getAgree(idx);
-		System.out.println(dto.getSitter_agree()+"&&"+dto.getParents_agree());
-		if(dto.getSitter_agree().equals("T")&&dto.getParents_agree().equals("T")) {
-			int delete = sqlSession.getMapper(RequestBoardImpl.class).invisibleBoard(dto.getRequest_idx());
-			System.out.println("삭제됬나용?"+ delete);
-		}
 		
 		return map;
 	}
@@ -636,12 +628,12 @@ public class MypageController {
 			System.out.println("원래별점:"+starrate);
 			
 			if(starrate==0) {
-				starrate = newrate;
+				starrate = starrate;
 			}
 			else {
 				starrate = (newrate + starrate) / 2;
 			}
-			System.err.println("최종별점:"+starrate);
+			System.out.println("최종별점:"+starrate);
 
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(sitter_id, starrate);
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(parents_id);
@@ -876,12 +868,6 @@ public class MypageController {
 		int suc = sqlSession.getMapper(SitterImpl.class).updateAdvertise(advertise, id);
 		System.out.println(suc);
 		
-		if(advertise.equals("T")) {
-			map.put("message", "이제부터 리스트에 보여집니다.");
-		}
-		else {
-			map.put("message", "리스트에서 회원님 정보를 숨깁니다.");
-		}
 		map.put("suc", suc);
 		
 		return map;

@@ -790,9 +790,6 @@ ol, ul {
 .noticeImg{
 	background-image:url("../images/notice.png");
 }
-.marketImg{
-	background-image:url("../images/market.png");
-}
 
 #accordion .card-header{
 	vertical-align:middle;
@@ -975,16 +972,18 @@ ol, ul {
 	height:70px;
 	font-size: 1.2em;
 }
-.btn-danger{
-	background-color:var(--primary-color);
-	border-color: var(--secondary-color);
-}
-.btn-danger:hover{
-	background-color:var(--secondary-color);
-	border-color: var(--primary-color);
-}
-.btn400w{
+form[name="regiform"] button[type="submit"],
+form[name="payappform"]  button[type="submit"],
+form[name="fileFrm"]  button[type="submit"],
+#findBtn, #tempPwBtn
+{
 	width:400px;
+	background-color:var(--primary-color);
+}
+form[name="regiform"] button[type="submit"]:hover,
+form[name="fileFrm"]  button[type="submit"]:hover,
+#findBtn:hover, #tempPwBtn:hover{
+	background-color:var(--secondary-color);
 }
 .btn-cc{
 	width:100px;
@@ -1047,68 +1046,43 @@ ol, ul {
     position: relative;
 }
 /*---------------------------------------
-    RequestBoard STYLES  hjkosmo추가   
- 
------------------------------------------*/ 
-/*메뉴 열림/닫힘 JS관련*/
-.drop{
-	padding: 10px;
-	font-size:15px;
-	vertical-align:middle;
-	height: 40px;
-	background-color:#fff;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-	text-align:center;
-}
-.drop:hover{
-	cursor:pointer;
-	background-color:#FFC079;	
-}
-.dropMenu{
-	display:none;
-	position:relative;
-	text-align:center;
-}
-/*여닫음 JS관련 끝*/
-.reqFrm{
-	padding:20px;
-	text-align:left;
-}
-.reqDiv table{
+    RequestBoard STYLES (찬 css)             
+  
+
+table{
 	border: 1px solid #EAEAEA;
 	border-radius: 10px;
 	margin-bottom: 10px;
-	display:none;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.reqDiv #title {
+#title {
 	font-size: 20px;
-	font-weight : bold;	
+	font-weight : bold;
 }
-.reqDiv .rightcontent{
+.rightcontent{
 	vertical-align: middle;
 	font-size: 12px;
 }
-.reqDiv span#childInfo {
+span#childInfo {
 	background-color: #DC5C05;
 	border-radius : 10px;
 	padding:0 10px;
 	color: white;
 	font-size: 12px;
 }
-.reqDiv span#warning{
+span#warning{
 	color: #930000;
 	font-size: 12px;
 	vertical-align: text-top;
 }
-.reqDiv #back{
+div#back{
+	width: 1000px;
 	text-align: center;
 }
-.reqDiv #search{
-	font-size:15px;
-	height:50px;
-	float:left;
-	width: 90%;
+div#search{
+	background-color: white;
+	width: 80%;
+	margin: 50px auto 0;
+	text-align: center;
 }
 .container-1 .icon{
   position: absolute;
@@ -1127,81 +1101,42 @@ ol, ul {
 	color: #595757;
 	padding: 6px 0;
 	text-align: center;
+	font-family: Noto Sans KR, sans-serif !important;
 	font-size: 15px;
 	font-weight: 400;
 }
 
-.reqDiv .workday_on {
-	background: var(--secondary-color);
+.workday_on {
+	background: #FFC079;
 }
-.reqDiv .box-radio-input input[type="radio"]{
+
+.box-radio-input input[type="radio"]{
   display:none;
   padding: 50px;
   text-align: center;
 }
 
-.reqDiv .box-radio-input input[type="radio"] + span{
+.box-radio-input input[type="radio"] + span{
 	border: 1px solid #e0e0e0;
 	background: #fff;
 	width: calc(58%/ 2);
-	color: var(--secondary-color);
+	color: #595757;
 	padding: 10px;
 	text-align: center;
+	font-family: Noto Sans KR, sans-serif !important;
 	font-size: 15px;
-	font-weight: 500;
-}
-
-.reqDiv .box-radio-input input[type="radio"]:checked + span{
-  color: var(--white-color);
-  background: var(--secondary-color);
+	font-weight: 400;
   
 }
 
-.reqDiv .box-radio-input input[type="radio"]:hover +span{
-	color: var(--white-color);
-	background-color:var(--secondary-color);
-	cursor:pointer;
+.box-radio-input input[type="radio"]:checked + span{
+  background: #FFC079;
 }
-
-.reqDiv .rightcontent {
+.rightcontent {
 	text-align: left;
 	font-size: 14px;
 }
-
-.reqDiv .rightcontent span{
-	display:inline-block;
-}
-
-.schArea{
-	margin-bottom: 10px;
-}
-.rightcontent span{
-	vertical-align:middle;
-}
-/**Reqview 쪽(의뢰상세) hjkosmo추가**/
-.upperReqView{
-	margin-bottom:20px;
-	padding-bottom:20px;
-	border-bottom:2px solid #ccc;
-}
-/****SitterBoard_list hjkosmo추가****/
-span.star-prototype, span.star-prototype > * {
-    height: 16px; 
-    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-    width: 80px;
-    display: inline-block;
-}
- 
-span.star-prototype > * {
-    background-position: 0 0;
-    max-width:80px; 
-}
-/* 마이페이지  hjkosmo*/
-.mypageCont{
-	text-align:left;
-	margin:50px 0;
-	padding: 50px 0;
-}
+-----------------------------------------*/
 
 /*---------------------------------------
     RESPONSIVE STYLES              

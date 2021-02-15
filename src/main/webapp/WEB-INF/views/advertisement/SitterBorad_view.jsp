@@ -62,10 +62,10 @@
 							<c:choose>
 								<c:when test="${dto.cctv_agree eq 'true' }">
 									<span style="color: #FF7000"><i class='fas fa-video'></i>
-										CCTV 촬영동의</span>
+										CCTV 동의함</span>
 								</c:when>
 								<c:otherwise>
-									<span><i class='fas fa-video'></i> CCTV 촬영동의 안함</span>
+									<span><i class='fas fa-video'></i> CCTV 동의 안함</span>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -114,91 +114,61 @@
 			</table>
 
 			<div class="container">
-				<h3 style="text-align: center;">
-					<strong>후기</strong> comment
-				</h3>
-				<br />
-				<c:choose>
-					<c:when test="${empty lists}">
-						<div class="card">등록된 후기가 없습니다.</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${lists }" var="row">
+						<h3 style="text-align: center;">
+							<strong>후기</strong> comment 
+						</h3><br />
+						<c:choose>
+							<c:when test="${empty lists}">
+								<div class="card" >등록된 후기가 없습니다.</div>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${lists }" var="row">
 
-							<div class="media border p-3" style="background-color: #F1F1F1">
-								<img src="../resources/images/${row.image_path }"
-									class="media-object mr-3"
-									style="width: 100px; height: 100px; border-radius: 70%">
-								<div class="media-body">
-									<span class="info">${row.send_id } | ${row.regidate }</span><br />
-									${row.content } <br /> <span class="star-prototype">${row.starrate }</span>
-								</div>
-							</div>
-
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<c:if test="${flag eq 'parents'}">
-				<div class="_1nW60 container">
-					<div class="_2KQBU">
-						<div class="_1Lb4l">
-							<div class="_26pci">
-								<c:out value="${first}○${last}" />
-								(${dto.age }세 , ${dto.gender })
-							</div>
-						</div>
-						<div class="_2RUNH">
-							희망시급 :
-							<fmt:formatNumber value="${dto.pay }" type="number" />
-							원
-						</div>
-						<div
-							style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
-							<button tabindex="0" type="button"
-								style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
-								<div>
-									<div
-										style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
-										<span
-											style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;"
-											onClick="applyInter();">인터뷰 신청하기</span>
+									<div class="card col-12" >
+									<div class="card-body">${row.content }</div>
 									</div>
-								</div>
-							</button>
+
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+			</div>
+			<div class="_1nW60 container">
+				<div class="_2KQBU">
+					<div class="_1Lb4l">
+						<div class="_26pci">
+							<c:out value="${first}○${last}" />
+							(${dto.age }세 , ${dto.gender })
 						</div>
 					</div>
+					<div class="_2RUNH">
+						희망시급 :
+						<fmt:formatNumber value="${dto.pay }" type="number" />
+						원
+					</div>
+					<div
+						style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
+						<button tabindex="0" type="button"
+							style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
+							<div>
+								<div
+									style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
+									<span
+										style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;" onClick="applyInter();">인터뷰
+										신청하기</span>
+								</div>
+							</div>
+						</button>
+					</div>
 				</div>
-			</c:if>
+			</div>
 		</div>
 	</div>
-	<input type="hid-den" id="id" value="${dto.sitter_id }" />
-	<input type="hid-den" id="activity_time" value="${dto.activity_time }" />
+	<input type="hid-den" id="id" value="${dto.sitter_id }"/>
+	<input type="hid-den" id="activity_time" value="${dto.activity_time }"/>
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>
-<style type="text/css">
-span.star-prototype, span.star-prototype>* {
-	height: 16px;
-	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-	width: 80px;
-	display: inline-block;
-}
 
-span.star-prototype>* {
-	background-position: 0 0;
-	max-width: 80px;
-}
-</style>
-<script type="text/javascript">
-	$.fn.generateStars = function() {
-		return this.each(function(i, e) {
-			$(e).html($('<span/>').width($(e).text() * 16));
-		});
-	};
-	// 숫자 평점을 별로 변환하도록 호출하는 함수
-	$('.star-prototype').generateStars();
-</script>
 <script type="text/javascript">
 	//주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
@@ -234,32 +204,32 @@ span.star-prototype>* {
 			var map = new kakao.maps.StaticMap(mapContainer, mapOption);
 		}
 	});
-
-	function applyInter() {
+	
+	function applyInter(){
 
 		$.ajax({
 			url : "../mypage/addList?${_csrf.parameterName}=${_csrf.token}",
 			type : "GET",
-			data : {
+			data : { 
 				sitterBoard_id : $('#id').val(),
 				request_time : $('#activity_time').val()
 			},
-			dataType : "json",
+			dataType : "json", 
 			contentType : "text/html;charset:utf-8;",
-			success : function(data) {
-				if (data.message == 'success') {
-					alert("인터뷰 요청이 성공했습니다.\n ( 남은 티켓은 " + data.count
-							+ "개입니다. )");
-				} else {
-					alert("보유하신 이용권이 없습니다.");
-					location.href = "../multiBoard/product";
+			success : function(data){
+				if(data.message=='success'){
+					alert("인터뷰 요청이 성공했습니다.\n ( 남은 티켓은 "+data.count+"개입니다. )");
 				}
-
+				else{
+					alert("보유하신 이용권이 없습니다.");
+					location.href="../multiBoard/product";
+				}
+				
 			},
-			error : function() {
+			error : function(){
 				alert("다시 시도해 주세요.");
 			}
-
+			
 		});
 	}
 </script>

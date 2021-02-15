@@ -60,7 +60,7 @@
 					<tr>
 						<th scope="row" style="vertical-align:middle;">이름</th>
 						<td><input type="text" name="name" id="name" value=""
-							>
+							pattern="([^가-힣])">
 							<div style="display:inline; margin-left: 5px;">
 								<label for="radio-1">남</label> <input type="radio" name="gender"
 								id="radio-1" value="남" checked> <label for="radio-2">여</label>
@@ -131,7 +131,7 @@
 				</table>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="submit" id="submitBtn" class="btn btn-danger btn400w">회원가입</button>
+					<button type="submit" id="submitBtn" class="btn btn-danger">회원가입</button>
 				</div>
 			</form:form>
 		</div>

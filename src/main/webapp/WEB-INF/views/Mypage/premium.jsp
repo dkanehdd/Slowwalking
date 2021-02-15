@@ -104,9 +104,9 @@ div .text {
 								<tr>
 									<td>
 										<div class="card">
-											<div class="card-body d-flex justify-content-between">
-											<span class="display-4">${row.product_name }</span>
-											<span class="display-5">${row.price }원</span>
+											<div class="card-body">
+											<span class="display-3">${row.product_name }</span>
+											<span class="display-4">${row.price }</span>원
 												<button type="button" class="btn btn-primary"
 									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
 											</div>

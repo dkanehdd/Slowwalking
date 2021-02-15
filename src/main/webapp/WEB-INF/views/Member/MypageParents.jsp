@@ -11,7 +11,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script >
 <script type="text/javascript">
 $(function(){
-	$("#innerPage").load("../mypage/interList");
 	$("#profile").on("click",function(){
 		$("#innerPage").load("../mypage/proEdit");
 	});
@@ -40,10 +39,6 @@ $(function(){
 .box img {width:200px; height:200px;}
 .in { position:absolute; top:10px; left:175px;}
 .in img {width:30px;}
-.list-group-item:hover {
-	cursor: pointer;
-	background-color: #ffce7f;
-}
 </style>
 </head>
 <body>

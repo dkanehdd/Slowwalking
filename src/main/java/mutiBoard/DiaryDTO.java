@@ -11,20 +11,12 @@ public class DiaryDTO {
 	private String name;//시터 이름
 	private int idx;
 	private int starrate;
-	private String image_path;
 	
-	public String getImage_path() {
-		return image_path;
-	}
-	public void setImage_path(String image_path) {
-		this.image_path = image_path;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
 	public int getStarrate() {
 		return starrate;
 	}

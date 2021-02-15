@@ -19,7 +19,6 @@ import member.MemberDTO;
 import member.MemberImpl;
 import member.MultiBoardImpl;
 import member.SitterImpl;
-import mutiBoard.ChattingDTO;
 import mutiBoard.MultiBoardDTO;
 import mutiBoard.OrderDTO;
 import mutiBoard.ProductDTO;
@@ -103,8 +102,7 @@ public class MultiBoardController {
 		String idx = req.getParameter("idx");
 		String flag = req.getParameter("flag");
 		int price = Integer.parseInt(req.getParameter("price"));
-		String p = req.getParameter("usepoint").equals("")?"0":req.getParameter("usepoint");
-		int usepoint = Integer.parseInt(p);
+		int usepoint = Integer.parseInt(req.getParameter("usepoint"));
 		
 		MemberDTO memberDTO = sqlSession.getMapper(MemberImpl.class).getMember(session.getAttribute("user_id").toString());
 		
@@ -176,30 +174,6 @@ public class MultiBoardController {
 		}
 		
 		map.put("suc", suc);
-		
-		return map;
-	}
-	
-	@RequestMapping("/chat/insertChat")
-	@ResponseBody
-	public Map<String, Object> insertChat(HttpServletRequest req) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String message = req.getParameter("message");
-		System.out.println(message+"*****");
-		ChattingDTO dto = new ChattingDTO();
-		String[] messageArr = message.split("/");
-		System.out.println(messageArr[0]);
-		System.out.println(messageArr[1]);
-		dto.setSend_id(messageArr[0].substring(0, messageArr[0].length()-1));
-		String[] arr = messageArr[1].split(" ");
-		dto.setRece_id(arr[0]);
-		dto.setContent(arr[1]);
-		System.out.println(arr[0]);
-		System.out.println(arr[1]);
-		int write = sqlSession.getMapper(MultiBoardImpl.class).chatwrite(dto);
-		System.out.println("성공???"+write);
-		
-		map.put("save", write);
 		
 		return map;
 	}

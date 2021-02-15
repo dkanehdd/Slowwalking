@@ -45,12 +45,14 @@
 				<tr>
 					<th>결제일</th>
 					<th>쿠폰명</th>
+					<th>티켓 수</th>
 					<th>결제금액</th>
 				</tr>
 				</thead>
 				<c:forEach var="row" items="${lists }">
 				<tbody>
 					<td>${row.regidate }</td>
+					<td>${row.content }</td>
 					<td>${row.product_name }회</td>
 					<td>${row.total_price}</td>
 				</tbody>
