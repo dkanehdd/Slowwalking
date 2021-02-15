@@ -24,6 +24,9 @@
 .btnSch:active{
 	background-color: var(--primary-color);
 	border-color: var(--secondary-color)
+<style type="text/css">
+table{
+	display: none;
 }
 </style>
 <title>느린걸음</title>
@@ -187,6 +190,8 @@
 						</tbody>
 					</table>
 				</c:forEach><!-- table(결과) -->
+          <br/>
+				<div class="text-center"><button class="btn btn-info">더보기</button></div>
 			</div><!-- #back -->
 		</div><!-- RequestBoardList -->
 	</div><!-- reqDiv -->

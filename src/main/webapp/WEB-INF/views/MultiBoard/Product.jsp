@@ -90,7 +90,7 @@ $(function(){
 			}		
 			var result2 = parseInt(num3) - parseInt(num2);
 			if(result2 <0){
-				alert("포인트가 금액 이상 일수는 없습니다");
+				alert("포인트가 부족합니다");
 				return;
 			}
 			document.getElementById("point").innerHTML=result2;
@@ -109,7 +109,7 @@ $(function(){
 		<div class="container">
 			<!-- Side메뉴 -->
 			<%@ include file="../include/side.jsp"%>
-			<div class="section_title subPimgBg">
+			<div class="section_title subPimgBg marketImg">
 				<h1 class="mb-5">
 					<strong>PASSES</strong> 이용권구매
 				</h1>
@@ -120,9 +120,10 @@ $(function(){
 						<tr>
 							<td>
 								<div class="card">
-									<div class="card-body">${row.product_name }
-										${row.price }
-										<button type="button" class="btn btn-primary"
+									<div class="card-body d-flex justify-content-between">
+										<h1><strong>${row.product_name }</strong></h1>
+										&nbsp;&nbsp;&nbsp;<h2 class="pt-2">${row.price }원</h2>
+										<button type="button" class="btn btn-info ml-auto"
 									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
 									</div>
 								</div>

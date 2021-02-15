@@ -78,7 +78,7 @@
 		SELECT * FROM requestBoard
 			WHERE request_date = #{request_time} or request_date LIKE '%'||#{consultation}||'%' 
 				AND regular_short LIKE '%'||#{regular_short}||'%' AND title LIKE '%'||#{title}||'%'
-				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
+				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%' advertise = 'on'
 	</select>
 	<!-- 형님 위에 쿼리가 에러가 나는겁니다! 오키 ㅋㅋㅋㅋ  or차이긴 한데... 아니 형님 왜 ''인데 검색이 되죠? ''이니까 
 	????? ㅋㅋㅋㅋㅋㅋㅋ || 이거 쓰면 ''이여도 검색되지
@@ -89,10 +89,12 @@
 		resultType="advertisement.RequestBoardDTO">
 		SELECT * FROM requestBoard 
 			WHERE regular_short LIKE '%'||#{regular_short}||'%' AND title LIKE '%'||#{title}||'%'
-				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
+				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%' advertise = 'on'
 	</select>
 	
-	
+	<update id="invisibleBoard">
+		UPDATE requestBoard SET advertise='off' WHERE idx=#{0}
+	</update>
 	
 	
 </mapper>

@@ -13,6 +13,8 @@
 <style>
 .container input {width:20px;}
 </style>
+
+
 </head>
 <body>
 <div class="ml-2">
@@ -39,6 +41,7 @@
 				<thead>
 					<th>이름(ID)</th>
 					<th>연락처</th>
+					<th>채팅</th>
 					<th>근무 시간</th>
 					<th>내용</th>
 					<th colspan="2">프로세스</th>
@@ -51,6 +54,14 @@
 					<c:otherwise><td id="sitter_id">${dto.name}(${row.sitter_id})</td></c:otherwise>
 				</c:choose>
 					<td>${dto.phone}</td>
+					<c:choose>
+					<c:when test="${flag eq 'sitter'}">
+					<td><button class="btn btn-dark" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }">접속</button></td>
+					</c:when>
+					<c:otherwise>
+					<td><button class="btn btn-dark" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }">접속</button></td>
+					</c:otherwise>
+				</c:choose>
 					<td>
 						${row.request_time }
 						<input type="hid-den" id="idx" value="${row.request_idx}"/>
@@ -171,5 +182,19 @@ function acceptThis(idx_c){
 		}
 	});
 }
+
+
+
+
 </script>
+<script type="text/javascript">
+function chatbutton(rece_id, room){
+
+	console.log(rece_id);
+	var id = '${dto.id}';
+	
+	window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=500px, height=600px");
+}
+</script>
+
 </html>
