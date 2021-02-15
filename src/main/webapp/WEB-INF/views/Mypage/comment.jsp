@@ -25,11 +25,14 @@
 	<div class="row">
 		<div class="myrate">
 			<c:choose>
-				<c:when test="${dto.starrate eq '0' }">등록된 별점이 아직 없어요.</c:when>
+				<c:when test="${dto.starrate eq '0' }">
+					등록된 별점이 아직 없어요.
+				</c:when>
 				<c:otherwise>
 					<div class="rateTxt">${dto.starrate}점</div>
 					<c:set var="x" value="${dto.starrate }"/>
-					<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
+					<fmt:parseNumber var="i" integerOnly="true" 
+					type="number" value="${x}"/>
 					<c:forEach begin="1" end="${i}" step="1">
 						<img src="../resources/images/star.png" alt="" />
 					</c:forEach>

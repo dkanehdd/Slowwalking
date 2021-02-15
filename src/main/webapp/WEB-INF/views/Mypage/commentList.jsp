@@ -65,7 +65,7 @@
 						<span class="star-prototype">${row.starrate }</span>
 					</td>
 					<td style="text-align:right; vertical-align:middle;">
-						<button class="btn btn-warning btn-sm" onclick="location.href='../mypage/editComment?idx=${row.its_idx }&mode=send';">수정</button>
+						<button class="btn btn-danger btn-sm" onclick="location.href='../mypage/editComment?idx=${row.its_idx }&mode=send';">수정</button>
 						<button class="btn btn-secondary btn-sm" onclick="location.href='../mypage/delComment?idx=${row.its_idx }&mode=send';">삭제</button>
 					</td>
 				</tr>
