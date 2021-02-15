@@ -16,18 +16,10 @@ public class ParameterDTO {
 	private String pay;
 	private String max_age;
 	private String min_age;
-	//시터 검색내용을 저장할 Map
-	private Map<String, String> searchmap;
+
 	
 	
 	
-	
-	public Map<String, String> getSearchmap() {
-		return searchmap;
-	}
-	public void setSearchmap(Map<String, String> searchmap) {
-		this.searchmap = searchmap;
-	}
 	public String getPay() {
 		return pay;
 	}

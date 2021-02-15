@@ -6,6 +6,7 @@ import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -654,29 +655,44 @@ public class AdvertisementController {
 	public String SitterBoardList(Model model, HttpServletRequest req, ParameterDTO parameterDTO) {
 		//오라클에서 가져온 레코드를 저장하는 lists
 		ArrayList<SitterMemberDTO> lists = new ArrayList<>();
-		//paramterDTO에 map으로 검색자료를 저장할 map
-		Map<String, String> searchmap = new HashMap<String, String>();
-		
-		if(parameterDTO.getSearch() != null) {
-			if(parameterDTO.getRequest_time() != "" && parameterDTO.getRequest_time() != null)
-				searchmap.put("activity_time", parameterDTO.getRequest_time());
-			if(parameterDTO.getRegion() != "" && parameterDTO.getRegion() != null) {
-				searchmap.put("residence1", parameterDTO.getRegion());
-				searchmap.put("residence2", parameterDTO.getRegion());
-				searchmap.put("residence3", parameterDTO.getRegion());
-			}
-			if(parameterDTO.getPay() != "" && parameterDTO.getPay() != null)
-				searchmap.put("pay", parameterDTO.getPay());
+		if(parameterDTO.getRequest_time() != null) {
+			System.out.println("request_time : " + parameterDTO.getRequest_time());
+		}
+		if(parameterDTO.getPay() != null) {
+			System.out.println("pay : " + parameterDTO.getPay());
+		}
+		if(parameterDTO.getRegion() != null) {
+			System.out.println("Region : " + parameterDTO.getRegion());
 		}
 		
-		Iterator<String> itr = searchmap.keySet().iterator();
+		Calendar cal = Calendar.getInstance();
+		System.out.println(cal);
+		String maxage; //검색 했을시 최대 나이를 저장하는 변수
+		String minage; //검색 했을시 최소 나이를 저장하는 변수
+		int maxyear; //최대 나이의 탄생년도 저장
+		int minyear; //최소 나이의 탄생년도 저장
+		String maxyearResult;//최대나이를 데이터베이스의 검색할수 있도록 형식을 변환후 담을 변수
+		String minyearResult;//최소나이를 데이터베이스의 검색할수 있도록 형식을 변환후 담을 변수
 		
-		while(itr.hasNext()) {
-			String key = itr.next();
-			String value = (String)searchmap.get(key);
-			
-			System.out.println(key + " : " + value);
+		//최대 나이 최소 나이를 데이터베이스에서 계산하기 위해서 년도로 변환하는 과정
+		int year = cal.get(Calendar.YEAR);
+		if(parameterDTO.getMax_age() != null && !("".equals(parameterDTO.getMax_age()))) {
+			maxage = parameterDTO.getMax_age();
+			maxyear = year - (Integer.parseInt(maxage)-1);
+			maxyearResult = Integer.toString(maxyear) + "/01/01";
+			System.out.println("최종 변환된 최대 나이 : " + maxyearResult);
+			parameterDTO.setMax_age(maxyearResult);
 		}
+		if(parameterDTO.getMin_age() != null && !("".equals(parameterDTO.getMin_age()))) {
+			minage = parameterDTO.getMin_age();
+			minyear = year - (Integer.parseInt(minage)-1);
+			minyearResult = Integer.toString(minyear) + "/01/01";
+			System.out.println("최종 변환된 최소 나이 : " + minyearResult);
+			parameterDTO.setMin_age(minyearResult);
+		}
+		
+		
+		
 		
 		
 		lists = sqlSession.getMapper(SitterImpl.class).list(parameterDTO);
