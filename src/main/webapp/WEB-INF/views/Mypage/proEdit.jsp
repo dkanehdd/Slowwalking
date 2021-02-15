@@ -11,6 +11,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $('#submit').on("click", function() {
+	var pw = document.getElementById("password").value;
+	var oriPw = document.getElementById("oriPw");
+	
+	if(oriPw.value==""){
+		oriPw.focus();
+		return false;
+	}
+	if(oriPw.value!=pw){
+		alert("현재 비밀번호가 일치하지 않습니다.");
+		oriPw.focus();
+		return false;
+	}
+	
 	$.ajax({
 		url : "../mypage/proEditAction?${_csrf.parameterName}=${_csrf.token}", //요청할 경로
 		type : "get", //전송방식
@@ -25,7 +38,7 @@ $('#submit').on("click", function() {
 		dataType : "json", //콜백데이터의 형식
 		success : function() { //콜백메소드
 			$('#pw').val("");
-			$('#pass1').val("");
+			$('#oriPw').val("");
 			$('#pass2').val("");
 			alert("수정이 완료되었습니다.");
 		},
@@ -42,10 +55,9 @@ $('#submit').on("click", function() {
 <h3>회원정보수정</h3>
 </div>
 <div class="container mt-5">
-<form action="../mypage/proEditAction?${_csrf.parameterName}=${_csrf.token}" method="post" id="editFrm" 
-	onsubmit="return pwValidate(this);">
 	<input type="hidden" name="id" id="id" value="${user_id }" />
-	<table class="table">
+	<input type="hidden" id="password" value="${dto.pw }" />
+	<table class="table form joinF">
 	<tbody>
 		<tr>
 			<th>이름</th>
@@ -53,7 +65,7 @@ $('#submit').on("click", function() {
 		</tr>
 		<tr>
 			<th>현재 비밀번호</td>
-			<td><input type="password" name="oriPw" id="pass1"/></td>
+			<td><input type="password" name="oriPw" id="oriPw"/></td>
 		</tr>
 		<tr>
 			<th>새 비밀번호</th>
@@ -69,64 +81,41 @@ $('#submit').on("click", function() {
 				maxlength='11' class='w50p' placeholder="휴대폰번호"> <input
 				type="hidden" name="hpyn" value="Y" id="hpyn1" checked>
 				<div style='display: inline-block;'>
-					<button type="button" id='sendPhoneNumber'>본인인증</button>
+					<button type="button" id='sendPhoneNumber' class="btn btn-primary" style="margin-left:5px;">본인인증</button>
 				</div>
 				<div style='display: none;' id="phonecheck" >
-				<input  type="text" name="userida" id='inputCertifiedNumber' maxlength="4" value=""><button type="button" id='checkBtn'>확인</button></div>
+				<input  type="text" name="userida" id='inputCertifiedNumber' maxlength="4" value="">
+				<button type="button" id='checkBtn' class="btn btn-primary" style="margin-left:5px;">확인</button></div>
 			</td>
 		</tr>
 		<tr>
-			<th>이메일</th>
-			<td>		
-				<input type="text" name="email1" id="email1"  value="" id="eamil1"/> @ 
-				<input type="text" name="email2" id="email2"  value="" />
-				<select name="last_email_check2" onChange="emailSelect(this);" class="pass" id="last_email_check2" >
-					<option selected="" value="">선택해주세요</option>
-					<option value="" >직접입력</option>
-					<option value="dreamwiz.com" >dreamwiz.com</option>
-					<option value="empal.com" >empal.com</option>
-					<option value="empas.com" >empas.com</option>
-					<option value="freechal.com" >freechal.com</option>
-					<option value="hanafos.com" >hanafos.com</option>
-					<option value="hanmail.net" >hanmail.net</option>
-					<option value="hotmail.com" >hotmail.com</option>
-					<option value="intizen.com" >intizen.com</option>
-					<option value="korea.com" >korea.com</option>
-					<option value="kornet.net" >kornet.net</option>
-					<option value="msn.co.kr" >msn.co.kr</option>
-					<option value="nate.com" >nate.com</option>
-					<option value="naver.com" >naver.com</option>
-					<option value="netian.com" >netian.com</option>
-					<option value="orgio.co.kr" >orgio.co.kr</option>
-					<option value="paran.com" >paran.com</option>
-					<option value="sayclub.com" >sayclub.com</option>
-					<option value="yahoo.co.kr" >yahoo.co.kr</option>
-					<option value="yahoo.com" >yahoo.com</option>
+			<th style="vertical-align:middle;">이메일</th>
+				<td><input type="text" name="email1" id="email1" value=""/> @ 
+				<input type="text" name="email2" id="email2"
+					value="" style="width:150px;"/> <select name="last_email_check2"
+					onChange="emailSelect(this);" 
+					style="width:150px; margin-left:5px; display:inline-block;" 
+					class="pass form-control flaot-right" id="last_email_check2">
+						<option selected="" value="">선택해주세요</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hotmail.com">hotmail.com</option>
+						<option value="">직접입력</option>
 				</select>
-			</td>
-		</tr>
-		<input type="hidden" name="email" id="email" value="${dto.email }"/>
+				<button type="button" id='emailChk' class="btn btn-primary" style="margin-left:5px; vertical-align: top;">중복확인</button>
+				</td>
+			</tr>
+			<input type="hidden" name="email" id="email" value="${dto.email }"/>
 	</tbody>
 </table>
-<div class="container text-center">
-	<button type="button" class="btn btn-info" id="submit">수정하기</button>
-	<button type="button" class="btn btn-dark">취소하기</button>
+<div class="btnBelow">
+	<button type="button" class="btn btn-danger" id="submit">수정하기</button>
 </div>
-</form>
 </div>
 </body>
 <script>
-//현재 비밀번호 확인
-function pwValidate(fn){
-	
-	var pw = "${dto.pw}";
-	
-	if(fn.oriPw.value!=pw){
-		alert("비밀번호가 일치하지 않습니다.");
-		fn.oriPw.focus();
-		return false;
-	}
-}
+/// JoiJs.jsp랑 다른 게 있어서 script 이대로 유지할게요 ///
 function emailSelect(obj) {
 	var email1 = document.getElementById("email1");
     var domain = document.getElementById("email2");
@@ -142,8 +131,7 @@ function emailSelect(obj) {
 }
 //비밀번호 확인 
 function checkPw2(pw) {
-    var f = document.editFrm;
-    var pw1 = f.pw.value;
+    var pw1 = document.getElementById("pw").value;
     var pw2 = document.getElementById("pw2");
     if (pw1 != pw) {
         pw2.hidden = false;
@@ -204,10 +192,6 @@ function checkPw(pw) {
     }
 }
 $(function(){
-	
-	$("input[type=radio]").checkboxradio({
-        icon: false
-    });
 	$('#sendPhoneNumber').click(function() {
 		var phoneNumber = $('#phone').val();
 		if(phoneNumber.length<11){
@@ -254,6 +238,37 @@ $(function(){
 	        }
 	    }
 	);
+	//이메일 중복 체크 추가 hjkosmo
+	$('#emailChk').click(function() {
+		$.ajax({
+			url : "./checkEmail", //요청할 경로
+			type : "get", //전송방식
+			//post방식일때의 컨텐츠 타입
+			contentType : "text/html;charset:utf-8;",
+			data : { //서버로 전송할 파라미터(JSON타입)
+				email : $('#email').val()
+			},
+			dataType : "json", //콜백데이터의 형식
+			success : function(d) { //콜백메소드
+				if(d.ckeck==1){ //중복일 때
+					alert(d.message)
+					//$("#email1").val("");					
+					//$("button[type='submit']").attr("disabled","disabled");
+				}
+				else{
+					alert(d.message);//중복 아닐 때
+					//$("#email1").attr("readonly",true);
+					//$("#email2").attr("readonly",true);
+					//$("#last_email_check2").attr("disabled","disabled");
+					//$("button[type='submit']").removeAttr("disabled");
+				}
+			},
+			error : function(e) {
+				alert("실패"+e);
+			}
+		});
+	});
+	
 	$("#phone").on('keydown', function(e){
 	var trans_num = $(this).val().replace(/-/gi,'');
 	var k = e.keyCode;						
@@ -283,7 +298,6 @@ $(function(){
 			}
 	  	}
   	});  
-	
 });
 </script>
 </html>

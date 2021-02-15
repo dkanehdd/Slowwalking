@@ -17,6 +17,7 @@ public class DiaryDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
 	public int getStarrate() {
 		return starrate;
 	}
