@@ -21,7 +21,8 @@ var webSocket;
 var logWindow;
 var rece_id;
 var room;
-window.onload = function(){		
+window.onload = function(){
+	console.log('chatUI.jsp 가 실행됨')
 	messageWindow = document.getElementById("messageWindow");	
 	messageWindow.scrollTop = messageWindow.scrollHeight;	
 	inputMessage = document.getElementById('inputMessage');

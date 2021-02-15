@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,6 +26,7 @@
 </head>
 
 <body id="page-top">
+<%@ include file="../links/linkOnly2dot.jsp"%>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -618,7 +617,8 @@
             </div>
         </div>
     </div>
-
+    되나????
+	<%@ include file="../include/side.jsp"%>
 <!-- Bootstrap core JavaScript-->
     <script src="../resources/vendor/jquery/jquery.min.js"></script>
     <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -256,6 +256,23 @@ public class MemberController {
 		return map;
 	}
 	
+	//아이디 flag구하는 함수
+	@RequestMapping("/member/getFlag")
+	@ResponseBody
+	public Map<String, Object> getFlag(HttpServletRequest req) {
+	
+		System.out.println("들어오는 하는가?");
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(req.getParameter("id"));
+	
+		System.out.println("회원의 등급 : " + flag);
+		
+		map.put("flag", flag);
+		
+		return map;
+	}
+	
 	// 이메일 중복확인(hjkosmo 추가)
 	@RequestMapping("/member/checkEmail")
 	@ResponseBody

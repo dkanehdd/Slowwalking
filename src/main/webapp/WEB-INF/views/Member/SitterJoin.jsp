@@ -13,7 +13,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
-<!-- http://localhost:9090/slowwalking/member/sitterjoin -->
+<!-- http://localhost:8080/slowwalking/member/sitterjoin -->
 <body>
 <%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color: #eee;">
