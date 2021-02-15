@@ -27,7 +27,7 @@
 		<c:otherwise>
 			<div class="ml-3 mt-3">
 			<h3>내 구인현황</h3>
-			</div>
+			</div> 
 		</c:otherwise>
 	</c:choose>
 </div>
