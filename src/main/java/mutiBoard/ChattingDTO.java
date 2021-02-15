@@ -24,7 +24,7 @@ public class ChattingDTO {
 	}
 	public void setRece_id(String rece_id) {
 		this.rece_id = rece_id;
-	}
+	} 
 	public String getContent() {
 		return content;
 	}

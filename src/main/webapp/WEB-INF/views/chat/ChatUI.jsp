@@ -141,7 +141,7 @@ function sendMessage() {
 	//msg += '<div style="text-align:right;">'+inputMessage.value+'</div>';
 	msg =
 		"<div class='mytalk' style='margin-top:10px;'>"+
-		"<div class=\"b\">\n"+
+		"<div class=\"b\">\n"+ 
 		"</div>\n"+
 		"<div class=\"a\"  style='padding:6px 8px 0px 5px;'>\n"+
 		inputMessage.value+"\n"+

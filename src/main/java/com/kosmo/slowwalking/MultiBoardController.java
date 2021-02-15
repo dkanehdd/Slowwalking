@@ -173,7 +173,7 @@ public class MultiBoardController {
 			System.out.println("프리미엄권 구매결과"+premiumdate);
 			System.out.println("프리미엄 날짜 업데이트 "+premium);
 		}
-		
+		 
 		map.put("suc", suc);
 		
 		return map;

@@ -60,7 +60,7 @@ public class WebSocketChat {
 				if(!self.getId().equals(session.getId())) {
 					if(roomlist.get(session.getId()).equals(roomlist.get(self.getId()))){
 						System.err.println(message+"*****");
-						session.getBasicRemote().sendText(message);
+						session.getBasicRemote().sendText(message); 
 						
 						
 					}

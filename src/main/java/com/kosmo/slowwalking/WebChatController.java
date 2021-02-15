@@ -16,7 +16,7 @@ import mutiBoard.ChattingDTO;
 public class WebChatController {
 	
 	@Autowired
-	public SqlSession sqlSession;
+	public SqlSession sqlSession; 
 	
 	//웹소켓채팅	
 	@RequestMapping(value="/chat/websocket", method=RequestMethod.GET)

@@ -141,7 +141,7 @@ public class AdminBoardController {
 	}
 
 	
-	// 의뢰서 내용보기
+	// 의뢰서 내용보기 
 			@RequestMapping("/admin/requestBoardView")
 			public String requestBoardView(Model model, HttpServletRequest req) {
 				int idx = Integer.parseInt(req.getParameter("idx"));
