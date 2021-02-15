@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Product.jsp</title>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <style type="text/css">
 .num {
@@ -108,7 +107,9 @@ $(function(){
 	<%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color: #eee;">
 		<div class="container">
-			<div class="section_title subPimgBg noticeImg">
+			<!-- Side메뉴 -->
+			<%@ include file="../include/side.jsp"%>
+			<div class="section_title subPimgBg">
 				<h1 class="mb-5">
 					<strong>PASSES</strong> 이용권구매
 				</h1>
@@ -134,8 +135,7 @@ $(function(){
 		<div id="modal_layer" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content pl-5 pt-5" id="modal-content">
-					<div id="modal_layer_html"
-						style="font-family: 'NanumSquare', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;">
+					<div id="modal_layer_html">
 						<script type="text/javascript">
 						</script>
 						<form name="order_form" method="post" action="../multiBoard/order?${_csrf.parameterName}=${_csrf.token}">
@@ -190,8 +190,8 @@ $(function(){
 									</li>
 								</ul>
 							</div>
-							<input type="hidden" id="price" name="price" value="" siez="5">
-							<input type="hidden" name="flag" value="" siez="5">
+							<input type="hidden" id="price" name="price" value="" size="5">
+							<input type="hidden" name="flag" value="" size="5">
 							<input type="hidden" name="idx" id="idx" value="" size="5"> 
 							<div>
 							

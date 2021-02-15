@@ -72,7 +72,33 @@
 		UPDATE interview SET parents_agree='T' WHERE
 		idx=#{idx}
 	</update>
-
+	<select id="andsitInterList" resultType="advertisement.InterviewDTO"><!-- 앱에서 수락안된 인터뷰 목록 -->
+		select M.name as parents_name, MM.name as sitter_name, I.*
+         from interview I
+          join member M
+              on I.parents_id = M.id
+          join member MM
+              on I.sitter_id = MM.id 
+        WHERE sitter_agree='F' and sitter_id=#{0}
+	</select>
+	<select id="andparInterList" resultType="advertisement.InterviewDTO">
+		select M.name as parents_name, MM.name as sitter_name, I.*
+         from interview I
+          join member M
+              on I.parents_id = M.id
+          join member MM
+              on I.sitter_id = MM.id 
+        WHERE parents_agree='F' and parents_id=#{0}
+	</select>
+	<select id="andsitDiaryList" resultType="advertisement.InterviewDTO"><!-- 앱에서 시터가 알림장쓸 목록 -->
+		select M.name as parents_name, MM.name as sitter_name, I.*
+         from interview I
+          join member M
+              on I.parents_id = M.id
+          join member MM
+              on I.sitter_id = MM.id 
+        WHERE sitter_agree='T' and parents_agree='T' and sitter_id=#{0}
+	</select>
 	<!-- 알림장 -->
 	<insert id="sendDiary">
 		INSERT INTO diary (its_idx, regidate, send_id, rece_id, content, flag, idx)
