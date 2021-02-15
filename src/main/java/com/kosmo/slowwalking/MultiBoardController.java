@@ -19,6 +19,7 @@ import member.MemberDTO;
 import member.MemberImpl;
 import member.MultiBoardImpl;
 import member.SitterImpl;
+import mutiBoard.ChattingDTO;
 import mutiBoard.MultiBoardDTO;
 import mutiBoard.OrderDTO;
 import mutiBoard.ProductDTO;

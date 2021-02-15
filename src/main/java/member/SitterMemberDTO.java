@@ -9,7 +9,7 @@ public class SitterMemberDTO {
 	private String license_check;
 	private String activity_time;
 	private String activity_date;
-	private String residence1;
+	private String residence1; 
 	private String residence2;
 	private String residence3;
 	private String pay;

@@ -2,6 +2,7 @@ package member;
 
 import java.util.ArrayList;
 
+import mutiBoard.ChattingDTO;
 import mutiBoard.MultiBoardDTO;
 
 public interface MultiBoardImpl {

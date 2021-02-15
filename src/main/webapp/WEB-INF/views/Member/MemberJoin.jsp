@@ -39,7 +39,7 @@
 						<td><input type="text" name="phone" id='phone' value=""
 							maxlength='11' class='w50p' placeholder="휴대폰번호"> <input
 							type="hidden" name="hpyn" value="Y" id="hpyn1" checked>
-							<div style='display: inline-block;'> 
+							<div style='display: inline-block;'>
 							<button type="button" id='sendPhoneNumber' class="btn btn-primary" style="margin-left:5px;">본인인증</button>
 							</div>
 							<div style='display: none;' id="phonecheck">
@@ -131,7 +131,7 @@
 				</table>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="submit" id="submitBtn" class="btn btn-danger">회원가입</button>
+					<button type="submit" id="submitBtn" class="btn btn-danger btn400w">회원가입</button>
 				</div>
 			</form:form>
 		</div>
