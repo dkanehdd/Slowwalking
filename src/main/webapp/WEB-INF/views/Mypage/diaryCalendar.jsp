@@ -242,15 +242,17 @@
 <%@ include file="../include/footer.jsp"%>
 </body>
 <script type="text/javascript">
+var popupX = (window.screen.width / 2) - (500 / 2);
+var popupY= (window.screen.height / 2) - (500 / 2);
 function popOpen(){
 	var idx = document.getElementById("idx").value;	
 	window.open("../mypage/openDiary?idx="+idx, "알림장", 
-	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
+	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 
 function diaryOpen(its_idx){	
 	window.open("../mypage/openDiaryView?its_idx="+its_idx, "알림장", 
-	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, top=10, left=10");
+	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
 </html>

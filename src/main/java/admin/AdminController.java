@@ -130,7 +130,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/emailAction")
 	public String mailSending(HttpServletRequest request, ModelMap mo) throws AddressException, MessagingException {
 		final String username = "cysik92@naver.com"; // 네이버 아이디를 입력해주세요. @nave.com은 입력하지 마시구요.
-		final String password = "asqw124680"; // 네이버 이메일 비밀번호를 입력해주세요.
+		final String password = "asqw1246"; // 네이버 이메일 비밀번호를 입력해주세요.
 
 		String host = "smtp.naver.com";
 

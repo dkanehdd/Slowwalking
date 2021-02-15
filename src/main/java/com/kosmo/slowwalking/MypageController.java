@@ -251,9 +251,6 @@ public class MypageController {
 		String id = (String)session.getAttribute("user_id");
 		
 		System.out.println("flag:"+flag+" id:"+id);
-		
-		MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(id);
-		model.addAttribute("dto", dto);
 	
 		if(flag.equals("sitter")) {
 			ArrayList<InterviewDTO> lists = sqlSession.getMapper(MypageImpl.class).sitInterList(id);
@@ -267,6 +264,20 @@ public class MypageController {
 		}
 		
 		return "Mypage/interviewList";
+	}
+	
+	//인터뷰 목록에서 상대방 개인정보 확인하기
+	@RequestMapping("/mypage/popInfo")
+	public String popInformation(HttpSession session, HttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		
+		MemberDTO dto = sqlSession.getMapper(MypageImpl.class).profile(id);
+		model.addAttribute("dto", dto);
+		
+		System.out.println("dto"+dto);
+		
+		return "Mypage/information";
 	}
 	
 	//인터뷰 목록에서 삭제하기
@@ -603,9 +614,10 @@ public class MypageController {
 		
 		
 		if(flag.equals("sitter")) {
-			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(parents_id);
-			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, sitter_id, parents_id, content, newrate);
-			System.out.println("원래별점:"+starrate);
+			int starrate = sqlSession.getMapper(MypageImpl.class).
+					getStarrate(parents_id);
+			int result = sqlSession.getMapper(MypageImpl.class).
+					writeComment(idx, sitter_id, parents_id, content, newrate);
 			
 			if(starrate==0) {
 				starrate = newrate;
@@ -613,19 +625,15 @@ public class MypageController {
 			else {
 				starrate = (newrate + starrate) / 2;
 			}
-			System.out.println("최종별점:"+starrate);
 			
 			//포인트 50점 지급, 별점 업데이트
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(parents_id, starrate);
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(sitter_id);
 			
-			System.out.println("success: "+success+", check: "+check);
-			
 		}
 		else {
 			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(sitter_id);
 			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, parents_id, sitter_id, content, newrate);
-			System.out.println("원래별점:"+starrate);
 			
 			if(starrate==0) {
 				starrate = starrate;
@@ -633,7 +641,6 @@ public class MypageController {
 			else {
 				starrate = (newrate + starrate) / 2;
 			}
-			System.out.println("최종별점:"+starrate);
 
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(sitter_id, starrate);
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(parents_id);

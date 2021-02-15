@@ -6,7 +6,7 @@
 
 <mapper namespace="member.AdminSitterImpl">
 
-<!-- 가입승인처리 -->
+<!-- 공지사항 수정 처리 -->
 	<update id="permission" parameterType="String">
 		UPDATE sitterMember 
 		SET  permission='T'

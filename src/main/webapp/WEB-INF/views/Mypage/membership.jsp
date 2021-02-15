@@ -39,7 +39,6 @@
 					<col width="20%"/>
 					<col width="*"/>
 					<col width="20%"/>
-					<col width="20%"/>
 				</colgroup>
 				<thead>
 				<tr>
@@ -51,7 +50,7 @@
 				<c:forEach var="row" items="${lists }">
 				<tbody>
 					<td>${row.regidate }</td>
-					<td>${row.product_name }회</td>
+					<td>${row.product_name }</td>
 					<td>${row.total_price}</td>
 				</tbody>
 			</c:forEach>
