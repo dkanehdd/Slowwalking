@@ -6,6 +6,7 @@ padding: 1px;
 border-radius: 200px;
 }
 </style>
+<!-- 알람 확인 -->
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajax({
