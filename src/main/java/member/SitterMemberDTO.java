@@ -31,6 +31,7 @@ public class SitterMemberDTO {
 	}
 	public void setPremiumdate(String premiumdate) {
 		this.premiumdate = premiumdate;
+	}
 	public String getActivity_date() {
 		return activity_date;
 	}
