@@ -695,7 +695,6 @@ public class AdvertisementController {
 		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
 		
 		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(id);
-		
 		model.addAttribute("dto", dto);
 		model.addAttribute("lists",lists);
 		return "advertisement/SitterBorad_view";
