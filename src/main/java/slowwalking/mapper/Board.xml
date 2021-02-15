@@ -26,5 +26,16 @@
 		UPDATE multi_board SET visitcount = visitcount+1
 		WHERE idx=#{idx}
 	</update>
-
+	
+	<!-- 채팅  -->
+	<insert id="chatwrite" parameterType="mutiBoard.ChattingDTO">
+		INSERT INTO chatting (regidate, send_id, rece_id, content)
+		VALUES
+		(sysdate, #{send_id}, #{rece_id}, #{content})	
+	</insert>
+	
+	<!-- 채팅불러오기  -->
+	<select id="chatlist" resultType="mutiBoard.ChattingDTO">
+		select * from Chatting where 
+	</select>
 </mapper>
