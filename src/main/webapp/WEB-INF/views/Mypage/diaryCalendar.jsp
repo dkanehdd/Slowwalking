@@ -218,7 +218,7 @@
 			</tr>
 			</c:if>
 			</c:forEach>
-			<c:forEach begin="${count }" end="${count < 34 ? 34: 41 }" var="i">
+			<c:forEach begin="${count }" end="${count < 35 ? 34: 41 }" var="i">
 			<td class="sat_day">
 					<div class="sat">
 						&nbsp;

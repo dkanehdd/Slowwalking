@@ -81,6 +81,11 @@ span.star-prototype > * {
 					<p style="color: #FFC079">※최대 시급을 작성해 주세요 희망시급으로 검색됩니다. 작성하지 않으시면 전체 시급으로 검색됩니다.</p>
 					<input type="number" name="pay" class="form-control" />
 					<br/><br/>
+					
+					<!-- Between 검색을 했을때 어린 나이를 검색하면 안됨 -->
+					<p style="color: #FFC079">※원하시는 시터의 최소나이와 최대나이를 적어주세요 둘중 하나만 적으셔도 검색이 가능합니다.</p>
+					<input type="number" name="min_age" /> ~ <input type="number" name="max_age" />
+					<br/><br/>
 					<button type="submit" class="btn btn-info btn-sm">검색</button>
 			
 		</form>

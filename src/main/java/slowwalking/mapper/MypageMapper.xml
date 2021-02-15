@@ -53,6 +53,16 @@
 	<delete id="delInterList">
 		DELETE FROM interview WHERE idx=#{0}
 	</delete>
+	
+	<select id="countParentsInterview" resultType="int">
+		SELECT COUNT(*) FROM interview
+			WHERE parents_id=#{0} and parents_agree='F'
+	</select>
+	<select id="countSitterInterview" resultType="int">
+		SELECT COUNT(*) FROM interview
+			WHERE sitter_id=#{0} and sitter_agree='F'
+	</select>
+	
 	<!-- 수락 상태 변경 -->
 	<update id="sitAgree">
 		UPDATE interview SET sitter_agree='T' WHERE

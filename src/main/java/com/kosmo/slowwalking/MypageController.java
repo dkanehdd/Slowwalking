@@ -901,4 +901,30 @@ public class MypageController {
 		return "Mypage/premium";
 	}
 	
+	@RequestMapping("/mypage/countInterview")
+	@ResponseBody
+	public Map<String, Object> countInterview(Principal principal, HttpSession session){
+		//ajax에 결과를 보내줄 map
+		Map<String, Object> result = new HashMap<>();
+		int resultCount = 0;
+		//부모회원인지 시터 회원인지 구별해야함
+		if(session.getAttribute("user_id") != null) {
+			String id= (String) session.getAttribute("user_id");
+			System.out.println("id : " + id);
+			String flag = sqlSession.getMapper(MemberImpl.class).flagValidate(id);
+			System.out.println("출력되는 flag : " + flag);
+			if(flag.equals("parents")) {
+				resultCount = sqlSession.getMapper(MypageImpl.class).countParentsInterview(id);
+				System.out.println("resultCount : " + resultCount);
+			}else if(flag.equals("sitter")) {
+				resultCount = sqlSession.getMapper(MypageImpl.class).countSitterInterview(id);
+				System.out.println("resultCount : " + resultCount);
+			}
+		}
+		
+		result.put("interviewCount", resultCount);
+		
+		return result;
+	}
+	
 }
