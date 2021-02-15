@@ -86,8 +86,8 @@ public class AndroidInterviewController {
 		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).getAgree(idx);
 		System.out.println(dto.getSitter_agree()+"&&"+dto.getParents_agree());
 		if(dto.getSitter_agree().equals("T")&&dto.getParents_agree().equals("T")) {
-			int delete = sqlSession.getMapper(RequestBoardImpl.class).invisibleBoard(dto.getRequest_idx());
-			System.out.println("삭제됬나용?"+ delete);
+//			int delete = sqlSession.getMapper(RequestBoardImpl.class).invisibleBoard(dto.getRequest_idx());
+//			System.out.println("삭제됬나용?"+ delete);
 		}
 		map.put("mode", "agree");
 		return map;

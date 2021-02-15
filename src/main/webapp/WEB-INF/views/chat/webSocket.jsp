@@ -6,27 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1대화 닉네임 설정</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@ include file="../links/linkOnly2dot.jsp"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../resources/webChat.js" />
 </head>
+<script>
+function chatWin(){
+	var id = document.getElementById("chat_id");
+	if(id.value==''){
+		alert('채팅 닉네임을 입력후 채팅창을 열어주세요');
+		id.focus();
+		return;
+	}
+	var room = document.getElementById("chat_room");
+	window.open("webChatUI?chat_id="+id.value+"&chat_room="+room.value, 
+			room.value+"-"+id.value,"width=350,height=490");		
+}
+</script>
 <body>
 <div class="container">
-	<script>
-	function chatWin(){
-		var id = document.getElementById("chat_id");
-		if(id.value==''){
-			alert('채팅 닉네임을 입력후 채팅창을 열어주세요');
-			id.focus();
-			return;
-		}
-		var room = document.getElementById("chat_room");		
-		window.open("webChatUI?chat_id="+id.value+"&chat_room="+room.value, 
-				room.value+"-"+id.value,"width=350,height=490");
-	
-	}
-	</script>
 	<h2>1:1 채팅 문의</h2>
 	<table border=1 cellpadding="10" cellspacing="0">
 		<tr>

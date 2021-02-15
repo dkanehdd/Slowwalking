@@ -1,7 +1,6 @@
 package member;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import advertisement.ParameterDTO;
 
