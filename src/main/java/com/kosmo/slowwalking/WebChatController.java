@@ -24,7 +24,7 @@ public class WebChatController {
 		
 		return "chat/webSocket";
 	}
-	@RequestMapping(value="/chat/webchatui", method=RequestMethod.GET)
+	@RequestMapping(value="/chat/webChatUI", method=RequestMethod.GET)
 	public String webChatUI() {
 		
 		return "chat/webChatUI";

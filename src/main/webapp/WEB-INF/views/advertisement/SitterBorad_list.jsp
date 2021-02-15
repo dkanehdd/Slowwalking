@@ -2,58 +2,71 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <!-- css, js 파일링크 등 묶음-->
 <%@ include file="../links/linkOnly2dot.jsp"%>
-<title>느린걸음</title>
+<script src="../resources/js/sitBdJs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style type="text/css">
-span.star-prototype, span.star-prototype > * {
-    height: 16px; 
-    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-    width: 80px;
-    display: inline-block;
+.btnSch{
+	width:50%;
+	height: 50px;
+	margin: 10px auto 30px;
+	background-color: var(--primary-color);
+	border-color: var(--secondary-color)
 }
- 
-span.star-prototype > * {
-    background-position: 0 0;
-    max-width:80px; 
+.btnSch:hover{
+	background-color: var(--secondary-color);
+	border-color: var(--primary-color)
+}
+.btnSch:active{
+	background-color: var(--primary-color);
+	border-color: var(--secondary-color)
 }
 </style>
+<title>느린걸음</title>
 </head>
-<body>
-	<%@ include file="../include/top.jsp"%>
 
-	<div class="container">
-		<div class="text-center">
-		<br/><br/><br/>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
+<%@ include file="../include/top.jsp"%>
+<section class="section-padding" style="background-color: #eee;">
+	<div class="container reqDiv">
+		<!-- Side메뉴 -->
+		<%@ include file="../include/side.jsp"%>
+		<div class="section_title">
+			<h1 class="mb-5"><strong>SITTER</strong> 시터리스트</h1>
+		</div>
+		<div class="RequestBoardList">
+			<div class="container-1" data-aos="fade-down" data-aos-delay="400">
 			<form action="../advertisement/SitterBoard_list?${_csrf.parameterName}=${_csrf.token}"
-				method="post">
-				<input type="hid den" name="search" value="search">
-				<p style="color: #FFC079">※가능한 시간을 체크해주세요 체크하지 않으면 모든 시간이 검색됩니다</p>
-				<button type="button" class="workday_off mr1p"
-					value="월">월</button>
-				<button type="button" class="workday_off mr1p"
-					value="화">화</button>
-				<button type="button" class="workday_off mr1p"
-					value="수">수</button>
-				<button type="button" class="workday_off mr1p"
-					value="목">목</button>
-				<button type="button" class="workday_off mr1p"
-					value="금">금</button>
-				<button type="button" class="workday_off mr1p" value="토">토</button>
-				<button type="button" class="workday_off" value="일">일</button>
-				<button type="button" class="workday_off" id="consultation" value="협의가능">협의가능</button>
-				<br/>
-				<input type="hid den" id="workday_name" name="request_time">
-				<br/><br/>
-				<p style="color: #FFC079">※원하시는 지역을 선택해주세요. 선택하지 않으시면 전체 지역으로 검색됩니다.</p>
-					<select id='sido' class="form-control">
-						<option value="">시/도 선택</option>
+			method="post" class="form reqFrm" style="width:100%; margin-bottom: 20px;">
+				<input type="hidden" name="search" value="search">
+				<div class="text-center">				
+					<div class="schArea">
+						<p style="margin-bottom:0;"><small>※ 가능한 요일(다중 선택 가능)</small></p>
+						<button type="button" class="workday_off mr1p" value="월">월</button>
+						<button type="button" class="workday_off mr1p" value="화">화</button>
+						<button type="button" class="workday_off mr1p" value="수">수</button>
+						<button type="button" class="workday_off mr1p" value="목">목</button>
+						<button type="button" class="workday_off mr1p" value="금">금</button>
+						<button type="button" class="workday_off mr1p" value="토">토</button>
+						<button type="button" class="workday_off" value="일">일</button>
+						<button type="button" class="workday_off" id="consultation" value="협의가능">협의가능</button>
+					</div>		
+					<button type="submit" class="btn btn-danger btnSch">검색</button>
+				</div>
+				<!-- 더보기 버튼 -->
+				<p class="clear drop dropMore dropClose">상세옵션 <i class="moreIco fa fa-chevron-down" aria-hidden="true"></i></p>
+				<!-- 더보기 버튼 눌렀을 시 열리는 메뉴 -->
+				<div class="dropMenu">	
+				<input type="hidden" id="workday_name" name="request_time">
+				<div class="schArea">
+					<select id='sido' class="form-control float-left" style="width:33%;">
+						<option value="">원하는 지역 시/도 선택</option>
 						<option value="서울">서울</option>
 						<option value="강원">강원</option>
 						<option value="경기">경기</option>
@@ -70,23 +83,25 @@ span.star-prototype > * {
 						<option value="제주">제주</option>
 						<option value="충남">충남</option>
 						<option value="충북">충북</option>
-					</select> <span id="catetd1" class="area2ck"
-						style="width: 30%; position: unset; margin: 0"> 
-					<br/>	
-					<select id="gugun" class="form-control">
-							<option value="">-구/군-</option>
-					</select></span><input type="hid`den" name="region"
-						id="region" />
-					<br/><br/>	
-					<p style="color: #FFC079">※최대 시급을 작성해 주세요 희망시급으로 검색됩니다. 작성하지 않으시면 전체 시급으로 검색됩니다.</p>
-					<input type="number" name="pay" class="form-control" />
-					<br/><br/>
-					<button type="submit" class="btn btn-info btn-sm">검색</button>
-			
+					</select> 
+					<span id="catetd1" class="area2ck float-left" style="width: 34%; position: unset; margin: 0"> 
+						<select id="gugun" class="form-control">
+								<option value="">-구/군-</option>
+						</select>
+					</span>					
+					<input type="number" name="pay" min="8720"
+					class="form-control float-left" style="width: 33%;"
+					placeholder="※시급 최대치, 비워둘 시 전체 검색"/>
+					<input type="hidden" name="region" id="region" />
+					<p class="clear"></p>
+				</div>
+			</div>				
 		</form>
 		</div>
+		</div>
+		<!-- 시터 리스트 -->
 		<c:forEach items="${lists }" var="row">
-			<div class="border mt-2 mb-2">
+			<div class="border mt-2 mb-2" data-aos="fade-up" data-aos-delay="400">
 				<div class="media">
 					<div class="media-left mr-3">
 						<img src="../resources/images/${row.image_path }"
@@ -126,145 +141,9 @@ span.star-prototype > * {
 				</div>
 			</div>
 		</c:forEach>
-<script type="text/javascript">
-	$.fn.generateStars = function() {
-    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
-	};
-
-// 숫자 평점을 별로 변환하도록 호출하는 함수
-$('.star-prototype').generateStars();
-</script>
-
-
 	</div>
-	<!-- Footer메뉴 -->
-	<%@ include file="../include/footer.jsp"%>
+</section>
+<!-- Footer메뉴 -->
+<%@ include file="../include/footer.jsp"%>
 </body>
-<script>
-$(function () {
-	$('#sido').change(function() {
-		$.ajax({
-			url : "../zipcode/gugun",
-			type : 'get',
-			contentType : "text/html;charset:utf-8",
-			data : {
-				sido : $('#sido option:selected').val()
-			},
-			dataType : "json",
-			success : function(d) {
-				var optionStr = "";
-				optionStr += "<option value=''>";
-				optionStr += "-구/군-";
-				optionStr += "</option>";
-				//$.each()통해 반복되는 요소의 인덱스와 요소값을 매개변수로 받을수있다.
-				$.each(d, function(index, data) {
-					optionStr += '<option value="'+data+'">';
-					optionStr += data;
-					optionStr += '</option>';
-				});
-				$('#gugun').html(optionStr);
-			},
-			error : function(e) {
-				alert("오류발생 : " + e.status + " : " + e.statue.Text);
-			}
-		});
-		$('#gugun').change(
-				function() {
-					$('#region').val(
-							$("#sido option:selected").val() + " "
-									+ $("#gugun option:selected").val());
-				})
-		
-	});
-})
-$(function() {
-	$(".workday_off").click(function() {
-		if ($(this).hasClass("workday_on") == false) {
-			if($('#consultation').hasClass("workday_on") == true){
-				//협의 가능이 눌러져있으면 아무것도 눌리지 않는다.
-			}else{
-				$(this).addClass("workday_on");
-			}
-		} else {
-			$(this).removeClass("workday_on");
-		}
-		workday_make()
-	});
-	
-	$('#consultation').click(
-		function() {
-			if ($(this).hasClass("workday_on") == true) {
-				$("#workday_name").val('협의가능');
-				$('.workday_off').removeClass("workday_on");
-				$(this).addClass("workday_on");
-				
-			} else {
-				var i = 0;
-				var workday_tyle = "";
-				$(".workday_off").each(function() {
-					if ($(this).hasClass("workday_on") == true) {
-						workdaytype = $(this).val();
-						if (i != 0)
-							workday_tyle += ",";
-						workday_tyle += workdaytype;
-						i++;
-					}
-				});
-				if (i == 0) {
-					$("#workday_name").val("");
-				} else {
-					$("#workday_name").val(workday_tyle);
-				}
-			}
-		})
-	
-});
-function workday_make() {
-	var i = 0;
-	var workday_tyle = "";
-	$(".workday_off").each(function() {
-		if ($(this).hasClass("workday_on") == true) {
-			workdaytype = $(this).val();
-			if (i != 0)
-				workday_tyle += ",";
-			workday_tyle += workdaytype;
-			i++;
-		}
-	});
-	if (i == 0) {
-		$("#workday_name").val("");
-	} else {
-		$("#workday_name").val(workday_tyle);
-	}
-}
-</script>
-<style>
-.workday_off {
-	border: 1px solid #e0e0e0;
-	background: #fff;
-	margin-top: 7px;
-	width: calc(58%/ 7);
-	color: #595757;
-	padding: 6px 0;
-	text-align: center;
-	font-family: Noto Sans KR, sans-serif !important;
-	font-size: 15px;
-	font-weight: 400;
-}
-
-.workday_on {
-	background: #FFC079;
-}
-</style>
 </html>
-
-
-<!-- 작성자 본인에게만 수정/삭제 버튼 보임처리 
-   <c:if test="${sessionScope.siteUserInfo.id eq row.id }">
-      <button class="btn btn-primary" 
-      onclick="location.href='advertisement/requestBoard_edit'">
-      수정</button>
-      <button class="btn btn-danger" 
-      onclick="javascript:deleteRow();">
-      삭제</button>
-    </c:if> -->

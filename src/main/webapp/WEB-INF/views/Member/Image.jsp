@@ -44,7 +44,7 @@
 			onsubmit="return checkImg();" data-aos="fade-up" data-aos-delay="400">
 			
 			
-			 <!-- 이미지 인풋 -->
+			<!-- 이미지 인풋 -->
 			<input type="hidden" name="id" value="${id }" />
 			<input type="hidden" name="flag" id="flag" value="${flag }" />
 			<input type="hidden" name="mode" id="mode" value="${mode }" />
@@ -65,7 +65,7 @@
 			
 			<div class="btnBelow">
 				<button type="button" onclick="skip();" class="btn btn-secondary btn-cc">건너뛰기</button>
-				<button type="submit" class="btn btn-danger">등록하기</button>
+				<button type="submit" class="btn btn-danger btn400w" style="background-color:var(--primary-color)">등록하기</button>
 			</div>		
 		</form:form>
 	</div>

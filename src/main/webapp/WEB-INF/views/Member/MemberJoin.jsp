@@ -131,7 +131,7 @@
 				</table>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="submit" id="submitBtn" class="btn btn-danger">회원가입</button>
+					<button type="submit" id="submitBtn" class="btn btn-danger btn400w">회원가입</button>
 				</div>
 			</form:form>
 		</div>

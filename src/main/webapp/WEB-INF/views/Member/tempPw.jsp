@@ -27,7 +27,7 @@
 				</div>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="button" id='tempPwBtn' class="btn btn-danger" style="width:200px; margin-left:5px;">임시 비밀번호 발급</button>
+					<button type="button" id='tempPwBtn' class="btn btn-danger btn400w" style="width:200px; margin-left:5px;">임시 비밀번호 발급</button>
 				</div>
 			</div>
 		</div>
