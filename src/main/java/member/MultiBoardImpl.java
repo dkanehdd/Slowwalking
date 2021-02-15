@@ -22,5 +22,5 @@ public interface MultiBoardImpl {
 	public int chatwrite(ChattingDTO chattingDTO);
 	
 	//채팅 리스트불러오기
-	public int chatlist(ChattingDTO chattingDTO);
+	public int chatlist(ChattingDTO chattingDTO);    
 }
