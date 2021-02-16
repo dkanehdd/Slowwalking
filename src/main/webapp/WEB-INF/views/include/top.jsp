@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>  
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" style="user-select: none;">
    <div class="container">
       <a class="navbar-brand nonHover" href="../main/main" style="font-weight:700">
        <i class="fa fa-slideshare" aria-hidden="false" style="visibility: visible !important;"></i>&nbsp;느린걸음
@@ -40,5 +40,8 @@
             </c:choose>
          </ul>
       </div>
+	<!-- Side메뉴, 채팅 -->
+	<%@ include file="../include/side.jsp"%>
+	<%@ include file="../chat/chatWidget.jsp"%>
    </div>
 </nav>

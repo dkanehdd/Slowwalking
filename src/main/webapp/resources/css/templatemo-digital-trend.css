@@ -121,6 +121,7 @@ blockquote {
 	background: var(--dark-color);
 	color: var(--white-color);
 	border-color: transparent;
+	transition: all .3s ease;
 }
 
 /*---------------------------------------
@@ -148,6 +149,7 @@ a:hover, a:active, a:focus {
 	color: var(--secondary-color);
 	outline: none;
 	text-decoration: none;
+	transition: all .3s ease;
 }
 
 ::selection {
@@ -199,7 +201,8 @@ ol, ul {
 }
 
 .nav-link.active, .nav-link:hover {
-	color: var(--secondary-color);
+	color: #ffffaa;
+	transition: all .3s ease;
 }
 
 /* 로고 호버 색변경 부분 추가 hjkosmo */
@@ -225,6 +228,7 @@ ol, ul {
 	{
 	background: var(--secondary-color);
 	color: var(--dark-color);
+	transition: all .3s ease;
 }
 
 .navbar-nav .navbar-toggler-icon {
@@ -303,8 +307,8 @@ ol, ul {
 }
 
 .mypgBtn:hover{	
-	color:var(--primary-color);
-	background-color:var(--white-color);
+	color:#ffffaa;
+	transition: all .3s ease;
 }
 
 /*---------------------------------------
@@ -471,6 +475,7 @@ ol, ul {
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span
 	{
 	background: var(--secondary-color);
+	transition: all .3s ease;
 }
 
 .list-detail {
@@ -709,6 +714,7 @@ ol, ul {
 	background-color: var(--secondary-color);
 	outline: none;
 	text-decoration: none;
+	transition: all .3s ease;
 }
 
 .form {
@@ -724,7 +730,7 @@ ol, ul {
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input[type="text"], .form input[type="password"]
-, .joinF input[type="email"]{
+, .joinF input[type="email"], .form input[type="number"]{
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -824,6 +830,7 @@ ol, ul {
 }
 .table td a:hover{
 	color: var(--primary-color);
+	transition: all .3s ease;
 }
 /*****사이드메뉴 hjkosmo*****/
 .floating-menu {
@@ -858,6 +865,7 @@ ol, ul {
 .main-menu li a:hover {
 	text-decoration:none;
 	background: rgba(255, 127, 39, 1);
+	transition: all .5s ease;
 }
 
 .main-menu li a i{
@@ -927,6 +935,7 @@ ol, ul {
 	color:var(--white-color);
 	text-decoration:none;
 	background-color:var(--secondary-color);
+	transition: all .3s ease;
 }
 .joinFrm a i{
 	margin-bottom:10px;
@@ -979,6 +988,7 @@ ol, ul {
 .btn-danger:hover{
 	background-color:var(--secondary-color);
 	border-color: var(--primary-color);
+	transition: all .3s ease;
 }
 .btn400w{
 	width:400px;
@@ -1060,6 +1070,7 @@ ol, ul {
 .drop:hover{
 	cursor:pointer;
 	background-color:#FFC079;	
+	transition: all .3s ease;
 }
 .dropMenu{
 	display:none;
@@ -1158,6 +1169,7 @@ ol, ul {
 	color: var(--white-color);
 	background-color:var(--secondary-color);
 	cursor:pointer;
+	transition: all .3s ease;
 }
 
 .reqDiv .rightcontent {

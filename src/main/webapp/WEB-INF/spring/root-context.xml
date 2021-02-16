@@ -18,8 +18,9 @@
 	<bean id="mailSender2" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
 	     <property name="host" value="smtp.gmail.com" />
 	     <property name="port" value="587" />
-	 <property name="username" value="slowwalking2021@gmail.com"/><!-- 작동 확인//최종버전에서 이메일 주소 및 비밀번호 입력예정 -->
-	 <property name="password" value=""/><!-- 작동 확인//최종버전에서 이메일 주소 및 비밀번호 입력예정 -->
+	     <property name="defaultEncoding" value="utf-8"/>
+	 <property name="username" value=""/><!-- 작동 확인//최종버전에서 이메일 및 비밀번호 입력예정 -->
+	 <property name="password" value=""/><!-- 작동 확인//최종버전에서 이메일 및 비밀번호 입력예정 -->
 	 <!-- 보안연결 TLS과 관련된 설정 -->
      <property name="javaMailProperties">
 	    <props>
@@ -28,18 +29,19 @@
 	    </props>
      </property>
 	</bean>
-	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
-      <property name="host" value="smtp.gmail.com" />
-      <property name="port" value="587" />
-      <property name="username" value="cysik92@naver.com" />
-      <property name="password" value="asqw1246" />
-      <property name="javaMailProperties">
-         <props>
-               <prop key="mail.transport.protocol">smtp</prop>
-               <prop key="mail.smtp.auth">true</prop>
-               <prop key="mail.smtp.starttls.enable">true</prop>
-               <prop key="mail.debug">true</prop>
-         </props>
-      </property>
-   </bean>
+	<!-- 한 프로젝트에 SMTP 계정 한 개만 -->
+<!-- 	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl"> -->
+<!--       <property name="host" value="smtp.gmail.com" /> -->
+<!--       <property name="port" value="587" /> -->
+<!--       <property name="username" value="cysik92@naver.com" /> -->
+<!--       <property name="password" value="asqw1246" /> -->
+<!--       <property name="javaMailProperties"> -->
+<!--          <props> -->
+<!--                <prop key="mail.transport.protocol">smtp</prop> -->
+<!--                <prop key="mail.smtp.auth">true</prop> -->
+<!--                <prop key="mail.smtp.starttls.enable">true</prop> -->
+<!--                <prop key="mail.debug">true</prop> -->
+<!--          </props> -->
+<!--       </property> -->
+<!--    </bean> -->
 </beans>

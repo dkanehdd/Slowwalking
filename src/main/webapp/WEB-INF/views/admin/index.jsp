@@ -22,12 +22,9 @@
 
     <!-- Custom styles for this template-->
     <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
 </head>
-
 <body id="page-top">
-<%@ include file="../links/linkOnly2dot.jsp"%>
-
+	<%@ include file="../links/linkOnly2dot.jsp"%>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -616,9 +613,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    되나????
-	<%@ include file="../include/side.jsp"%>
+    </div>    
+	<%@ include file="../chat/chatWidget.jsp"%>
 <!-- Bootstrap core JavaScript-->
     <script src="../resources/vendor/jquery/jquery.min.js"></script>
     <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
