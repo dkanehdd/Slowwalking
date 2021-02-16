@@ -27,6 +27,20 @@ window.onload = function() {
 	chat_id = document.getElementById('chat_id').value;
 	logWindow = document.getElementById('logWindow');
 	room = document.getElementById('chat_room').value;
+	var now = new Date();	// 현재 날짜 및 시간
+	var date = now.getDate();	// 일
+	console.log("일 : ", date);
+	var hours = now.getHours();	// 시간
+	console.log("시간 : ", hours);
+	var minutes = now.getMinutes();	// 분
+	console.log("분 : ", minutes);
+	var milliseconds = now.getMilliseconds();	// 밀리초
+	console.log("초 : ", milliseconds);
+	if(chat_id == ""){
+		console.log("시간으로 비회원에게 아이디 부여하는 로직");
+		chat_id = date + ":" + hours + ":" + minutes + ":" + milliseconds;
+		console.log("chat_id : " + chat_id);
+	}
 	
 	//관리자이면 특정 회원에게 문의 응답을 할 수 있도록  하기 위해 flag을 가져옴
 	$.ajax({
@@ -46,8 +60,7 @@ window.onload = function() {
 		}
 	});
 	
-	
-	//	localhost:9090 포트번호는 맞춰서 수정 필요
+	//포트번호는 맞춰서 수정 필요
 	WebSocket = new WebSocket('ws://localhost:8080/slowwalking/EchoServer.do/' + room);
 	WebSocket.onopen = function(event) {
 		wsOpen(event);
@@ -70,13 +83,37 @@ function wsMessage(event) {
 	var sender = message[0];
 	var msg;
 	var flag = document.getElementById("flag");
+	var sender_flag;
+	
+	//관리자이면 특정 회원에게 문의 응답을 할 수 있도록  하기 위해 flag을 가져옴
+	$.ajax({
+		url: "../member/getFlag",
+		async:false,//전역변수 저장을 위한 코드
+		type: "GET",
+		data: {
+			id : sender
+		},
+		dataType: "json",
+		contentType: "text/html;charset:utf-8",
+		success: function(d){
+			sender_flag=d.flag;
+			console.log("11sender_flag : " + sender_flag);
+		},
+		error: function(){
+			alert("에러"+e);
+		}
+	});
 	
 	console.log(flag);
 	//만약 보내는 사람이 admin이 아니라면 관리자에게만 문의가 갈수 있도록 한다.
 	if(flag != "admin"){
-		var content = "/kosmo" + message[1];
+		if(sender_flag == "admin"){
+			var content = message[1];
+		}else{
+			var content = "/kosmo" + message[1];
+		}
 	}
-	else{//만약 admin이라면 선택해서 보낼 수 있도록 한다.
+	else{//admin은 kosmo가 안붙은 상태로 전달받음
 		var content = message[1];
 	}
 	
@@ -86,26 +123,16 @@ function wsMessage(event) {
 	writeResponse(event.data);
 	
 	console.log("content : " + content);
-
+	console.log("chat_id : " + chat_id);
+	
 	if (content == "/kosmo" || sender == "대화방에 연결 되었습니다.") {
 		//날아온 내용이 없으므로 아무것도 하지않는다.
 	}
 	else {
 		//내용에 / 가 있다면 귓속말이므로...
 		if (contentfirst.match("/")) {
-			if (content.match(("/kosmo"))){
-				var temp = content.replace(("/kosmo"), "[문의]");
-				
-				//메세지에 UI를 적용하는 부분
-				msg = makeBalloon(sender, temp);
-				messageWindow.innerHTML += msg;
-
-				//대화영역의 스크롤바를 항상 아래로 내려준다. 
-				messageWindow.scrollTop = messageWindow.scrollHeight;
-			}
 			//해당 아이디(닉네임) 에게만 디스플레이 한다.
-			else if (content.match(("/"))) {
-				console.log("/kosmo로 들어옴? chat_id : " + chat_id);
+			if (content.match(("/" + chat_id))) {
 				var temp = content.replace(("/" + chat_id), "[답변]");
 				//메세지에 UI를 적용하는 부분
 				msg = makeBalloon(sender, temp);
@@ -136,6 +163,7 @@ function wsError(event) {
 function makeBalloon(id, cont) {
 	var time = nowTime();
 	var msg = '';
+	console.log("id" + id);
 	msg =
 		"<div class='othertalk' style='margin-top:10px;'>" +
 		"<div class=\"profile_image\" style=\"background: url(../resources/img/profile_image.png) no-repeat;\">\n" +
