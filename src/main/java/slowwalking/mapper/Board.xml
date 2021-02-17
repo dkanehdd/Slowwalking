@@ -34,8 +34,8 @@
    </insert>
 
    <!-- 채팅불러오기  -->
-   <select id="chatlist" resultType="mutiBoard.ChattingDTO">
-      select * from Chatting where 
+   <select id="chatlist" resultType="Int">
+      select count(*) from Chatting where send_id=#{send_id} and rece_id = #{rece_id}
    </select>
 
 </mapper>

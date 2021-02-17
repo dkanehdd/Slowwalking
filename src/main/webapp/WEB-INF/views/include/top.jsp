@@ -26,7 +26,7 @@ $(document).ready(function(){
 	});
 })
 </script>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" style="user-select: none;">
    <div class="container">
       <a class="navbar-brand nonHover" href="../main/main" style="font-weight:700">
        <i class="fa fa-slideshare" aria-hidden="false" style="visibility: visible !important;"></i>&nbsp;느린걸음
@@ -53,7 +53,7 @@ $(document).ready(function(){
             <c:choose>
                <c:when test="${not empty sessionScope.user_id }">
                   <li class="nav-item"><a href="../member/mypage"
-                  class="nav-link mypgBtn"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; ${sessionScope.user_name }님의 마이페이지</a></li>
+                  class="nav-link mypgBtn"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; ${sessionScope.user_name }님의 마이페이지</a><div id="alert"></div></li>
                   <li class="nav-item"><a href="../member/logout"
                   class="nav-link contact ml-2">로그아웃</a></li>
                </c:when>
@@ -66,5 +66,8 @@ $(document).ready(function(){
             </c:choose>
          </ul>
       </div>
+	<!-- Side메뉴, 채팅 -->
+	<%@ include file="../include/side.jsp"%>
+	<%@ include file="../chat/chatWidget.jsp"%>
    </div>
 </nav>

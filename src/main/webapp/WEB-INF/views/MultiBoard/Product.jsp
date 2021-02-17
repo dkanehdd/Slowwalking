@@ -107,8 +107,6 @@ $(function(){
 	<%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color: #eee;">
 		<div class="container">
-			<!-- Side메뉴 -->
-			<%@ include file="../include/side.jsp"%>
 			<div class="section_title subPimgBg">
 				<h1 class="mb-5">
 					<strong>PASSES</strong> 이용권구매
