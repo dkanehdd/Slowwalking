@@ -25,12 +25,28 @@
 <script src="../resources/js/owl.carousel.min.js"></script>
 <script src="../resources/js/smoothscroll.js"></script>
 <script src="../resources/js/custom.js"></script>
-<style>
+<style>	
+ 	
 	body{
 		font-family: Noto Sans KR, sans-serif !important;
+		-webkit-font-smoothing: antialiased;
+	}
+	a{
+		color: #333;
+	}
+	a:hover{
+		text-decoration: none;
+		color: var(--priamry-color);
 	}
 	.btn-danger{
-		background-color: var(--primary-color);
+		background-color: var(--primary-color) !important;
+		border-color: var(--secondary-color) !important;
 	}
-	input:focus {outline:none;}
+	.btn-danger:hover{
+		color:white;
+		background-color:var(--secondary-color) !important;
+		border-color: var(--primary-color) !important;
+		transition: all .3s ease !important;
+	}
+	input:focus { outline:none !important;}
 </style>
