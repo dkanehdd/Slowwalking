@@ -183,8 +183,13 @@ public class MultiBoardController {
    public Map<String, Object> insertChat(HttpServletRequest req) {
       Map<String, Object> map = new HashMap<String, Object>();
       String message = req.getParameter("message");
+      String room = req.getParameter("room");
+      
       System.out.println(message+"*****");
       ChattingDTO dto = new ChattingDTO();
+      
+      dto.setRoom(room);
+      
       String[] messageArr = message.split("/");
       System.out.println(messageArr[0]);
       System.out.println(messageArr[1]);

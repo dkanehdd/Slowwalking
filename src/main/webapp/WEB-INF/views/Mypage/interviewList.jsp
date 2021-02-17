@@ -191,9 +191,9 @@ function acceptThis(idx_c){
 function chatbutton(rece_id, room){
 
    console.log(rece_id);
-   var id = '${dto.id}';
+   var id = '${sessionScope.user_id}';
    
-   window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=500px, height=600px");
+   window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=320px, height=470px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no");
 }
 </script>
 
