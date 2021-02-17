@@ -2,15 +2,23 @@ package mutiBoard;
 
 public class ChattingDTO {
 
-	private java.sql.Date regidate;
+	private String regidate;
 	private String send_id;
 	private String rece_id;
 	private String content;
+	private String room;
 	
-	public java.sql.Date getRegidate() {
+	
+	public String getRoom() {
+		return room;
+	}
+	public void setRoom(String room) {
+		this.room = room;
+	}
+	public String getRegidate() {
 		return regidate;
 	}
-	public void setRegidate(java.sql.Date regidate) {
+	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
 	public String getSend_id() {

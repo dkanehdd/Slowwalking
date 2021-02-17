@@ -28,11 +28,15 @@
 	</update>
 	<!-- 채팅  -->
    <insert id="chatwrite" parameterType="mutiBoard.ChattingDTO">
-      INSERT INTO chatting (regidate, send_id, rece_id, content)
+      INSERT INTO chatting (regidate, send_id, rece_id, content, room)
       VALUES
-      (sysdate, #{send_id}, #{rece_id}, #{content})   
+      (sysdate, #{send_id}, #{rece_id}, #{content},#{room})   
    </insert>
 
+<!--    채팅불러오기  -->
+   <select id="chatlist" resultType="mutiBoard.ChattingDTO">
+     select send_id, rece_id, content, to_char(regidate,'PM HH:MI') as regidate from chatting where room=#{0}
+     order by regidate
    <!-- 채팅불러오기  -->
    <select id="chatlist" resultType="Int">
       select count(*) from Chatting where send_id=#{send_id} and rece_id = #{rece_id}

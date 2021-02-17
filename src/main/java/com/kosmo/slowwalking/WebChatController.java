@@ -1,5 +1,7 @@
 package com.kosmo.slowwalking;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -33,13 +35,9 @@ public class WebChatController {
 	@RequestMapping(value="/chat/chatui", method=RequestMethod.GET)
    public String ChatUI(Model model, HttpServletRequest req) {
       
-      ChattingDTO dto = new ChattingDTO();
-      dto.setRece_id("kosmo");
-      dto.setSend_id("kosmo");
-      System.out.println("send_id : " + dto.getSend_id());
-      System.out.println("recd_id : " + dto.getRece_id());
-      int result = sqlSession.getMapper(MultiBoardImpl.class).chatlist(dto);
-      
+      String room = req.getParameter("room");
+      List<ChattingDTO> result = sqlSession.getMapper(MultiBoardImpl.class).chatlist(room);
+      model.addAttribute("result",result);
       return "chat/ChatUI";
    }
 }

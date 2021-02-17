@@ -1,6 +1,7 @@
 package member;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mutiBoard.ChattingDTO;
 import mutiBoard.MultiBoardDTO;
@@ -21,5 +22,7 @@ public interface MultiBoardImpl {
 	public int chatwrite(ChattingDTO chattingDTO);
 	
 	//채팅 리스트불러오기
-	public int chatlist(ChattingDTO chattingDTO);    
+//	public int chatlist(ChattingDTO chattingDTO);   
+	
+	public List<ChattingDTO> chatlist(String room);   
 }

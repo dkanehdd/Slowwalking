@@ -123,7 +123,7 @@ function sendMessage() {
 		url : "../chat/insertChat?${_csrf.parameterName}=${_csrf.token}",
 		type : "GET",
 		data : { 
-			message : messsa
+			message : messsa, room: $('#room').val()
 		},
 		dataType : "json", 
 		contentType : "text/html;charset:utf-8;",
@@ -181,12 +181,48 @@ function nowTime(){
 </script>
 
 
-<input type="hid-den" id="chat_id" name="send_id" value="${param.id }" />
-<input type="hid-den" id="room" name="room" value="${param.room }" />
-<input type="hid-den" id="rece_id" name="rece_id" value="${param.rece_id }" />
+<input type="hidden" id="chat_id" name="send_id" value="${param.id }" />
+<input type="hidden" id="room" name="room" value="${param.room }" />
+<input type="hidden" id="rece_id" name="rece_id" value="${param.rece_id }" />
 <%-- <input type="hid-den" id="rece_id" name="rece_id" value="${param.chat_room }" /> --%>
 <div class="chat_ui" id="chat_ui_test" style="width: 320px; height: 480px;">
-	<div class="msg" id="messageWindow"></div>
+	<div class="msg" id="messageWindow">
+<c:forEach var="row" items="${result }">
+<c:if test="${row.send_id eq param.id }">
+	<div class='mytalk' style='margin-top:10px;'>
+		<div class="b"> 
+		</div>
+		<div class="a"  style='padding:6px 8px 0px 5px;'>
+		${row.content }
+		</div>
+		<div class="time">
+		${row.regidate }
+		</div>
+		</div>
+</c:if>
+<c:if test="${row.send_id eq param.rece_id }">
+		<div class='othertalk' style='margin-top:10px;'>
+		<div class="profile_image" style="background: url(../resources/img/profile_image.png) no-repeat;">
+		</div>
+		<div class="box">
+		<div class="profile_name">
+		${row.send_id }
+		</div>
+		<div class="a">
+		
+		</div>
+		<div class="b" style='padding:6px 8px 0px 5px;'>
+		${row.content }
+		</div>
+		<div class="time">
+	 ${row.regidate }
+		</div>
+		</div>
+		</div>
+</c:if>
+		
+</c:forEach>
+	</div>
 	<div class="sendmsg">
 	    <textarea class="textarea" name="content" id="inputMessage" onkeyup="enterkey();"></textarea>
 	    <div class="button"  onclick="sendMessage();">
@@ -195,7 +231,7 @@ function nowTime(){
 	    <div class="clear"></div>
 	</div>	
 </div>
-<div id="logWindow" class="border border-danger" style="height:130px; overflow:auto;"></div> 
+<!-- <div id="logWindow" class="border border-danger" style="height:130px; overflow:auto;"></div>  -->
 
 </body>
 </html>
