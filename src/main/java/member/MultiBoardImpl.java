@@ -21,8 +21,6 @@ public interface MultiBoardImpl {
 	//채팅 인설트
 	public int chatwrite(ChattingDTO chattingDTO);
 	
-	//채팅 리스트불러오기
-//	public int chatlist(ChattingDTO chattingDTO);   
 	
 	public List<ChattingDTO> chatlist(String room);   
 }
