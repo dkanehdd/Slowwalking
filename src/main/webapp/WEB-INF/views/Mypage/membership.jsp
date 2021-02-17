@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="contatiner ml-3 mt-3">
-	<h3>이용권</h3>
+<div class="ml-2">
+<div class="section_title">
+	<h3 class="mb-5"><strong>My Ticket</strong> 이용권</h3>
 </div>
 <div class="container ml-4 mt-5">
 	<table class="table">

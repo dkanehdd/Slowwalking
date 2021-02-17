@@ -106,18 +106,26 @@
 		#{0})
 	</insert>
 	<select id="sitDiary" resultType="mutiBoard.DiaryDTO">
-		SELECT * FROM diary WHERE send_id=#{0} AND idx=#{1}
+		SELECT * FROM diary WHERE send_id=#{0}
 	</select>
 	<select id="parDiary" resultType="mutiBoard.DiaryDTO">
-		SELECT * FROM diary WHERE rece_id=#{0} AND idx=#{1}
+		SELECT * FROM diary WHERE rece_id=#{0}
 	</select>
-	<select id="diaryView" resultType="mutiBoard.DiaryDTO">
+	<select id="sitDiaryView" resultType="mutiBoard.DiaryDTO">
 		select M.name,d.content from diary D
     		join interview I
         		on D.idx = I.idx
 		    join member M
 		        on I.sitter_id = M.id
-		    where its_idx=#{0}
+		    where its_idx=#{0} and flag='diary'
+	</select>
+	<select id="parDiaryView" resultType="mutiBoard.DiaryDTO">
+		select M.name,d.content from diary D
+    		join interview I
+        		on D.idx = I.idx
+		    join member M
+		        on I.parents_id = M.id
+		    where its_idx=#{0} flag='diary'
 	</select>
 
 	<!-- 후기 -->
@@ -175,6 +183,9 @@
 	<update id="getPoint">
 		UPDATE member SET point=(point+50) WHERE id=#{0}
 	</update>
+	<update id="setComplete">
+		UPDATE interview SET complete='T' WHERE idx=#{0}
+	</update>
 	<!-- 이용권 -->
 	<select id="purchaseList" resultType="mutiBoard.OrderDTO">
 		SELECT O.total_price,
@@ -183,4 +194,8 @@
 		on O.product_idx = P.idx
 		WHERE id=#{0} ORDER BY regidate desc
 	</select>
+	<!-- 메인 -->
+	<select id="mainComment" resultType="mutiBoard.DiaryDTO">
+      SELECT * FROM diary WHERE flag='comment' ORDER BY regidate DESC
+   </select>
 </mapper>

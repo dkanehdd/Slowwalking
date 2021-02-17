@@ -27,7 +27,6 @@ public interface MypageImpl {
 	public ArrayList<InterviewDTO> andsitInterList(String id);
 	public ArrayList<InterviewDTO> andparInterList(String id);
 	public ArrayList<InterviewDTO> andsitDiaryList(String id);
-	
 	public int countParentsInterview(String id);
 	public int countSitterInterview(String id);
 	//수락
@@ -35,10 +34,10 @@ public interface MypageImpl {
 	public int parAgree(int idx);
 	//알림장
 	public int sendDiary(int idx, String send_id, String rece_id, String content);
-	public ArrayList<DiaryDTO> sitDiary(String id, int idx);
-	public ArrayList<DiaryDTO> parDiary(String id, int idx);
-	public DiaryDTO diaryView(int its_idx);
-
+	public ArrayList<DiaryDTO> sitDiary(String id);
+	public ArrayList<DiaryDTO> parDiary(String id);
+	public DiaryDTO sitDiaryView(int its_idx);
+	public DiaryDTO parDiaryView(int its_idx);
 	//후기
 	public int writeComment(int idx, String send_id, String rece_id, String content, int starrate);
 	public ArrayList<DiaryDTO> receivedComment(String id, int start, int end);
@@ -51,9 +50,11 @@ public interface MypageImpl {
 	public int setStarrate(String id, int rate);
 	public int getStarrate(String id);
 	public int getPoint(String id);
-	
 	public ArrayList<DiaryDTO> CommentList(String id); 
+	public int setComplete(int idx);
 	//이용권
 	public ArrayList<OrderDTO> purchaseList(String id);
+	//메인
+	public ArrayList<DiaryDTO> mainComment();
 
 }

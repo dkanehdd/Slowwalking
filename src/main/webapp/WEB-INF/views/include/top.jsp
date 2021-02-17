@@ -27,7 +27,17 @@
             <c:choose>
                <c:when test="${not empty sessionScope.user_id }">
                   <li class="nav-item"><a href="../member/mypage"
-                  class="nav-link mypgBtn"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; ${sessionScope.user_name }님의 마이페이지</a></li>
+                  class="nav-link mypgBtn"><i class="fa fa-user" aria-hidden="true">
+                  </i>
+                  <c:choose>
+                  	<c:when test="${flag eq 'admin' }">
+                  		&nbsp;관리자 페이지
+                  	</c:when>
+                  	<c:otherwise>
+                  		&nbsp;${sessionScope.user_name }님의 마이페이지
+                  	</c:otherwise>
+                  </c:choose>
+                  	</a></li>
                   <li class="nav-item"><a href="../member/logout"
                   class="nav-link contact ml-2">로그아웃</a></li>
                </c:when>

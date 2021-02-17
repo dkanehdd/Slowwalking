@@ -16,7 +16,9 @@
 <!-- http://localhost:9090/slowwalking/member/sitterjoin -->
 <body>
 <div class="ml-3 mt-3">
-<h3>시터정보 수정</h3>
+<div class="section_title">
+	<h3 class="mb-5"><strong>My Information</strong> 시터정보수정</h3>
+</div>
 </div>
 		<div class="container">
 			<form:form method="post" name="payappform" id="payappform"

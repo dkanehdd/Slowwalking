@@ -103,8 +103,7 @@ public class MemberController {
 	
 	//로그인 페이지로 이동하는 요청명(메소드)
 	@RequestMapping("/member/login")
-	public String Login() {
-		
+	public String Login() {		
 		return "Member/Login";
 	}
 	//로그인폼 거치지 않고 바로 로그인(소셜 로그인)
@@ -407,6 +406,9 @@ public class MemberController {
 			
 			model.addAttribute("dto", dto);
 			view = "Member/MypageParents";
+		}
+		else if(flag.equals("admin")) {
+			view = "redirect:../admin/index";
 		}
     
       return view;
