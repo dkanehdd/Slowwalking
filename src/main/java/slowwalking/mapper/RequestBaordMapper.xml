@@ -92,7 +92,9 @@
 				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
 	</select>
 	
-	
+	<update id="invisibleBoard">
+		UPDATE requestBoard SET advertise='off' WHERE idx=#{0}
+	</update>
 	
 	
 </mapper>

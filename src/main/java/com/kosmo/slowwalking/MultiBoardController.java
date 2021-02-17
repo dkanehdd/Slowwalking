@@ -103,7 +103,8 @@ public class MultiBoardController {
 		String idx = req.getParameter("idx");
 		String flag = req.getParameter("flag");
 		int price = Integer.parseInt(req.getParameter("price"));
-		int usepoint = Integer.parseInt(req.getParameter("usepoint"));
+		String p = req.getParameter("usepoint").equals("")?"0":req.getParameter("usepoint");
+		int usepoint = Integer.parseInt(p);
 		
 		MemberDTO memberDTO = sqlSession.getMapper(MemberImpl.class).getMember(session.getAttribute("user_id").toString());
 		
