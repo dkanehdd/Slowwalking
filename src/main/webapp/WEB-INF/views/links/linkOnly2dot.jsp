@@ -32,4 +32,5 @@
 	.btn-danger{
 		background-color: var(--primary-color);
 	}
+	input:focus {outline:none;}
 </style>

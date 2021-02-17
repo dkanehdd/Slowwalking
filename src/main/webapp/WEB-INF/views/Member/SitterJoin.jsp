@@ -13,7 +13,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
-<!-- http://localhost:9090/slowwalking/member/sitterjoin -->
+<!-- http://localhost:8080/slowwalking/member/sitterjoin -->
 <body>
 <%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color: #eee;">
@@ -148,7 +148,7 @@
 							<button type="button" class="workday_off mr1p" value="토">토</button>
 							<button type="button" class="workday_off" value="일">일</button>
 							<input type="checkbox" id="time_type" style="visibility:hidden;" name="time_type" value='Y'><label
-							for="time_type" class="workday_off" style="vertical-align: top; width: 110px;">협의가능</label> <input type="hid den" id="workday_name" name="activity_time"
+							for="time_type" class="workday_off" style="vertical-align: top; width: 110px;">협의가능</label> <input type="hidden" id="workday_name" name="activity_time"
 							value="월,화,수,목,금"> <br /> <select name='starttime'
 							id='starttime1' style="width: 24%; margin-top: 10px"
 							class="pass form-control">
@@ -220,11 +220,11 @@
 						</td>
 					</tr>
 					<tr>
-						<th scope="row" style="vertical-align:middle;">희망급여
+						<th scope="row" style="vertical-align:middle;">희망시급
 						<br><small>&#42; 원 단위로 입력해주세요.</small></th>
 						<td>
 							<div>
-								시급 : <input type="number" id="paytype" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;">
+								<input type="number" id="paytype" class="" name="pay" value="" placeholder="※2021년 기준 최저시급 : 8,720원" style="vertical-align:middle;  width: 400px; margin-bottom:0;">
 							</div></td>
 					</tr>
 					<tr>

@@ -47,8 +47,6 @@ $(function() {
 </c:if>
 <section class="section-padding" style="background-color: #eee;">
 	<div class="container reqDiv">
-		<!-- Side메뉴 -->
-		<%@ include file="../include/side.jsp"%>
 		<div class="section_title">
 			<h1 class="mb-5"><strong>REQUEST</strong> 의뢰리스트</h1>
 		</div>
