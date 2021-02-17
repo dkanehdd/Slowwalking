@@ -114,23 +114,30 @@
 			</table>
 
 			<div class="container">
-						<h3 style="text-align: center;">
-							<strong>후기</strong> comment 
-						</h3><br />
-						<c:choose>
-							<c:when test="${empty lists}">
-								<div class="card" >등록된 후기가 없습니다.</div>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${lists }" var="row">
+				<h3 style="text-align: center;">
+					<strong>후기</strong> comment
+				</h3>
+				<br />
+				<c:choose>
+					<c:when test="${empty lists}">
+						<div class="card">등록된 후기가 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${lists }" var="row">
 
-									<div class="card col-12" >
-									<div class="card-body">${row.content }</div>
-									</div>
+							<div class="media border p-3" style="background-color: #F1F1F1">
+								<img src="../resources/images/${row.image_path }"
+									class="media-object mr-3"
+									style="width: 100px; height: 100px; border-radius: 70%">
+								<div class="media-body">
+									<span class="info">${row.send_id } | ${row.regidate }</span><br />
+									${row.content } <br /> <span class="star-prototype">${row.starrate }</span>
+								</div>
+							</div>
 
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="_1nW60 container">
 				<div class="_2KQBU">
@@ -168,7 +175,27 @@
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </body>
-
+<style type="text/css">
+span.star-prototype, span.star-prototype>* {
+	height: 16px;
+	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+	width: 80px;
+	display: inline-block;
+}
+span.star-prototype>* {
+	background-position: 0 0;
+	max-width: 80px;
+}
+</style>
+<script type="text/javascript">
+	$.fn.generateStars = function() {
+		return this.each(function(i, e) {
+			$(e).html($('<span/>').width($(e).text() * 16));
+		});
+	};
+	// 숫자 평점을 별로 변환하도록 호출하는 함수
+	$('.star-prototype').generateStars();
+</script>
 <script type="text/javascript">
 	//주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();

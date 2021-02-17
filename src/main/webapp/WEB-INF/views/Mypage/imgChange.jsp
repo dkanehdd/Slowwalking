@@ -16,7 +16,7 @@
 <body>
 <div class="ml-2">
 <div class="section_title">
-	<h3 class="mb-5"><strong>Profile Image</strong> 이미지 변경하기</h1>
+	<h3 class="mb-5"><strong>Profile Image</strong> 이미지 변경하기</h3>
 </div>
 </div>
 <div class="container mypageCont">

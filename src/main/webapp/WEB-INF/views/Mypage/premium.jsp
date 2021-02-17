@@ -70,7 +70,6 @@ div .text {
     color: #DC5C05;
     font-weight: 900;
 }
-
 </style>
 </head>
 <body>
@@ -104,9 +103,6 @@ div .text {
 								<tr>
 									<td>
 										<div class="card">
-											<div class="card-body">
-											<span class="display-3">${row.product_name }</span>
-											<span class="display-4">${row.price }</span>원
 											<div class="card-body d-flex justify-content-between">
 											<span class="display-4">${row.product_name }</span>
 											<span class="display-4">${row.price }원</span>

@@ -796,6 +796,9 @@ ol, ul {
 .noticeImg{
 	background-image:url("../images/notice.png");
 }
+.marketImg{
+	background-image:url("../images/market.png");
+}
 
 #accordion .card-header{
 	vertical-align:middle;

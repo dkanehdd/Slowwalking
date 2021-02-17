@@ -1,6 +1,9 @@
 package android;
 
+import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import advertisement.InterviewDTO;
 import advertisement.RequestBoardImpl;
 import member.MemberDTO;
+import member.MemberImpl;
 import member.MypageImpl;
+import mutiBoard.CalendarDTO;
+import mutiBoard.DiaryDTO;
 
 @Controller
 public class AndroidInterviewController {
@@ -49,6 +55,7 @@ public class AndroidInterviewController {
 		else {
 			ArrayList<InterviewDTO> lists = sqlSession.getMapper(MypageImpl.class).andparInterList(id);
 			map.put("lists", lists);
+			System.out.println("lists:"+lists);
 		}
 		
 		return map;
@@ -86,8 +93,8 @@ public class AndroidInterviewController {
 		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).getAgree(idx);
 		System.out.println(dto.getSitter_agree()+"&&"+dto.getParents_agree());
 		if(dto.getSitter_agree().equals("T")&&dto.getParents_agree().equals("T")) {
-//			int delete = sqlSession.getMapper(RequestBoardImpl.class).invisibleBoard(dto.getRequest_idx());
-//			System.out.println("삭제됬나용?"+ delete);
+			int delete = sqlSession.getMapper(RequestBoardImpl.class).invisibleBoard(dto.getRequest_idx());
+			System.out.println("삭제됬나용?"+ delete);
 		}
 		map.put("mode", "agree");
 		return map;
@@ -140,5 +147,73 @@ public class AndroidInterviewController {
 		return map;
 	}
 	
+	@RequestMapping("/android/openCalendar")
+	@ResponseBody
+	public Map<String, Object> openCalendar(HttpServletRequest req, HttpSession session, CalendarDTO calendarDTO) {
+		
+		//사용자가 부모회원인지 시터회원인지 구별하고 모달에 알림장 데이터를 저장한다.
+		
+		String user_id = req.getParameter("id");
+		ArrayList<DiaryDTO> diaryList = new ArrayList<>();
+		
+		diaryList = sqlSession.getMapper(MypageImpl.class).anddiaryList(user_id);
+		//날짜를 맞는 형식으로 검색해 날짜에 맞게 출력하기 위해 날짜 형식을 바꿔준다.
+		for(DiaryDTO dto : diaryList) {
+			System.out.println("변경전 시간 : " + dto.getRegidate());
+			String regidate = dto.getRegidate();
+			regidate = regidate.substring(0,10);
+			dto.setRegidate(regidate);
+			System.out.println("regidate의 5번째 문자열 : " + regidate.charAt(5));
+			if('0' == regidate.charAt(5)) {
+				regidate = regidate.substring(0,5) + regidate.substring(6);
+				System.out.println("regidate의 7번째 문자열 : " + regidate.charAt(7));
+				if('0' == regidate.charAt(7)) {
+					regidate = regidate.substring(0,7) + regidate.substring(8);
+				}
+			}else if('0' == regidate.charAt(8)){
+				regidate = regidate.substring(0,8) + regidate.substring(9);
+			}
+			
+			//데이터가 어떻게 출력되는지 확인
+			System.out.println("변경된 후 시간 : " + regidate);
+			
+			dto.setRegidate(regidate);
+		}
+		
+		Map<String, Object> today_data = new HashMap<String, Object>();
+		
+		today_data.put("lists", diaryList);
+		return today_data;
+	
+	}
+	
+	//알림장 보내기
+	@RequestMapping("/android/sendDiary")
+	@ResponseBody
+	public Map<String, Object> sendDiary(HttpServletRequest req, HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		System.out.println("sendDiary");
+		
+		String content = req.getParameter("content");
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
+		
+		System.out.println(dto.getSitter_id());
+		System.out.println(dto.getParents_id());
+		System.out.println("content:"+content);
+		
+
+		int result = sqlSession.getMapper(MypageImpl.class).sendDiary(idx, dto.getSitter_id(), dto.getParents_id(), content);
+		map.put("message", "발송 완료되었습니다.");
+	
+		System.out.println("result:"+result);
+
+		
+		return map;
+		
+		
+	}
 	
 }

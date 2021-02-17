@@ -13,8 +13,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="contatiner ml-3 mt-3">
-	<h3>나의 후기</h3>
+<div class="ml-2">
+<div class="section_title">
+	<h3 class="mb-5"><strong>My Comment</strong> 나의 후기</h3>
+</div>
 </div>
 <div class="container ml-3 mt-5">
 	<div class="row info">
