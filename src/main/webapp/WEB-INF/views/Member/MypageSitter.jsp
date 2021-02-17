@@ -118,12 +118,12 @@
 				</ul>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item" id="interview">내 구직현황</li>
-					<li class="list-group-item" id="comment">후기관리</li>
+					<li class="list-group-item" id="comment">후기 관리</li>
 				</ul>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item mt-2" id="membership">이용권</li>
+					<li class="list-group-item" id="premium"><img src="../resources/images/premium-icon.png" style="height:16px;"> 프리미엄</li>
 					<li class="list-group-item"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</li>
-					<li class="list-group-item" id="premium">프리미엄권</li>
 				</ul>
 				<br />
 				<br />

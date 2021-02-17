@@ -37,6 +37,7 @@
 			default-target-url="/member/LoginAction"
 			authentication-failure-url="/member/login?error"
 			login-processing-url="/loginAction"
+			always-use-default-target="true"
 			username-parameter="id"
 			password-parameter="pass"
 		/>

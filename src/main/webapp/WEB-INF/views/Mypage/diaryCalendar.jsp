@@ -15,6 +15,7 @@
 
 <style TYPE="text/css">
 	body {
+	background-color: #EEEEEE;
 	scrollbar-face-color: #F6F6F6;
 	scrollbar-highlight-color: #bbbbbb;
 	scrollbar-3dlight-color: #FFFFFF;
@@ -26,19 +27,15 @@
 	}
 
 	td { font-size: 9pt; color:#595959;}
-	th { font-size: 9pt; color:#000000;}
+	th { font-size: 9pt; color:#FFFFFF;}
 	select { font-size: 9pt; color:#595959;}
 
-
+	A {color:#343A40; }
+	A:hover {color: #DC5C05;}
 	.divDotText {
 	overflow:hidden;
 	text-overflow:ellipsis;
 	}
-
-	A:link { font-size:9pt; font-family:"돋움";color:#000000; text-decoration:none; }
-	A:visited { font-size:9pt; font-family:"돋움";color:#000000; text-decoration:none; }
-	A:active { font-size:9pt; font-family:"돋움";color:red; text-decoration:none; }
-	A:hover { font-size:9pt; font-family:"돋움";color:red;text-decoration:none;}
 	.day{
 		width:100px; 
 		height:30px;
@@ -79,13 +76,7 @@
 		margin-bottom: 50px;
 		border-collapse: collapse;
 	}
-	.calendar_body .today{
-		border:1px solid white;
-		height:20px;
-		background-color:#c9c9c9;
-		text-align: left;
-		vertical-align: top;
-	}
+
 	.calendar_body .date{
 		font-weight: bold;
 		font-size: 15px;
@@ -93,9 +84,9 @@
 		padding-top: 3px;
 	}
 	.calendar_body .sat_day{
-		border:1px solid white;
+		border:1px solid #EFEFEF;
 		height:120px;
-		background-color:#EFEFEF;
+		background-color: white;
 		text-align:left;
 		vertical-align: top;
 	}
@@ -130,6 +121,7 @@
 	.this_month{
 		margin: 10px;
 	}
+	#diaryBar {background-color: #DC5C05; color:white;}
 </style>
 </head>
 <body>
@@ -142,31 +134,37 @@
 
 	<!--날짜 네비게이션  -->
 	<div class="navigation">
-		<a class="before_after_year" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&yearIdx=0&idx=${idx}">
-			&lt;&lt;
 		<!-- 이전해 -->
+		<a href="../mypage/openCalendar?year=${today.year}&month=${today.month}&yearIdx=0&idx=${idx}">
+			<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+			
 		</a> 
-		<a class="before_after_month" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&monthIdx=0&idx=${idx}">
-			&lt;
 		<!-- 이전달 -->
+		<a href="../mypage/openCalendar?year=${today.year}&month=${today.month}&monthIdx=0&idx=${idx}">
+			<i class="fa fa-angle-left" aria-hidden="true"></i>
 		</a> 
 		<span class="this_month">
 			&nbsp;${today.year}.${today.month+1}
 		</span>
-		<a class="before_after_month" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&monthIdx=1&idx=${idx}">
 		<!-- 다음달 -->
-			&gt;
+		<a href="../mypage/openCalendar?year=${today.year}&month=${today.month}&monthIdx=1&idx=${idx}">
+			<i class="fa fa-angle-right" aria-hidden="true"></i>
 		</a> 
-		<a class="before_after_year" href="../mypage/openCalendar?year=${today.year}&month=${today.month}&yearIdx=1&idx=${idx}">
-			<!-- 다음해 -->
-			&gt;&gt;
+		<!-- 다음해 -->
+		<a href="../mypage/openCalendar?year=${today.year}&month=${today.month}&yearIdx=1&idx=${idx}">
+			<i class="fa fa-angle-double-right" aria-hidden="true"></i>
 		</a>
 	</div>
+	<c:if test="${flag eq 'sitter' }">
+		<div class="mb-2" style="text-align:right;">
+			<button type="button" class="btn btn-danger btn-sm" onClick="popOpen()">알림장 작성</button>
+		</div>
+	</c:if>
 
 
 	<table class="calendar_body">
 		<thead>
-			<tr bgcolor="#CECECE">
+			<tr bgcolor="#3C5059">
 				<th class="day sun" >
 					일
 				</th>
@@ -209,7 +207,7 @@
 						<c:forEach items="${diaryList }" var="row">
 							<c:set var="date" value="${today.year }-${today.month+1 }-${i }"/>
 							<c:if test="${row.regidate eq date}">
-								<p onclick="diaryOpen(${row.its_idx});">오늘의 알림장</p>
+								<div id="diaryBar" class="mb-1" onclick="diaryOpen(${row.its_idx});">오늘의 알림장</div>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -228,12 +226,8 @@
 			
 		</tbody>
 	</table>
-	<c:if test="${flag eq 'sitter' }">
-		<div>
-		<button type="button" class="btn btn-warning" onClick="popOpen()">알림장</button>
-		</div>
-	</c:if>
-	<input type="hid-den" id="idx" value="${idx }"/>
+	
+	<input type="hidden" id="idx" value="${idx }"/>
 	
 	
 	</div>
@@ -246,13 +240,13 @@ var popupX = (window.screen.width / 2) - (500 / 2);
 var popupY= (window.screen.height / 2) - (500 / 2);
 function popOpen(){
 	var idx = document.getElementById("idx").value;	
-	window.open("../mypage/openDiary?idx="+idx, "알림장", 
+	window.open("../mypage/openDiary?idx="+idx, "알림장쓰기", 
 	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 
 function diaryOpen(its_idx){	
-	window.open("../mypage/openDiaryView?its_idx="+its_idx, "알림장", 
-	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+	window.open("../mypage/openDiaryView?its_idx="+its_idx, "알림장보기", 
+	"width=500, height=400, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
 </html>

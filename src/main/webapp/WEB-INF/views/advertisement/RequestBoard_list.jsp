@@ -40,16 +40,25 @@ $(function() {
 });
 </script>
 </head> 
-
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
-<c:if test="${list_flag ne 'mylist' }">
+<c:choose>
+	<c:when test="${list_flag ne 'mylist' }">
 	<%@ include file="../include/top.jsp"%>
-</c:if>
-<section class="section-padding" style="background-color: #eee;">
+	<section class="section-padding" style="background-color: #eee;">
 	<div class="container reqDiv">
 		<div class="section_title">
 			<h1 class="mb-5"><strong>REQUEST</strong> 의뢰리스트</h1>
 		</div>
+	</c:when>
+	<c:otherwise>
+	<div class="ml-2">
+		<div class="section_title">
+			<h3 class="mb-5"><strong>My Interview</strong> 구직현황</h3>
+		</div>
+	</div>
+	<div class="container reqDiv">
+	</c:otherwise>
+</c:choose>
 		<div class="RequestBoardList">	
 			<div id="back">
 			<c:if test="${list_flag ne 'mylist' }">

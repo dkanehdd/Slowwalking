@@ -7,13 +7,21 @@ public class InterviewDTO {
 	private String request_time;
 	private String parents_agree;
 	private String sitter_agree;
+	private String complete;
 	private int request_idx;
+
 	
 	///인터뷰을 신청한 부모회원과 시터회원의 이름을 알아오기 위한 맴버변수
 	private String parents_name;
 	private String sitter_name;
 	
 	
+	public String getComplete() {
+		return complete;
+	}
+	public void setComplete(String complete) {
+		this.complete = complete;
+	}
 	public String getParents_name() {
 		return parents_name;
 	}

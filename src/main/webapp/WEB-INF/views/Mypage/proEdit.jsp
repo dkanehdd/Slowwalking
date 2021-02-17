@@ -51,8 +51,10 @@ $('#submit').on("click", function() {
 </script>
 </head>
 <body>
-<div class="ml-3 mt-3">
-<h3>회원정보수정</h3>
+<div class="ml-2">
+<div class="section_title">
+	<h3 class="mb-5"><strong>My Profile</strong> 회원정보수정</h1>
+</div>
 </div>
 <div class="container mt-5">
 	<input type="hidden" name="id" id="id" value="${user_id }" />

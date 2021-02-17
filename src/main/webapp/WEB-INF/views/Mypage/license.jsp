@@ -20,7 +20,9 @@
 </head>
 <body>
 <div class="ml-2">
-<h3>자격증 관리</h3>
+<div class="section_title">
+	<h3 class="mb-5"><strong>My Certification</strong> 자격증</h3>
+</div>
 </div>
 <div class="container">
 	<form:form action="../mypage/updatelicense?${_csrf.parameterName}=${_csrf.token}" name="fileFrm" method="post" 

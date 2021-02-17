@@ -33,8 +33,7 @@
 				<c:otherwise>
 					<div class="rateTxt">${dto.starrate}점</div>
 					<c:set var="x" value="${dto.starrate }"/>
-					<fmt:parseNumber var="i" integerOnly="true" 
-					type="number" value="${x}"/>
+					<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
 					<c:forEach begin="1" end="${i}" step="1">
 						<img src="../resources/images/star.png" alt="" />
 					</c:forEach>
@@ -55,7 +54,7 @@
 <style>
 .myrate{margin: 25px auto; text-align:center;}
 .info{background-color: #3C5059; width:530px; height:100px; margin:0 auto; padding:20px; border-radius:10px;}
-.firstTxt {color: white; font-size:20px; font-weight:bold;}
+.firstTxt {color: white; font-size:20px; font-weight:bold; width:250px;}
 .secTxt {color:#E6EAEE; font-size:12px;}
 .rateTxt {font-size:30px; font-weight:bold;}
 .buttons {text-align:center;}

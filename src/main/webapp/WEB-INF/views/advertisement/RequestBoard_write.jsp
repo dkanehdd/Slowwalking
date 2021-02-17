@@ -53,8 +53,12 @@ function checkform() {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	<section class="testimonial section-padding"
-		style="background-color: var(- -project-bg);">
+<div class="ml-2">
+<div class="section_title">
+	<h3 class="mb-5"><strong>My request</strong> 신청의뢰서</h3>
+</div>
+</div>
+	<section style="background-color: var(- -project-bg);">
 		<div class="container">
 			<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
 				<div class="text-center">
@@ -76,7 +80,7 @@ function checkform() {
 									<col width="50%" />
 									<col width="*" />
 								</colgroup>
-								<input type="hid-den" name="id" value="${user_id }" />
+								<input type="hidden" name="id" value="${user_id }" />
 								<tbody>
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">신청서의
@@ -296,7 +300,7 @@ function checkform() {
 									</tr>
 								</tbody>
 							</table>
-							<button type="submit" class="btn btn-primary">의뢰 신청하기</button>
+							<button type="submit" class="btn btn-danger mb-3">의뢰 신청하기</button>
 
 						</div>
 					</form>

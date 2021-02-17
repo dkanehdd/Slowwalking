@@ -1,5 +1,6 @@
 package com.kosmo.slowwalking;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import member.MemberDTO;
 import member.MemberImpl;
@@ -69,15 +71,19 @@ public class MultiBoardController {
 
 	// 상품목록으로 이동하는 요청명(메소드)
 	@RequestMapping("/multiBoard/product")
-	public String productList(Model model, HttpServletRequest req) {
-
+	public String productList(Model model, HttpServletRequest req, HttpSession session, Principal principal) {
+		
+		String user_id = principal.getName();
+		System.out.println("id:"+user_id);
+		System.out.println("flag:"+(String)session.getAttribute("flag"));
+		
 		// 파라미터 저장을 위한 DTO객체 생성
 		ProductDTO productDTO = new ProductDTO();
 		// Mapper 호출
 		ArrayList<ProductDTO> lists = sqlSession.getMapper(ProductImpl.class).productList();
 
 		model.addAttribute("lists", lists);
-
+		
 		return "MultiBoard/Product";
 	}
 

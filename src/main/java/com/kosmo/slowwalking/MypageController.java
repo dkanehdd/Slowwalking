@@ -374,8 +374,14 @@ public class MypageController {
 		
 		model.addAttribute("user_flag", user_flag);
 		
-		DiaryDTO dto = sqlSession.getMapper(MypageImpl.class).diaryView(its_idx);
+		DiaryDTO dto = new DiaryDTO();
 		
+		if(user_flag.equals("sitter")) {
+			dto = sqlSession.getMapper(MypageImpl.class).parDiaryView(its_idx);
+		}
+		else {
+			dto = sqlSession.getMapper(MypageImpl.class).sitDiaryView(its_idx);
+		}
 		model.addAttribute("dto", dto);
 		
 		return "Mypage/diaryView";
@@ -406,9 +412,9 @@ public class MypageController {
 		
 		
 		if("parents".equals(user_flag)) {
-			diaryList = sqlSession.getMapper(MypageImpl.class).parDiary(user_id, idx);
+			diaryList = sqlSession.getMapper(MypageImpl.class).parDiary(user_id);
 		}else if("sitter".equals(user_flag)) {
-			diaryList = sqlSession.getMapper(MypageImpl.class).sitDiary(user_id, idx);
+			diaryList = sqlSession.getMapper(MypageImpl.class).sitDiary(user_id);
 		}
 		
 		
@@ -600,6 +606,7 @@ public class MypageController {
 		System.out.println("idx:"+idx);
 		
 		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
+		sqlSession.getMapper(MypageImpl.class).setComplete(idx);
 		
 		model.addAttribute("dto", dto);
 		

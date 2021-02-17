@@ -73,9 +73,11 @@ div .text {
 </style>
 </head>
 <body>
-	<div class="contatiner ml-3 mt-3">
-		<h3>프리미엄권</h3>
-	</div>
+<div class="ml-2">
+<div class="section_title">
+	<h3 class="mb-5"><strong>My Membership</strong> 프리미엄권</h3>
+</div>
+</div>
 	<div class="container ml-4 mt-5">
 		<table class="table">
 			<colgroup>
@@ -87,8 +89,8 @@ div .text {
 					<td><img class="ticket" src="../resources/images/primium.png" /></td>
 					<td>남은날짜 <span>${dto.premium}</span> 일
 						<div class="text mt-2">· 프리미엄권을 구매하면 시터목록에 상단에 위치하게 됩니다.</div>
-						<div class="text">· 이미 구매한 티켓은 취소가 불가능합니다.</div>
-						<div class="text">· 남은 날짜가 있을경우 추가 구매가 불가합니다.</div>
+						<div class="text">· 이미 구매한 이용권은 환불이 불가능합니다.</div>
+						<div class="text">· 잔여 이용 기간이 있을 시 추가 구매가 불가합니다.</div>
 					</td>
 				</tr>
 			</tbody>
