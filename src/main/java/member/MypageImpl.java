@@ -28,6 +28,7 @@ public interface MypageImpl {
 	public ArrayList<InterviewDTO> andparInterList(String id);
 	public ArrayList<InterviewDTO> andsitDiaryList(String id);
 	
+	
 	public int countParentsInterview(String id);
 	public int countSitterInterview(String id);
 	//수락
@@ -38,7 +39,7 @@ public interface MypageImpl {
 	public ArrayList<DiaryDTO> sitDiary(String id, int idx);
 	public ArrayList<DiaryDTO> parDiary(String id, int idx);
 	public DiaryDTO diaryView(int its_idx);
-
+	public ArrayList<DiaryDTO> anddiaryList(String id);
 	//후기
 	public int writeComment(int idx, String send_id, String rece_id, String content, int starrate);
 	public ArrayList<DiaryDTO> receivedComment(String id, int start, int end);

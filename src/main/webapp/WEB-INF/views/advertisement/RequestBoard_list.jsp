@@ -27,6 +27,18 @@
 }
 </style>
 <title>느린걸음</title>
+<script type="text/javascript">
+$(function() {
+	$('table').slice(0, 3).show();
+	$('#load').click(function(e) {
+		e.preventDefault();
+		if($('table:hidden').length==0){
+			alert("더이상 게시물이 없습니다.");
+		}
+		$('table:hidden').slice(0, 3).show();
+	});
+});
+</script>
 </head> 
 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
@@ -35,8 +47,6 @@
 </c:if>
 <section class="section-padding" style="background-color: #eee;">
 	<div class="container reqDiv">
-		<!-- Side메뉴 -->
-		<%@ include file="../include/side.jsp"%>
 		<div class="section_title">
 			<h1 class="mb-5"><strong>REQUEST</strong> 의뢰리스트</h1>
 		</div>
@@ -187,6 +197,7 @@
 						</tbody>
 					</table>
 				</c:forEach><!-- table(결과) -->
+					<div class="text-center"><button class="btn btn-danger" id="load">더보기</button></div>
 			</div><!-- #back -->
 		</div><!-- RequestBoardList -->
 	</div><!-- reqDiv -->
@@ -195,17 +206,5 @@
 	<!-- Footer메뉴 -->
 	<%@ include file="../include/footer.jsp"%>
 </c:if>
-<script type="text/javascript">
-$(function() {
-	$('table').slice(0, 3).show();
-	$('#load').click(function(e) {
-		e.preventDefault();
-		if($('table:none').length==0){
-			alert("더이상 게시물이 없습니다.");
-		}
-		$('table:hidden').slice(0, 3).show();
-	});
-});
-</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기</title>
+<title>임시비밀번호 발급</title>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
 <body>
@@ -18,7 +18,7 @@
 				<h1 class="mb-5"><strong>Temporary Password</strong><br />임시 비밀번호 발급</h1>
 			</div>
 				<div>
-					<input class='w50p' type="text" id="id" name="id" value="" 
+					<input class='w50p' type="text" id="id_" name="id" value="" 
 					placeholder="아이디를 입력해주세요" title="아이디를 입력해주세요" required="required" autofocus>
 					<input class='w50p' type="text" id="email" name="email" value=""
 					pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required="required" title="형식 : OOOO@OOOO.OOO"
@@ -27,7 +27,7 @@
 				</div>
 				<div class="btnBelow">
 					<button type="button" class="btn btn-secondary btn-cc" onclick="location.href = '../main/main';">취소</button>
-					<button type="button" id='tempPwBtn' class="btn btn-danger" style="width:200px; margin-left:5px;">임시 비밀번호 발급</button>
+					<button type="button" id='tempPwBtn' class="btn btn-danger btn400w" style="width:200px; margin-left:5px;">임시 비밀번호 발급</button>
 				</div>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 				url: "../member/tempPwAction",
 				type: "GET",
 				data: {
-					id : $('#id').val(),
+					id : $('#id_').val(),
 					email : $('#email').val()
 				},
 				dataType: "json",
@@ -72,8 +72,6 @@
 			});
 		});
 	});
-	
-	
 	</script>
 </body>
 </html>

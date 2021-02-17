@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Product.jsp</title>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <style type="text/css">
 .num {
@@ -46,8 +47,6 @@ function on_pay(pay_flag) {
 	
 	f.submit();
 }
-
-
 $(function(){
 	$('#panel').hide();
 	//문서의 로드가 끝난후 내용부분을 숨김처리
@@ -69,8 +68,6 @@ $(function(){
 // 		$('#panel').toggle('fast');
 // 	});	
 });
-
-
 </script>
 
 <script>
@@ -90,7 +87,7 @@ $(function(){
 			}		
 			var result2 = parseInt(num3) - parseInt(num2);
 			if(result2 <0){
-				alert("포인트가 금액 이상 일수는 없습니다");
+				alert("포인트가 부족합니다");
 				return;
 			}
 			document.getElementById("point").innerHTML=result2;
@@ -107,9 +104,7 @@ $(function(){
 	<%@ include file="../include/top.jsp"%>
 	<section class="section-padding" style="background-color: #eee;">
 		<div class="container">
-			<!-- Side메뉴 -->
-			<%@ include file="../include/side.jsp"%>
-			<div class="section_title subPimgBg">
+			<div class="section_title subPimgBg marketImg">
 				<h1 class="mb-5">
 					<strong>PASSES</strong> 이용권구매
 				</h1>
@@ -120,9 +115,10 @@ $(function(){
 						<tr>
 							<td>
 								<div class="card">
-									<div class="card-body">${row.product_name }
-										${row.price }
-										<button type="button" class="btn btn-primary"
+									<div class="card-body d-flex justify-content-between">
+										<h1><strong>${row.product_name }</strong></h1>
+										&nbsp;&nbsp;&nbsp;<h2 class="pt-2">${row.price }원</h2>
+										<button type="button" class="btn btn-info ml-auto"
 									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
 									</div>
 								</div>
@@ -135,7 +131,8 @@ $(function(){
 		<div id="modal_layer" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content pl-5 pt-5" id="modal-content">
-					<div id="modal_layer_html">
+					<div id="modal_layer_html"
+						style="font-family: 'NanumSquare', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;">
 						<script type="text/javascript">
 						</script>
 						<form name="order_form" method="post" action="../multiBoard/order?${_csrf.parameterName}=${_csrf.token}">
@@ -190,8 +187,8 @@ $(function(){
 									</li>
 								</ul>
 							</div>
-							<input type="hidden" id="price" name="price" value="" size="5">
-							<input type="hidden" name="flag" value="" size="5">
+							<input type="hidden" id="price" name="price" value="" siez="5">
+							<input type="hidden" name="flag" value="" siez="5">
 							<input type="hidden" name="idx" id="idx" value="" size="5"> 
 							<div>
 							

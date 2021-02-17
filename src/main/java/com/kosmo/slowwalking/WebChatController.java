@@ -37,7 +37,6 @@ public class WebChatController {
       
       String room = req.getParameter("room");
       List<ChattingDTO> result = sqlSession.getMapper(MultiBoardImpl.class).chatlist(room);
-      
       model.addAttribute("result",result);
       return "chat/ChatUI";
    }

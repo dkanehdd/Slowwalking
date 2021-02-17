@@ -31,9 +31,10 @@ public class WebSocketChat {
    private static final List<Session> sessionList=new ArrayList<Session>();
    private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class); 
    private static final Map<String, String> roomlist = new HashMap<String, String>();
+
    public WebSocketChat() {
-      System.out.println("웹소켓(서버) 객체생성");
-   } 
+      System.out.println("WebSocketChat 웹소켓(서버) 객체생성");
+   }  
 
    
    @OnOpen 
@@ -43,6 +44,7 @@ public class WebSocketChat {
       try {
          final Basic basic=session.getBasicRemote();
          basic.sendText("대화방에 연결 되었습니다.");
+         logger.info("sendText complete"); 
       }
       catch (Exception e) { 
          System.out.println(e.getMessage());

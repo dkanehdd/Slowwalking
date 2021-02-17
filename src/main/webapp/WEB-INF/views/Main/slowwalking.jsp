@@ -7,7 +7,7 @@
 <!-- css, js 파일링크 등 묶음-->
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
-<body>
+<body style="user-select: none;">
 	<!-- Top메뉴 -->
 	<%@ include file="../include/top.jsp"%>
 
@@ -29,8 +29,6 @@
 	<!-- ABOUT -->
 	<section class="about section-padding pb-0" id="about">
 		<div class="container">
-			<!-- Side메뉴 -->
-			<%@ include file="../include/side.jsp"%>
 			<div class="row">
 				<div class="col-lg-7 mx-auto col-md-10 col-12">
 					<div class="about-info">

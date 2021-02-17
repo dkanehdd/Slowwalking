@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.databind.type.ArrayType;
 
 import advertisement.InterviewDTO;
+import advertisement.RequestBoardImpl;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MypageImpl;
@@ -333,6 +334,12 @@ public class MypageController {
 			map.put("message", "수락 상태가 변경되었습니다.");
 		}
 		
+		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).getAgree(idx);
+		System.out.println(dto.getSitter_agree()+"&&"+dto.getParents_agree());
+		if(dto.getSitter_agree().equals("T")&&dto.getParents_agree().equals("T")) {
+			int delete = sqlSession.getMapper(RequestBoardImpl.class).invisibleBoard(dto.getRequest_idx());
+			System.out.println("삭제됬나용?"+ delete);
+		}
 		
 		return map;
 	}
@@ -622,10 +629,9 @@ public class MypageController {
 		
 		
 		if(flag.equals("sitter")) {
-			int starrate = sqlSession.getMapper(MypageImpl.class).
-					getStarrate(parents_id);
-			int result = sqlSession.getMapper(MypageImpl.class).
-					writeComment(idx, sitter_id, parents_id, content, newrate);
+			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(parents_id);
+			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, sitter_id, parents_id, content, newrate);
+			System.out.println("원래별점:"+starrate);
 			
 			if(starrate==0) {
 				starrate = newrate;
@@ -633,22 +639,27 @@ public class MypageController {
 			else {
 				starrate = (newrate + starrate) / 2;
 			}
+			System.out.println("최종별점:"+starrate);
 			
 			//포인트 50점 지급, 별점 업데이트
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(parents_id, starrate);
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(sitter_id);
 			
+			System.out.println("success: "+success+", check: "+check);
+			
 		}
 		else {
 			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(sitter_id);
 			int result = sqlSession.getMapper(MypageImpl.class).writeComment(idx, parents_id, sitter_id, content, newrate);
+			System.out.println("원래별점:"+starrate);
 			
 			if(starrate==0) {
-				starrate = starrate;
+				starrate = newrate;
 			}
 			else {
 				starrate = (newrate + starrate) / 2;
 			}
+			System.err.println("최종별점:"+starrate);
 
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(sitter_id, starrate);
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(parents_id);
