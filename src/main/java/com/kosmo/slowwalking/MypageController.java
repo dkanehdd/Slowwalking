@@ -271,7 +271,6 @@ public class MypageController {
 			ArrayList<InterviewDTO> lists = sqlSession.getMapper(MypageImpl.class).parInterList(id);
 			model.addAttribute("lists", lists);
 		}
-		
 		return "Mypage/interviewList";
 	}
 	
@@ -378,9 +377,11 @@ public class MypageController {
 		
 		if(user_flag.equals("sitter")) {
 			dto = sqlSession.getMapper(MypageImpl.class).parDiaryView(its_idx);
+			System.out.println("dto:"+dto);
 		}
 		else {
 			dto = sqlSession.getMapper(MypageImpl.class).sitDiaryView(its_idx);
+			System.out.println("dto:"+dto);
 		}
 		model.addAttribute("dto", dto);
 		
@@ -606,7 +607,6 @@ public class MypageController {
 		System.out.println("idx:"+idx);
 		
 		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
-		sqlSession.getMapper(MypageImpl.class).setComplete(idx);
 		
 		model.addAttribute("dto", dto);
 		
@@ -654,6 +654,8 @@ public class MypageController {
 			
 			System.out.println("success: "+success+", check: "+check);
 			
+			sqlSession.getMapper(MypageImpl.class).sitStatus(idx);
+			
 		}
 		else {
 			int starrate = sqlSession.getMapper(MypageImpl.class).getStarrate(sitter_id);
@@ -670,9 +672,12 @@ public class MypageController {
 
 			int success = sqlSession.getMapper(MypageImpl.class).setStarrate(sitter_id, starrate);
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(parents_id);
+			
+			sqlSession.getMapper(MypageImpl.class).parStatus(idx);
 
 		}
-
+		
+		
 		return map;	
 	}
 	

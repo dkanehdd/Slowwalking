@@ -112,13 +112,27 @@
                      <td><button type="button" class="btn btn-danger" id="diary" onClick="javascript:openCalendar(${row.idx});">알림장</button></td>
                      <td>
                      <c:choose>
-                     	<c:when test="${row.complete eq 'F'}">
-                     		<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx});">후기</button>
+                     	<c:when test="${flag eq 'sitter' }">
+                     		<c:choose>
+                     			<c:when test="${row.sitter_status eq 'F' }">
+                     				<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx}); this.onclick='';">후기</button>
+                     			</c:when>
+                     			<c:otherwise>
+                     			<button type="button" class="btn btn-basic">완료</button>
+                     			</c:otherwise>
+                     		</c:choose>
                      	</c:when>
                      	<c:otherwise>
-                     		<button type="button" class="btn btn-basic">완료</button>
+                     		<c:choose>
+                     			<c:when test="${row.parents_status eq 'F' }">
+                     				<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx}); this.onclick='';">후기</button>
+                     			</c:when>
+                     			<c:otherwise>
+                     			<button type="button" class="btn btn-basic">완료</button>
+                     			</c:otherwise>
+                     		</c:choose>
                      	</c:otherwise>
-	                     </c:choose>
+                     </c:choose>
             		</td>
 					</c:otherwise>
                </c:choose>

@@ -22,7 +22,7 @@
 	<br/><br/>
 	<h3 class="text-center">${dto.title }</h3>  
 	<input type="hid-den" id="idx" value="${dto.idx}"/>
-	<input type="hid-den" id="id" value="${dto.id}" />
+	<input type="hid-den" id="parents_id" value="${dto.id}" />
 	<input type="hid-den" id="request_time" value="${dto.request_time}" />
 	<hr style="border: solid 3px #DBDBDB ">
 	<h4>${dto.children_name }</smail>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<smail>no.${dto.idx }</smail>
@@ -133,7 +133,7 @@ $(function(){
 			type : "GET",
 			data : { 
 				idx : $('#idx').val(),
-				id : $('#id').val(),
+				id : $('#parents_id').val(),
 				request_time : $('#request_time').val()
 			},
 			dataType : "json", 
