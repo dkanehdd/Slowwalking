@@ -52,7 +52,8 @@ public interface MypageImpl {
 	public int getStarrate(String id);
 	public int getPoint(String id);
 	public ArrayList<DiaryDTO> CommentList(String id); 
-	public int setComplete(int idx);
+	public int sitStatus(int idx);
+	public int parStatus(int idx);
 	//이용권
 	public ArrayList<OrderDTO> purchaseList(String id);
 	//메인

@@ -7,7 +7,8 @@ public class InterviewDTO {
 	private String request_time;
 	private String parents_agree;
 	private String sitter_agree;
-	private String complete;
+	private String parents_status;
+	private String sitter_status;
 	private int request_idx;
 
 	
@@ -16,11 +17,18 @@ public class InterviewDTO {
 	private String sitter_name;
 	
 	
-	public String getComplete() {
-		return complete;
+	
+	public String getParents_status() {
+		return parents_status;
 	}
-	public void setComplete(String complete) {
-		this.complete = complete;
+	public void setParents_status(String parents_status) {
+		this.parents_status = parents_status;
+	}
+	public String getSitter_status() {
+		return sitter_status;
+	}
+	public void setSitter_status(String sitter_status) {
+		this.sitter_status = sitter_status;
 	}
 	public String getParents_name() {
 		return parents_name;
