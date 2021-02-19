@@ -32,7 +32,7 @@
 		-webkit-font-smoothing: antialiased;
 	}
 	a{
-		color: #333;
+		color:#666;
 	}
 	a:hover{
 		text-decoration: none;

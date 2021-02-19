@@ -777,6 +777,7 @@ ol, ul {
 }
 .form ul li::after{
 	content:" |";
+	color:#666;
 	
 }
 .form ul li.non-af::after{
@@ -800,6 +801,11 @@ ol, ul {
 	font-size:100px;
 	text-align:center;
 }
+.labelInpAlign{
+	vertical-align:middle;
+}
+
+
 /*****FAQ 아코디언 hjkosmo******/
 /*****NOTICE 공지게시판 hjkosmo******/
 

@@ -22,7 +22,6 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <title>Login.jsp</title>
-
 </head>
 <body>
 	<!-- Top메뉴 -->
@@ -49,9 +48,9 @@
 						<input type="text" class="form-control" id="id" name="id" value="" placeholder="아이디" /> 
 						<input type="password" class="form-control" name="pass" value="" placeholder="비밀번호"/>
 						<button type="submit" class="btn btn-danger">로그인</button><br>
-						<div class="form-check">
+						<div class="form-check labelInpAlign">
 							<input type="checkbox" id="idSave" name="idSave" class="clear form-check-input"/>
-							<label for="idSave" class="form-check-label">아이디 저장</label>
+							<label for="idSave" class="form-check-label" style="position: relative; top:-2.5px;	">아이디 저장</label>
 						</div>
 					<ul>
 						<li><a href="../member/findid" id="findId" name="findId" >아이디 찾기</a></li>
