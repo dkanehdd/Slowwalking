@@ -76,21 +76,28 @@
 	<select id="requestSearch" parameterType="advertisement.ParameterDTO" 
 		resultType="advertisement.RequestBoardDTO">
 		SELECT * FROM requestBoard
-			WHERE request_date = #{request_time} or request_date LIKE '%'||#{consultation}||'%' 
-				AND regular_short LIKE '%'||#{regular_short}||'%' AND title LIKE '%'||#{title}||'%'
-				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
+			WHERE advertise = 'on'
+		<if test='regular_short != null and !(regular_short eq " ".toString())'>
+			AND regular_short = #{regular_short}
+		</if>
+		<if test='title != null and !(title eq "".toString())'>
+			AND title LIKE '%'||#{title}||'%'
+		</if>
+		<if test='region != null and !(region eq "".toString())'>
+			AND region = #{region}
+		</if>
+		<if test='age != null and !(age eq "".toString())'>
+			AND age = #{age}
+		</if>
+		<if test='request_time != null and !(request_time eq "".toString())'>
+			AND request_date = #{request_time} or request_date LIKE '%'||#{consultation}||'%' 
+		</if>
+		
 	</select>
 	<!-- 형님 위에 쿼리가 에러가 나는겁니다! 오키 ㅋㅋㅋㅋ  or차이긴 한데... 아니 형님 왜 ''인데 검색이 되죠? ''이니까 
 	????? ㅋㅋㅋㅋㅋㅋㅋ || 이거 쓰면 ''이여도 검색되지
 	date는 ||이거 없는뎅아  이해해씁니당 or때문에~ 안되네요 ㅠㅠ 되는겁니다!!! 날짜만 선택하고 검색하는거??? 다 할수 있어요! 하나만 해도 되고 두개만 해도 되고
 	3개 해되고 다해도 되요!그걸 쿼리문을 다 만든거야????? 넹ㅋㅋㅋㅋㅋㅋㅋ 대단하네 그거 수업시간에 했었지 않아?? 그랬어요? 몰라요!-->
-	
-	<select id="noTimeRequestSearch" parameterType="advertisement.ParameterDTO" 
-		resultType="advertisement.RequestBoardDTO">
-		SELECT * FROM requestBoard 
-			WHERE regular_short LIKE '%'||#{regular_short}||'%' AND title LIKE '%'||#{title}||'%'
-				AND region LIKE '%'||#{region}||'%' AND age LIKE '%'||#{age}||'%'
-	</select>
 	
 	<update id="invisibleBoard">
 		UPDATE requestBoard SET advertise='off' WHERE idx=#{0}
