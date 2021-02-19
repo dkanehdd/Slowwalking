@@ -113,7 +113,7 @@
                      <td>
                      <c:choose>
                      	<c:when test="${row.complete eq 'F'}">
-                     		<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx});">후기</button>
+                     		<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx});this.onclick='';">후기</button>
                      	</c:when>
                      	<c:otherwise>
                      		<button type="button" class="btn btn-basic">완료</button>

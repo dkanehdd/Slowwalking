@@ -213,8 +213,8 @@ public class MypageController {
 					sqlSession.getMapper(MypageImpl.class).updateCount(user_id);
 					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
 					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(parentsBoard_id);
-					//나중에 풀어주세요~
-					//certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
+					
+					certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
 					System.out.println("result:"+result);
 					
 					map.put("message", "success");
@@ -229,8 +229,8 @@ public class MypageController {
 					sqlSession.getMapper(MypageImpl.class).updateCount(user_id);
 					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(sitterBoard_id);
 					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
-					//나중에 풀어주세요~
-					//certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
+					
+					certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
 					
 					System.out.println("result:"+result);
 					map.put("message", "success");
@@ -606,7 +606,7 @@ public class MypageController {
 		System.out.println("idx:"+idx);
 		
 		InterviewDTO dto = sqlSession.getMapper(MypageImpl.class).interList(idx);
-		sqlSession.getMapper(MypageImpl.class).setComplete(idx);
+		
 		
 		model.addAttribute("dto", dto);
 		
@@ -672,7 +672,7 @@ public class MypageController {
 			int check = sqlSession.getMapper(MypageImpl.class).getPoint(parents_id);
 
 		}
-
+		sqlSession.getMapper(MypageImpl.class).setComplete(idx);
 		return map;	
 	}
 	

@@ -25,6 +25,7 @@ function changeModal(product_idx) {
 		dataType : "json", //콜백데이터의 형식
 		success : function(d) { //콜백메소드
 			$('#price').html(d.dto.price);
+			$('#totalprice').val(d.dto.price);
 			$('#idx').val(d.dto.idx)
 		},
 		error : function(e) {
@@ -35,6 +36,7 @@ function changeModal(product_idx) {
 function on_pay(pay_flag) {
 	var f = document.order_form;
 	f.flag.value = pay_flag;
+	
 	f.submit();
 }
 </script>
@@ -156,6 +158,7 @@ div .text {
 							</div>
 							<input type="hid`den" name="idx" id="idx" value=""> 
 							<input type="hid`den" name="flag"  value=""> 
+							<input type="hid den" name="price" id="totalprice" value="" />
 						</form>
 					</div>
 				</div>
