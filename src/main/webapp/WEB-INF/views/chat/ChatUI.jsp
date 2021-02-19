@@ -21,8 +21,7 @@ var webSocket;
 var logWindow;
 var rece_id;
 var room;
-window.onload = function(){
-	console.log('chatUI.jsp 가 실행됨')
+window.onload = function(){		
 	messageWindow = document.getElementById("messageWindow");	
 	messageWindow.scrollTop = messageWindow.scrollHeight;	
 	inputMessage = document.getElementById('inputMessage');
@@ -231,7 +230,9 @@ function nowTime(){
 	    <div class="clear"></div>
 	</div>	
 </div>
-<!-- <div id="logWindow" class="border border-danger" style="height:130px; overflow:auto;"></div>  -->
+<!-- <div id="logWindow" class="border border-danger" style="height:130px; overflow:auto;"></div> -->
+<input type="hidden" id="logWindow" class="border border-danger" style="height:130px; overflow:auto;">
+
 
 </body>
 </html>
