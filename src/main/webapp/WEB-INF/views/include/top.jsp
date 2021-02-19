@@ -60,10 +60,10 @@ $(document).ready(function(){
                   		&nbsp;관리자 페이지
                   	</c:when>
                   	<c:otherwise>
-                  		&nbsp;${sessionScope.user_name }님의 마이페이지
+                  		&nbsp;${sessionScope.user_name }님의 마이페이지<span id="alert"></span>
                   	</c:otherwise>
                   </c:choose>
-                  	</a><div id="alert"></div></li>
+                  	</a></li>
                   <li class="nav-item"><a href="../member/logout"
                   class="nav-link contact ml-2">로그아웃</a></li>
                </c:when>

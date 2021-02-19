@@ -19,8 +19,8 @@
 	     <property name="host" value="smtp.gmail.com" />
 	     <property name="port" value="587" />
 	     <property name="defaultEncoding" value="utf-8"/>
-	 <property name="username" value=""/><!-- 작동 확인//최종버전에서 이메일 및 비밀번호 입력예정 -->
-	 <property name="password" value=""/><!-- 작동 확인//최종버전에서 이메일 및 비밀번호 입력예정 -->
+	 <property name="username" value="slowwalking2021@gmail.com"/><!-- 작동 확인//최종버전에서 이메일 및 비밀번호 입력예정 -->
+	 <property name="password" value="2102162335Aa!"/><!-- 작동 확인//최종버전에서 이메일 및 비밀번호 입력예정 -->
 	 <!-- 보안연결 TLS과 관련된 설정 -->
      <property name="javaMailProperties">
 	    <props>

@@ -102,8 +102,17 @@
 			<div class="border mt-2 mb-2" data-aos="fade-up" data-aos-delay="400">
 				<div class="media">
 					<div class="media-left mr-3">
-						<img src="../resources/images/${row.image_path }"
+					<c:choose>
+						<c:when test="${not empty row.image_path }">
+							<img src="../resources/images/${row.image_path }"
 							class="media-object" style="width: 100px; height: 100px; border-radius: 70%">
+						</c:when>
+						<c:otherwise>
+							<img src="../resources/images/anonymous-avatar.jpg"
+							class="media-object" style="width: 100px; height: 100px; border-radius: 70%"/>
+						</c:otherwise>
+					</c:choose>
+						
 					</div>
 					<div class="media-body">
 						<div class="profileInfo">
