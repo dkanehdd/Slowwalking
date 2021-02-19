@@ -61,10 +61,14 @@
 </style>
 <script type="text/javascript">
 function popReceive(){
-	window.open("../mypage/commentList?mode=receive", "rece_comment", "width=500px, height=600px");
+	var popupX = (window.screen.width / 2) - (500 / 2);
+	var popupY= (window.screen.height / 2) - (600 / 2);
+	window.open("../mypage/commentList?mode=receive", "rece_comment", "width=500px, height=600px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 function popSend(){
-	window.open("../mypage/commentList?mode=send", "send_comment", "width=500px, height=600px");
+	var popupX = (window.screen.width / 2) - (500 / 2);
+	var popupY= (window.screen.height / 2) - (600 / 2);
+	window.open("../mypage/commentList?mode=send", "send_comment", "width=500px, height=600px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
 </html>

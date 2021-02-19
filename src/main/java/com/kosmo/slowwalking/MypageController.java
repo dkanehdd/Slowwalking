@@ -214,7 +214,7 @@ public class MypageController {
 					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
 					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(parentsBoard_id);
 					
-					certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
+					//certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
 					System.out.println("result:"+result);
 					
 					map.put("message", "success");
@@ -230,7 +230,7 @@ public class MypageController {
 					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(sitterBoard_id);
 					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
 					
-					certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
+					//certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
 					
 					System.out.println("result:"+result);
 					map.put("message", "success");

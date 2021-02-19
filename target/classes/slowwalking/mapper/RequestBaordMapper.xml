@@ -77,6 +77,9 @@
 		resultType="advertisement.RequestBoardDTO">
 		SELECT * FROM requestBoard
 			WHERE advertise = 'on'
+		<if test='request_time != null and !(request_time eq "".toString())'>
+			AND request_date = #{request_time} or request_date LIKE '%'||#{consultation}||'%' 
+		</if>
 		<if test='regular_short != null and !(regular_short eq " ".toString())'>
 			AND regular_short = #{regular_short}
 		</if>
@@ -89,9 +92,7 @@
 		<if test='age != null and !(age eq "".toString())'>
 			AND age = #{age}
 		</if>
-		<if test='request_time != null and !(request_time eq "".toString())'>
-			AND request_date = #{request_time} or request_date LIKE '%'||#{consultation}||'%' 
-		</if>
+		
 		
 	</select>
 	<!-- 형님 위에 쿼리가 에러가 나는겁니다! 오키 ㅋㅋㅋㅋ  or차이긴 한데... 아니 형님 왜 ''인데 검색이 되죠? ''이니까 

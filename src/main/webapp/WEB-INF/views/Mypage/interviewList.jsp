@@ -159,7 +159,7 @@ function openComment(idx_c){
 	var popupX = (window.screen.width / 2) - (500 / 2);
 	var popupY= (window.screen.height / 2) - (500 / 2);
    window.open("../mypage/openComment?idx="+idx_c, "후기", 
-   "width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no");
+   "width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 function popInfo(id){
 	var popupX = (window.screen.width / 2) - (300 / 2);
@@ -208,6 +208,7 @@ function acceptThis(idx_c){
          $('#agree_'+idx_c).val('T');
          $('#accept_'+idx_c).html('대기');
          alert(data.message);
+         location.reload();
       },
       error : function(){
          alert("다시 시도해 주세요.");
@@ -220,8 +221,9 @@ function chatbutton(rece_id, room){
 
    console.log(rece_id);
    var id = '${sessionScope.user_id}';
-   
-   window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=320px, height=470px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no");
+   var popupX = (window.screen.width / 2) - (320 / 2);
+	var popupY= (window.screen.height / 2) - (470 / 2);
+   window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=320px, height=470px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
 
