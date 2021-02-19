@@ -37,7 +37,7 @@
          <table class="table table-hover">
             <thead>
                <th>아이디</th>
-               <th>채팅</th>
+               <th>1:1채팅</th>
                <th>근무 시간</th>
                <th>내용</th>
                <th colspan="2">프로세스</th>
@@ -55,12 +55,12 @@
 							onclick="javascript:popInfo('${row.sitter_id}')"/></td>
 				</c:otherwise>
             </c:choose>
-               <c:choose>
+            <c:choose>
                <c:when test="${flag eq 'sitter'}">
-               <td><button class="btn btn-dark" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }">접속</button></td>
+               <td><button class="btn btn-success" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
                </c:when>
                <c:otherwise>
-               <td><button class="btn btn-dark" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }">접속</button></td>
+               <td><button class="btn btn-success" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
                </c:otherwise>
             </c:choose>
                <td>
@@ -112,13 +112,27 @@
                      <td><button type="button" class="btn btn-danger" id="diary" onClick="javascript:openCalendar(${row.idx});">알림장</button></td>
                      <td>
                      <c:choose>
-                     	<c:when test="${row.complete eq 'F'}">
-                     		<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx});this.onclick='';">후기</button>
+                     	<c:when test="${flag eq 'sitter' }">
+                     		<c:choose>
+                     			<c:when test="${row.sitter_status eq 'F' }">
+                     				<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx}); this.onclick='';">후기</button>
+                     			</c:when>
+                     			<c:otherwise>
+                     			<button type="button" class="btn btn-basic">완료</button>
+                     			</c:otherwise>
+                     		</c:choose>
                      	</c:when>
                      	<c:otherwise>
-                     		<button type="button" class="btn btn-basic">완료</button>
+                     		<c:choose>
+                     			<c:when test="${row.parents_status eq 'F' }">
+                     				<button type="button" class="btn btn-danger" onClick="javacript:openComment(${row.idx}); this.onclick='';">후기</button>
+                     			</c:when>
+                     			<c:otherwise>
+                     			<button type="button" class="btn btn-basic">완료</button>
+                     			</c:otherwise>
+                     		</c:choose>
                      	</c:otherwise>
-	                     </c:choose>
+                     </c:choose>
             		</td>
 					</c:otherwise>
                </c:choose>

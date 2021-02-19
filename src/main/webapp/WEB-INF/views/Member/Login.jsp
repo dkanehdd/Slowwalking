@@ -32,22 +32,25 @@
 			<c:url value="/loginAction" var="loginUrl" />
 			<form:form name="loginFrm" action="${loginUrl}" method="post">
 				<div class="loginContainer input-group mb-3" data-aos="fade-up" data-aos-delay="400">
-					<div class="form">
-						<div class="lc_top">
-							<p class="lct_img"></p>
+					<div class="form" style="padding: 60px 100px 100px 100px;">
+						<div class="lct_logo">
+							<i class="fa fa-slideshare" style="margin:0; padding:0;"></i>
+							<span style="color:var(--primary-color); font-size:20px; display:block; font-weight:700;">느린걸음</span>
+						</div>				
+						<div class="lc_top">							
 							<c:if test="${param.error != null }">
 								<p class="errTxt">아이디 또는 패스워드가 잘못되었습니다.</p>
 							</c:if>
 							<c:if test="${param.login != null }">
 								<p>로그아웃 하였습니다.</p>
 							</c:if>
-						</div>						
+						</div>		
 						<input type="text" class="form-control" id="id" name="id" value="" placeholder="아이디" /> 
 						<input type="password" class="form-control" name="pass" value="" placeholder="비밀번호"/>
 						<button type="submit" class="btn btn-danger">로그인</button><br>
-						<div class="form-check">
+						<div class="form-check labelInpAlign">
 							<input type="checkbox" id="idSave" name="idSave" class="clear form-check-input"/>
-							<label for="idSave" class="form-check-label">아이디 저장</label>
+							<label for="idSave" class="form-check-label" style="position: relative; top:-2.5px;	">아이디 저장</label>
 						</div>
 					<ul>
 						<li><a href="../member/findid" id="findId" name="findId" >아이디 찾기</a></li>

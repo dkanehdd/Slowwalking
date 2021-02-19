@@ -35,23 +35,14 @@ $(function(){
 	});
 });
 </script>
-<style>
-.box { position:relate;}
-.box img {width:200px; height:200px;}
-.in { position:absolute; top:10px; left:175px;}
-.in img {width:30px;}
-.list-group-item:hover {
-	cursor: pointer;
-	background-color: #ffce7f;
-}
-</style>
+
 </head>
 <body>
 <%@ include file="../include/top.jsp"%>
- <div class="container-fluid">
-    <div class="row mt-5 ml-5">
-      <div class="col-2">
-		<div class="box">
+<section class="section-padding" style="background-color: #eee;">
+ <div class="container mypage">
+      <div class="float-left pageSide"><!-- 왼쪽 -->
+		<div class="imgBox">
 			<c:choose>
 				<c:when test="${not empty dto.image_path }">
 					<img src="../resources/images/${dto.image_path }"/>
@@ -60,45 +51,39 @@ $(function(){
 					<img src="../resources/images/anonymous-avatar.jpg" style="width:200px;"/>
 				</c:otherwise>
 			</c:choose>
+	      	<div class="in"><!-- 사진변경 아이콘 -->
+				<img src="../resources/images/imgChange.png" id="image">
+			</div>
 		</div>
-		<div class="in">
-			<img src="../resources/images/photo-camera.png" id="image">
-		</div>
+		
 		<div class="bg-dark text-light" style="width:200px;">
           	&nbsp;${dto.name}&nbsp;<small>님</small>
 		</div>
-		<ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2" id="profile">
-          	회원정보수정
-       		</li>
-        </ul>
         <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2" id="writerequest">의뢰서 작성</li>
+         	<li class="list-group-item" id="profile">회원정보수정</li>
+         	<li class="list-group-item" id="writerequest">의뢰서 작성</li>
          	<li class="list-group-item" id="myrequest">내 의뢰서 보기</li>
           	<li class="list-group-item" id="interview">내 구인현황</li>
           	<li class="list-group-item" id="comment">후기관리</li>
-        </ul>
-        <ul class="list-group list-group-flush">
-         	<li class="list-group-item mt-2" id="membership">이용권</li>
+         	<li class="list-group-item" id="membership">이용권</li>
           	<li class="list-group-item"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</li>
         </ul>
-        <br/><br/><br/><br/>
       </div>
       
-      <div class="col-10">
-      <div id="innerPage" class="ml-3 mt-3">
+      <div class="float-right pageSideRight"><!-- 오른쪽 -->
+      	<div id="innerPage" class="w100">
         <h3>마이페이지</h3>
-
           <div class="container">
             <div class="row">
-              <div class="col-12">
+              <div class="">
                 </div>
               </div>
             </div>
           </div>
       </div>
-    </div>
+      <p class="clear"></p><!-- 상단에 쓰여진 float속성을 이 태그 이후로 적용되지 않게 해주는 class입니다 내용 없습니다. -->
 </div>
+</section>
 <%@ include file="../include/footer.jsp"%>
 </body>
 </html>
