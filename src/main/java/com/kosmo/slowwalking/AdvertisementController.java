@@ -50,22 +50,27 @@ public class AdvertisementController {
 		String search = parameterDTO.getSearch();
 		System.out.println("search : " + search);
 		System.out.println("parameterdto.request_time : " + parameterDTO.getRequest_time());
+		System.out.println("parameterdto.getTitle : " + parameterDTO.getTitle());
+		System.out.println("parameterdto.getRegion : " + parameterDTO.getRegion());
+		System.out.println("parameterdto.getRegular_short : " + parameterDTO.getRegular_short());
+		System.out.println("parameterdto.getAge : " + parameterDTO.getAge());
 		
 		if("search".equals(search)) {
 			
 			String age = parameterDTO.getAge();
 			
-			if(age.equals("상관없음")) {
+			if(age.equals("선호 연령대(무관)")) {
 				parameterDTO.setAge("");
 			}
 			
-			if("".equals(parameterDTO.getRequest_time())) {
-				System.out.println("request_time 파라미터 null인가요? : " + parameterDTO.getRequest_time());
-				lists = sqlSession.getMapper(RequestBoardImpl.class).noTimeRequestSearch(parameterDTO);
-			}else {
-				System.out.println("request_time 파라미터 null이 아닌가요?: " + parameterDTO.getRequest_time());
-				lists = sqlSession.getMapper(RequestBoardImpl.class).requestSearch(parameterDTO);
+			System.out.println("parameterDTO.getTitle : " + parameterDTO.getTitle());
+			
+			lists = sqlSession.getMapper(RequestBoardImpl.class).requestSearch(parameterDTO);
+		
+			for(RequestBoardDTO dto : lists) {
+				System.out.println("검색되어 나온 결과 : " + dto.getTitle());
 			}
+			
 			String list_flag=req.getParameter("list_flag");
 			
 			if(list_flag == null) {
@@ -136,18 +141,23 @@ public class AdvertisementController {
 
 		RequestBoardDTO requestBoarddto = sqlSession.getMapper(RequestBoardImpl.class).requestBoardView(index);
 		
+		System.out.println("requestBoarddto.getRegular_short() : " + requestBoarddto.getRegular_short() );
 		//단기, 정기를 한글로 변환
-		if (requestBoarddto.getRegular_short().equals("regular")) {
+		if (requestBoarddto.getRegular_short().equalsIgnoreCase("regular")) {
 			requestBoarddto.setRegular_short("정기적");
-		} else if (requestBoarddto.getRegular_short().equals("short")) {
+			System.out.println("requestBoarddto.getRegular_short() : " + requestBoarddto.getRegular_short() );
+		} else if (requestBoarddto.getRegular_short().equalsIgnoreCase("short")) {
 			requestBoarddto.setRegular_short("단기");
+			System.out.println("requestBoarddto.getRegular_short() : " + requestBoarddto.getRegular_short() );
 		}
 		
 		//장애 등급을 한글로 변환
-		if(requestBoarddto.getDisability_grade().equals("slight")) {
+		if(requestBoarddto.getDisability_grade().equalsIgnoreCase("slight")) {
 			requestBoarddto.setDisability_grade("경증");
-		}else if(requestBoarddto.getDisability_grade().equals("slight")) {
+			System.out.println("requestBoarddto.getRegular_short() : " + requestBoarddto.getDisability_grade() );
+		}else if(requestBoarddto.getDisability_grade().equalsIgnoreCase("serious")) {
 			requestBoarddto.setDisability_grade("중증");
+			System.out.println("requestBoarddto.getRegular_short() : " + requestBoarddto.getDisability_grade() );
 		}
 		
 		
@@ -304,9 +314,6 @@ public class AdvertisementController {
 			// 파일외에 폼값을 받음.
 			dto.setIdx(Integer.parseInt(req.getParameter("idx")));
 			dto.setId(req.getParameter("id"));
-			String title = req.getParameter("title");
-			title = " " + title;
-			dto.setTitle(title);
 			dto.setChildren_name(req.getParameter("children_name"));
 			
 			
@@ -358,11 +365,6 @@ public class AdvertisementController {
 			dto.setDisability_grade(req.getParameter("disability_grade"));
 			dto.setWarning(req.getParameter("warning"));
 			String age = req.getParameter("age");
-			age = " " + age;
-			dto.setAge(age);
-			String regular_short = req.getParameter("regular_short");
-			regular_short = " " + regular_short;
-			dto.setRegular_short(regular_short);
 			dto.setStart_work(req.getParameter("start_work"));
 			dto.setContent(req.getParameter("content"));
 			
@@ -483,18 +485,15 @@ public class AdvertisementController {
 			// 파일외에 폼값을 받음.
 			String id = req.getParameter("id");
 			String title = req.getParameter("title");
-			title = " " + title;
 			String children_name = req.getParameter("children_name");
 			String advertise = req.getParameter("advertise");
 			String age = req.getParameter("age");
-			age = " " + age;
 			String pay = req.getParameter("pay");
 			String region = req.getParameter("region");
 			String request_time = req.getParameter("request_time");
 			String disability_grade = req.getParameter("disability_grade");
 			String warning = req.getParameter("warning");
 			String regular_short = req.getParameter("regular_short");
-			regular_short = " " + regular_short;
 			String start_work = req.getParameter("start_work");
 			String content = req.getParameter("content");
 			

@@ -22,7 +22,7 @@ function checkform() {
 	var start_work = document.getElementsByName("start_work")[0];
 	var region = document.getElementsByName("region")[0];
 	console.log(region.value);
-	
+	 
 	var result = true;
 	
 	if(title.value == ""){
