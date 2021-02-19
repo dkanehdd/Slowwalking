@@ -46,7 +46,7 @@
 			</c:otherwise>
 		</c:choose>
 		<div class="btnBelow">
-			<button type="button" onclick="history.back()" class="btn btn-secondary btn-cc">취소하기</button>
+			<button type="button" onclick="location.href='../member/mypage'" class="btn btn-secondary btn-cc">취소하기</button>
 			<button type="submit" class="btn btn-danger btn400w" style="background-color:var(--primary-color)">완료하기</button>
 		</div>
 	</form:form>
