@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,7 +198,7 @@ $(function() {
 										</span>
 										<span class="float-right" 
 										style="width: 15%; font-size: 14px; text-align:right;">
-										희망시급 : ${row.pay }
+										희망시급 : <fmt:formatNumber value="${row.pay }" type="number" />원
 										<br />ID: ${row.id }</span>
 										<span class="clear"></span>
 									</a>									
