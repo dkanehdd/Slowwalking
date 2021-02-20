@@ -99,23 +99,23 @@
 		</div>
 		<!-- 시터 리스트 -->
 		<c:forEach items="${lists }" var="row">
-			<div class="container-1 border p-3 mb-2" data-aos="fade-up" data-aos-delay="400" style="background-color: #fff;">
+			<div class="myPageBg p-3 mb-2" data-aos="fade-up" data-aos-delay="400" style="background-color: #fff;">
 				<div class="media">
 					<div class="media-left ml-4 mr-5">
 					<c:choose>
 						<c:when test="${not empty row.image_path }">
 							<img src="../resources/images/${row.image_path }"
-							class="media-object mr-3" style="width: 100px; height: 100px; border-radius: 70%">
+							class="media-object rounded-circle" style="width:100px; height:100px;"/>
 						</c:when>
 						<c:otherwise>
 							<img src="../resources/images/anonymous-avatar.jpg"
-							class="media-object" style="width: 100px; height: 100px; border-radius: 70%"/>
+							class="media-object rounded-circle" style="width:100px; height:100px;"/>
 						</c:otherwise>
 					</c:choose>
 						
 					</div>
 					<div class="media-body">
-						<div class="profileInfo">
+						<div class="profileInfo rightcontent">
 							<div class="contentRow"
 								style="justify-content: space-between; margin-bottom: -2px;">
 								<div class="contentRow">

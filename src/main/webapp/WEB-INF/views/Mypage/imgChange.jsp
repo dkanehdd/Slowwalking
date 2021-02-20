@@ -19,7 +19,7 @@
 	<h3 class="mb-5"><strong>Profile Image</strong> 이미지 변경하기</h3>
 </div>
 </div>
-<div class="container mypageCont">
+<div class="container myPageBg"  data-aos="fade-up" data-aos-delay="400">
 	<form:form action="../mypage/imgChange?${_csrf.parameterName}=${_csrf.token}" name="fileFrm" method="post" 
                enctype="multipart/form-data" onsubmit="return checkImg();">
 		<input type="hidden"  name="id"  value="${user_id }">
