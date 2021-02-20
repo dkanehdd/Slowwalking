@@ -198,7 +198,23 @@ $(function() {
 										<span class="float-right" 
 										style="width: 15%; font-size: 14px; text-align:right;">
 										희망시급 : ${row.pay }
-										<br />ID: ${row.id }</span>
+										<br />ID: ${row.id }<br />
+											<c:choose>
+												<c:when test="${row.starrate eq '0' }">
+												</c:when>
+												<c:otherwise>
+													<c:set var="x" value="${row.starrate }"/>
+													<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
+													<c:forEach begin="1" end="${i}" step="1">
+														<img src="../resources/images/star.png" style="width:15px;">
+													</c:forEach>
+													<c:if test="${ i ne 5 }"></c:if>
+														<c:forEach begin="1" end="${5-i }" step="1">
+															<img src="../resources/images/b_star.png" style="width:15px;">
+														</c:forEach>
+												</c:otherwise>
+											</c:choose>
+											</span>
 										<span class="clear"></span>
 									</a>									
 								</td>
