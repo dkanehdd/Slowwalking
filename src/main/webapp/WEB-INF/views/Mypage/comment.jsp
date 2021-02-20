@@ -11,19 +11,47 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+	.myrate{margin: 25px auto; text-align:center;}
+	.info{text-align:center;}
+	.info i{color: var(--primary-color); font-size: 21px;}
+	.firstTxt {font-size:20px; font-weight:700;}
+	.secTxt {color:#777; font-size:14px;}
+	.rateTxt {font-size:30px; color: var(--first-color);}
+	.buttons {text-align:center;}
+	.buttons button:hover{
+		box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+		transition: all 0.3s ease 0s 
+	}
+	.btn_image1{
+		width:248px;
+		height:308px;
+		border-radius:;
+		border:none;
+		background-image:url("../resources/images/receive_comment.png");
+		box-size: content-box;
+	}
+	.btn_image2{
+		width:248px;
+		height:308px;
+		background-image:url("../resources/images/send_comment.png");
+		box-size: content-box;
+	}
+</style>
 </head>
 <body>
-<div class="ml-2">
-<div class="section_title">
-	<h3 class="mb-5"><strong>My Comment</strong> 나의 후기</h3>
-</div>
-</div>
-<div class="container ml-3 mt-5">
-	<div class="row info">
-		<div class="firstTxt">당신의 별점을 확인하세요</div>
-		<div class="secTxt">나의 별점은 후기에서 작성되며
-		<br/>후기 내용은 아래 버튼을 통해 확인하실 수 있습니다.</div>
+<div class="ml-2 myComment">
+	<div class="section_title">
+		<h3 class="mb-5"><strong>My Comment</strong> 나의 후기</h3>
 	</div>
+	</div>
+	<div class="container mt-5 myPageBg"  data-aos="fade-up" data-aos-delay="400">
+		<div class="info">
+			<i class="fa fa-star mb-3" aria-hidden="true"></i>
+			<div class="firstTxt">당신의 별점을 확인하세요</div>
+			<div class="secTxt">나의 별점은 후기에서 작성되며
+			<br/>후기 내용은 아래 버튼을 통해 확인하실 수 있습니다.</div>
+		</div>
 	<div class="row">
 		<div class="myrate">
 			<c:choose>
@@ -46,29 +74,21 @@
 		</div>
 	</div>
 	<div class="buttons mb-5">
-		<button class="btn btn_image" onClick="popReceive();"><img src="../resources/images/receive_comment.png"></button>
-		<button class="btn btn_image" onClick="popSend();"><img src="../resources/images/send_comment.png"></button>
+		<button class="btn btn_image1 mr-2" onClick="popReceive();"></button>
+		<button class="btn btn_image2" onClick="popSend();"></button>
 	</div>
 </div>
-</body>
-<style>
-.myrate{margin: 25px auto; text-align:center;}
-.info{background-color: #3C5059; width:530px; height:100px; margin:0 auto; padding:20px; border-radius:10px;}
-.firstTxt {color: white; font-size:20px; font-weight:bold; width:250px;}
-.secTxt {color:#E6EAEE; font-size:12px;}
-.rateTxt {font-size:30px; font-weight:bold;}
-.buttons {text-align:center;}
-</style>
 <script type="text/javascript">
-function popReceive(){
-	var popupX = (window.screen.width / 2) - (500 / 2);
-	var popupY= (window.screen.height / 2) - (600 / 2);
-	window.open("../mypage/commentList?mode=receive", "rece_comment", "width=500px, height=600px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
-}
-function popSend(){
-	var popupX = (window.screen.width / 2) - (500 / 2);
-	var popupY= (window.screen.height / 2) - (600 / 2);
-	window.open("../mypage/commentList?mode=send", "send_comment", "width=500px, height=600px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
-}
+	function popReceive(){
+		var popupX = (window.screen.width / 2) - (500 / 2);
+		var popupY= (window.screen.height / 2) - (600 / 2);
+		window.open("../mypage/commentList?mode=receive", "rece_comment", "width=500px, height=600px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+	}
+	function popSend(){
+		var popupX = (window.screen.width / 2) - (500 / 2);
+		var popupY= (window.screen.height / 2) - (600 / 2);
+		window.open("../mypage/commentList?mode=send", "send_comment", "width=500px, height=600px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+	}
 </script>
+</body>
 </html>

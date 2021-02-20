@@ -49,29 +49,38 @@ $('#submit').on("click", function() {
 });
 
 </script>
+<style type="text/css">
+.proEdit input{
+	width: 170px !important;
+}
+</style>
 </head>
 <body>
 <div class="ml-2">
 <div class="section_title">
-	<h3 class="mb-5"><strong>My Profile</strong> 회원정보수정</h1>
+	<h3 class="mb-5"><strong>My Profile</strong> 회원정보수정</h3>
 </div>
 </div>
-<div class="container mt-5">
+<div class="container mt-5 proEdit"  data-aos="fade-up" data-aos-delay="400">
 	<input type="hidden" name="id" id="id" value="${user_id }" />
 	<input type="hidden" id="password" value="${dto.pw }" />
 	<table class="table form joinF">
+	<colgroup>
+		<col width = "20%">		
+		<col width = "*">		
+	</colgroup>
 	<tbody>
 		<tr>
 			<th>이름</th>
 			<td><input type="text" id="${dto.name }" value="${dto.name }" readonly/></td>
 		</tr>
 		<tr>
-			<th>현재 비밀번호</td>
+			<th>현재 비밀번호</th>
 			<td><input type="password" name="oriPw" id="oriPw"/></td>
 		</tr>
 		<tr>
 			<th>새 비밀번호</th>
-			<td><input type="password" name="pw" id="pw" onblur="checkPw(this.value);" >&nbsp;&nbsp;<span id="pw1">* 4자 이상 12자 이내의 영문/숫자/특수문자 조합</span></td>
+			<td><input type="password" name="pw" id="pw" onblur="checkPw(this.value);">&nbsp;&nbsp;<span id="pw1">* 4자 이상 12자 이내의 영문/숫자/특수문자 조합</span></td>
 		</tr>
 		<tr>
 			<th>비밀번호 확인</th>

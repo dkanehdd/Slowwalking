@@ -12,29 +12,37 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 .container input {width:20px;}
+.intIco{
+	font-size: 16px; 
+	color: var(--primary-color);
+}
+.intIco:hover{
+	color: var(--secondary-color);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
 <div class="ml-2">
-<div class="section_title">
-   <c:choose>
-      <c:when test="${flag eq 'sitter' }">
-         <h3 class="mb-5"><strong>My Interview</strong> 구직현황</h3>
-         </div>
-      </c:when>
-      <c:otherwise>
-         <h3 class="mb-5"><strong>My Interview</strong> 구인현황</h3>
-      </c:otherwise>
-   </c:choose>
+	<div class="section_title">
+	   <c:choose>
+	      <c:when test="${flag eq 'sitter' }">
+	         <h3 class="mb-5"><strong>My Interview</strong> 구직현황</h3>
+	      </c:when>
+	      <c:otherwise>
+	         <h3 class="mb-5"><strong>My Interview</strong> 구인현황</h3>
+	      </c:otherwise>
+	   </c:choose>
+	</div>
 </div>
-</div>
-<div class="container mt-5">
+<div class="container mt-5"   data-aos="fade-up" data-aos-delay="400">
    <c:choose>
       <c:when test="${empty lists}">
          <div>등록된 인터뷰가 없습니다.</div>
       </c:when>
       <c:otherwise>
-         <table class="table table-hover">
+         <table class="table form joinF">
             <thead>
                <th>아이디</th>
                <th>근무 시간</th>
@@ -46,22 +54,18 @@
             <tr id="box_${row.idx}">      
             <c:choose>
                <c:when test="${flag eq 'sitter'}">
-               		<td>${row.parents_id} <img src="../resources/images/phone.png" class="media-object rounded-circle" 
-							onclick="javascript:popInfo('${row.parents_id}')"/>
+               		<td>${row.parents_id} <i class="fa fa-phone-square intIco" aria-hidden="true" onclick="javascript:popInfo('${row.parents_id}')"></i>
                 </c:when>
                 <c:otherwise>
-						<td id="sitter_id">${row.sitter_id} <img src="../resources/images/phone.png" class="media-object rounded-circle" 
-							onclick="javascript:popInfo('${row.sitter_id}')"/>
+						<td id="sitter_id">${row.sitter_id} <i class="fa fa-phone-square intIco" aria-hidden="true" onclick="javascript:popInfo('${row.sitter_id}')"></i>
 				</c:otherwise>
             </c:choose>
             <c:choose>
                <c:when test="${flag eq 'sitter'}">
-               	<img src="../resources/images/chat-icon.png" class="media-object rounded-circle" style="width:26px;" 
-               		onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"/>
+               	<i class="fa fa-comments intIco" aria-hidden="true" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"></i>
                </c:when>
                <c:otherwise>
-               	<img src="../resources/images/chat-icon.png" class="media-object rounded-circle" style="width:26px;" 
-               		onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"/>
+               	<i class="fa fa-comments intIco" aria-hidden="true" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"></i>
                </c:otherwise>
             </c:choose>
             	</td>
@@ -82,7 +86,7 @@
                               <button type="button" class="btn btn-sm btn-basic">받은 요청</button>
                            </c:when>
                            <c:otherwise>
-                              <button type="button" class="btn btn-secondary" onClick="parentsView(${row.request_idx});">자세히</button>
+                               <button type="button" class="btn btn-secondary" onClick="parentsView('${row.request_idx}', '${row.parents_id}');">자세히</button>
                            </c:otherwise>
                         </c:choose>
                      </c:when>
@@ -147,8 +151,8 @@
 </div>
 </body>
 <script type="text/javascript">
-function parentsView(idx){
-   location.href="../advertisement/requestBoard_view?idx="+idx;
+function parentsView(idx, id){
+   location.href="../advertisement/requestBoard_view?list_flag=&idx="+idx+"&id="+id;
 }
 
 function sitterView(id) {

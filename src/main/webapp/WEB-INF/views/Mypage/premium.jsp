@@ -41,33 +41,33 @@ function on_pay(pay_flag) {
 }
 </script>
 <style>
-table {
+.premium table {
 	border-bottom: 1px solid #DEE2E6;
 }
-th {
+.premium th {
 	font-size: 15px;
 }
-span {
+.premium span {
 	color: #FF7000;
 	font-size: 20px;
 	font-weight: bold;
 }
-div .text {
+.premium div .text {
 	text-align: left;
 	font-size: 12px;
 }
-.purchaseList {
+.premium .purchaseList {
 	font-weight: bold;
 }
-.ticket {
+.premium .ticket {
 	width: 100px;
 	background-color: #FFE6E2;
 	border-radius: 20px;
 }
-.conatiner {
+.premium .conatiner {
 	width: 20px;
 }
-.num {
+.premium .num {
     font-size: 49px;
     color: #DC5C05;
     font-weight: 900;
@@ -75,7 +75,7 @@ div .text {
 </style>
 </head>
 <body>
-<div class="ml-2">
+<div class="ml-2 premium">
 <div class="section_title">
 	<h3 class="mb-5"><strong>My Membership</strong> 프리미엄권</h3>
 </div>
@@ -156,9 +156,9 @@ div .text {
 									</div>
 								</div>
 							</div>
-							<input type="hid`den" name="idx" id="idx" value=""> 
-							<input type="hid`den" name="flag"  value=""> 
-							<input type="hid den" name="price" id="totalprice" value="" />
+							<input type="hidden" name="idx" id="idx" value=""> 
+							<input type="hidden" name="flag"  value=""> 
+							<input type="hidden" name="price" id="totalprice" value="" />
 						</form>
 					</div>
 				</div>
