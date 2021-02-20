@@ -91,7 +91,7 @@ function on_pay(pay_flag) {
 			</colgroup>
 			<tbody>
 				<tr>
-					<td><img class="ticket" src="../resources/images/primium.png" /></td>
+					<td><img class="ticket" src="../resources/images/primium.png" style="width: 100px; height: 100px;" /></td>
 					<td>남은날짜 <span>${dto.premium}</span> 일
 						<div class="text mt-2">· 프리미엄권을 구매하면 시터목록에 상단에 위치하게 됩니다.</div>
 						<div class="text">· 이미 구매한 이용권은 환불이 불가능합니다.</div>

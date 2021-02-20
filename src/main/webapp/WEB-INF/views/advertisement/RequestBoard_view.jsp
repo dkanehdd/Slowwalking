@@ -16,6 +16,7 @@
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
 <body>
+<%@ include file="../include/top.jsp"%>
 <section class="section-padding" style="background-color: #eee;">
 	<div class="container">
 		<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
