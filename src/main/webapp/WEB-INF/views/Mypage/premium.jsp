@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,9 @@ function changeModal(product_idx) {
 		},
 		dataType : "json", //콜백데이터의 형식
 		success : function(d) { //콜백메소드
-			$('#price').html(d.dto.price);
+			var price = String(d.dto.price);
+			price = price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			$('#price').html(price);
 			$('#totalprice').val(d.dto.price);
 			$('#idx').val(d.dto.idx)
 		},
@@ -109,7 +112,7 @@ function on_pay(pay_flag) {
 										<div class="card">
 											<div class="card-body d-flex justify-content-between">
 											<span class="display-4">${row.product_name }</span>
-											<span class="display-4">${row.price }원</span>
+											<span class="display-4"><fmt:formatNumber value="${row.price }" type="number" />원</span>
 												<button type="button" class="btn btn-primary"
 									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
 											</div>
