@@ -66,7 +66,7 @@
 									style="width: 30%; position: unset; margin: 0"> <select
 									id="gugun1" class="pass form-control">
 										<option value="">-구/군-</option>
-								</select></span> <small style="vertical-align:sub;">1순위 (필수)</small><input type="hidden" name="residence1"
+								</select></span> <small style="vertical-align:sub;">1순위 (필수)</small><input type="hid`den" name="residence1"
 									id="residence1" />
 							</div>
 							<div id="area_box" style="clear: both;">
@@ -147,7 +147,7 @@
 							<input type="hid-den" id="workday_name" name="activity_time" value="월,화,수,목,금"> <br /> 
 							<select name='starttime' id='starttime1' style="width: 24%; margin-top: 10px" class="pass form-control">
 								<optgroup label="오전">
-									<option value="">시작 시각</option>
+									<option value="">시작 시각</option> 
 									<option value="06:00">오전 6:00</option>
 									<option value="07:00">오전 7:00</option>
 									<option value="08:00">오전 8:00</option>
