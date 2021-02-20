@@ -127,38 +127,3 @@ $(function(){
 
 });
 
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-var addr = document.getElementById('addr').value;
-//주소로 좌표를 검색합니다
-geocoder.addressSearch(addr, function(result, status) {
-
-	// 정상적으로 검색이 완료됐으면 
-	if (status === kakao.maps.services.Status.OK) {
-
-		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(result[0].y, result[0].x), // 지도의 중심좌표
-			level : 5
-		// 지도의 확대 레벨
-		};
-		
-
-		var circle = new kakao.maps.Circle({
-			center : new kakao.maps.LatLng(result[0].y, result[0].x), // 원의 중심좌표 입니다 
-			radius : 200, // 미터 단위의 원의 반지름입니다 
-			strokeWeight : 5, // 선의 두께입니다 
-			strokeColor : '#75B8FA', // 선의 색깔입니다
-			strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-			strokeStyle : 'dashed', // 선의 스타일 입니다
-			fillColor : '#CFE7FF', // 채우기 색깔입니다
-			fillOpacity : 0.7
-		// 채우기 불투명도 입니다   
-		});
-		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		circle.setMap(map);
-		var map = new kakao.maps.StaticMap(mapContainer, mapOption);
-	}
-});
