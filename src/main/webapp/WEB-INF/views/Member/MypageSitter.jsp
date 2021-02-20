@@ -66,10 +66,9 @@ $(function() {
           	&nbsp;${dto.name}&nbsp;<small>님</small>
 		</div>
 		
-		<div>
+		<div class="mt-1 text-center" >
 			리스트에 공개 
 			<label class="switch">
-			
 			<c:choose>
 				<c:when test="${sdto.advertise eq 'T'}">
 					<input type="checkbox" onclick="togglechange(this);" checked="checked"> 
@@ -91,8 +90,8 @@ $(function() {
 			<li class="list-group-item" id="comment">후기 관리</li>
 			<li class="list-group-item" id="membership">이용권</li>
 			<li class="list-group-item" id="premium"><img src="../resources/images/premium-icon.png" style="height:16px;"> 프리미엄</li>
-			<li class="list-group-item"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</li>
         </ul>
+		<p style="padding: 12px 20px;"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</p>
       </div>
       
       <div class="float-right pageSideRight"><!-- 오른쪽 -->

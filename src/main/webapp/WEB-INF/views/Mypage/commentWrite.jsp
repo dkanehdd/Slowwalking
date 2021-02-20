@@ -8,6 +8,10 @@
 <title>느린걸음</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<%@ include file="../links/linkOnly2dot.jsp"%>
+<style type="text/css">
+	textarea:focus { outline:none !important;}	
+</style>
 </head>
 <body>
 <div class="container">
@@ -15,19 +19,20 @@
 	<input type="hidden" id="sitter_id" value="${dto.sitter_id }"/>
 	<input type="hidden" id="idx" value="${dto.idx }"/>
 	<input type="hidden" id="newrate" />
-	<div class="item">
-		<h3>후기 작성</h3>
+	<div class="itemT mt-5" style="text-align:left;">
+		<h3 style="font-weight:700;">후기 작성</h3>
 		<c:choose>
 			<c:when test="${flag eq 'sitter' }">
-				<p class="s-font">${dto.parents_name } 님에 대한 후기를 작성해 보세요.<p>
+				<p class="s-font">${dto.parents_name } 님에 대한 후기를 작성해 보세요<p>
 			</c:when>
 			<c:otherwise>
-				<p class="s-font">${dto.sitter_name } 님에 대한 후기를 작성해 보세요.<p>
+				<p class="s-font">${dto.sitter_name } 님에 대한 후기를 작성해 보세요<p>
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div class="i_item">
-		<div class="starRev">
+	<div class="i_item"
+	 oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
+		<div class="starRev" style="text-align:center;">
 		  <span class="starR on" value="1"></span>
 		  <span class="starR" value="2"></span>
 		  <span class="starR" value="3"></span>
@@ -36,12 +41,12 @@
 		</div>
 	</div>
 	<div class="item" id="textarea">
-		<textarea class="noresize" rows="7" id="content" placeholder="내용을 입력해 주세요(최대 1000자)"></textarea></div>
+		<textarea class="noresize" rows="7" id="content" placeholder="내용을 입력해 주세요(최대 1000자)" style="border:none;"></textarea></div>
 	
 	<!-- 버튼만들기 -->
 	<div class="text-center mt-3">
-		<button class="btn btn-warning" id="send">보내기</button>
 		<button class="btn btn-secondary" onclick="javascript:self.close();">취소하기</button>
+		<button class="btn btn-danger" id="send" style="width: 200px;">보내기</button>
 	</div>
 </div>
 </body>
@@ -88,7 +93,10 @@ $(function(){
 });
 </script>
 <style>
-body{background:url(../resources/images/diary_back2.jpg)}
+body{
+	background:#ddd url("../resources/images/comment.png") no-repeat 360px 15px;
+	background-size:120px;
+}
 p {font-size: 14px;}
 #sitter{height:50px;}
 #textarea{height: 230px;}
@@ -104,6 +112,7 @@ p {font-size: 14px;}
 .starR.on{background-position:0 0;}
 .container {display:flex; flex-direction:column; justify-content:center; align-itmes:center;}
 .item {background:white; border-radius:10px; width:450px; height:100px; padding:15px; margin:5px 10px;}
+.itemT {border-radius:10px; width:450px; height:100px; padding:15px; margin:5px 10px; text-align:center;}
 .i_item {background:white; border-radius:10px; width:450px; height:60px; padding:15px; margin:5px 10px;}
 .noresize {resize:none; box-sizing: border-box; width:420px; margin-top:3px;
 			border:1px solid #c0c0c0; border-radius: 10px;}

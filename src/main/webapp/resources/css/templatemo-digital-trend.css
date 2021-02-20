@@ -753,6 +753,18 @@ ol, ul {
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+.noPdForm {
+	width: 100%;
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 100%;
+	min-width: 300px;
+	margin: 0 auto 100px;
+	text-align: center;
+	padding:0;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
 .form input[type="text"], .form input[type="password"]
 , .joinF input[type="email"], .form input[type="number"]{
   outline: 0;
