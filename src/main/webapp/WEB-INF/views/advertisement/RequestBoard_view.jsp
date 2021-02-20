@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +51,7 @@
 					<span>장소: </span><i class='fas fa-map-marker-alt' style='font-size:20px; color: #F77B26;'></i><span style="color: #F77B26; ">${dto.region }</span>
 				</div>
 				<div id="in">
-					<span>시급 : </span><i class='fas fa-won-sign' style='font-size:24px; color: #F77B26;'></i></i><span span style="color: #F77B26; ">${dto.pay }</span> 
+					<span>시급 : </span><i class='fas fa-won-sign' style='font-size:24px; color: #F77B26;'></i></i><span span style="color: #F77B26; "><fmt:formatNumber value="${dto.pay }" type="number" />원</span> 
 				</div>
 				<div id="in"> 
 					<p style="color: #F77B26; font-size: 15px;">※가능한 날짜 색깔입니다.</p> 

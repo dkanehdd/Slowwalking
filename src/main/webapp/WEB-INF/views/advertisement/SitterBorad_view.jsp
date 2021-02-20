@@ -114,7 +114,7 @@
 					</tr>
 					<tr>
 						<td>활동 가능 시간</td>
-						<td>${dto.activity_time }</td>
+						<td>${dto.activity_date} ${dto.activity_time }</td>
 					</tr>
 					<tr>
 						<td>간단 자기소개</td>

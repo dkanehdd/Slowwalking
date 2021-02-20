@@ -14,6 +14,17 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript">
 </script>
+<style type="text/css">
+	.certificate{
+		font-size: 21px;
+	}
+	.certificate i{
+		color: var(--primary-color);
+	}
+	.certificate span{
+		display:block;
+	}
+</style>
 </head>
 <body>
 <div class="ml-2">
@@ -21,7 +32,7 @@
 	<h3 class="mb-5"><strong>My Certification</strong> 자격증</h3>
 </div>
 </div>
-<div class="container">
+<div class="container"   data-aos="fade-up" data-aos-delay="400">
 	<form:form action="../mypage/updatelicense?${_csrf.parameterName}=${_csrf.token}" name="fileFrm" method="post" 
                enctype="multipart/form-data" onsubmit="return checkImg();">
 		<input type="hidden"  name="sitter_id"  value="${dto.sitter_id}">
@@ -53,7 +64,12 @@
 		<div class="mt-3 text-center">
 			<c:choose>
 					<c:when test="${not empty dto.license_check and not empty dto.personality_check}">
-						<th scope="row">자격증 검사가 완료되었습니다.</th>
+						<th scope="row">
+							<p class="certificate">
+								<i class="fa fa-certificate" aria-hidden="true"> Certificated</i>
+								<span class="">자격증 검사가 완료되었습니다.</span>
+							</p>
+						</th>
 					</c:when>
 					<c:otherwise>
 						<button type="submit" class="btn btn-warning" >등록하기</button>

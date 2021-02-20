@@ -9,3 +9,6 @@ MANIFEST.MF
 target/classes/slowwalking/mapper/Board.xml
 *.class
 target/m2e-wtp/web-resources/META-INF/maven/com.kosmo/slowwalking/pom.xml
+target/classes/slowwalking/mapper/SitterMapper.xml
+target/classes/slowwalking/mapper/SitterMapper.xml
+target/classes/slowwalking/mapper/SitterMapper.xml

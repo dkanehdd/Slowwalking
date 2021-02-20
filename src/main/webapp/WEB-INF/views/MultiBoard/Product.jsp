@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +28,13 @@ function changeModal(product_idx) {
 		},
 		dataType : "json", //콜백데이터의 형식
 		success : function(d) { //콜백메소드
-			$('#saleprice').html(d.dto.price);
+			var price = String(d.dto.price);
+			price = price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			$('#saleprice').html(price);
 			$('#idx').val(d.dto.idx);
-			$('#point').html(d.member.point);
+			var point = String(d.member.point);
+			point = point.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			$('#point').html(point);
 			console.log(d.member.point);
 		},
 		error : function(e) {
@@ -42,7 +47,7 @@ function on_pay(pay_flag) {
 	f.flag.value = pay_flag;
 	
 	var saleprice = document.getElementById("saleprice").innerHTML;
-	document.getElementById("price").value = saleprice;
+	document.getElementById("price").value = saleprice.replace(/[^\d]+/g, '');;
 	
 	
 	f.submit();
@@ -74,8 +79,10 @@ $(function(){
 		var showSum = function(){
 			console.log(1);
 			var num1 = document.getElementById("saleprice").innerHTML;
+			num1 = num1.replace(/[^\d]+/g, '');
 			var num2 = document.getElementById("usepoint").value;
 			var num3 = document.getElementById("point").innerHTML;
+			num3 = num3.replace(/[^\d]+/g, '');
 			if(num2==""){
 				alert("포인트를 입력해주세요");
 				return;
@@ -90,8 +97,10 @@ $(function(){
 				alert("포인트가 부족합니다");
 				return;
 			}
-			document.getElementById("point").innerHTML=result2;
-			document.getElementById("saleprice").innerHTML=result;
+			result2 = String(result2).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			result = String(result).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			document.getElementById("point").innerHTML=result2
+			document.getElementById("saleprice").innerHTML=result.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 			
 		}
 	</script>
@@ -117,7 +126,7 @@ $(function(){
 								<div class="card">
 									<div class="card-body d-flex justify-content-between">
 										<h1><strong>${row.product_name }</strong></h1>
-										&nbsp;&nbsp;&nbsp;<h2 class="pt-2">${row.price }원</h2>
+										&nbsp;&nbsp;&nbsp;<h2 class="pt-2"><fmt:formatNumber value="${row.price }" type="number" />원</h2>
 										<button type="button" class="btn btn-info ml-auto"
 									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
 									</div>
@@ -152,7 +161,7 @@ $(function(){
 									</li>
 									<li class="payment-item">
 									<br />
-									<div class="title w3-pagination w3-white w3-border-bottom">
+									<div class="title btn rounded-lg btn-light">
 										적립된포인트 보기
 									</div>
 									<div class="content" style="font-size: 1.5em">

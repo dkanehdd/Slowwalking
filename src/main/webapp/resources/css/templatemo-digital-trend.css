@@ -1226,11 +1226,16 @@ span.star-prototype > * {
     max-width:80px; 
 }
 /* 마이페이지  hjkosmo*/
-.mypageCont{
-	text-align:left;
-	margin:50px 0;
-	padding: 50px 0;
+.myPageBg{
+	width: 100%;
+	background: #FFFFFF;
+	padding: 40px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+/* 별점 my comment rates */
+
 
 /*---------------------------------------
     RESPONSIVE STYLES              
