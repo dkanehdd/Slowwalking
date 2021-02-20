@@ -265,6 +265,17 @@ public class AdvertisementController {
 		//나의 의뢰서리스트에서 온건지 의뢰리스트에서 온건지 확인하는 flag
 		model.addAttribute("list_flag", list_flag);
 		model.addAttribute("flag", flag);
+		
+		//후기 리스트
+		String getId = req.getParameter("id");
+		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(getId);
+
+		for(DiaryDTO diary : lists) {
+			String temp = diary.getContent().replace("\r\n", "<br/>");
+			diary.setContent(temp);
+		}
+		
+		model.addAttribute("lists",lists);
 
 		return "advertisement/RequestBoard_view";
 	}
@@ -696,6 +707,11 @@ public class AdvertisementController {
 		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
 		
 		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(id);
+		
+		for(DiaryDTO diary : lists) {
+			String temp = diary.getContent().replace("\r\n", "<br/>");
+			diary.setContent(temp);
+		}
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("lists",lists);

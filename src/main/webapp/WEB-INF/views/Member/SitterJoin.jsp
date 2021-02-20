@@ -135,23 +135,17 @@
 						<th scope="row">희망요일/시간</th>
 						<td>
 
-							<button type="button" class="workday_off workday_on mr1p"
-								value="월" id="focus5" tabindex="5">월</button>
-							<button type="button" class="workday_off workday_on mr1p"
-								value="화">화</button>
-							<button type="button" class="workday_off workday_on mr1p"
-								value="수">수</button>
-							<button type="button" class="workday_off workday_on mr1p"
-								value="목">목</button>
-							<button type="button" class="workday_off workday_on mr1p"
-								value="금">금</button>
+							<button type="button" class="workday_off workday_on mr1p" value="월" id="focus5" tabindex="5">월</button>
+							<button type="button" class="workday_off workday_on mr1p" value="화">화</button>
+							<button type="button" class="workday_off workday_on mr1p" value="수">수</button>
+							<button type="button" class="workday_off workday_on mr1p" value="목">목</button>
+							<button type="button" class="workday_off workday_on mr1p" value="금">금</button>
 							<button type="button" class="workday_off mr1p" value="토">토</button>
 							<button type="button" class="workday_off" value="일">일</button>
-							<input type="checkbox" id="time_type" style="visibility:hidden;" name="time_type" value='Y'><label
-							for="time_type" class="workday_off" style="vertical-align: top; width: 110px;">협의가능</label> <input type="hidden" id="workday_name" name="activity_time"
-							value="월,화,수,목,금"> <br /> <select name='starttime'
-							id='starttime1' style="width: 24%; margin-top: 10px"
-							class="pass form-control">
+							<input type="checkbox" id="time_type" style="visibility:hidden;" name="time_type" value='Y'>
+							<label for="time_type" class="workday_off consultation" style="vertical-align: top; width: 110px;">협의가능</label> 
+							<input type="hid-den" id="workday_name" name="activity_time" value="월,화,수,목,금"> <br /> 
+							<select name='starttime' id='starttime1' style="width: 24%; margin-top: 10px" class="pass form-control">
 								<optgroup label="오전">
 									<option value="">시작 시각</option>
 									<option value="06:00">오전 6:00</option>

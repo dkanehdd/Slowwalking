@@ -37,7 +37,6 @@
          <table class="table table-hover">
             <thead>
                <th>아이디</th>
-               <th>1:1채팅</th>
                <th>근무 시간</th>
                <th>내용</th>
                <th colspan="2">프로세스</th>
@@ -48,22 +47,25 @@
             <c:choose>
                <c:when test="${flag eq 'sitter'}">
                		<td>${row.parents_id} <img src="../resources/images/phone.png" class="media-object rounded-circle" 
-							onclick="javascript:popInfo('${row.parents_id}')"/></td>
+							onclick="javascript:popInfo('${row.parents_id}')"/>
                 </c:when>
                 <c:otherwise>
 						<td id="sitter_id">${row.sitter_id} <img src="../resources/images/phone.png" class="media-object rounded-circle" 
-							onclick="javascript:popInfo('${row.sitter_id}')"/></td>
+							onclick="javascript:popInfo('${row.sitter_id}')"/>
 				</c:otherwise>
             </c:choose>
             <c:choose>
                <c:when test="${flag eq 'sitter'}">
-               <td><button class="btn btn-success" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
+               	<img src="../resources/images/chat-icon.png" class="media-object rounded-circle" style="width:26px;" 
+               		onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"/>
                </c:when>
                <c:otherwise>
-               <td><button class="btn btn-success" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
+               	<img src="../resources/images/chat-icon.png" class="media-object rounded-circle" style="width:26px;" 
+               		onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"/>
                </c:otherwise>
             </c:choose>
-               <td>
+            	</td>
+               <td class="text-center">
                   ${row.request_time }
                   <input type="hidden" id="idx" value="${row.request_idx}"/>
                   <input type="hidden" id="id" value="${row.sitter_id}"/>
@@ -226,5 +228,7 @@ function chatbutton(rece_id, room){
    window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=320px, height=470px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
-
+<style>
+.btn-pink {background: #FFE6E2; padding:-5px; width:15px; height:25px;}
+</style>
 </html>

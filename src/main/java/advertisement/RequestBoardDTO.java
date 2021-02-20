@@ -45,6 +45,7 @@ public class RequestBoardDTO {
 	}
 	//회원 정보를 받기위한 변수
 	private String name;
+	private int starrate;
 	
 	public String getName() {
 		return name;
@@ -52,11 +53,15 @@ public class RequestBoardDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getStarrate() {
+		return starrate;
+	}
+	public void setStarrate(int starrate) {
+		this.starrate = starrate;
+	}
 	//////////////////
 	
-	
-	
-
 	
 	public String getTitle() {
 		return title;

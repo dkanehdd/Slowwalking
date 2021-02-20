@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,8 +176,7 @@ $(function() {
 			</c:if>				
 				<!-- 의뢰서 리스트 -->
 				<c:forEach items="${lists }" var="row">
-					<table class="table table-borderless" style="display:none;" 
-					 data-aos="fade-up" data-aos-delay="400">
+					<table class="table table-borderless" style="display:none;" data-aos="fade-up" data-aos-delay="400">
 						<colgroup>
 							<col width="20%"/>
 							<col width="*"/>
@@ -188,8 +188,8 @@ $(function() {
 								</td>
 								<td rowspan="2" class="rightcontent">
 									<a id="title" style="display:block; width:100%; height: 100%;"
-									href="../advertisement/requestBoard_view?list_flag=${listflag }&idx=${row.idx}">								
-										<span id="childInfo" class="float-left">${row.age}세 ∥ ${row.children_name }</span><br/>
+									href="../advertisement/requestBoard_view?list_flag=${listflag }&idx=${row.idx}&id=${row.id}">								
+										<span id="childInfo" class="float-left p-1">${row.age}세 | ${row.children_name }</span><br/>
 										<span style="width: 85%" class="clear float-left">&#91;${row.region }&#93; ${row.title }
 											<c:if test="${not empty row.warning }">
 												<span id="warning" style="vertical-align:middle;">※ 주의사항 참고</span>

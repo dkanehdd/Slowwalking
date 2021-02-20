@@ -8,9 +8,9 @@
 	<insert id="insertSitter">
 		INSERT INTO sittermember
 		(sitter_id,cctv_agree,introduction,personality_check,license_check, activity_date, activity_time,residence1,
-				residence2,residence3,pay,career)
+				residence2,residence3,pay)
 		values(#{sitter_id}, #{cctv_agree},#{introduction}, #{personality_check},#{license_check},#{activity_date},
-		#{activity_time},#{residence1},#{residence2},#{residence3},#{pay},0)
+		#{activity_time},#{residence1},#{residence2},#{residence3},#{pay})
 	</insert>
 	
 	<!-- 트렁크가 나이 구하는 쿼리문 -->

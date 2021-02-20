@@ -16,7 +16,7 @@
 	
 	<select id="requestBoardView" resultType="advertisement.RequestBoardDTO">
 		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, R.start_work,
-				R.disability_grade, R.warning, R.image, R.age, R.idx, R.regular_short, B.name,
+				R.disability_grade, R.warning, R.image, R.age, R.idx, R.regular_short, B.name, B.starrate,
 				R.content, R.request_date
 		    FROM requestBoard R inner join member B
 		    on R.id = B.id
@@ -95,11 +95,7 @@
 		
 		
 	</select>
-	<!-- 형님 위에 쿼리가 에러가 나는겁니다! 오키 ㅋㅋㅋㅋ  or차이긴 한데... 아니 형님 왜 ''인데 검색이 되죠? ''이니까 
-	????? ㅋㅋㅋㅋㅋㅋㅋ || 이거 쓰면 ''이여도 검색되지
-	date는 ||이거 없는뎅아  이해해씁니당 or때문에~ 안되네요 ㅠㅠ 되는겁니다!!! 날짜만 선택하고 검색하는거??? 다 할수 있어요! 하나만 해도 되고 두개만 해도 되고
-	3개 해되고 다해도 되요!그걸 쿼리문을 다 만든거야????? 넹ㅋㅋㅋㅋㅋㅋㅋ 대단하네 그거 수업시간에 했었지 않아?? 그랬어요? 몰라요!-->
-	
+
 	<update id="invisibleBoard">
 		UPDATE requestBoard SET advertise='off' WHERE idx=#{0}
 	</update>
