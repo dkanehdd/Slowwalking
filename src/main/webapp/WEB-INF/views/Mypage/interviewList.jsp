@@ -82,7 +82,7 @@
                               <button type="button" class="btn btn-sm btn-basic">받은 요청</button>
                            </c:when>
                            <c:otherwise>
-                              <button type="button" class="btn btn-secondary" onClick="parentsView(${row.request_idx});">자세히</button>
+                              <button type="button" class="btn btn-secondary" onClick="parentsView('${row.request_idx}', '${row.parents_id}');">자세히</button>
                            </c:otherwise>
                         </c:choose>
                      </c:when>
@@ -147,8 +147,8 @@
 </div>
 </body>
 <script type="text/javascript">
-function parentsView(idx){
-   location.href="../advertisement/requestBoard_view?idx="+idx;
+function parentsView(idx, id){
+   location.href="../advertisement/requestBoard_view?list_flag=&idx="+idx+"&id="+id;
 }
 
 function sitterView(id) {
