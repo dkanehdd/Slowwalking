@@ -45,7 +45,7 @@ public class AndroidSitterController {
 				searchmap.put("pay", parameterDTO.getPay());
 		}
 		
-		Iterator<String> itr = searchmap.keySet().iterator();
+		Iterator<String> itr = searchmap.keySet().iterator();	
 		
 		while(itr.hasNext()) {
 			String key = itr.next();

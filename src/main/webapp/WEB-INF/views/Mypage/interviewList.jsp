@@ -57,10 +57,10 @@
             </c:choose>
             <c:choose>
                <c:when test="${flag eq 'sitter'}">
-               <td><button class="btn btn-success" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
+               <td style="text-align: center;"><button class="btn btn-success" onclick="chatbutton('${row.parents_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
                </c:when>
                <c:otherwise>
-               <td><button class="btn btn-success" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
+               <td style="text-align: center;"><button class="btn btn-success" onclick="chatbutton('${row.sitter_id}','${row.idx }')" value="${dto.id }"><i class="fa fa-comments" aria-hidden="true"></i></button></td>
                </c:otherwise>
             </c:choose>
                <td>
