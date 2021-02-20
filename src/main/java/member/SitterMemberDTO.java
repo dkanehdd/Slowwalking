@@ -18,7 +18,6 @@ public class SitterMemberDTO {
 	private String advertise;
 	private String premium;
 	private String premiumdate;
-	private int career;
 	private String name;
 	private String image_path;
 	private int starrate;
@@ -157,12 +156,6 @@ public class SitterMemberDTO {
 	}
 	public void setPremium(String premium) {
 		this.premium = premium;
-	}
-	public int getCareer() {
-		return career;
-	}
-	public void setCareer(int career) {
-		this.career = career;
 	}
 	
 	

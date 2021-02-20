@@ -60,12 +60,6 @@ input:checked+.slider:before {
 	border-radius: 50%;
 }
 
-p {
-	margin: 0px;
-	display: inline-block;
-	font-size: 15px;
-	font-weight: bold;
-}
 </style>
 
 

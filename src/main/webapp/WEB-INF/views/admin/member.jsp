@@ -295,7 +295,6 @@ function editRow(id){
                                             <th>희망시급</th>
                                             <th>가입승인</th>
                                             <th>결제회원</th>
-                                            <th>활동시간</th>
                                             <th>이름</th>
                                             <th>프로필사진</th>
                                             <th>별점</th>
@@ -325,7 +324,6 @@ function editRow(id){
                                             <th>${row.pay }</th>
                                             <th>${row.permission }</th>
                                             <th>${row.premium }</th>
-                                            <th>${row.career }</th>
                                             <th>${row.name }</th>
                                             <th>${row.image_path }</th>
                                             <th>${row.starrate }</th>

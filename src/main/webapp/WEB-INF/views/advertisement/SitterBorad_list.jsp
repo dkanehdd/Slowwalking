@@ -99,13 +99,13 @@
 		</div>
 		<!-- 시터 리스트 -->
 		<c:forEach items="${lists }" var="row">
-			<div class="border mt-2 mb-2" data-aos="fade-up" data-aos-delay="400">
+			<div class="container-1 border p-3 mb-2" data-aos="fade-up" data-aos-delay="400" style="background-color: #fff;">
 				<div class="media">
-					<div class="media-left mr-3">
+					<div class="media-left ml-4 mr-5">
 					<c:choose>
 						<c:when test="${not empty row.image_path }">
 							<img src="../resources/images/${row.image_path }"
-							class="media-object" style="width: 100px; height: 100px; border-radius: 70%">
+							class="media-object mr-3" style="width: 100px; height: 100px; border-radius: 70%">
 						</c:when>
 						<c:otherwise>
 							<img src="../resources/images/anonymous-avatar.jpg"
@@ -121,10 +121,29 @@
 								<div class="contentRow">
 									<a href="../advertisement/SitterBoard_view?id=${row.sitter_id }">
 									<c:set var="name" value="${row.name}" />
+									<div class="contentRow" style="height: 23px;">
 									<c:set var="totalLength" value="${fn:length(name) }" />
 									<c:set var="first" value="${fn:substring(name, 0, 1) }" />
 									<c:set var="last" value="${fn:substring(name, 2, totalLength) }" />
 									<c:out value="${first}○${last}"/></a>
+								</div>
+							</div>
+								<div class="ReviewRate__Wrapper-sc-1mriui7-0 bEuJEW">
+								<c:choose>
+									<c:when test="${row.starrate eq '0' }">
+									</c:when>
+									<c:otherwise>
+										<c:set var="x" value="${row.starrate }"/>
+										<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
+										<c:forEach begin="1" end="${i}" step="1">
+											<img src="../resources/images/star.png" style="width:15px;">
+										</c:forEach>
+										<c:if test="${ i ne 5 }"></c:if>
+											<c:forEach begin="1" end="${5-i }" step="1">
+												<img src="../resources/images/b_star.png" style="width:15px;">
+											</c:forEach>
+									</c:otherwise>
+								</c:choose>
 								</div>
 							</div>
 							<div class="contentRow">
@@ -138,11 +157,7 @@
 								<div class="userAge">${row.age }세</div>
 								<div class="wantedPayment">희망시급 <fmt:formatNumber value="${row.pay }" type="number" />원</div>
 							</div>
-							<div class="contentRow" style="height: 23px;">
-								<div class="ReviewRate__Wrapper-sc-1mriui7-0 bEuJEW">
-									평점 : <span class="star-prototype">${row.starrate }</span>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -153,25 +168,4 @@
 <!-- Footer메뉴 -->
 <%@ include file="../include/footer.jsp"%>
 </body>
-<style type="text/css">
-span.star-prototype, span.star-prototype>* {
-	height: 16px;
-	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-	width: 80px;
-	display: inline-block;
-}
-span.star-prototype>* {
-	background-position: 0 0;
-	max-width: 80px;
-}
-</style>
-<script type="text/javascript">
-	$.fn.generateStars = function() {
-		return this.each(function(i, e) {
-			$(e).html($('<span/>').width($(e).text() * 16));
-		});
-	};
-	// 숫자 평점을 별로 변환하도록 호출하는 함수
-	$('.star-prototype').generateStars();
-</script>
 </html>

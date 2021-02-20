@@ -165,8 +165,12 @@
 		$(function() {
 			$(".workday_off").click(function() {
 				if ($(this).hasClass("workday_on") == false) {
-					$(this).addClass("workday_on");
-				} else {
+					if ($("#time_type").is(":checked")){
+						//협의 가능이 눌러져있으면 아무것도 눌리지 않는다.
+					}else{
+						$(this).addClass("workday_on");
+					}
+				} else { 
 					$(this).removeClass("workday_on");
 				}
 				workday_make()
@@ -187,10 +191,15 @@
 						workday_tyle += " "
 								+ $("#starttime1 option:selected").val() + "~"
 								+ $("#endtime1 option:selected").val();
-						if (i == 0) {
-							$("#workday_name").val("");
-						} else {
-							$("#workday_name").val(workday_tyle);
+						if ($("#time_type").is(":checked")){
+						}
+						else{
+
+							if (i == 0) {
+								$("#workday_name").val("");
+							} else {
+								$("#workday_name").val(workday_tyle);
+							}
 						}
 					});
 			$('#endtime1').change(
@@ -209,17 +218,23 @@
 						workday_tyle += " "
 								+ $("#starttime1 option:selected").val() + "~"
 								+ $("#endtime1 option:selected").val();
-						if (i == 0) {
-							$("#workday_name").val("");
-						} else {
-							$("#workday_name").val(workday_tyle);
+						if ($("#time_type").is(":checked")){
+						}
+						else{
+
+							if (i == 0) {
+								$("#workday_name").val("");
+							} else {
+								$("#workday_name").val(workday_tyle);
+							}
 						}
 					});
 			$('#time_type').change(
 					function name() {
 						if ($("#time_type").is(":checked")) {
 							$("#workday_name").val('협의가능');
-							
+							$('.workday_off').removeClass("workday_on");
+							$('.consultation').addClass("workday_on");
 						} else {
 							var i = 0;
 							var workday_tyle = "";
@@ -236,10 +251,15 @@
 									+ $("#starttime1 option:selected").val()
 									+ "~"
 									+ $("#endtime1 option:selected").val();
-							if (i == 0) {
-								$("#workday_name").val("");
-							} else {
-								$("#workday_name").val(workday_tyle);
+							if ($("#time_type").is(":checked")){
+							}
+							else{
+
+								if (i == 0) {
+									$("#workday_name").val("");
+								} else {
+									$("#workday_name").val(workday_tyle);
+								}
 							}
 						}
 					})
@@ -259,10 +279,15 @@
 			});
 			workday_tyle += " " + $("#starttime1 option:selected").val() + "~"
 					+ $("#endtime1 option:selected").val();
-			if (i == 0) {
-				$("#workday_name").val("");
-			} else {
-				$("#workday_name").val(workday_tyle);
+			if ($("#time_type").is(":checked")){
+			}
+			else{
+
+				if (i == 0) {
+					$("#workday_name").val("");
+				} else {
+					$("#workday_name").val(workday_tyle);
+				}
 			}
 		}
 	</script>

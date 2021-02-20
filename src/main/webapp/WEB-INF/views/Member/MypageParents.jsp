@@ -35,7 +35,6 @@ $(function(){
 	});
 });
 </script>
-
 </head>
 <body>
 <%@ include file="../include/top.jsp"%>

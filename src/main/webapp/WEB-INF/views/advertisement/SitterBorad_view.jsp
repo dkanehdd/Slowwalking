@@ -41,7 +41,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="../include/top.jsp"%>
+<%@ include file="../include/top.jsp"%>
+<section class="section-padding" style="background-color: #eee;">
 	<div class="container">
 		<div class="container p-3 my-3 bg-muted">
 			<table class="table table-bordered">
@@ -68,6 +69,22 @@
 									<span><i class='fas fa-video'></i> CCTV 동의 안함</span>
 								</c:otherwise>
 							</c:choose>
+							<div class="row ml-0">
+								<c:choose>
+									<c:when test="${dto.starrate eq '0' }"></c:when>
+									<c:otherwise>
+										<c:set var="x" value="${dto.starrate }"/>
+										<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
+										<c:forEach begin="1" end="${i}" step="1">
+											<img src="../resources/images/star.png" style="width:20px; margin-right:3px;"/>
+										</c:forEach>
+										<c:if test="${ i ne 5 }"></c:if>
+											<c:forEach begin="1" end="${5-i }" step="1">
+												<img src="../resources/images/b_star.png" style="width:20px; margin-right:3px;"/>
+											</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</td>
 					</tr>
 					<tr>
@@ -105,7 +122,7 @@
 					</tr>
 					<tr>
 						<td>선호 지역</td>
-						<input type="hid`den" id="addr" value="${dto.residence1 }" />
+						<input type="hidden" id="addr" value="${dto.residence1 }" />
 						<td colspan="1">
 							<div id="map" style="width: 600px; height: 400px;"></div>
 						</td>
@@ -125,16 +142,32 @@
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row">
 
-							<div class="media border p-3" style="background-color: #F1F1F1">
+							<div class="media border p-5" style="background-color: #fff;">
 								<img src="../resources/images/${row.image_path }"
 									class="media-object mr-3"
-									style="width: 100px; height: 100px; border-radius: 70%">
+									style="width: 80px; height: 80px; border-radius: 70%">
 								<div class="media-body">
 									<span class="info">${row.send_id } | ${row.regidate }</span><br />
-									${row.content } <br /> <span class="star-prototype">${row.starrate }</span>
+									
+								<div class="row ml-0 mt-1 mb-1">
+									<c:choose>
+										<c:when test="${row.starrate eq '0' }"></c:when>
+										<c:otherwise>
+											<c:set var="x" value="${row.starrate }"/>
+											<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
+											<c:forEach begin="1" end="${i}" step="1">
+												<img src="../resources/images/star.png" style="width:15px;"/>
+											</c:forEach>
+											<c:if test="${ i ne 5 }"></c:if>
+												<c:forEach begin="1" end="${5-i }" step="1">
+													<img src="../resources/images/b_star.png" style="width:15px;"/>
+												</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								${row.content } <br />
 								</div>
 							</div>
-
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -170,32 +203,12 @@
 			</div>
 		</div>
 	</div>
-	<input type="hid-den" id="id" value="${dto.sitter_id }"/>
-	<input type="hid-den" id="activity_time" value="${dto.activity_time }"/>
-	<!-- Footer메뉴 -->
-	<%@ include file="../include/footer.jsp"%>
+	<input type="hidden" id="id" value="${dto.sitter_id }"/>
+	<input type="hidden" id="activity_time" value="${dto.activity_time }"/>
+</section>
+<!-- Footer메뉴 -->
+<%@ include file="../include/footer.jsp"%>
 </body>
-<style type="text/css">
-span.star-prototype, span.star-prototype>* {
-	height: 16px;
-	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
-	width: 80px;
-	display: inline-block;
-}
-span.star-prototype>* {
-	background-position: 0 0;
-	max-width: 80px;
-}
-</style>
-<script type="text/javascript">
-	$.fn.generateStars = function() {
-		return this.each(function(i, e) {
-			$(e).html($('<span/>').width($(e).text() * 16));
-		});
-	};
-	// 숫자 평점을 별로 변환하도록 호출하는 함수
-	$('.star-prototype').generateStars();
-</script>
 <script type="text/javascript">
 	//주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
