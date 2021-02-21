@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="advertisement.SearchRadiusImpl">
+
+	<select id="searchCount" resultType="int">
+		SELECT COUNT(*)
+		FROM hospital
+		WHERE trunc(to_number(distance_wgs84(#{param2}, #{param3}, 
+		hp_latitude, hp_longitude)),5)<![CDATA[<=]]>#{param1}
+	</select>
+	
+	<select id="searchRadius" resultType="advertisement.MyHospitalDTO">
+		select * from(
+    		select Tb.*, rownum rNum from (
+        		SELECT 
+        			hp_sido, hp_gugun, hp_name, hp_explain, hp_tel, hp_addr,   
+        			hp_latitude, hp_longitude,
+           			trunc(to_number(distance_wgs84(#{param2}, #{param3},  
+           			 hp_latitude, hp_longitude)),5) AS disKM
+       			FROM hospital
+        		WHERE trunc(to_number(distance_wgs84(#{param2}, #{param3}, 
+        		hp_latitude, hp_longitude)),5)<![CDATA[<=]]>#{param1}
+        		ORDER BY disKM ASC
+	    	)Tb
+		)	
+		where rNum BETWEEN #{param4} and #{param5}
+	</select>
+
+</mapper>  

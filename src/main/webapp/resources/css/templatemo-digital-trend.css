@@ -1317,3 +1317,21 @@ span.star-prototype > * {
 		margin-left: 0;
 	}
 }
+/***소아과 검색***/
+.location { 
+	background-color: var(--project-bg); 
+	padding: 20px;
+	text-align: center;
+}
+.distanceBox {
+	border: 1px solid var(--primary-color);
+	vertical-align: middle;
+	width:150px;
+	height:45px;
+	
+}
+.hospitalImg{
+	background-image:url("../images/hospital.png");
+}
+	
+}
