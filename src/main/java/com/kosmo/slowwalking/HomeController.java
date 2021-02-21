@@ -88,6 +88,7 @@ public class HomeController {
 					.searchRadius(distance, latTxt, lngTxt, start, end);
 		}
 		model.addAttribute("searchLists", searchLists);
+		System.out.println(searchLists);
 		
 		return "Main/searchRadius";
 	}

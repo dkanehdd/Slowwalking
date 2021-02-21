@@ -30,27 +30,50 @@
 <section class="section-padding" style="background-color:#eee;">
 	<div class="container">
 		<div class="section_title subPimgBg hospitalImg">
-				<h1 class="mb-5"><strong>우리동네</strong> 소아과</h1>
-			</div>
-		<span id="result" style="color:red; font-size:1.5em; font-weight:bold;"></span>
-		<fieldset>
-			<legend>${resultCount }</legend>		
+			<h1 class="mb-5"><strong>우리 동네</strong> 소아과 찾기</h1>
+		</div>
+		
+		<fieldset>		
 			<form name="searchFrm">
-				현재위치에서
 				<!-- 현재위치 위경도 입력상자 -->
 				<input type="hidden" id="latTxt" name="latTxt" />
 				<input type="hidden" id="lngTxt" name="lngTxt" />
-				 
-				<select name="distance" id="distance">
-					<option value="1" <c:if test="${param.distance==1 }">selected</c:if>>1Km</option>
-					<option value="5" <c:if test="${param.distance==5 }">selected</c:if>>5Km</option>
-					<option value="10" <c:if test="${param.distance==10 }">selected</c:if>>10Km</option>
-					<option value="20" <c:if test="${param.distance==20 }">selected</c:if>>20Km</option>
-					<option value="30" <c:if test="${param.distance==30 }">selected</c:if>>30Km</option>
-					<option value="40" <c:if test="${param.distance==40 }">selected</c:if>>40Km</option>
-				</select>
-				반경내 시설 검색하기			 
-				<input type="submit" value="검색하기" />
+				<table class="table table-bordered">
+					<colgroup>
+						<col width="30%"/>
+						<col width="*"/>
+					</colgroup>
+					<tbody>
+						
+						<tr>
+							<th colspan="2">
+								<span id="result" style="color:grey; font-size:1em;"></span>
+								<div class="mt-2">우리 동네
+									<select name="distance" id="distance" class="distanceBox-m">
+										<option value="1" <c:if test="${param.distance==1 }">selected</c:if>>1Km</option>
+										<option value="5" <c:if test="${param.distance==5 }">selected</c:if>>5Km</option>
+										<option value="10" <c:if test="${param.distance==10 }">selected</c:if>>10Km</option>
+										<option value="20" <c:if test="${param.distance==20 }">selected</c:if>>20Km</option>
+										<option value="30" <c:if test="${param.distance==30 }">selected</c:if>>30Km</option>
+										<option value="40" <c:if test="${param.distance==40 }">selected</c:if>>40Km</option>
+									</select>
+									이내 소아과			 
+									<button type="submit" class="btn btn-danger" >재검색</button>
+								</div>
+							</th>
+						</tr>
+						<tr>
+							<td style="height:10px;"><legend>${resultCount }</legend></td>
+							<td rowspan="2">
+								<div id="map" style="width:100%; height:700px;"></div>
+								<script async defer src="https://maps.googleapis.com/maps/api/js?key=${apiKey }"></script>
+							</td>
+						</tr>
+						<tr>
+							<td id="hospitalInfo">이곳에 정보가 뜹니다.</td>
+						</tr>
+					</tbody>
+				</table> 
 			</form>
 		</fieldset>
 			
@@ -59,8 +82,8 @@
 			<span id="result" style="color:red; font-size:1.5em; font-weight:bold;"></span>
 		</fieldset> -->
 		
-		<div id="map" style="width:100%; height:700px;"></div>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=${apiKey }"></script>
+		
+		
 	</div>
 </section>
 <%@ include file="../include/footer.jsp"%>
@@ -90,7 +113,7 @@ var showPosition = function(position){
 	var latitude = position.coords.latitude;
 	//경도를 가져오는 부분
 	var longitude = position.coords.longitude;
-	span.innerHTML = "위도:"+latitude+",경도:"+longitude;	
+	span.innerHTML = "<img src='../resources/images/badge.png' style='width:20px;'/>"+" 현재 위치 확인 완료";
 	
 	////////////////////////////////////////////////////////////////////////
 	//위경도를 text input에 입력
@@ -131,11 +154,12 @@ function initMap(latVar, lngVar) {
 		['남산', 37.550925, 126.990945],
 		['이태원', 37.540223, 126.994005] */
 		<c:forEach items="${searchLists }" var="row">
-			['${row.hp_name }', '${row.hp_latitude}', '${row.hp_longitude}', '${row.hp_tel}'], 
+			['${row.hp_name }', '${row.hp_latitude}', '${row.hp_longitude}', '${row.hp_tel}', '${row.hp_addr}', '${row.hp_explain}'], 
 		</c:forEach>
 	];
 	
  	var marker, i;
+ 	var info = document.getElementById("hospitalInfo");
 
 	for (i=0; i<locations.length; i++) {  
 		marker = new google.maps.Marker({
@@ -148,8 +172,10 @@ function initMap(latVar, lngVar) {
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
 				//정보창에 HTML코드가 들어갈 수 있음.
-				infowindow.setContent(locations[i][0]+locations[i][3]+"<br/><a href='javascript:alert(\"병원명:"+locations[i][0]+"\");'>바로가기</a>");
+				infowindow.setContent(locations[i][0]);
 				infowindow.open(map, marker);
+				info.innerHTML=locations[i][0]+"<br/>"+locations[i][3]+"<br/>"+locations[i][4]+"<br/>"+locations[i][5];
+				
 			}
 		})(marker, i));
 	
