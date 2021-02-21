@@ -35,7 +35,7 @@
 
 <!--    채팅불러오기  -->
    <select id="chatlist" resultType="mutiBoard.ChattingDTO">
-     select send_id, rece_id, content, to_char(regidate,'PM HH:MI') as regidate from chatting where room=#{0}
+     select send_id, rece_id, content, to_char(regidate,'PM HH:MI:ss') as regidate from chatting where room=#{0}
      order by regidate
      </select>
  
