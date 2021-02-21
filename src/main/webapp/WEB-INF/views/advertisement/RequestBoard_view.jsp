@@ -8,29 +8,56 @@
 <head>
 <meta charset="UTF-8">
 <title>RequestBoard_view</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e1bfbd13b698ee8d3ecba1e269ed3918&libraries=services"></script>
 <!-- css, js 파일링크 등 묶음-->
 <%@ include file="../links/linkOnly2dot.jsp"%>
+<style type="text/css">
+/* 화면 아래에 인터뷰 신청하기 div css */
+._1nW60 {
+	min-height: 50px;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	padding: 10px 18px;
+	background-color: #fff;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+	-webkit-box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
+	box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
+	position: fixed;
+	left : 400px;
+	right : 400px;
+	bottom: 0;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 14;
+	margin: 0 auto;
+}
+.container {
+	padding: 0;
+}
+.comment{
+	width: 70%;
+	margin: 5px auto;
+	border-radius: 50px 50px 50px 0;
+	border: #ddd;
+}
+</style>
 </head>
 <body>
 <%@ include file="../include/top.jsp"%>
 <section class="section-padding" style="background-color: #eee;">
-	<div class="container">
-		<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
-		<div class="container p-3 my-3 bg-muted">
-		<center>
-			<img src="../resources/images/${dto.image }" class="media-object rounded-circle" style="width:200px; height:200px">
-			<br/><br/>
-			<h3 class="text-center">${dto.title }</h3>  
-			<input type="hidden" id="idx" value="${dto.idx}"/>
-			<input type="hidden" id="parents_id" value="${dto.id}" />
-			<input type="hidden" id="request_time" value="${dto.request_time}" />
-			<hr style="border: solid 3px #DBDBDB ">
-			<h4>${dto.children_name }</smail>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<smail>no.${dto.idx }</smail>
-				<div class="row">
+	<div class="container noPdForm" data-aos="fade-up" data-aos-delay="400">
+		<div>
+		<div style="padding:100px;">
+				<!-- 별점 -->
+				<div class="row ml-0" style="display:inline-block;">
 					<c:choose>
 						<c:when test="${dto.starrate eq '0' }"></c:when>
 						<c:otherwise>
@@ -46,16 +73,40 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-			<div id="back"> 
-				<div id="in">
-					<span>장소: </span><i class='fas fa-map-marker-alt' style='font-size:20px; color: #F77B26;'></i><span style="color: #F77B26; ">${dto.region }</span>
-				</div>
-				<div id="in">
-					<span>시급 : </span><i class='fas fa-won-sign' style='font-size:24px; color: #F77B26;'></i></i><span span style="color: #F77B26; "><fmt:formatNumber value="${dto.pay }" type="number" />원</span> 
-				</div>
-				<div id="in"> 
-					<p style="color: #F77B26; font-size: 15px;">※가능한 날짜 색깔입니다.</p> 
-					<button type="button" ${fn:contains(timeArray, '월') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
+				<table class="table joinF">
+					<tbody class="text-center">
+						<tr><!-- 프로필이미지 -->
+							<c:choose>
+							    <c:when test="${not empty dto.image }">
+							        <td colspan="2" style="border:none !important;"><img
+									src="../resources/images/${dto.image }"
+									style="width: 200px; height: 200px"></td>
+							    </c:when>
+							    <c:otherwise>
+							        <td colspan="2" style="border:none !important;"><img
+									src="../resources/images/anonymous-avatar.jpg"
+									style="width: 200px; height: 200px"></td>
+							    </c:otherwise>
+							</c:choose>
+						</tr>
+						<tr><!-- 본문 -->				
+							<td colspan="2"
+								style="text-align: center; border-top:none; font-size: 1.5em; font-weight: bold;">
+								<c:set var="name" value="${dto.children_name }" /> <c:set
+									var="totalLength" value="${fn:length(name) }" /> <c:set
+									var="first" value="${fn:substring(name, 0, 1) }" /> <c:set
+									var="last" value="${fn:substring(name, 2, totalLength) }" /> <c:out
+									value="${first}○${last}" />(${dto.age }세) &nbsp;&nbsp;&nbsp;
+								<span style="color: #FF7000">${dto.title }</span>
+							</td>
+						</tr>
+						<tr>
+							<th>장소</th>
+							<td><i class='fas fa-map-marker-alt' style='font-size:20px; color: #F77B26;'></i>${dto.region }</td>
+						</tr>
+						<tr>
+							<th>시간</th>
+							<td><button type="button" ${fn:contains(timeArray, '월') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 						value="월">월</button>
 					<button type="button" ${fn:contains(timeArray, '화') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 						value="화">화</button>
@@ -70,34 +121,43 @@
 					<button type="button" ${fn:contains(timeArray, '일') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'} 
 					value="일">일</button> 
 					<button type="button" ${fn:contains(timeArray, '협의 가능') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
-					value="협의가능" style="width: 60px">협의가능</button> 
-				</div>
-				<div id="in">
-					<span>시간 : </span><span span style="color: #F77B26; " >${time }</span> 
-				</div>
-				<div id="in">
-					<span>장애등급 : </span><span span style="color: #F77B26; " >${dto.disability_grade }</span> 
-				</div>
-				<div id="in">
-					<span>주의사항 : </span><i class="fa fa-warning" style="font-size:24px; color: #DD143C"></i><span span style="color: #DD143C; " >${dto.warning }</span> 
-				</div>
-				<div id="in">
-					<span>아이의 나이 : </span><span span style="color: #F77B26; " >${dto.age }</span> 
-				</div>
-				<div id="in">
-					<span>시터 기간 : </span><span span style="color: #F77B26; " >${dto.regular_short }</span> 
-				</div>
-				<div id="in">
-					<span>희망 시작 날짜 : </span><span span style="color: #F77B26; " >${dto.start_work }</span> 
-				</div>
-				<input type="hidden" id="addr" value="${dto.region }" />
-				<div id="map" style="width: 600px; height: 400px;"></div>
-			</div>  
-			 
-		</center>
-		
-		<div class="container">
-				<h3 style="text-align: center;">
+					value="협의가능" style="width: 60px">협의가능</button>
+					<span>${time }</span>
+					</td>
+						</tr>
+						<tr>
+							<th>장애 등급</th>
+							<td>${dto.disability_grade }</td>
+						</tr>
+						<tr>
+							<th>주의사항</th>
+							<td><i class="fa fa-warning" style="font-size:24px; color: #DD143C"></i><span style="color: #DD143C; " >${dto.warning }</span></td>
+						</tr>
+						<tr>
+							<th>희망 시작 날짜</th>
+							<td>${dto.start_work }</td>
+						</tr>
+						<tr>
+							<th>시터 기간</th>
+							<td>${dto.regular_short }</td>
+						</tr>
+						<tr>
+							<th style="border-bottom: 2px solid #dee2e6;">선호 지역</th>
+							<input type="hidden" id="addr" value="${dto.region }" />
+							<td colspan="1">
+								<div id="map" style="width: 100%; height: 400px;"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<c:if test="${dto.id eq sessionScope.user_id }">
+					<button onClick="location.href='requestBoard_edit?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-warning">수정하기</button>
+					<button onClick="location.href='requestBoardAction_delete?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-dark">삭제하기</button>
+				</c:if>
+			</div>
+		<!-- 후기 -->
+			<div class="container p-3 pb-5" style="background-color:#eee;">
+				<h3 style="text-align: center;" class="mt-3">
 					<strong>후기</strong> comment
 				</h3>
 				<br />
@@ -107,60 +167,86 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row">
-							<div class="media border p-5" style="background-color: #fff;">
-								<img src="../resources/images/${row.image_path }"
-									class="media-object mr-3"
-									style="width: 80px; height: 80px; border-radius: 70%">
-								<div class="media-body">
-									<span class="info">${row.send_id } | ${row.regidate }</span><br />
-									
-								<div class="row ml-0 mt-1 mb-1">
+							<div class="media border p-5  comment" style="background-color: #fff;" data-aos="fade-up" data-aos-delay="400">
+								<div class="float-left mr-3" style="width:20%; height:100%;">
 									<c:choose>
-										<c:when test="${row.starrate eq '0' }"></c:when>
-										<c:otherwise>
-											<c:set var="x" value="${row.starrate }"/>
-											<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
-											<c:forEach begin="1" end="${i}" step="1">
-												<img src="../resources/images/star.png" style="width:15px;"/>
-											</c:forEach>
-											<c:if test="${ i ne 5 }"></c:if>
-												<c:forEach begin="1" end="${5-i }" step="1">
-													<img src="../resources/images/b_star.png" style="width:15px;"/>
-												</c:forEach>
-										</c:otherwise>
-									</c:choose>
+									    <c:when test="${not empty row.image_path }">
+									        <img src="../resources/images/${row.image_path }" class="media-object mr-3" 
+									        style="width: 80px; height: 80px; border-radius: 70%">
+									    </c:when>
+									    <c:otherwise>
+									        <img src="../resources/images/anonymous-avatar.jpg"
+									        class="media-object" style="width: 80px; height: 80px; border-radius: 70%">
+									    </c:otherwise>
+									</c:choose>	
+									<p class="info">${row.send_id }</p>
+									<span style="display:inline-block; color: #ccc; font-size: 12px; postion: absolute; right:0; bottom: 10px;">${row.regidate }	</span>						
 								</div>
-								${row.content } <br />
+								<div class="rightcontent" style="width:80%; height:100%;">																								
+									<div class="media-body">
+										
+										<div class="float-left" style="width: 100%; height: 100px; text-align:left !important;">
+											${row.content }	
+											
+										</div>
+										<!-- 별점 -->
+										<div class="mt-1 mb-1 float-right">
+											<c:choose>
+												<c:when test="${row.starrate eq '0' }"></c:when>
+												<c:otherwise>
+													<c:set var="x" value="${row.starrate }"/>
+													<fmt:parseNumber var="i" integerOnly="true" type="number" value="${x}"/>
+													<c:forEach begin="1" end="${i}" step="1">
+														<img src="../resources/images/star.png" style="width:15px;"/>
+													</c:forEach>
+													<c:if test="${ i ne 5 }"></c:if>
+														<c:forEach begin="1" end="${5-i }" step="1">
+															<img src="../resources/images/b_star.png" style="width:15px;"/>
+														</c:forEach>
+												</c:otherwise>
+											</c:choose>										
+										</div><!-- 별점 끝 -->
+										<span class="clear"></span>
+									</div>
+									
 								</div>
 							</div>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</div>
-			
-		<center>
-			<c:if test="${flag eq 'sitter'}"> 
-				<button class="btn btn-success" id="submit">인터뷰 신청하기</button>
-			</c:if>
-			<c:if test="${dto.id eq sessionScope.user_id }">
-				<button onClick="location.href='requestBoard_edit?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-warning">수정하기</button>
-				<button onClick="location.href='requestBoardAction_delete?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-dark">삭제하기</button>
-			</c:if>
-		</center>
-		</div>
-		</div>
+		</div><!-- 후기끝  -->
+		<span class="clear"></span>
 	</div>
+		<c:if test="${sessionScope.flag eq 'sitter' }">
+		<div class="_1nW60 container">
+			    <div class="_2KQBU">
+			        <div class="_1Lb4l">
+			            <div class="_26pci">
+			                <c:out value="${first}○${last}" />
+			                (${dto.age }세)
+			            </div>
+			        </div>
+			        <div class="_2RUNH">희망시급 :<fmt:formatNumber value="${dto.pay }" type="number" />원</div>
+			        <div style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
+		            <button tabindex="0" type="button"
+		                style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
+		                <div>
+		                    <div style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
+		                        <span style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;"
+		                           id="submit">인터뷰 신청하기</span>
+		                    </div>
+		                </div>
+		            </button>
+		        </div>
+		    </div>
+		</div>
+		</c:if>
+		<input type="hidden" id="idx" value="${dto.idx}"/>
+<input type="hidden" id="parents_id" value="${dto.id}" />
+<input type="hidden" id="request_time" value="${dto.request_time}" />
+</section>
 <style>
-#back{
-	background-color: #DBDBDB;
-	width: 500px;
-}
-#in{
-	padding: 10px;
-	margin: 10px;
-	width: 650px;
-	background-color: white;
-}
 .workday_off {
 	border: 1px solid #e0e0e0;
 	background: #fff;
@@ -173,7 +259,6 @@
 	font-size: 15px;
 	font-weight: 400; 
 }
-
 .workday_on {
 	background: #F77B26;
 }
@@ -186,7 +271,8 @@
 	width: 700px;
 }
 </style>
-</section>
+
+
 </body>
 <script type="text/javascript">
 $(function(){

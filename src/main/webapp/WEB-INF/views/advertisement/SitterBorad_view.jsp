@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SitterBoard_view.jsp</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -32,6 +33,8 @@
 	-webkit-box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	position: fixed;
+	left: 400px;
+	right : 400px;
 	bottom: 0;
 	width: 100%;
 	-webkit-box-sizing: border-box;
@@ -39,11 +42,9 @@
 	z-index: 14;
 	margin: 0 auto;
 }
-
 .container {
 	padding: 0;
 }
-
 .comment{
 	width: 70%;
 	margin: 5px auto;
@@ -105,7 +106,7 @@
 											CCTV 동의함</span>
 									</c:when>
 									<c:otherwise>
-										<span><i class='fas fa-video'></i> CCTV 동의 안함</span>
+										<span><i class='fa fa-video-camera'></i> CCTV 동의 안함</span>
 									</c:otherwise>
 								</c:choose>
 								
@@ -218,6 +219,7 @@
 		<span class="clear"></span>
 		
 	</div>
+	<c:if test="${sessionScope.flag eq 'parents' }">
 		<div class="_1nW60 container">
 			    <div class="_2KQBU">
 			        <div class="_1Lb4l">
@@ -240,6 +242,7 @@
 		        </div>
 		    </div>
 		</div>
+	</c:if>
 	<input type="hidden" id="id" value="${dto.sitter_id }"/>
 	<input type="hidden" id="activity_time" value="${dto.activity_time }"/>		
 </section>
@@ -249,14 +252,11 @@
 <script type="text/javascript">
 	//주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
-
 	var addr = document.getElementById('addr').value;
 	//주소로 좌표를 검색합니다
 	geocoder.addressSearch(addr, function(result, status) {
-
 		// 정상적으로 검색이 완료됐으면 
 		if (status === kakao.maps.services.Status.OK) {
-
 			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
@@ -264,7 +264,6 @@
 				level : 5
 			// 지도의 확대 레벨
 			};
-
 			var circle = new kakao.maps.Circle({
 				center : new kakao.maps.LatLng(result[0].y, result[0].x), // 원의 중심좌표 입니다 
 				radius : 200, // 미터 단위의 원의 반지름입니다 
@@ -283,7 +282,6 @@
 	});
 	
 	function applyInter(){
-
 		$.ajax({
 			url : "../mypage/addList?${_csrf.parameterName}=${_csrf.token}",
 			type : "GET",

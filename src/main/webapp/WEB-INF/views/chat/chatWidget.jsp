@@ -31,7 +31,7 @@
   	console.log("chatWidget에서 감지한 id : " + id);
   	window.open("../chat/webchatui?chat_id="+id+"&chat_room=ask"
   	, id+"-문의" 
-  	, "width=334,height=480, resizable=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+  	, "width=322,height=482, resizable=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
   }
 </script>
 <!-- 채팅버튼 -->

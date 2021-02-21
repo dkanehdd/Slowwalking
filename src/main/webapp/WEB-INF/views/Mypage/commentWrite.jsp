@@ -80,6 +80,7 @@ $(function(){
 			success : function(){
 				alert("작성이 완료되었습니다.\n포인트 지급 +50");
 				window.open("about:blank","_self").close();
+				opener.location.reload();
 			},
 			error : function(){
 				alert("다시 시도해 주세요.");

@@ -15,14 +15,6 @@ $(document).ready(function(){
 });
 //끝
 
-//SitterBoard_list 별점
-$.fn.generateStars = function() {
-    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
-    };
-    
-// 숫자 평점을 별로 변환하도록 호출하는 함수
-$('.star-prototype').generateStars();
-
 $(function () {
 	$('#sido').change(function() {
 		$.ajax({

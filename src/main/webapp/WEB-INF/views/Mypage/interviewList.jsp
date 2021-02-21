@@ -229,7 +229,7 @@ function chatbutton(rece_id, room){
    var id = '${sessionScope.user_id}';
    var popupX = (window.screen.width / 2) - (320 / 2);
 	var popupY= (window.screen.height / 2) - (470 / 2);
-   window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=320px, height=470px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+   window.open("../chat/chatui?id="+id + "&rece_id="+rece_id+"&room="+room, "" ,"width=321px, height=481px, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
 <style>

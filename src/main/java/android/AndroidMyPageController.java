@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import member.MemberDTO;
+import member.MemberImpl;
 import member.SitterImpl;
 
 @Controller
@@ -32,6 +34,19 @@ public class AndroidMyPageController {
 		System.out.println(suc);
 		map.put("message", "보이기상태가 변경되었습니다.");
 		map.put("suc", suc);
+		
+		return map;
+	}
+	
+	@RequestMapping("/android/myinfo")
+	@ResponseBody
+	public Map<String, Object> myinfo(HttpServletRequest req){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String id = req.getParameter("id");
+		
+		MemberDTO dto = sqlSession.getMapper(MemberImpl.class).getMember(id);
+		map.put("dto",dto );
 		
 		return map;
 	}
