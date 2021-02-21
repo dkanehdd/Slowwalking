@@ -29,7 +29,8 @@
  	
 	body{
 		font-family: Noto Sans KR, sans-serif !important;
-		-webkit-font-smoothing: antialiased;
+		-webkit-font-smoothing: antialiased !important;
+		-moz-osx-font-smoothing: grayscale !important;
 	}
 	a{
 		color:#666;

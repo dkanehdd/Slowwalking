@@ -65,8 +65,8 @@ $(function(){
           	<li class="list-group-item" id="interview">내 구인현황</li>
           	<li class="list-group-item" id="comment">후기관리</li>
          	<li class="list-group-item" id="membership">이용권</li>
-          	<li class="list-group-item"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</li>
         </ul>
+        <p style="padding: 12px 20px;"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</p>
       </div>
       
       <div class="float-right pageSideRight"><!-- 오른쪽 -->

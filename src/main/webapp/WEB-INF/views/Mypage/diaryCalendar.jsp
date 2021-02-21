@@ -121,7 +121,8 @@
 	.this_month{
 		margin: 10px;
 	}
-	#diaryBar {background-color: #DC5C05; color:white;}
+	#diaryBar {color:var(--secondary-color);}
+	#diaryBar:hover{color:var(--primary-color); cursor:pointer;}
 </style>
 </head>
 <body>
@@ -165,7 +166,7 @@
 	<table class="calendar_body">
 		<thead>
 			<tr bgcolor="#3C5059">
-				<th class="day sun" >
+				<th class="day sun" style="color: #EC939B;">
 					일
 				</th>
 				<th class="day" >
@@ -183,7 +184,7 @@
 				<th class="day" >
 					금
 				</th>
-				<th class="day sat" >
+				<th class="day sat" style="color: #CAE7F6;">
 					토
 				</th>
 			</tr>
@@ -207,7 +208,9 @@
 						<c:forEach items="${diaryList }" var="row">
 							<c:set var="date" value="${today.year }-${today.month+1 }-${i }"/>
 							<c:if test="${row.regidate eq date}">
-								<div id="diaryBar" class="mb-1" onclick="diaryOpen(${row.its_idx});">오늘의 알림장</div>
+								<div id="diaryBar" style="text-align:center; " class="mb-1 pt-3 pb-3" onclick="diaryOpen(${row.its_idx});">
+								<i style="text-align:center; display:block; font-size: 40px;"  class="fa fa-sticky-note" aria-hidden="true"></i>
+								</div>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -237,16 +240,16 @@
 </body>
 <script type="text/javascript">
 var popupX = (window.screen.width / 2) - (500 / 2);
-var popupY= (window.screen.height / 2) - (500 / 2);
+var popupY= (window.screen.height / 2) - (550 / 2);
 function popOpen(){
 	var idx = document.getElementById("idx").value;	
 	window.open("../mypage/openDiary?idx="+idx, "알림장쓰기", 
-	"width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+	"width=500, height=550, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 
 function diaryOpen(its_idx){	
 	window.open("../mypage/openDiaryView?its_idx="+its_idx, "알림장보기", 
-	"width=500, height=400, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+	"width=500, height=550, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 </script>
 </html>
