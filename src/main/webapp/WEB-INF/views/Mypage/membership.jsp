@@ -14,26 +14,26 @@
 <div class="section_title">
 	<h3 class="mb-5"><strong>My Ticket</strong> 이용권</h3>
 </div>
-<div class="container ml-4 mt-5">
-	<table class="table">
+<div class="membership container mt-5 myPageBg" data-aos="fade-up" data-aos-delay="400">
+	<table class="table" style="background-color:#eee;">
 		<colgroup>
 			<col width="20%"/>
 			<col width="*"/>
 		</colgroup>
 		<tbody>
-		<tr>
-			<td><img class="ticket" src="../resources/images/ticket.png" /></td>
-			<td>
-				보유티켓 <span>${dto.ticket}</span> 개
-				<div class="text mt-2">· 인터뷰 신청 클릭 시 1회씩 차감됩니다.</div>
-				<div class="text">· 이미 사용한 티켓은 취소가 불가능합니다.</div>
-				<div class="text">· 인터뷰에 성공한 목록은 구인/구직현황을 통해 확인 가능합니다.</div>
-			</td>
-		</tr>
+			<tr style="border:none;">
+				<td style="border:none;"><img class="ticket" src="../resources/images/ticket.png" /></td>
+				<td style="border:none;">
+					보유티켓 <span>${dto.ticket}</span> 개
+					<div class="text mt-2">· 인터뷰 신청 클릭 시 1회씩 차감됩니다.</div>
+					<div class="text">· 이미 사용한 티켓은 취소가 불가능합니다.</div>
+					<div class="text">· 인터뷰에 성공한 목록은 구인/구직현황을 통해 확인 가능합니다.</div>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	
-	<div class="row mt-5">
+	<div class="row mt-5 p-3">
 		<span class="purchaseList">구매내역</span>
 			<table class="table mt-3 mb-5">
 				<colgroup>
@@ -60,10 +60,10 @@
 </div>
 </body>
 <style>
-table{border-bottom:1px solid #DEE2E6;}
-th{font-size: 15px;}
-span {color:#FF7000; font-size:20px; font-weight: bold;}
-div .text{text-align:left; font-size:12px;}
+.membership table{border-bottom:1px solid #DEE2E6;}
+.membership th{font-size: 15px;}
+.membership span {color:#FF7000; font-size:20px; font-weight: bold;}
+.membership div .text{text-align:left; font-size:12px;}
 .purchaseList{font-weight: bold;}
 .ticket {width:100px;}
 .conatiner{width:20px;}
