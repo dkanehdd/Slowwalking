@@ -29,6 +29,18 @@
 }
 </style>
 <title>느린걸음</title>
+<script type="text/javascript">
+$(function() {
+	$('table').slice(0, 3).show();
+	$('#load').click(function(e) {
+		e.preventDefault();
+		if($('table:hidden').length==0){
+			alert("더이상 게시물이 없습니다.");
+		}
+		$('table:hidden').slice(0, 3).show();
+	});
+});
+</script>
 </head>
 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
@@ -39,6 +51,7 @@
 			<h1 class="mb-5"><strong>SITTER</strong> 시터리스트</h1>
 		</div>
 		<div class="RequestBoardList">
+		<div id="back">
 			<div class="container-1" data-aos="fade-down" data-aos-delay="400">
 			<form action="../advertisement/SitterBoard_list?${_csrf.parameterName}=${_csrf.token}"
 			method="post" class="form reqFrm" style="width:100%; margin-bottom: 20px;">
@@ -96,40 +109,44 @@
 			</div>				
 		</form>
 		</div>
-		</div>
 		<!-- 시터 리스트 -->
 		<c:forEach items="${lists }" var="row">
-			<div class="myPageBg p-3 mb-2" data-aos="fade-up" data-aos-delay="400" style="background-color: #fff;">
-				<div class="media">
-					<div class="media-left ml-4 mr-5">
-					<c:choose>
-						<c:when test="${not empty row.image_path }">
-							<img src="../resources/images/${row.image_path }"
-							class="media-object rounded-circle" style="width:100px; height:100px;"/>
-						</c:when>
-						<c:otherwise>
-							<img src="../resources/images/anonymous-avatar.jpg"
-							class="media-object rounded-circle" style="width:100px; height:100px;"/>
-						</c:otherwise>
-					</c:choose>
-						
-					</div>
-					<div class="media-body">
-						<div class="profileInfo rightcontent">
-							<div class="contentRow"
-								style="justify-content: space-between; margin-bottom: -2px;">
-								<div class="contentRow">
-									<a href="../advertisement/SitterBoard_view?id=${row.sitter_id }">
-									<c:set var="name" value="${row.name}" />
-									<div class="contentRow" style="height: 23px;">
+			<table class="table table-borderless" style="display:none;" data-aos="fade-up" data-aos-delay="400">
+					<colgroup>
+						<col width="20%"/>
+						<col width="*"/>
+					</colgroup>
+			<tbody>
+				<tr>
+					<td>
+						<c:choose>
+							<c:when test="${not empty row.image_path }">
+								<img src="../resources/images/${row.image_path }"
+								class="media-object rounded-circle" style="width:100px; height:100px;"/>
+							</c:when>
+							<c:otherwise>
+								<img src="../resources/images/anonymous-avatar.jpg"
+								class="media-object rounded-circle" style="width:100px; height:100px;"/>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td rowspan="2" class="rightcontent">
+						<a id="title" style="display:block; width:100%; height: 100%;"
+						href="../advertisement/SitterBoard_view?id=${row.sitter_id }">								
+							<span id="childInfo" class="float-left p-1">${row.age }세 | <c:set var="name" value="${row.name}" />
 									<c:set var="totalLength" value="${fn:length(name) }" />
 									<c:set var="first" value="${fn:substring(name, 0, 1) }" />
 									<c:set var="last" value="${fn:substring(name, 2, totalLength) }" />
-									<c:out value="${first}○${last}"/></a>
-								</div>
-							</div>
-								<div class="ReviewRate__Wrapper-sc-1mriui7-0 bEuJEW">
-								<c:choose>
+									<c:out value="${first}○${last}"/></span><br/>
+							<span style="width: 85%" class="clear float-left">선호지역 : &#91;${row.residence1} ${row.residence2} ${row.residence3} &#93;
+							<br />선호시간 : ${row.activity_date } ${row.activity_time } 
+							</span>
+							<span class="float-right" 
+							style="width: 15%; font-size: 14px; text-align:right;">
+							희망시급 : <fmt:formatNumber value="${row.pay }" type="number" />원
+							<br />ID: ${row.sitter_id } 
+							
+							<br/><c:choose>
 									<c:when test="${row.starrate eq '0' }">
 									</c:when>
 									<c:otherwise>
@@ -143,26 +160,16 @@
 												<img src="../resources/images/b_star.png" style="width:15px;">
 											</c:forEach>
 									</c:otherwise>
-								</c:choose>
-								</div>
-							</div>
-							<div class="contentRow">
-								<div class="locationBlock">
-									<span class="locationItem">${row.residence1}</span>
-									&nbsp;<span class="locationItem">${row.residence2}</span>
-									&nbsp;<span class="locationItem">${row.residence3}</span>
-								</div>
-							</div>
-							<div class="contentRow">
-								<div class="userAge">${row.age }세</div>
-								<div class="wantedPayment">희망시급 <fmt:formatNumber value="${row.pay }" type="number" />원</div>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</c:forEach>
+								</c:choose></span>
+							<span class="clear"></span>
+						</a>									
+					</td>
+					</tr>
+				</tbody>
+			</table>
+			</c:forEach>
+		<div class="text-center"><button class="btn btn-danger" id="load">더보기</button></div>
+		</div>
 	</div>
 </section>
 <!-- Footer메뉴 -->
