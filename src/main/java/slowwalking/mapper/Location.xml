@@ -16,7 +16,7 @@
 		select * from(
     		select Tb.*, rownum rNum from (
         		SELECT 
-        			hp_sido, hp_gugun, hp_name, hp_explain, hp_tel, hp_addr,   
+        			hp_name, hp_sido, hp_gugun, hp_explain, hp_tel, hp_addr,   
         			hp_latitude, hp_longitude,
            			trunc(to_number(distance_wgs84(#{param2}, #{param3},  
            			 hp_latitude, hp_longitude)),5) AS disKM

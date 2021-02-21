@@ -1326,12 +1326,19 @@ span.star-prototype > * {
 .distanceBox {
 	border: 1px solid var(--primary-color);
 	vertical-align: middle;
-	width:150px;
-	height:45px;
-	
+	width:100px;
+	height:40px;
+}
+.distanceBox-m {
+	border: 1px solid var(--primary-color);
+	vertical-align: middle;
+	width:80px;
+	height:35px;
 }
 .hospitalImg{
 	background-image:url("../images/hospital.png");
 }
-	
+.mainSearch {
+	font-size: 1.5em;
+}
 }
