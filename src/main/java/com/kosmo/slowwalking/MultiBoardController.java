@@ -202,8 +202,12 @@ public class MultiBoardController {
 	      System.out.println(messageArr[1]);
 	      dto.setSend_id(messageArr[0].substring(0, messageArr[0].length()-1));
 	      String[] arr = messageArr[1].split(" ");
+	      String content = "";
+	      for(int i =1 ; i<arr.length ; i++) {
+	    	  content+= arr[i]+" ";
+	      }
 	      dto.setRece_id(arr[0]);
-	      dto.setContent(arr[1]);
+	      dto.setContent(content);
 	      System.out.println(arr[0]);
 	      System.out.println(arr[1]);
 	      int write = sqlSession.getMapper(MultiBoardImpl.class).chatwrite(dto);
