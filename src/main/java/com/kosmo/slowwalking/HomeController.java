@@ -72,7 +72,7 @@ public class HomeController {
 		int resultCount = sqlSession.getMapper(SearchRadiusImpl.class)
 				.searchCount(distance, latTxt, lngTxt);
 		
-		model.addAttribute("resultCount", "검색결과:"+resultCount+"건");
+		model.addAttribute("resultCount", "검색결과 : "+resultCount+" 건");
 		model.addAttribute("selectNum", Math.ceil(resultCount/numberPerPage));
 		
 		int pageNum = (req.getParameter("pageNum")==null) ?
