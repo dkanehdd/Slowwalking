@@ -44,37 +44,59 @@ function on_pay(pay_flag) {
 }
 </script>
 <style>
-.premium table {
-	border-bottom: 1px solid #DEE2E6;
-}
-.premium th {
-	font-size: 15px;
-}
-.premium span {
-	color: #FF7000;
-	font-size: 20px;
-	font-weight: bold;
-}
-.premium div .text {
-	text-align: left;
-	font-size: 12px;
-}
-.premium .purchaseList {
-	font-weight: bold;
-}
-.premium .ticket {
-	width: 100px;
-	background-color: #FFE6E2;
-	border-radius: 20px;
-}
-.premium .conatiner {
-	width: 20px;
-}
-.premium .num {
-    font-size: 49px;
-    color: #DC5C05;
-    font-weight: 900;
-}
+    .info{text-align:center;}
+	.info i{color: var(--primary-color); font-size: 21px;}
+	.firstTxt {font-size:20px; font-weight:700;}
+	.secTxt {color:#777; font-size:14px;}
+	.rateTxt {font-size:30px; color: var(--first-color);}
+	.buttons {text-align:center;}
+	.buttons button:hover{
+		box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+		transition: all 0.3s ease 0s 
+	}
+	.btnCredit{
+		background-color: #444;
+		color: white;
+		width:120px;
+	}
+	.pay-title{
+		font-size: 16px;
+		color:#444;
+	}
+	.btn_image{
+		width:248px;
+		height:308px;
+		border-radius:15px;
+		border:none;
+		background-image:url("../resources/img/prBg.png");
+		background-size:248px;
+	}
+	.btnGroup{
+		text-align:center;
+	}
+	.prcard{
+		background-color:none;
+		display:block;
+		vertical-align:top;	
+	}
+	.cardTitle{
+		font-size:16px;
+		font-weight: 500;
+	}
+	.cardPrice{
+		font-size: 25px;
+		font-weight:900;
+	}
+	#price{
+		text-align: right;
+		font-size:55px;
+	}
+	.closeIco{
+		position:absolute;
+		color: red;
+		top: 15px;
+		right: 15px;
+	}
 </style>
 </head>
 <body>
@@ -83,89 +105,68 @@ function on_pay(pay_flag) {
 	<h3 class="mb-5"><strong>My Membership</strong> 프리미엄권</h3>
 </div>
 </div>
-	<div class="container ml-4 mt-5">
-		<table class="table">
-			<colgroup>
-				<col width="20%" />
-				<col width="*" />
-			</colgroup>
-			<tbody>
-				<tr>
-					<td><img class="ticket" src="../resources/images/primium.png" style="width: 100px; height: 100px;" /></td>
-					<td>남은날짜 <span>${dto.premium}</span> 일
-						<div class="text mt-2">· 프리미엄권을 구매하면 시터목록에 상단에 위치하게 됩니다.</div>
-						<div class="text">· 이미 구매한 이용권은 환불이 불가능합니다.</div>
-						<div class="text">· 잔여 이용 기간이 있을 시 추가 구매가 불가합니다.</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+    <div class="container mt-5 myPageBg" style="padding-bottom:80px;" data-aos="fade-up" data-aos-delay="400">
+		<div class="info">
+			<img class="ticket" src="../resources/images/primium.png" style="width: 100px; height: 100px;" />
+			<div class="firstTxt">남은날짜 ${dto.premium} 일</div>
+			<div class="secTxt">
+				<ul>
+					<li>프리미엄권을 구매하면 시터목록에 상단에 위치하게 됩니다</li>
+					<li>이미 구매한 이용권은 환불이 불가능합니다</li>						
+					<li>잔여 이용 기간이 있을 시 추가 구매가 불가합니다</li>
+				</ul>
+			</div>
+		</div>
 		<c:choose>
 			<c:when test="${dto.premium eq 0 }">
-				<div class="row mt-5">
-					<span class="purchaseList">프리미엄권 구매</span>
-					<table class="table mt-3 mb-5">
-						<c:forEach var="row" items="${lists }">
-							<tbody>
-								<tr>
-									<td>
-										<div class="card">
-											<div class="card-body d-flex justify-content-between">
-											<span class="display-4">${row.product_name }</span>
-											<span class="display-4"><fmt:formatNumber value="${row.price }" type="number" />원</span>
-												<button type="button" class="btn btn-primary"
-									data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">구매하기</button>
-											</div>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</c:forEach>
-					</table>
+				<div class="buttons text-center">
+					<h3 class="mb-5" style="color: #FF7000; font-size: 20px; font-weight: bold;">프리미엄권 구매</h3>
+					<c:forEach var="row" items="${lists }">
+						<div class="btnGroup" style="display:inline;">
+							<button class="buttons btn btn_image mr-2" data-toggle="modal" data-target="#modal_layer" onclick="changeModal('${row.idx}')">
+								<div style="position:relative; top: -75px;">
+									<span class="cardTitle prcard" style="postion:relative; top: -83px;">${row.product_name }</span>
+									<span class="cardPrice prcard"><fmt:formatNumber value="${row.price }" type="number" />원</span>
+								</div>
+							</button>
+							<span class="clear" style="clear:both;"></span>					
+						</div>
+						<span class="clear" style="clear:both;"></span>	
+					</c:forEach>
 				</div>
 			</c:when>
 			<c:otherwise>
 			</c:otherwise>
-		</c:choose>
-
+		</c:choose>	
+		<span class="clear" style="clear:both;"></span>	
 	</div>
-	<div id="modal_layer" class="modal fade" tabindex="-1"
+	<span class="clear" style="clear:both;"></span>	
+	
+	<!-- 모달 -->
+	<div id="modal_layer" class="modal fade clear" tabindex="-1"
 			style="display: none;" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content pl-5 pt-5" id="modal-content">
-					<div id="modal_layer_html"
-						style="font-family: 'NanumSquare', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;">
-						<script type="text/javascript">
-						</script>
-						<form name="order_form" method="post" action="../multiBoard/order?${_csrf.parameterName}=${_csrf.token}">
-							<button type="button" class="closs btn float-right"
-								data-dismiss="modal" aria-label="Close">&times;</button>
-							<div class="payment-point">
-								<div class="payment-total">
-									<h3>결제금액</h3>
-								</div>
-								<div class="payment-pay">
-									<div class="price">
-										<span class="num" id="price"></span>원
-									</div>
-								</div>
-							<br />
-							<h3>결제수단을 선택하세요</h3>
-								<div class="row">
-									<div class="col-3 ml-2">
-										<button class="btn rounded-lg btn-light" 
-											onclick="on_pay('card');">
-											<img src="../img/card.png" alt="" style="width: 60px; height: 50px;" />카드결제</button>
-									</div>
-								</div>
+				<div class="modal-content p-5" id="modal-content">
+					<div id="modal_layer_html" >
+					<form name="order_form" method="post" action="../multiBoard/order?${_csrf.parameterName}=${_csrf.token}">
+						<button type="button" class="closeIco btn float-right"
+							data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+						<div class="payment-point">
+							<div class="payment-total">
+								<p class="pay-title">결제금액</p>
+								<p style="display:inline-block; width: 84%" class="num" id="price"></p>
+								<span style="color: #444; font-weight: 700; display:inline-block; width: 15%; text-align: right; font-size: 30px;">&#8361;</span>
 							</div>
-							<input type="hidden" name="idx" id="idx" value=""> 
-							<input type="hidden" name="flag"  value=""> 
-							<input type="hidden" name="price" id="totalprice" value="" />
-						</form>
-					</div>
+							<p class="pay-title">결제수단을 선택하세요</p>
+							<button class="btnCredit btn rounded-lg btn-light mr-2"  onclick="on_pay('card');"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  카드결제</button>
+						</div>
+						<input type="hidden" name="idx" id="idx" value=""> 
+						<input type="hidden" name="flag"  value=""> 
+						<input type="hidden" name="price" id="totalprice" value="" />
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>

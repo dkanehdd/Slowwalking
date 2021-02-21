@@ -26,16 +26,14 @@
 	.btn_image1{
 		width:248px;
 		height:308px;
-		border-radius:;
+		border-radius:15px;
 		border:none;
 		background-image:url("../resources/images/receive_comment.png");
-		box-size: content-box;
 	}
 	.btn_image2{
 		width:248px;
 		height:308px;
 		background-image:url("../resources/images/send_comment.png");
-		box-size: content-box;
 	}
 </style>
 </head>

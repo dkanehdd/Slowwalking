@@ -5,7 +5,11 @@
 
 <mapper namespace="advertisement.RequestBoardImpl">
 	<select id="requestBoard" resultType="advertisement.RequestBoardDTO">
-		SELECT * FROM requestBoard
+		SELECT R.id, R.title, R.pay, R.region, R.request_time, R.children_name, R.start_work,
+				R.disability_grade, R.warning, R.image, R.age, R.idx, R.regular_short, B.starrate,
+				R.content, R.request_date
+		    FROM requestBoard R inner join member B
+		    on R.id = B.id
 			WHERE advertise = 'on'
 	</select>
 	
