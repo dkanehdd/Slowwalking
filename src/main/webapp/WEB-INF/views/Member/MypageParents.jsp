@@ -33,6 +33,10 @@ $(function(){
 	$("#membership").on("click",function(){
 		$("#innerPage").load("../mypage/membership");
 	});
+	$("#CCTV").on("click",function(){
+		window.open("http://pinocchio.iptime.org:12345/", 'CCTV', 'width=500, height=700');
+	});
+	
 });
 </script>
 </head>
@@ -65,6 +69,7 @@ $(function(){
           	<li class="list-group-item" id="interview">내 구인현황</li>
           	<li class="list-group-item" id="comment">후기관리</li>
          	<li class="list-group-item" id="membership">이용권</li>
+         	<li class="list-group-item" id="CCTV">CCTV보기</li>
         </ul>
         <p style="padding: 12px 20px;"><img src="../resources/images/p.png" style="height:14px;"> ${dto.point}</p>
       </div>
