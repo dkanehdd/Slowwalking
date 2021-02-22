@@ -19,4 +19,7 @@ public interface SitterImpl {
 	public int updatePremiumdate(int ticket, String id);
 	public int updatePremium(String id);
 	public int resetPremium(String id);
+	
+	public void premiumUpdateAll();
+	public void resetPremiumAll();
 }

@@ -184,7 +184,16 @@ $(function() {
 						<tbody>
 							<tr>
 								<td>
-									<img src="../resources/images/${row.image }" class="media-object rounded-circle" style="width:100px; height:100px;">
+								<c:choose>
+									<c:when test="${not empty row.image }">
+										<img src="../resources/images/${row.image }"
+										class="media-object rounded-circle" style="width:100px; height:100px;"/>
+									</c:when>
+									<c:otherwise>
+										<img src="../resources/images/anonymous-avatar.jpg"
+										class="media-object rounded-circle" style="width:100px; height:100px;"/>
+									</c:otherwise>
+								</c:choose>
 								</td>
 								<td rowspan="2" class="rightcontent">
 									<a id="title" style="display:block; width:100%; height: 100%;"

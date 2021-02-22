@@ -1,21 +1,27 @@
 package android;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Action;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import member.MemberDTO;
 import member.MemberImpl;
+import member.MypageImpl;
 import member.SitterImpl;
+import mutiBoard.DiaryDTO;
+import util.PagingUtil;
 
 @Controller
 public class AndroidMyPageController {
@@ -49,5 +55,23 @@ public class AndroidMyPageController {
 		map.put("dto",dto );
 		
 		return map;
+	}
+	
+	@RequestMapping("/android/commentList")
+	@ResponseBody
+	public ArrayList<DiaryDTO> commentList(HttpSession session, HttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		
+		
+		
+		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(id);
+
+
+		
+		
+		
+				
+		return lists;
 	}
 }

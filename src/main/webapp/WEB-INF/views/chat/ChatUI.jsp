@@ -30,7 +30,7 @@ window.onload = function(){
 	logWindow = document.getElementById('logWindow');
 	rece_id= document.getElementById('rece_id').value;
 	room = document.getElementById('room').value
-	webSocket = new WebSocket('ws://localhost:8080/slowwalking/EchoServer.do/'+room);
+	webSocket = new WebSocket('ws://192.168.219.121:8080/slowwalking/EchoServer.do/'+room);
 	webSocket.onopen = function(event) {
 		wsOpen(event);
 	};
@@ -185,7 +185,7 @@ function nowTime(){
 <input type="hidden" id="room" name="room" value="${param.room }" />
 <input type="hidden" id="rece_id" name="rece_id" value="${param.rece_id }" />
 <%-- <input type="hid-den" id="rece_id" name="rece_id" value="${param.chat_room }" /> --%>
-<div class="chat_ui" id="chat_ui_test" style="width: 320px; height: 480px;">
+<div class="chat_ui" id="chat_ui_test" style="width: 400px; height: 800px;">
 	<div class="msg" id="messageWindow">
 <c:forEach var="row" items="${result }">
 <c:if test="${row.send_id eq param.id }">

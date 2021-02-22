@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import admin.AdminBoardController;
+import member.AdminMemberImpl;
 import member.MemberDTO;
 import member.MemberImpl;
 import member.MultiBoardImpl;
@@ -62,10 +64,10 @@ public class MultiBoardController {
 
 		MultiBoardDTO multiBoardDTO = new MultiBoardDTO();
 		// Mapper 호출
+		sqlSession.getMapper(AdminMemberImpl.class).contentCount(idx);
 		multiBoardDTO = sqlSession.getMapper(MultiBoardImpl.class).contentPage(idx); // DTO객체에 쿼리문 실행 결과를 담는다.
-
+		multiBoardDTO.setContent(multiBoardDTO.getContent().replaceAll("\r\n", "<br/>"));
 		model.addAttribute("dto", multiBoardDTO); // model에 저장해서 view로 전달해주는 객체 dto.
-
 		return "MultiBoard/Notice_view";
 	}
 
