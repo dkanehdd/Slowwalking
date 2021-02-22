@@ -31,7 +31,7 @@
 						<th scope="col">No</th>
 						<th scope="col">제목</th>
 						<th scope="col">작성시간</th>
-						<th scope="col">첨부파일</th>
+						<th scope="col">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,7 +42,7 @@
 								<a href="../multiBoard/notice_view?idx=${row.idx }">${row.title }</a>
 							</td>
 							<td>${row.postdate }</td>
-							<td>${row.attachedfile }</td>
+							<td>${row.visitcount }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

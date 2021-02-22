@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import advertisement.ParameterDTO;
+import member.MypageImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
+import mutiBoard.DiaryDTO;
 
 @Controller
 public class AndroidSitterController {
@@ -59,6 +61,27 @@ public class AndroidSitterController {
 		
 
 		map.put("lists", lists);
+		return map;
+	}
+	
+	@RequestMapping("/android/SitterBoard_view")
+	@ResponseBody
+	public Map<String, Object> SitterBoardView(HttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		SitterMemberDTO dto = sqlSession.getMapper(SitterImpl.class).selectSitter(id);
+		
+		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).CommentList(id);
+		
+		for(DiaryDTO diary : lists) {
+			String temp = diary.getContent().replace("\r\n", "<br/>");
+			diary.setContent(temp);
+		}
+		
+		map.put("dto", dto);
+		map.put("lists",lists);
 		return map;
 	}
 
