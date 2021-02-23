@@ -72,7 +72,8 @@
                <td class="text-center">
                   ${row.request_time }
                   <input type="hidden" id="idx" value="${row.request_idx}"/>
-                  <input type="hidden" id="id" value="${row.sitter_id}"/>
+                  <input type="hidden" id="sitter_id" value="${row.sitter_id}"/>
+                  <input type="hidden" id="parents_id" value="${row.parents_id}"/>
                   <c:choose>
                      <c:when test="${flag eq 'sitter' }"><input type="hidden" id="agree_${row.idx }" value="${row.sitter_agree}" /></c:when>
                      <c:otherwise><input type="hidden" id="agree_${row.idx }" value="${row.parents_agree}" /></c:otherwise>
@@ -163,9 +164,9 @@ function openCalendar(idx_c){
 }
 function openComment(idx_c){
 	var popupX = (window.screen.width / 2) - (500 / 2);
-	var popupY= (window.screen.height / 2) - (500 / 2);
+	var popupY= (window.screen.height / 2) - (550 / 2);
    window.open("../mypage/openComment?idx="+idx_c, "후기", 
-   "width=500, height=500, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
+   "width=500, height=550, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 function popInfo(id){
 	var popupX = (window.screen.width / 2) - (300 / 2);
@@ -174,8 +175,6 @@ function popInfo(id){
 	"width=300, height=300, toolbar=no, menubar=no, status=no, scrollbars=no, resizable=no, left="+ popupX + ", top="+ popupY);
 }
 function deleteThis(idx_c){
-   var cfm = confirm('목록에서 삭제하시겠습니까?');
-   if(cfm){
       $.ajax({
          url : "../mypage/deleteAction",
          type : "GET",
@@ -196,10 +195,6 @@ function deleteThis(idx_c){
          }
          
       });
-   }
-   else{
-      return;
-   }
 }
 function acceptThis(idx_c){
    $.ajax({
@@ -211,8 +206,6 @@ function acceptThis(idx_c){
       dataType : "json", 
       contentType : "text/html;charset:utf-8;",
       success : function(data){
-         $('#agree_'+idx_c).val('T');
-         $('#accept_'+idx_c).html('대기');
          alert(data.message);
          location.reload();
       },
