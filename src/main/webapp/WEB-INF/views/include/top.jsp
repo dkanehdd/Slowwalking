@@ -2,8 +2,32 @@
 	pageEncoding="UTF-8"%> 
 <style>
 #alert{
-padding: 1px;
-border-radius: 200px;
+	margin-left: 7px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: inline-block;
+	background-color: fff36d;
+	color: var(--primary-color);
+	text-align:center;
+	font-size: 14px;
+	font-weight: 600;
+    -webkit-animation:blink .5s ease-in-out infinite alternate;
+    -moz-animation:blink .5s ease-in-out infinite alternate;
+    animation:blink .5s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes blink{
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    @-moz-keyframes blink{
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    @keyframes blink{
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
 }
 </style>
 <!-- 알람 확인 -->
@@ -17,7 +41,7 @@ $(document).ready(function(){
 		success : function(data){
 			if(data.interviewCount != 0){
 				$('#alert').text(data.interviewCount);
-				$('#alert').css('border', 'solid 3px red');
+				$("#alert").removeAttr("hidden");
 			}
 		},
 		error : function(){
@@ -60,7 +84,7 @@ $(document).ready(function(){
                   		&nbsp;관리자 페이지
                   	</c:when>
                   	<c:otherwise>
-                  		&nbsp;${sessionScope.user_name }님의 마이페이지<span id="alert"></span>
+                  		&nbsp;${sessionScope.user_name }님의 마이페이지<span id="alert" class="ml-2" hidden></span>
                   	</c:otherwise>
                   </c:choose>
                   	</a></li>
