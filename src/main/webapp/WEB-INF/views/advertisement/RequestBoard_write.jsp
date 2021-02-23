@@ -131,7 +131,7 @@ function checkform() {
 											줄수있는 시급을 적어주세요<br/>
 											<small>※2021년 기준 최저시급 : 8,720원</small>
 										</th>
-										<td><input type="number" class="form-control form-control"
+										<td><input type="text" class="form-control form-control"
 											style="width: 400px;" name="pay" placeholder="12,000원 or 협의 가능"/>
 										</td>
 									</tr>
@@ -142,7 +142,7 @@ function checkform() {
 										<div id="area_box"  style="clear: both;">
 											<select id='sido' class="form-control">
 												<option value="">시/도 선택</option>
-												<option value="서울">서울</option>
+												<option value="서울" >서울</option>
 												<option value="강원">강원</option>
 												<option value="경기">경기</option>
 												<option value="경남">경남</option>
@@ -163,7 +163,7 @@ function checkform() {
 											<br/>	
 											<select id="gugun" class="form-control">
 													<option value="">-구/군-</option>
-											</select></span><input type="hid`den" name="region"
+											</select></span><input type="hidden" name="region"
 												id="region" />
 										</div>
 										</td>
@@ -186,7 +186,7 @@ function checkform() {
 											<button type="button" class="workday_off" value="일">일</button> <input
 											id="time_type" type="checkbox" name="time_type" value='Y'><label
 											for="time_type"><span style="margin-left: 25px;">협의
-													가능</span></label> <input type="hid den" id="workday_name" name="request_time"
+													가능</span></label> <input type="hidden" id="workday_name" name="request_time"
 											value="월,화,수,목,금"> <br /> <select name='starttime'
 											id='starttime1' style="width: 24%; margin-top: 10px">
 												<optgroup label="오전">
@@ -284,7 +284,7 @@ function checkform() {
 											년도 : <select id="select_year" onchange="javascript:lastday();"></select>
 											월 : <select id="select_month" onchange="javascript:lastday();"></select> 
 											일 : <select id="select_day"></select>
-											<input type="hid-den" id="start_work" value="2020/1/1" name="start_work"/>
+											<input type="hidden" id="start_work" value="2020/1/1" name="start_work"/>
 										<!-- 최대한 빨리 이런 라디오 하나 넣고싶다. 나중에 시간되면 추가하자 -->
 										</td>
 									</tr>

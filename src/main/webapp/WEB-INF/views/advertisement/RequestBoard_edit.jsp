@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,102 +182,104 @@ function checkform() {
 									<td><div id="area_box"  style="clear: both;">
 										<select id='sido' class="pass form-control" style="width: 30%; display: inline-block;">
 											<option value="">시/도 선택</option>
-											<option value="서울">서울</option>
-											<option value="강원">강원</option>
-											<option value="경기">경기</option>
-											<option value="경남">경남</option>
-											<option value="경북">경북</option>
-											<option value="광주">광주</option>
-											<option value="대구">대구</option>
-											<option value="대전">대전</option>
-											<option value="부산">부산</option>
-											<option value="울산">울산</option>
-											<option value="인천">인천</option>
-											<option value="전남">전남</option>
-											<option value="전북">전북</option>
-											<option value="제주">제주</option>
-											<option value="충남">충남</option>
-											<option value="충북">충북</option>
+											<option value="서울" ${region_first eq '서울' ? 'selected="selected"' : ''}>서울</option>
+											<option value="강원" ${region_first eq '강원' ? 'selected="selected"' : ''}>강원</option>
+											<option value="경기" ${region_first eq '경기' ? 'selected="selected"' : ''}>경기</option>
+											<option value="경남" ${region_first eq '경남' ? 'selected="selected"' : ''}>경남</option>
+											<option value="경북" ${region_first eq '경북' ? 'selected="selected"' : ''}>경북</option>
+											<option value="광주" ${region_first eq '광주' ? 'selected="selected"' : ''}>광주</option>
+											<option value="대구" ${region_first eq '대구' ? 'selected="selected"' : ''}>대구</option>
+											<option value="대전" ${region_first eq '대전' ? 'selected="selected"' : ''}>대전</option>
+											<option value="부산" ${region_first eq '부산' ? 'selected="selected"' : ''}>부산</option>
+											<option value="울산" ${region_first eq '울산' ? 'selected="selected"' : ''}>울산</option>
+											<option value="인천" ${region_first eq '인천' ? 'selected="selected"' : ''}>인천</option>
+											<option value="전남" ${region_first eq '전남' ? 'selected="selected"' : ''}>전남</option>
+											<option value="전북" ${region_first eq '전북' ? 'selected="selected"' : ''}>전북</option>
+											<option value="제주" ${region_first eq '제주' ? 'selected="selected"' : ''}>제주</option>
+											<option value="충남" ${region_first eq '충남' ? 'selected="selected"' : ''}>충남</option>
+											<option value="충북" ${region_first eq '충북' ? 'selected="selected"' : ''}>충북</option>
 										</select> <span id="catetd1" class="area2ck"
 											style="width: 30%; position: unset; margin: 0"> 
 										<select id="gugun"  class="pass form-control" style="width: 30%; display: inline-block;">
 												<option value="">-구/군-</option>
-										</select></span><input type="hidden" name="region"
+										</select></span><input type="hid den" name="region"
 											id="region" />
 									</div>
 								</tr>
 								<tr>
 									<th style="vertical-align: middle;">근무시간</th>
 									<td>
-									<button type="button" class="workday_off workday_on mr1p"
+									<button type="button" ${fn:contains(timeArray, '월') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 											value="월">월</button>
-										<button type="button" class="workday_off workday_on mr1p"
+										<button type="button" ${fn:contains(timeArray, '화') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 											value="화">화</button>
-										<button type="button" class="workday_off workday_on mr1p"
+										<button type="button" ${fn:contains(timeArray, '수') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 											value="수">수</button>
-										<button type="button" class="workday_off workday_on mr1p"
+										<button type="button" ${fn:contains(timeArray, '목') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 											value="목">목</button>
-										<button type="button" class="workday_off workday_on mr1p"
+										<button type="button" ${fn:contains(timeArray, '금') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 											value="금">금</button>
-										<button type="button" class="workday_off mr1p" value="토">토</button>
-										<button type="button" class="workday_off" value="일">일</button> <input
-										id="time_type" style="visibility:hidden;"  type="checkbox" name="time_type" value='Y'>
-										<label for="time_type" class="workday_off consultation" 
-										style="vertical-align: top; width: 110px;">협의가능</label> 
-												<input type="hidden" id="workday_name" name="request_time"
-										value="월,화,수,목,금"> <br /> 
+										<button type="button" ${fn:contains(timeArray, '토') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
+											value="토">토</button>
+										<button type="button" ${fn:contains(timeArray, '일') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
+											value="일">일</button> <input
+											id="time_type" type="checkbox" name="time_type" value='Y' ${fn:contains(timeArray, '협의 가능') ? 'checked' : ''}><label
+											for="time_type"><span style="margin-left: 25px;">협의
+													가능</span></label>
+												<input type="hid den" id="workday_name" name="request_time"
+										value=""> <br /> 
 										<select name='starttime' class="pass form-control"
 										id='starttime1' style="width: 24%; margin-top: 10px; display:inline;">
 											<optgroup label="오전">
-												<option value="">시간선택</option>
-												<option value="06:00">오전 6:00</option>
-												<option value="07:00">오전 7:00</option>
-												<option value="08:00">오전 8:00</option>
-												<option value="09:00">오전 9:00</option>
-												<option value="10:00">오전 10:00</option>
-												<option value="11:00">오전 11:00</option>
+												<option value="" ${time_first eq ' 협의 가능' ? 'selected="selected"' : ''}>시간선택</option>
+												<option value="06:00" ${time_first eq '06:00' ? 'selected="selected"' : ''}>오전 6:00</option>
+												<option value="07:00" ${time_first eq '07:00' ? 'selected="selected"' : ''}>오전 7:00</option>
+												<option value="08:00" ${time_first eq '08:00' ? 'selected="selected"' : ''}>오전 8:00</option>
+												<option value="09:00" ${time_first eq '09:00' ? 'selected="selected"' : ''}>오전 9:00</option>
+												<option value="10:00" ${time_first eq '10:00' ? 'selected="selected"' : ''}>오전 10:00</option>
+												<option value="11:00" ${time_first eq '11:00' ? 'selected="selected"' : ''}>오전 11:00</option>
 											</optgroup>
 											<optgroup label="오후">
-												<option value="12:00">정오 12:00</option>
-												<option value="13:00">오후 1:00</option>
-												<option value="14:00">오후 2:00</option>
-												<option value="15:00">오후 3:00</option>
-												<option value="16:00">오후 4:00</option>
-												<option value="17:00">오후 5:00</option>
-												<option value="18:00">오후 6:00</option>
-												<option value="19:00">오후 7:00</option>
-												<option value="20:00">오후 8:00</option>
-												<option value="21:00">오후 9:00</option>
-												<option value="22:00">오후 10:00</option>
-												<option value="23:00">오후 11:00</option>
-												<option value="00:00">자정 12:00</option>
+												<option value="12:00" ${time_first eq '12:00' ? 'selected="selected"' : ''}>정오 12:00</option>
+												<option value="13:00" ${time_first eq '13:00' ? 'selected="selected"' : ''}>오후 1:00</option>
+												<option value="14:00" ${time_first eq '14:00' ? 'selected="selected"' : ''}>오후 2:00</option>
+												<option value="15:00" ${time_first eq '15:00' ? 'selected="selected"' : ''}>오후 3:00</option>
+												<option value="16:00" ${time_first eq '16:00' ? 'selected="selected"' : ''}>오후 4:00</option>
+												<option value="17:00" ${time_first eq '17:00' ? 'selected="selected"' : ''}>오후 5:00</option>
+												<option value="18:00" ${time_first eq '18:00' ? 'selected="selected"' : ''}>오후 6:00</option>
+												<option value="19:00" ${time_first eq '19:00' ? 'selected="selected"' : ''}>오후 7:00</option>
+												<option value="20:00" ${time_first eq '20:00' ? 'selected="selected"' : ''}>오후 8:00</option>
+												<option value="21:00" ${time_first eq '21:00' ? 'selected="selected"' : ''}>오후 9:00</option>
+												<option value="22:00" ${time_first eq '22:00' ? 'selected="selected"' : ''}>오후 10:00</option>
+												<option value="23:00" ${time_first eq '23:00' ? 'selected="selected"' : ''}>오후 11:00</option>
+												<option value="00:00" ${time_first eq '00:00' ? 'selected="selected"' : ''}>자정 12:00</option>
 											</optgroup>
 										</select> <span style="padding: 0 7px; position: relative;">~</span> 
 										<select  class="pass form-control"
 										id="endtime1" style="width: 24%; margin-top: 10px; display:inline;">
 											<optgroup label="오전">
-												<option value="">시간선택</option>
-												<option value="06:00">오전 6:00</option>
-												<option value="07:00">오전 7:00</option>
-												<option value="08:00">오전 8:00</option>
-												<option value="09:00">오전 9:00</option>
-												<option value="10:00">오전 10:00</option>
-												<option value="11:00">오전 11:00</option>
+												<option value="" ${time_second eq '' ? 'selected="selected"' : ''}>시간선택</option>
+												<option value="06:00" ${time_second eq '06:00' ? 'selected="selected"' : ''}>오전 6:00</option>
+												<option value="07:00" ${time_second eq '07:00' ? 'selected="selected"' : ''}>오전 7:00</option>
+												<option value="08:00" ${time_second eq '08:00' ? 'selected="selected"' : ''}>오전 8:00</option>
+												<option value="09:00" ${time_second eq '09:00' ? 'selected="selected"' : ''}>오전 9:00</option>
+												<option value="10:00" ${time_second eq '10:00' ? 'selected="selected"' : ''}>오전 10:00</option>
+												<option value="11:00" ${time_second eq '11:00' ? 'selected="selected"' : ''}>오전 11:00</option>
 											</optgroup>
 											<optgroup label="오후">
-												<option value="12:00">정오 12:00</option>
-												<option value="13:00">오후 1:00</option>
-												<option value="14:00">오후 2:00</option>
-												<option value="15:00">오후 3:00</option>
-												<option value="16:00">오후 4:00</option>
-												<option value="17:00">오후 5:00</option>
-												<option value="18:00">오후 6:00</option>
-												<option value="19:00">오후 7:00</option>
-												<option value="20:00">오후 8:00</option>
-												<option value="21:00">오후 9:00</option>
-												<option value="22:00">오후 10:00</option>
-												<option value="23:00">오후 11:00</option>
-												<option value="00:00">자정 12:00</option>
+												<option value="12:00" ${time_second eq '12:00' ? 'selected="selected"' : ''}>정오 12:00</option>
+												<option value="13:00" ${time_second eq '13:00' ? 'selected="selected"' : ''}>오후 1:00</option>
+												<option value="14:00" ${time_second eq '14:00' ? 'selected="selected"' : ''}>오후 2:00</option>
+												<option value="15:00" ${time_second eq '15:00' ? 'selected="selected"' : ''}>오후 3:00</option>
+												<option value="16:00" ${time_second eq '16:00' ? 'selected="selected"' : ''}>오후 4:00</option>
+												<option value="17:00" ${time_second eq '17:00' ? 'selected="selected"' : ''}>오후 5:00</option>
+												<option value="18:00" ${time_second eq '18:00' ? 'selected="selected"' : ''}>오후 6:00</option>
+												<option value="19:00" ${time_second eq '19:00' ? 'selected="selected"' : ''}>오후 7:00</option>
+												<option value="20:00" ${time_second eq '20:00' ? 'selected="selected"' : ''}>오후 8:00</option>
+												<option value="21:00" ${time_second eq '21:00' ? 'selected="selected"' : ''}>오후 9:00</option>
+												<option value="22:00" ${time_second eq '22:00' ? 'selected="selected"' : ''}>오후 10:00</option>
+												<option value="23:00" ${time_second eq '23:00' ? 'selected="selected"' : ''}>오후 11:00</option>
+												<option value="00:00" ${time_second eq '00:00' ? 'selected="selected"' : ''}>자정 12:00</option>
 											</optgroup>
 									</select> <br />
 									</td>
@@ -347,6 +350,37 @@ function checkform() {
 
 <script>
 $(function () {
+	$.ajax({
+		url : "../zipcode/gugun",
+		type : 'get',
+		contentType : "text/html;charset:utf-8",
+		data : {
+			sido : $('#sido option:selected').val()
+		},
+		dataType : "json",
+		success : function(d) {
+			var optionStr = "";
+			optionStr += "<option value=''>";
+			optionStr += "-구/군-";
+			optionStr += "</option>";
+			//$.each()통해 반복되는 요소의 인덱스와 요소값을 매개변수로 받을수있다.
+			$.each(d, function(index, data) {
+				optionStr += '<option value="'+data+'">';
+				optionStr += data;
+				optionStr += '</option>';
+			});
+			$('#gugun').html(optionStr);
+		},
+		error : function(e) {
+			alert("오류발생 : " + e.status + " : " + e.statue.Text);
+		}
+	});
+	$('#gugun').change(
+			function() {
+				$('#region').val(
+						$("#sido option:selected").val() + " "
+								+ $("#gugun option:selected").val());
+			})
 	$('#sido').change(function() {
 		$.ajax({
 			url : "../zipcode/gugun",
@@ -384,6 +418,7 @@ $(function () {
 })
 
 $(function() {
+	workday_make()
 	$(".workday_off").click(function() {
 		if ($(this).hasClass("workday_on") == false) {
 			$(this).addClass("workday_on");
