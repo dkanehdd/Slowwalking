@@ -30,7 +30,7 @@ window.onload = function(){
 	logWindow = document.getElementById('logWindow');
 	rece_id= document.getElementById('rece_id').value;
 	room = document.getElementById('room').value
-	webSocket = new WebSocket('ws://192.168.219.121:8080/slowwalking/EchoServer.do/'+room);
+	webSocket = new WebSocket('ws://192.168.0.31:8080/slowwalking/EchoServer.do/'+room);
 	webSocket.onopen = function(event) {
 		wsOpen(event);
 	};
