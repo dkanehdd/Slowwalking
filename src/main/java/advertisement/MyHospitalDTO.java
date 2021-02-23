@@ -1,6 +1,6 @@
 package advertisement;
 
-public class MyHospitalDTO {
+public class MyHospitalDTO { 
 	
 	private String hp_name;
 	private String hp_sido;

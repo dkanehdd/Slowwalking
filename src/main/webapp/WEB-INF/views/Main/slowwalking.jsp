@@ -7,6 +7,7 @@
 <head>
 <title>느린걸음</title>
 <!-- css, js 파일링크 등 묶음-->
+<script src="../resources/js/hospital.js"></script>
 <%@ include file="../links/linkOnly2dot.jsp"%>
 </head>
 <body style="user-select: none;">

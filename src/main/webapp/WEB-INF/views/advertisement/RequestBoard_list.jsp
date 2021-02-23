@@ -107,8 +107,7 @@ $(function() {
 									value="금">금</button>
 								<button type="button" class="workday_off mr1p" value="토">토</button>
 								<button type="button" class="workday_off" value="일">일</button>
-							</div>							
-							
+							</div>	
 <!-- 							<p style="color: #FFC079">※단기를 원하시는지 정기적으로 일하시기를 원하시는지 알려주세요.</p> -->
 						
 <!-- 							<p style="color: #FFC079">※원하시는 지역을 선택해주세요. 선택하지 않으시면 전체 지역으로 검색됩니다.</p> -->
