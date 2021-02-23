@@ -144,7 +144,7 @@
 							<button type="button" class="workday_off" value="일">일</button>
 							<input type="checkbox" id="time_type" style="visibility:hidden;" name="time_type" value='Y'>
 							<label for="time_type" class="workday_off consultation" style="vertical-align: top; width: 110px;">협의가능</label> 
-							<input type="hid-den" id="workday_name" name="activity_time" value="월,화,수,목,금"> <br /> 
+							<input type="hidden" id="workday_name" name="activity_time" value="월,화,수,목,금"> <br /> 
 							<select name='starttime' id='starttime1' style="width: 24%; margin-top: 10px" class="pass form-control">
 								<optgroup label="오전">
 									<option value="">시작 시각</option> 

@@ -12,293 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<script type="text/javascript">
-function checkform() {
-	var title = document.getElementsByName("title")[0];
-	var children_name = document.getElementsByName("children_name")[0];
-	var age = document.getElementsByName("age")[0];
-	var pay = document.getElementsByName("pay")[0];
-	var start_work = document.getElementsByName("start_work")[0];
-	var region = document.getElementsByName("region")[0];
-	console.log(region.value);
-	 
-	var result = true;
-	
-	if(title.value == ""){
-		alert("제목을 입력해주세요");
-		document.getElementsByName("title")[0].focus();
-		result = false;
-	}else if(children_name.value == ""){
-		alert("아이의 이름을 입력해주세요");
-		document.getElementsByName("children_name")[0].focus();
-		result = false;
-	}else if(age.value == ""){
-		alert("아이의 나이를 입력해주세요");
-		document.getElementsByName("age")[0].focus();
-		result = false;
-	}else if(pay.value == ""){
-		alert("시터의 시급을 입력해주세요");
-		document.getElementsByName("pay")[0].focus();
-		result = false;
-	}else if(region.value == ""){
-		alert("지역을 알려주세요");
-		document.getElementsByName("region")[0].focus();
-		result = false;
-	}else if(start_work.value == ""){
-		alert("시터의 일 시작일을 작성해주세요");
-		document.getElementsByName("start_work")[0].focus();
-		result = false;
-	}
-	
-	return result;
-}
-</script>
-<%@ include file="../include/top.jsp"%>
-<body>
-	<section class="testimonial section-padding"
-		style="background-color: var(--project-bg);">
-		<div class="container">
-			<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
-				<div class="text-center">
-					<h2>구직 신청 의뢰서를 수정해주세요.</h2>
-					<form
-						action="requestBoardAction_edit?${_csrf.parameterName}=${_csrf.token}"
-						method="post" name="requestBoard" enctype="multipart/form-data"
-						onsubmit="return checkform();">
-						<div class="custom-control custom-switch">
-						<!-- checked속성안에 jstl의 ""가 문법상 적용이 안된느거 같아서 아직 어떻게 할지 모르겠다. -->
-							<input type="checkbox" class="custom-control-input" id="switch1"
-								name="advertise" checked="${dto.advertise eq 'on' ? 'checked' : ''}"> <label class="custom-control-label"
-								for="switch1">의뢰서 보이기</label>
-						</div>
-
-						<div class="text-center">
-
-							<table class="table table-bordered">
-								<colgroup>
-									<col width="50%" />
-									<col width="*" />
-								</colgroup>
-								<input type="hid-den" name="id" value="${user_id }" />
-								<input type="hid-den" name="idx" value="${dto.idx }">
-								<input type="hid-den" name="list_flag" value="${list_flag }">
-								<tbody>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">신청서의
-											제목을 작성해주세요</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" name="title" value="${dto.title }"/></td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">아이의
-											이쁜 이름을 적어주세요</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" name="children_name" value="${dto.children_name }"/></td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">이쁜
-											아이의 사진도 함께 넣어주세요</th>
-										<td>
-										<c:choose>
-											<c:when test="${not empty dto.image }">
-												현재 사진이 있습니다 바꾸실려면 파일선택을 누루세요!
-											</c:when>
-											<c:otherwise>
-												사진이 아직 없습니다!
-											</c:otherwise>
-										</c:choose>
-										<input type="file" 
-											style="width: 400px;" name="image"/></td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">아이의
-											현재연령을 알려주세요</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" name="age" value="${dto.age }"/></td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">시터에게
-											줄수있는 시급을 적어주세요<br/>
-											<small>※2021년 기준 최저시급 : 8,720원</small>
-										</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" name="pay" value="${dto.pay }"/></td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">지역구를
-											적어주세요</th>
-										<td><div id="area_box"  style="clear: both;">
-											<select id='sido' class="form-control">
-												<option value="">시/도 선택</option>
-												<option value="서울">서울</option>
-												<option value="강원">강원</option>
-												<option value="경기">경기</option>
-												<option value="경남">경남</option>
-												<option value="경북">경북</option>
-												<option value="광주">광주</option>
-												<option value="대구">대구</option>
-												<option value="대전">대전</option>
-												<option value="부산">부산</option>
-												<option value="울산">울산</option>
-												<option value="인천">인천</option>
-												<option value="전남">전남</option>
-												<option value="전북">전북</option>
-												<option value="제주">제주</option>
-												<option value="충남">충남</option>
-												<option value="충북">충북</option>
-											</select> <span id="catetd1" class="area2ck"
-												style="width: 30%; position: unset; margin: 0"> 
-											<br/>	
-											<select id="gugun" class="form-control">
-													<option value="">-구/군-</option>
-											</select></span><input type="hid`den" name="region"
-												id="region" />
-										</div>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">시터가
-											일하는 시간을 알려주세요</th>
-										<td>
-										<button type="button" class="workday_off workday_on mr1p"
-												value="월">월</button>
-											<button type="button" class="workday_off workday_on mr1p"
-												value="화">화</button>
-											<button type="button" class="workday_off workday_on mr1p"
-												value="수">수</button>
-											<button type="button" class="workday_off workday_on mr1p"
-												value="목">목</button>
-											<button type="button" class="workday_off workday_on mr1p"
-												value="금">금</button>
-											<button type="button" class="workday_off mr1p" value="토">토</button>
-											<button type="button" class="workday_off" value="일">일</button> <input
-											id="time_type" type="checkbox" name="time_type" value='Y'><label
-											for="time_type"><span style="margin-left: 25px;">협의
-													가능</span></label> <input type="hid den" id="workday_name" name="request_time"
-											value="월,화,수,목,금"> <br /> <select name='starttime'
-											id='starttime1' style="width: 24%; margin-top: 10px">
-												<optgroup label="오전">
-													<option value="">시간선택</option>
-													<option value="06:00">오전 6:00</option>
-													<option value="07:00">오전 7:00</option>
-													<option value="08:00">오전 8:00</option>
-													<option value="09:00">오전 9:00</option>
-													<option value="10:00">오전 10:00</option>
-													<option value="11:00">오전 11:00</option>
-												</optgroup>
-												<optgroup label="오후">
-													<option value="12:00">정오 12:00</option>
-													<option value="13:00">오후 1:00</option>
-													<option value="14:00">오후 2:00</option>
-													<option value="15:00">오후 3:00</option>
-													<option value="16:00">오후 4:00</option>
-													<option value="17:00">오후 5:00</option>
-													<option value="18:00">오후 6:00</option>
-													<option value="19:00">오후 7:00</option>
-													<option value="20:00">오후 8:00</option>
-													<option value="21:00">오후 9:00</option>
-													<option value="22:00">오후 10:00</option>
-													<option value="23:00">오후 11:00</option>
-													<option value="00:00">자정 12:00</option>
-												</optgroup>
-											</select> <span style="padding: 0 7px; position: relative;">~</span> <select
-											id="endtime1" style="width: 24%; margin-top: 10px">
-												<optgroup label="오전">
-													<option value="">시간선택</option>
-													<option value="06:00">오전 6:00</option>
-													<option value="07:00">오전 7:00</option>
-													<option value="08:00">오전 8:00</option>
-													<option value="09:00">오전 9:00</option>
-													<option value="10:00">오전 10:00</option>
-													<option value="11:00">오전 11:00</option>
-												</optgroup>
-												<optgroup label="오후">
-													<option value="12:00">정오 12:00</option>
-													<option value="13:00">오후 1:00</option>
-													<option value="14:00">오후 2:00</option>
-													<option value="15:00">오후 3:00</option>
-													<option value="16:00">오후 4:00</option>
-													<option value="17:00">오후 5:00</option>
-													<option value="18:00">오후 6:00</option>
-													<option value="19:00">오후 7:00</option>
-													<option value="20:00">오후 8:00</option>
-													<option value="21:00">오후 9:00</option>
-													<option value="22:00">오후 10:00</option>
-													<option value="23:00">오후 11:00</option>
-													<option value="00:00">자정 12:00</option>
-												</optgroup>
-										</select> <br />
-										</td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">아이의
-											장애등급을 알려주세요.</th>
-										<td>
-											<label class="box-radio-input"> <input
-												type="radio" id="serious"
-												name="disability_grade" value="serious" ${dto.disability_grade eq "serious" ? "checked" : ""}><span>중증</span>
-											</label>
-
-											<label class="box-radio-input"> <input 
-												type="radio"  id="slight"
-												name="disability_grade" value="slight" ${dto.disability_grade eq "slight" ? "checked" : ""}><span>경증</span>
-											</label>
-			
-										</td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">아이를
-											볼때 주의사항을 적어주세요!</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" name="warning" value="${dto.warning }" /></td> 
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">단기
-											시터를 원하시나요? 정기적인 시터를 원하시나요?</th>
-										<td>
-											<label class="box-radio-input" > <input
-												type="radio" id="short"
-												name="regular_short" value="short" ${dto.regular_short eq "short" ? "checked" : ""}><span>단기</span>
-											</label>
-
-											<label class="box-radio-input"> <input
-												type="radio" id="regular"
-												name="regular_short" value="regular" ${dto.regular_short eq "regular" ? "checked" : ""}><span>정기적</span>
-											</label>
-										</td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">시터가
-											일을 시작했으면 하는 날짜를 적어주세요</th>
-										<td>
-											년도 : <select id="select_year" onchange="javascript:lastday();"></select>
-											월 : <select id="select_month" onchange="javascript:lastday();"></select> 
-											일 : <select id="select_day"></select>
-											<input type="hid-den" id="start_work" name="start_work"/>
-										</td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">일할
-											내용을 구체적으로 작성해주세요</th> 
-										<td>
-											<div class="form-group">
-												<textarea class="form-control" rows="5" id="content"
-													name="content">${dto.content }</textarea>
-											</div> 
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<button type="submit" class="btn btn-primary">의뢰 수정하기</button>
-
-						</div>
-					</form>
-				</div>
-			</div>
-
-		</div>
-	</section>
-<style>
+<style type="text/css">
 #free_open {
 	display: none;
 	text-align: center;
@@ -353,6 +67,284 @@ function checkform() {
   background: #fae100;
 }
 </style>
+</head>
+<script type="text/javascript">
+function checkform() {
+	var title = document.getElementsByName("title")[0];
+	var children_name = document.getElementsByName("children_name")[0];
+	var age = document.getElementsByName("age")[0];
+	var pay = document.getElementsByName("pay")[0];
+	var start_work = document.getElementsByName("start_work")[0];
+	var region = document.getElementsByName("region")[0];
+	console.log(region.value);
+	 
+	var result = true;
+	
+	if(title.value == ""){
+		alert("제목을 입력해주세요");
+		document.getElementsByName("title")[0].focus();
+		result = false;
+	}else if(children_name.value == ""){
+		alert("아이의 이름을 입력해주세요");
+		document.getElementsByName("children_name")[0].focus();
+		result = false;
+	}else if(age.value == ""){
+		alert("아이의 나이를 입력해주세요");
+		document.getElementsByName("age")[0].focus();
+		result = false;
+	}else if(pay.value == ""){
+		alert("시터의 시급을 입력해주세요");
+		document.getElementsByName("pay")[0].focus();
+		result = false;
+	}else if(region.value == ""){
+		alert("지역을 알려주세요");
+		document.getElementsByName("region")[0].focus();
+		result = false;
+	}else if(start_work.value == ""){
+		alert("시터의 일 시작일을 작성해주세요");
+		document.getElementsByName("start_work")[0].focus();
+		result = false;
+	}
+	
+	return result;
+}
+</script>
+<%@ include file="../include/top.jsp"%>
+<body>
+	<section class="section-padding" style="background-color: eee;">
+		<div class="container">
+			<div class="section_title">
+				<h1 class="mb-5"><strong>Request Edit</strong> 구인의뢰 수정</h1>
+			</div>
+			<div class="RequestBoardList" data-aos="fade-up" data-aos-delay="400">
+				<div class="text-center">					
+					<form
+						action="requestBoardAction_edit?${_csrf.parameterName}=${_csrf.token}"
+						method="post" name="requestBoard" enctype="multipart/form-data"
+						onsubmit="return checkform();">
+						
+						<input type="hidden" name="id" value="${user_id }" />
+						<input type="hidden" name="idx" value="${dto.idx }">
+						<input type="hidden" name="list_flag" value="${list_flag }">
+						<table class="table form joinF">
+							<colgroup>
+								<col width="30%" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>의뢰서 보이기</th>
+									<td><div class="custom-control custom-switch text-left">
+										<input type="checkbox" class="custom-control-input mb-2" id="switch1"
+											name="advertise" checked="${dto.advertise eq 'on' ? 'checked' : ''}"> <label class="custom-control-label"
+											for="switch1"></label></div>
+									</td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">신청서 제목</th>
+									<td><input type="text" class="form-control"
+										style="width: 400px;" name="title" value="${dto.title }"/></td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">아이의 이름</th>
+									<td><input type="text" class="form-control"
+										style="width: 400px;" name="children_name" value="${dto.children_name }"/></td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">아이의 사진</th>
+									<td>
+									<c:choose>
+										<c:when test="${not empty dto.image }">
+											현재 사진이 있습니다 바꾸시려면 파일선택을 누르세요
+										</c:when>
+										<c:otherwise>
+											사진이 아직 없습니다
+										</c:otherwise>
+									</c:choose>
+									<input type="file" 
+										style="width: 400px;" name="image"/></td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">아이의 현재연령</th>
+									<td><input type="text" class="form-control"
+										style="width: 400px;" name="age" value="${dto.age }"/></td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">시터의 시급<br/>
+										<small>※2021년 기준 최저시급 : 8,720원</small>
+									</th>
+									<td><input type="text" class="form-control"
+										style="width: 400px;" name="pay" value="${dto.pay }"/></td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">지역</th>
+									<td><div id="area_box"  style="clear: both;">
+										<select id='sido' class="pass form-control" style="width: 30%; display: inline-block;">
+											<option value="">시/도 선택</option>
+											<option value="서울">서울</option>
+											<option value="강원">강원</option>
+											<option value="경기">경기</option>
+											<option value="경남">경남</option>
+											<option value="경북">경북</option>
+											<option value="광주">광주</option>
+											<option value="대구">대구</option>
+											<option value="대전">대전</option>
+											<option value="부산">부산</option>
+											<option value="울산">울산</option>
+											<option value="인천">인천</option>
+											<option value="전남">전남</option>
+											<option value="전북">전북</option>
+											<option value="제주">제주</option>
+											<option value="충남">충남</option>
+											<option value="충북">충북</option>
+										</select> <span id="catetd1" class="area2ck"
+											style="width: 30%; position: unset; margin: 0"> 
+										<select id="gugun"  class="pass form-control" style="width: 30%; display: inline-block;">
+												<option value="">-구/군-</option>
+										</select></span><input type="hidden" name="region"
+											id="region" />
+									</div>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">근무시간</th>
+									<td>
+									<button type="button" class="workday_off workday_on mr1p"
+											value="월">월</button>
+										<button type="button" class="workday_off workday_on mr1p"
+											value="화">화</button>
+										<button type="button" class="workday_off workday_on mr1p"
+											value="수">수</button>
+										<button type="button" class="workday_off workday_on mr1p"
+											value="목">목</button>
+										<button type="button" class="workday_off workday_on mr1p"
+											value="금">금</button>
+										<button type="button" class="workday_off mr1p" value="토">토</button>
+										<button type="button" class="workday_off" value="일">일</button> <input
+										id="time_type" style="visibility:hidden;"  type="checkbox" name="time_type" value='Y'>
+										<label for="time_type" class="workday_off consultation" 
+										style="vertical-align: top; width: 110px;">협의가능</label> 
+												<input type="hidden" id="workday_name" name="request_time"
+										value="월,화,수,목,금"> <br /> 
+										<select name='starttime' class="pass form-control"
+										id='starttime1' style="width: 24%; margin-top: 10px; display:inline;">
+											<optgroup label="오전">
+												<option value="">시간선택</option>
+												<option value="06:00">오전 6:00</option>
+												<option value="07:00">오전 7:00</option>
+												<option value="08:00">오전 8:00</option>
+												<option value="09:00">오전 9:00</option>
+												<option value="10:00">오전 10:00</option>
+												<option value="11:00">오전 11:00</option>
+											</optgroup>
+											<optgroup label="오후">
+												<option value="12:00">정오 12:00</option>
+												<option value="13:00">오후 1:00</option>
+												<option value="14:00">오후 2:00</option>
+												<option value="15:00">오후 3:00</option>
+												<option value="16:00">오후 4:00</option>
+												<option value="17:00">오후 5:00</option>
+												<option value="18:00">오후 6:00</option>
+												<option value="19:00">오후 7:00</option>
+												<option value="20:00">오후 8:00</option>
+												<option value="21:00">오후 9:00</option>
+												<option value="22:00">오후 10:00</option>
+												<option value="23:00">오후 11:00</option>
+												<option value="00:00">자정 12:00</option>
+											</optgroup>
+										</select> <span style="padding: 0 7px; position: relative;">~</span> 
+										<select  class="pass form-control"
+										id="endtime1" style="width: 24%; margin-top: 10px; display:inline;">
+											<optgroup label="오전">
+												<option value="">시간선택</option>
+												<option value="06:00">오전 6:00</option>
+												<option value="07:00">오전 7:00</option>
+												<option value="08:00">오전 8:00</option>
+												<option value="09:00">오전 9:00</option>
+												<option value="10:00">오전 10:00</option>
+												<option value="11:00">오전 11:00</option>
+											</optgroup>
+											<optgroup label="오후">
+												<option value="12:00">정오 12:00</option>
+												<option value="13:00">오후 1:00</option>
+												<option value="14:00">오후 2:00</option>
+												<option value="15:00">오후 3:00</option>
+												<option value="16:00">오후 4:00</option>
+												<option value="17:00">오후 5:00</option>
+												<option value="18:00">오후 6:00</option>
+												<option value="19:00">오후 7:00</option>
+												<option value="20:00">오후 8:00</option>
+												<option value="21:00">오후 9:00</option>
+												<option value="22:00">오후 10:00</option>
+												<option value="23:00">오후 11:00</option>
+												<option value="00:00">자정 12:00</option>
+											</optgroup>
+									</select> <br />
+									</td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">아이의 장애등급</th>
+									<td>
+										<!-- 중복선택 아닌 경우 radio로 할게요! -->
+										<label><input
+											type="radio" id="serious"
+											name="disability_grade" value="serious" ${dto.disability_grade eq "serious" ? "checked" : ""}><span> 중증</span>
+										</label>
+										
+										<label><input 
+											type="radio"  id="slight"
+											name="disability_grade" value="slight" ${dto.disability_grade eq "slight" ? "checked" : ""}><span> 경증</span>
+										</label>
+		
+									</td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">주의사항
+									<br><small>※없을 경우 공란</small></th>
+									<td><input type="text" class="form-control"
+										style="width: 400px;" name="warning" value="${dto.warning }" /></td> 
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">고용 형태</th>
+									<td>
+										<label ><input
+											type="radio" id="short"
+											name="regular_short" value="short" ${dto.regular_short eq "short" ? "checked" : ""}><span> 단기</span>
+										</label>
+
+										<label><input
+											type="radio" id="regular"
+											name="regular_short" value="regular" ${dto.regular_short eq "regular" ? "checked" : ""}><span> 정기적</span>
+										</label>
+									</td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">시작일자</th>
+									<td>
+										<select class="mr-2" id="select_year" onchange="javascript:lastday();"></select> 
+										<select class="mr-2" id="select_month" onchange="javascript:lastday();"></select> 
+										<select id="select_day"></select>
+										<input type="hidden" id="start_work" name="start_work"/>
+									</td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">근무 상세</th> 
+									<td>
+										<div class="form-group">
+											<textarea  class="contents noresize" rows="5" id="content"
+												name="content">${dto.content }</textarea>
+										</div> 
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="submit" class="btn btn-primary">의뢰 수정하기</button>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
 <script>
 $(function () {
 	$('#sido').change(function() {
@@ -390,8 +382,7 @@ $(function () {
 		
 	});
 })
-</script>
-<script>
+
 $(function() {
 	$(".workday_off").click(function() {
 		if ($(this).hasClass("workday_on") == false) {
@@ -537,10 +528,8 @@ function workday_make() {
 		$("#workday_name").val(workday_tyle);
 	}
 }
-
-</script>
-<!-- 선택한 년과 월에 따라 마지막 일 구하기 --> 
-<script> 
+	<!-- 선택한 년과 월에 따라 마지막 일 구하기 --> 
+ 
 	var start_year="2020";// 시작할 년도 
 	var today = new Date(); 
 	var index=0; 
@@ -575,17 +564,16 @@ function workday_make() {
 		}
 	} 
 	
-	</script>
+</script>
 
-	<!-- Footer메뉴 -->
-	<%@ include file="../include/footer.jsp"%>
-
-	<!-- 스크립트 -->
-	<script src="../resources/js/jquery.min.js"></script>
-	<script src="../resources/js/bootstrap.min.js"></script>
-	<script src="../resources/js/aos.js"></script>
-	<script src="../resources/js/owl.carousel.min.js"></script>
-	<script src="../resources/js/smoothscroll.js"></script>
-	<script src="../resources/js/custom.js"></script>
+<!-- Footer메뉴 -->
+<%@ include file="../include/footer.jsp"%>
+<!-- 스크립트 -->
+<script src="../resources/js/jquery.min.js"></script>
+<script src="../resources/js/bootstrap.min.js"></script>
+<script src="../resources/js/aos.js"></script>
+<script src="../resources/js/owl.carousel.min.js"></script>
+<script src="../resources/js/smoothscroll.js"></script>
+<script src="../resources/js/custom.js"></script>
 </body>
 </html>
