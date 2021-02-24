@@ -7,7 +7,7 @@
 	height: 20px;
 	border-radius: 50%;
 	display: inline-block;
-	background-color: fff36d;
+	background-color: #fff36d;
 	color: var(--primary-color);
 	text-align:center;
 	font-size: 14px;
