@@ -17,27 +17,28 @@
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <style type="text/css">
 /* 화면 아래에 인터뷰 신청하기 div css */
-._1nW60 {
-	min-height: 50px;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 10px 18px;
+._1nW60 {	
+	min-height: 50px;	
 	background-color: #fff;
-	-ms-flex-align: stretch;
-	align-items: stretch;
 	-webkit-box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	position: fixed;
-	left : 400px;
-	right : 400px;
 	bottom: 0;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 14;
 	margin: 0 auto;
+	left: calc((25%-1140px)/2);
+	text-align:center;
+/*  left : 400px;  */
+/* 	right : 400px; */
+/* 	-ms-flex-direction: row; */
+/* 	flex-direction: row; */
+/* 	-ms-flex-pack: justify; */
+/* 	justify-content: space-between; */
+/* 	-ms-flex-align: stretch; */
+/* 	align-items: stretch; */
 }
 .container {
 	padding: 0;
@@ -52,10 +53,10 @@
 </head>
 <body>
 <%@ include file="../include/top.jsp"%>
-<section class="section-padding" style="background-color: #eee;">
+<section class="section-padding" style="background-color: #eee;" >
 	<div class="container noPdForm" data-aos="fade-up" data-aos-delay="400">
 		<div>
-		<div style="padding:100px;">
+			<div style="padding:100px;">
 				<!-- 별점 -->
 				<div class="row ml-0" style="display:inline-block;">
 					<c:choose>
@@ -155,7 +156,7 @@
 					<button onClick="location.href='requestBoardAction_delete?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-dark">삭제하기</button>
 				</c:if>
 			</div>
-		<!-- 후기 -->
+			<!-- 후기 -->
 			<div class="container p-3 pb-5" style="background-color:#eee;">
 				<h3 style="text-align: center;" class="mt-3">
 					<strong>후기</strong> comment
@@ -218,31 +219,32 @@
 		</div><!-- 후기끝  -->
 		<span class="clear"></span>
 	</div>
-		<c:if test="${sessionScope.flag eq 'sitter' }">
-		<div class="_1nW60 container">
-			    <div class="_2KQBU">
-			        <div class="_1Lb4l">
-			            <div class="_26pci">
-			                <c:out value="${first}○${last}" />
-			                (${dto.age }세)
-			            </div>
-			        </div>
-			        <div class="_2RUNH">희망시급 :<fmt:formatNumber value="${dto.pay }" type="number" />원</div>
-			        <div style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
+	<c:if test="${sessionScope.flag eq 'sitter' }">	
+		<!-- 하단 fixed 창 -->
+		<div class="_1nW60 container" style="padding: 10px 18px; background-color: rgba( 255,255,255,0.7);">
+		    <div class="_2KQBU">
+		        <div class="_1Lb4l">
+		            <div class="_26pci">
+		                <c:out value="${first}○${last}" />
+		                (${dto.age }세)
+		            </div>
+		        </div>
+		        <div class="_2RUNH">희망시급: <span style="color:var(--primary-color); font-weight: 600;"><fmt:formatNumber value="${dto.pay }" type="number"/></span> 원</div>
+		        <div style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
 		            <button tabindex="0" type="button"
 		                style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
-		                <div>
-		                    <div style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
-		                        <span style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;"
-		                           id="submit">인터뷰 신청하기</span>
-		                    </div>
-		                </div>
-		            </button>
-		        </div>
-		    </div>
+			            <div>
+			                <div style="height: 50px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
+			                    <span style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgb(255, 255, 255); line-height: 50px;"
+			                       id="submit">인터뷰 신청하기</span>
+			                </div>
+			            </div>
+					</button>
+	        	</div>
+	    	</div>
 		</div>
-		</c:if>
-		<input type="hidden" id="idx" value="${dto.idx}"/>
+	</c:if>
+	<input type="hidden" id="idx" value="${dto.idx}"/>
 <input type="hidden" id="parents_id" value="${dto.id}" />
 <input type="hidden" id="request_time" value="${dto.request_time}" />
 </section>

@@ -21,26 +21,27 @@
 <style type="text/css">
 /* 화면 아래에 인터뷰 신청하기 div css */
 ._1nW60 {
-	min-height: 50px;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 10px 18px;
+	min-height: 50px;	
 	background-color: #fff;
-	-ms-flex-align: stretch;
-	align-items: stretch;
 	-webkit-box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	position: fixed;
-	left: 400px;
-	right : 400px;
 	bottom: 0;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 14;
 	margin: 0 auto;
+	left: calc((25%-1140px)/2);
+	text-align:center;
+/*  left : 400px;  */
+/* 	right : 400px; */
+/* 	-ms-flex-direction: row; */
+/* 	flex-direction: row; */
+/* 	-ms-flex-pack: justify; */
+/* 	justify-content: space-between; */
+/* 	-ms-flex-align: stretch; */
+/* 	align-items: stretch; */
 }
 .container {
 	padding: 0;
