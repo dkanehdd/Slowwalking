@@ -398,6 +398,8 @@ public class AdvertisementController {
 			String fileName = "";
 			List resultList = new ArrayList();
 			
+			System.out.println("이미지 이름 : " + req.getParameter("image"));
+			
 			list_flag = req.getParameter("list_flag");
 			System.out.println("파라미터로 넘어온 list_flag : " + list_flag);
 			
@@ -405,7 +407,9 @@ public class AdvertisementController {
 			dto.setIdx(Integer.parseInt(req.getParameter("idx")));
 			dto.setId(req.getParameter("id"));
 			dto.setChildren_name(req.getParameter("children_name"));
-			
+			dto.setAge("age");
+			dto.setTitle(req.getParameter("title"));
+			dto.setRegular_short(req.getParameter("regular_short"));
 			
 			String advertise = req.getParameter("advertise");
 			
@@ -456,6 +460,7 @@ public class AdvertisementController {
 			dto.setWarning(req.getParameter("warning"));
 			String age = req.getParameter("age");
 			dto.setStart_work(req.getParameter("start_work"));
+			System.out.println("시작 날짜 : " + dto.getStart_work());
 			dto.setContent(req.getParameter("content"));
 			
 			File directory = new File(path);
@@ -473,11 +478,29 @@ public class AdvertisementController {
 				//한글깨짐방지 처리후 전송된 파일명을 가져옴
   				String originalName = 
   					new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
+  				System.out.println("originalName : " + originalName);
   				//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다.
+  				
+  				//폼값 확인
+  				System.out.println("dto.getPay() : " + dto.getPay());
+  				System.out.println("dto.region() : " + dto.getRegion());
+  				System.out.println("dto.request_time() : " + dto.getRequest_time());
+  				System.out.println("dto.request_date() : " + dto.getRequest_date());
+  				System.out.println("dto.advertise() : " + dto.getAdvertise());
+  				System.out.println("dto.getchildren_name() : " + dto.getChildren_name());
+  				System.out.println("dto.warning() : " + dto.getWarning());
+  				System.out.println("dto.age() : " + dto.getAge());
+  				System.out.println("dto.disability_grade() : " + dto.getDisability_grade());
+  				System.out.println("dto.title() : " + dto.getTitle());
+  				System.out.println("dto.regular_short() : " + dto.getRegular_short());
+  				System.out.println("dto.start_work() : " + dto.getStart_work());
+  				System.out.println("dto.content() : " + dto.getContent());
+  				System.out.println("dto.idx : " + dto.getIdx());
+  				
+  				
   				if("".equals(originalName)) {
   					System.out.println("혹시 이거?");
   					int result = sqlSession.getMapper(RequestBoardImpl.class).noImageUpdateRequestBoard(dto);
-  					System.out.println("혹시 이거!");
   					if(result == 1) {
   						System.out.println("1행이 업데이트되었습니다.");
   					}else {
@@ -508,9 +531,7 @@ public class AdvertisementController {
 				
 				dto.setImage(saveFileName);
 				
-				System.out.println("나이 : " + dto.getAge());
-				System.out.println("이미지 : " + dto.getImage());
-				System.out.println("주의 사항 : " + dto.getWarning());
+				
 				int result = sqlSession.getMapper(RequestBoardImpl.class).updateRequestBoard(dto);
 				
 				if(result == 1) {

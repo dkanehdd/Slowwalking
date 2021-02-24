@@ -103,26 +103,13 @@ function checkform() {
 										<th class="text-center" style="vertical-align: middle;">아이의
 											현재연령을 알려주세요</th>
 										<td><select class="form-control" id="age" name="age">
-										      <option>1</option>
-										      <option>2</option>
-										      <option>3</option>
-										      <option>4</option>
-										      <option>5</option>
-										      <option>6</option>
-										      <option>7</option>
-										      <option>8</option>
-										      <option>9</option>
-										      <option>10</option>
-										      <option>11</option>
-										      <option>12</option>
-										      <option>13</option>
-										      <option>14</option>
-										      <option>15</option>
-										      <option>16</option>
-										      <option>17</option>
-										      <option>18</option>
-										      <option>19</option>
-										      <option>20</option>
+										    	<option>선호 연령대(무관)</option>
+								    			<option>0~3(영아)</option>
+		 						      			<option>4~7(유아)</option> 
+		 						      			<option>8~10(초등 저학년)</option> 
+		 						      			<option>11~13(초등 고학년)</option> 
+								      			<option>14~16(중등)</option> 
+								      			<option>17~19(고등)</option>
 										    </select>
 										    </td>
 									</tr>
@@ -569,7 +556,7 @@ function workday_make() {
 </script>
 <!-- 선택한 년과 월에 따라 마지막 일 구하기 --> 
 <script> 
-	var start_year="2020";// 시작할 년도 
+	var start_year="2021";// 시작할 년도 
 	var today = new Date(); 
 	var index=0; 
 	for(var y=start_year; y<="2030"; y++){ 

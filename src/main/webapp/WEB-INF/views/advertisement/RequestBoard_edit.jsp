@@ -167,8 +167,16 @@ function checkform() {
 								</tr>
 								<tr>
 									<th style="vertical-align: middle;">아이의 현재연령</th>
-									<td><input type="text" class="form-control"
-										style="width: 400px;" name="age" value="${dto.age }"/></td>
+									<td><select class="form-control" id="age" name="age">
+									     <option>선호 연령대(무관)</option>
+							    		<option>0~3(영아)</option>
+	 						      		<option>4~7(유아)</option> 
+	 						      		<option>8~10(초등 저학년)</option> 
+	 						      		<option>11~13(초등 고학년)</option> 
+							      		<option>14~16(중등)</option> 
+							      		<option>17~19(고등)</option>
+								    </select>
+								    </td>
 								</tr>
 								<tr>
 									<th style="vertical-align: middle;">시터의 시급<br/>
@@ -565,7 +573,7 @@ function workday_make() {
 }
 	<!-- 선택한 년과 월에 따라 마지막 일 구하기 --> 
  
-	var start_year="2020";// 시작할 년도 
+	var start_year="2021";// 시작할 년도 
 	var today = new Date(); 
 	var index=0; 
 	for(var y=start_year; y<="2030"; y++){ 
