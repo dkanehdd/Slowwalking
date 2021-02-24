@@ -67,7 +67,10 @@ public class AndroidRequestController {
       int index = Integer.parseInt(req.getParameter("idx"));
 
       RequestBoardDTO requestBoarddto = sqlSession.getMapper(RequestBoardImpl.class).requestBoardView(index);
-      
+      String children_name = requestBoarddto.getChildren_name();
+      String change_name = children_name.substring(0,1) + 0 + children_name.substring(2);
+      System.out.println("변환된 아이의 이름 : " + change_name);
+      requestBoarddto.setChildren_name(change_name);
       map.put("dto", requestBoarddto);
       //시터인지 부모회원인지 확인하는 쿼리문
 
