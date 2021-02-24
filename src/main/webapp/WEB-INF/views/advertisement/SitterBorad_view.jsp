@@ -244,7 +244,7 @@
 		    </div>
 		</div>
 	</c:if>
-	<input type="hidden" id="id" value="${dto.sitter_id }"/>
+	<input type="hid`den" id="sitter_id" value="${dto.sitter_id }"/>
 	<input type="hidden" id="activity_time" value="${dto.activity_time }"/>		
 </section>
 <!-- Footer메뉴 -->
@@ -287,7 +287,7 @@
 			url : "../mypage/addList?${_csrf.parameterName}=${_csrf.token}",
 			type : "GET",
 			data : { 
-				sitterBoard_id : $('#id').val(),
+				sitterBoard_id : $('#sitter_id').val(),
 				request_time : $('#activity_time').val()
 			},
 			dataType : "json", 
