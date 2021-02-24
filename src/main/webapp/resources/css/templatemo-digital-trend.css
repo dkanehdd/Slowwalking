@@ -317,7 +317,7 @@ ol, ul {
     mypage   //hjkosmo 추가    
   -----------------------------------------*/
 .mypage .imgBox{width:200px; height:200px; text-align: center;}
-.mypage .imgBox img {width:100%; box-sizing: content-box; display: block;}
+.mypage .imgBox img {width:100%; height: 100%; box-sizing: border-box; display: block;}
 .mypage .in {position:relative; bottom:190px; left: 160px; z-index: 999; width:30px; height:30px;}
 .mypage .in:hover{
 	cursor:pointer;	
@@ -1340,5 +1340,4 @@ span.star-prototype > * {
 }
 .mainSearch {
 	font-size: 1.5em;
-}
 }
