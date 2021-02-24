@@ -12,6 +12,7 @@ function checkform() {
 	var pay = document.getElementsByName("pay")[0];
 	var start_work = document.getElementsByName("start_work")[0];
 	var region = document.getElementsByName("region")[0];
+	var content = document.getElementsByName("content")[0];
 	console.log(region.value);
 	
 	var result = true;
@@ -39,6 +40,10 @@ function checkform() {
 	}else if(start_work.value == ""){
 		alert("시터의 일 시작일을 작성해주세요");
 		document.getElementsByName("start_work")[0].focus();
+		result = false;
+	}else if(content.value == ""){
+		alert("시터의 일 시작일을 작성해주세요");
+		document.getElementsByName("content")[0].focus();
 		result = false;
 	}
 	
