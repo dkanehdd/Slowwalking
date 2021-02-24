@@ -105,6 +105,10 @@ function checkform() {
 		alert("시터의 일 시작일을 작성해주세요");
 		document.getElementsByName("start_work")[0].focus();
 		result = false;
+	}else if(content.value == ""){
+		alert("일할 내용을 구체적으로 작성해주세요");
+		document.getElementsByName("content")[0].focus();
+		result = false;
 	}
 	
 	return result;

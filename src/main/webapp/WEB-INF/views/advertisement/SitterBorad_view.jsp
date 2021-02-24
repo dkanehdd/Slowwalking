@@ -164,7 +164,7 @@
 				<br />
 				<c:choose>
 					<c:when test="${empty lists}">
-						<div class="card">등록된 후기가 없습니다.</div>
+						<div>등록된 후기가 없습니다.</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row">
@@ -244,7 +244,7 @@
 		    </div>
 		</div>
 	</c:if>
-	<input type="hid`den" id="sitter_id" value="${dto.sitter_id }"/>
+	<input type="hidden" id="sitter_id" value="${dto.sitter_id }"/>
 	<input type="hidden" id="activity_time" value="${dto.activity_time }"/>		
 </section>
 <!-- Footer메뉴 -->

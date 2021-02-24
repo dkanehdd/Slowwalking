@@ -39,7 +39,27 @@
 /* 	justify-content: space-between; */
 /* 	-ms-flex-align: stretch; */
 /* 	align-items: stretch; */
+	.workday_off {
+		border: 1px solid #e0e0e0;
+		background: #fff;
+		margin-top: 7px;
+		width: calc(70%/ 8);
+		color: #595757;
+		padding: 6px 0;
+		text-align: center;
+		font-family: Noto Sans KR, sans-serif !important;
+		font-size: 15px;
+		font-weight: 400; 
+	}
+	.workday_on {
+		background: #F77B26;
+	}
+	#back{
+		background-color: #DBDBDB;
+		width: 700px;
+	}
 }
+
 .container {
 	padding: 0;
 }
@@ -103,7 +123,7 @@
 						</tr>
 						<tr>
 							<th>장소</th>
-							<td><i class='fas fa-map-marker-alt' style='font-size:20px; color: #F77B26;'></i>${dto.region }</td>
+							<td><i class='fas fa-map-marker-alt' style='font-size:20px; color: #F77B26;'></i> ${dto.region }</td>
 						</tr>
 						<tr>
 							<th>요일</th>
@@ -122,7 +142,7 @@
 					<button type="button" ${fn:contains(timeArray, '일') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'} 
 					value="일">일</button> 
 					<button type="button" ${fn:contains(timeArray, '협의 가능') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
-					value="협의가능" style="width: 60px">협의가능</button>
+					value="협의가능" style="width: 90px">협의가능</button>
 					</td>
 						</tr>
 						<tr>
@@ -157,10 +177,12 @@
 							</td>
 						</tr>
 					</tbody>
-				</table>
+				</table>				
 				<c:if test="${dto.id eq sessionScope.user_id }">
-					<button onClick="location.href='requestBoard_edit?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-warning">수정하기</button>
-					<button onClick="location.href='requestBoardAction_delete?idx=${dto.idx}&list_flag=${list_flag }'" class="btn btn-dark">삭제하기</button>
+					<div class="btnBelow">
+						<button class="btn btn-secondary btn-cc" onClick="location.href='requestBoardAction_delete?idx=${dto.idx}&list_flag=${list_flag }'">삭제하기</button>
+						<button class="btn btn-danger btn400w" onClick="location.href='requestBoard_edit?idx=${dto.idx}&list_flag=${list_flag }'">수정하기</button>
+					</div>
 				</c:if>
 			</div>
 			<!-- 후기 -->
@@ -171,7 +193,7 @@
 				<br />
 				<c:choose>
 					<c:when test="${empty lists}">
-						<div class="card">등록된 후기가 없습니다.</div>
+						<div>등록된 후기가 없습니다.</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row">
@@ -238,6 +260,9 @@
 		        </div>
 		        <div class="_2RUNH">희망시급: <span style="color:var(--primary-color); font-weight: 600;"><fmt:formatNumber value="${dto.pay }" type="number"/></span> 원</div>
 		        <div style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px; height: 50px;">
+<!-- 		        <div class="btnBelow"> -->
+<!-- 					<button type="button" id="submit" class="btn btn-danger">의뢰 수정하기</button> -->
+<!-- 				</div>        -->
 		            <button tabindex="0" type="button"
 		                style="border: 10px; box-sizing: border-box; display: inline-block; font-family: &amp; amp; amp; quot; Noto Sans KR&amp;amp; amp; quot; , sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 50px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 112, 0); text-align: center;">
 			            <div>
@@ -255,33 +280,8 @@
 <input type="hidden" id="parents_id" value="${dto.id}" />
 <input type="hidden" id="request_time" value="${dto.request_time}" />
 </section>
-<style>
-.workday_off {
-	border: 1px solid #e0e0e0;
-	background: #fff;
-	margin-top: 7px;
-	width: calc(70%/ 8);
-	color: #595757;
-	padding: 6px 0;
-	text-align: center;
-	font-family: Noto Sans KR, sans-serif !important;
-	font-size: 15px;
-	font-weight: 400; 
-}
-.workday_on {
-	background: #F77B26;
-}
-</style>
 <!-- Footer메뉴 -->
 <%@ include file="../include/footer.jsp"%>
-<style>
-#back{
-	background-color: #DBDBDB;
-	width: 700px;
-}
-</style>
-
-
 </body>
 <script type="text/javascript">
 $(function(){
