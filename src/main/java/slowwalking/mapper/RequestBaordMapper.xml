@@ -44,16 +44,16 @@
 	
 	<update id="updateRequestBoard" parameterType="advertisement.RequestBoardDTO">
 		UPDATE requestBoard
-			SET pay=#{pay}, region=#{region}, request_time=#{request_time}, advertise=#{advertise},
-			children_name=#{children_name}, warning=#{warning}, image=#{image}, age=#{age},
+			SET pay=#{pay}, region=#{region}, request_time=#{request_time}, request_date=#{request_date}, advertise=#{advertise},
+			children_name=#{children_name}, warning=#{warning}, image=#{image}, age=#{age}, disability_grade=#{disability_grade},
 			title=#{title}, regular_short=#{regular_short}, start_work=to_date(#{start_work},'YYYY-MM-DD'), content=#{content}
 			WHERE idx=#{idx}
 	</update>
 	
 	<update id="noImageUpdateRequestBoard" parameterType="advertisement.RequestBoardDTO">
 		UPDATE requestBoard
-			SET pay=#{pay}, region=#{region}, request_time=#{request_time}, advertise=#{advertise},
-			children_name=#{children_name}, warning=#{warning}, age=#{age},
+			SET pay=#{pay}, region=#{region}, request_time=#{request_time}, request_date=#{request_date}, advertise=#{advertise},
+			children_name=#{children_name}, warning=#{warning}, age=#{age}, disability_grade=#{disability_grade},
 			title=#{title}, regular_short=#{regular_short}, start_work=to_date(#{start_work},'YYYY-MM-DD'), content=#{content}
 			WHERE idx=#{idx}
 	</update>

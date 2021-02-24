@@ -105,7 +105,7 @@
 							<td><i class='fas fa-map-marker-alt' style='font-size:20px; color: #F77B26;'></i>${dto.region }</td>
 						</tr>
 						<tr>
-							<th>시간</th>
+							<th>요일</th>
 							<td><button type="button" ${fn:contains(timeArray, '월') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 						value="월">월</button>
 					<button type="button" ${fn:contains(timeArray, '화') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
@@ -122,8 +122,11 @@
 					value="일">일</button> 
 					<button type="button" ${fn:contains(timeArray, '협의 가능') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 					value="협의가능" style="width: 60px">협의가능</button>
-					<span>${time }</span>
 					</td>
+						</tr>
+						<tr>
+							<th>시간</th>
+							<td>${time}</td>
 						</tr>
 						<tr>
 							<th>장애 등급</th>
@@ -140,6 +143,10 @@
 						<tr>
 							<th>시터 기간</th>
 							<td>${dto.regular_short }</td>
+						</tr>
+						<tr>
+							<th>근무 상세</th>
+							<td>${dto.content }</td>
 						</tr>
 						<tr>
 							<th style="border-bottom: 2px solid #dee2e6;">선호 지역</th>

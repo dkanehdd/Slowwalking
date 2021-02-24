@@ -251,6 +251,8 @@ public class AdvertisementController {
 		start_work = start_work.substring(0,10);
 		requestBoarddto.setStart_work(start_work);
 		
+		//context 줄바꿈
+		requestBoarddto.setContent(requestBoarddto.getContent().replaceAll("\r\n", "<br/>"));
 		
 		//재조합한 시간을 보냄
 		model.addAttribute("time", time);
@@ -284,19 +286,96 @@ public class AdvertisementController {
 	@RequestMapping("/advertisement/requestBoard_edit")
 	public String ReqeustBoardEdit(Model model,HttpServletRequest req) {
 
+		
 		int index = Integer.parseInt(req.getParameter("idx"));
+		String region_first = "";
+		//String region_second;
+		String time_first = ""; //시작 시간을 저장
+		String time_second = ""; //끝 시간을 저장
 		String list_flag = req.getParameter("list_flag");
 		
 		RequestBoardDTO requestBoarddto = sqlSession.getMapper(RequestBoardImpl.class).requestBoardView(index);
 		
 		String start_work = requestBoarddto.getStart_work();
+		//지역을 나눠서 첫 지역을 저장한다.
+		if(requestBoarddto.getRegion() != null) {
+			System.out.println("지역 : " + requestBoarddto.getRegion());
+			String[] regionArray = requestBoarddto.getRegion().split(" ");
+			
+			region_first = regionArray[0];
+			System.out.println("첫번째 지역 : " + region_first);
+		}
 		
+		//시간을 나눠서 저장한다.
+		if(requestBoarddto.getRequest_time() != null) {
+			System.out.println("시간 : " + requestBoarddto.getRequest_time());
+			String[] timeArray = requestBoarddto.getRequest_time().split(" ~ ");
+			time_first = timeArray[0];
+			System.out.println("시작 시간 : " + time_first);
+			if(timeArray.length > 1) {
+				time_second = timeArray[1];
+				System.out.println("끝 시간 : " + time_second);
+			}
+			
+		}
 		
 		start_work = start_work.substring(0,10);
 		//System.out.println("변환된 시간 : " + start_work);
 		
 		requestBoarddto.setStart_work(start_work);
 		
+		//,로 요일을 배열에 저장함
+		String[] requestTimeArray = requestBoarddto.getRequest_date().split(",");
+		
+		//model로 보낼 arrayList
+		ArrayList<String> timeArray = new ArrayList<String>();
+		
+		//배열을 돌려서 리스트에 배열에 담겨져 있는 요일을 저장
+		for(String temp : requestTimeArray) {
+			System.out.println("나눠진 일하는 시간  : " + temp);
+			if(temp.equals("월")) {
+				timeArray.add(temp);
+			}else if(temp.equals("화")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("화")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("수")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("목")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("금")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("토")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("일")) {
+				timeArray.add(temp);
+			}
+			else if(temp.equals("협의 가능")) {
+				timeArray.add(temp);
+			}
+		}
+		
+		//요일이 잘 저장되었는지 확인
+		Iterator<String> mapIter = timeArray.iterator();
+		
+		while(mapIter.hasNext()) {
+			System.out.println(mapIter.next());
+		}
+		
+		//요일을 보냄
+		model.addAttribute("timeArray", timeArray);
+		//지역을 보냄
+		model.addAttribute("region_first", region_first);
+		//끝 시간을 보냄
+		model.addAttribute("time_first", time_first);
+		//시작 시간을 보냄
+		model.addAttribute("time_second", time_second);
 		model.addAttribute("dto", requestBoarddto);
 		model.addAttribute("list_flag", list_flag);
 
@@ -319,6 +398,8 @@ public class AdvertisementController {
 			String fileName = "";
 			List resultList = new ArrayList();
 			
+			System.out.println("이미지 이름 : " + req.getParameter("image"));
+			
 			list_flag = req.getParameter("list_flag");
 			System.out.println("파라미터로 넘어온 list_flag : " + list_flag);
 			
@@ -326,7 +407,9 @@ public class AdvertisementController {
 			dto.setIdx(Integer.parseInt(req.getParameter("idx")));
 			dto.setId(req.getParameter("id"));
 			dto.setChildren_name(req.getParameter("children_name"));
-			
+			dto.setAge("age");
+			dto.setTitle(req.getParameter("title"));
+			dto.setRegular_short(req.getParameter("regular_short"));
 			
 			String advertise = req.getParameter("advertise");
 			
@@ -377,6 +460,7 @@ public class AdvertisementController {
 			dto.setWarning(req.getParameter("warning"));
 			String age = req.getParameter("age");
 			dto.setStart_work(req.getParameter("start_work"));
+			System.out.println("시작 날짜 : " + dto.getStart_work());
 			dto.setContent(req.getParameter("content"));
 			
 			File directory = new File(path);
@@ -394,11 +478,29 @@ public class AdvertisementController {
 				//한글깨짐방지 처리후 전송된 파일명을 가져옴
   				String originalName = 
   					new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
+  				System.out.println("originalName : " + originalName);
   				//서버로 전송된 파일이 없다면 while문의 처음으로 돌아간다.
+  				
+  				//폼값 확인
+  				System.out.println("dto.getPay() : " + dto.getPay());
+  				System.out.println("dto.region() : " + dto.getRegion());
+  				System.out.println("dto.request_time() : " + dto.getRequest_time());
+  				System.out.println("dto.request_date() : " + dto.getRequest_date());
+  				System.out.println("dto.advertise() : " + dto.getAdvertise());
+  				System.out.println("dto.getchildren_name() : " + dto.getChildren_name());
+  				System.out.println("dto.warning() : " + dto.getWarning());
+  				System.out.println("dto.age() : " + dto.getAge());
+  				System.out.println("dto.disability_grade() : " + dto.getDisability_grade());
+  				System.out.println("dto.title() : " + dto.getTitle());
+  				System.out.println("dto.regular_short() : " + dto.getRegular_short());
+  				System.out.println("dto.start_work() : " + dto.getStart_work());
+  				System.out.println("dto.content() : " + dto.getContent());
+  				System.out.println("dto.idx : " + dto.getIdx());
+  				
+  				
   				if("".equals(originalName)) {
-  					
+  					System.out.println("혹시 이거?");
   					int result = sqlSession.getMapper(RequestBoardImpl.class).noImageUpdateRequestBoard(dto);
-  					
   					if(result == 1) {
   						System.out.println("1행이 업데이트되었습니다.");
   					}else {
@@ -416,8 +518,9 @@ public class AdvertisementController {
 				
 				mfile.transferTo(serverFullName);
 				
+				System.out.println("dto.getIdx" + dto.getId());
 				String image = sqlSession.getMapper(RequestBoardImpl.class).getImage(dto.getIdx());
-				
+				System.out.println("dto.getIdx 성공");
 				System.out.println("찾은 이미지 이름 : " + image);
 				if(image!=null) {
 					File f = new File(path+ File.separator+ image);
@@ -427,6 +530,7 @@ public class AdvertisementController {
 				}
 				
 				dto.setImage(saveFileName);
+				
 				
 				int result = sqlSession.getMapper(RequestBoardImpl.class).updateRequestBoard(dto);
 				

@@ -103,26 +103,13 @@ function checkform() {
 										<th class="text-center" style="vertical-align: middle;">아이의
 											현재연령을 알려주세요</th>
 										<td><select class="form-control" id="age" name="age">
-										      <option>1</option>
-										      <option>2</option>
-										      <option>3</option>
-										      <option>4</option>
-										      <option>5</option>
-										      <option>6</option>
-										      <option>7</option>
-										      <option>8</option>
-										      <option>9</option>
-										      <option>10</option>
-										      <option>11</option>
-										      <option>12</option>
-										      <option>13</option>
-										      <option>14</option>
-										      <option>15</option>
-										      <option>16</option>
-										      <option>17</option>
-										      <option>18</option>
-										      <option>19</option>
-										      <option>20</option>
+										    	<option>선호 연령대(무관)</option>
+								    			<option>0~3(영아)</option>
+		 						      			<option>4~7(유아)</option> 
+		 						      			<option>8~10(초등 저학년)</option> 
+		 						      			<option>11~13(초등 고학년)</option> 
+								      			<option>14~16(중등)</option> 
+								      			<option>17~19(고등)</option>
 										    </select>
 										    </td>
 									</tr>
@@ -131,7 +118,7 @@ function checkform() {
 											줄수있는 시급을 적어주세요<br/>
 											<small>※2021년 기준 최저시급 : 8,720원</small>
 										</th>
-										<td><input type="number" class="form-control form-control"
+										<td><input type="text" class="form-control form-control"
 											style="width: 400px;" name="pay" placeholder="12,000원 or 협의 가능"/>
 										</td>
 									</tr>
@@ -142,7 +129,7 @@ function checkform() {
 										<div id="area_box"  style="clear: both;">
 											<select id='sido' class="form-control">
 												<option value="">시/도 선택</option>
-												<option value="서울">서울</option>
+												<option value="서울" >서울</option>
 												<option value="강원">강원</option>
 												<option value="경기">경기</option>
 												<option value="경남">경남</option>
@@ -163,7 +150,7 @@ function checkform() {
 											<br/>	
 											<select id="gugun" class="form-control">
 													<option value="">-구/군-</option>
-											</select></span><input type="hid`den" name="region"
+											</select></span><input type="hidden" name="region"
 												id="region" />
 										</div>
 										</td>
@@ -186,7 +173,7 @@ function checkform() {
 											<button type="button" class="workday_off" value="일">일</button> <input
 											id="time_type" type="checkbox" name="time_type" value='Y'><label
 											for="time_type"><span style="margin-left: 25px;">협의
-													가능</span></label> <input type="hid den" id="workday_name" name="request_time"
+													가능</span></label> <input type="hidden" id="workday_name" name="request_time"
 											value="월,화,수,목,금"> <br /> <select name='starttime'
 											id='starttime1' style="width: 24%; margin-top: 10px">
 												<optgroup label="오전">
@@ -284,7 +271,7 @@ function checkform() {
 											년도 : <select id="select_year" onchange="javascript:lastday();"></select>
 											월 : <select id="select_month" onchange="javascript:lastday();"></select> 
 											일 : <select id="select_day"></select>
-											<input type="hid-den" id="start_work" value="2020/1/1" name="start_work"/>
+											<input type="hidden" id="start_work" value="2020/1/1" name="start_work"/>
 										<!-- 최대한 빨리 이런 라디오 하나 넣고싶다. 나중에 시간되면 추가하자 -->
 										</td>
 									</tr>
@@ -569,7 +556,7 @@ function workday_make() {
 </script>
 <!-- 선택한 년과 월에 따라 마지막 일 구하기 --> 
 <script> 
-	var start_year="2020";// 시작할 년도 
+	var start_year="2021";// 시작할 년도 
 	var today = new Date(); 
 	var index=0; 
 	for(var y=start_year; y<="2030"; y++){ 
