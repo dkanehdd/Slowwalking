@@ -39,6 +39,7 @@
 /* 	justify-content: space-between; */
 /* 	-ms-flex-align: stretch; */
 /* 	align-items: stretch; */
+	}
 	.workday_off {
 		border: 1px solid #e0e0e0;
 		background: #fff;
@@ -59,7 +60,6 @@
 		width: 700px;
 	}
 }
-
 .container {
 	padding: 0;
 }
