@@ -79,6 +79,12 @@ function checkform() {
 	var region = document.getElementsByName("region")[0];
 	console.log(region.value);
 	 
+	//한글 정규식
+	var check_hangul = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	// 특수문자 정규식
+	var check_special = /[~!@#$%^&*()_+|<>?:{}]/; 
+	
+	
 	var result = true;
 	
 	if(title.value == ""){
@@ -105,6 +111,11 @@ function checkform() {
 		alert("시터의 일 시작일을 작성해주세요");
 		document.getElementsByName("start_work")[0].focus();
 		result = false;
+	}else if(pay.value != '협의 가능'){
+		if(check_hangul.test(pay.value) || check_special.test(pay.value) || pay.value.includes(",")){
+			alert("시급은 숫자만 입력이 가능합니다.");
+			result = false;
+		}
 	}
 	
 	return result;
@@ -183,7 +194,7 @@ function checkform() {
 										<small>※2021년 기준 최저시급 : 8,720원</small>
 									</th>
 									<td><input type="text" class="form-control"
-										style="width: 400px;" name="pay" value="${dto.pay }"/></td>
+										style="width: 400px;" name="pay" value="${dto.pay }" placeholder="12000 or 협의 가능(금액을 작성할 경우 숫자만 작성해주세요.)"/></td>
 								</tr>
 								<tr>
 									<th style="vertical-align: middle;">지역</th>

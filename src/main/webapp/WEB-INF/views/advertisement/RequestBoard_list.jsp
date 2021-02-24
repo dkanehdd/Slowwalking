@@ -184,7 +184,12 @@ $(function() {
 										</span>
 										<span class="float-right" 
 										style="width: 15%; font-size: 14px; text-align:right;">
-										희망시급 : ${row.pay }
+										<c:if test="${row.pay ne '협의 가능' }">
+											희망시급 : <fmt:formatNumber value="${row.pay }" pattern="#,###" />
+										</c:if>
+										<c:if test="${row.pay eq '협의 가능' }">
+											희망시급 : ${row.pay }
+										</c:if>
 										<br />ID: ${row.id }<br />
 											<c:choose>
 												<c:when test="${row.starrate eq '0' }">

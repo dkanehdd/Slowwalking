@@ -133,6 +133,15 @@
 							<td>${dto.disability_grade }</td>
 						</tr>
 						<tr>
+							<th>시급</th>
+							<td><c:if test="${dto.pay ne '협의 가능' }">
+									<fmt:formatNumber value="${dto.pay }" pattern="#,###" />원
+								</c:if>
+								<c:if test="${dto.pay eq '협의 가능' }">
+									${dto.pay }
+								</c:if></td>
+						</tr>
+						<tr>
 							<th>주의사항</th>
 							<td><i class="fa fa-warning" style="font-size:24px; color: #DD143C"></i><span style="color: #DD143C; " >${dto.warning }</span></td>
 						</tr>
