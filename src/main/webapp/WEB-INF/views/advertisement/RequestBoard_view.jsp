@@ -193,7 +193,7 @@
 				<br />
 				<c:choose>
 					<c:when test="${empty lists}">
-						<div>등록된 후기가 없습니다.</div>
+						<div>등록된 후기가 없습니다</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row">
