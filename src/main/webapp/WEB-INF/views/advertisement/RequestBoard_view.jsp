@@ -29,7 +29,8 @@
 	box-sizing: border-box;
 	z-index: 14;
 	margin: 0 auto;
-	left: calc((25%-1140px)/2);
+	left: 0;
+	right: 0;
 	text-align:center;
 /*  left : 400px;  */
 /* 	right : 400px; */
