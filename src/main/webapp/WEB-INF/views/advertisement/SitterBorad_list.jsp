@@ -76,7 +76,7 @@ $(function() {
 				<div class="dropMenu">	
 				<input type="hidden" id="workday_name" name="request_time">
 				<div class="schArea">
-					<select id='sido' class="form-control float-left" style="width:33%;">
+					<select id='sido' class="form-control" style="width:20%; display:inline-block;">
 						<option value="">원하는 지역 시/도 선택</option>
 						<option value="서울">서울</option>
 						<option value="강원">강원</option>
@@ -95,15 +95,22 @@ $(function() {
 						<option value="충남">충남</option>
 						<option value="충북">충북</option>
 					</select> 
-					<span id="catetd1" class="area2ck float-left" style="width: 34%; position: unset; margin: 0"> 
-						<select id="gugun" class="form-control">
+					<span id="catetd1" class="area2ck" > 
+						<select id="gugun" class="form-control" style="width: 25%; position: unset; margin: 0;  display:inline-block;">
 								<option value="">-구/군-</option>
 						</select>
-					</span>					
+					</span>		
+					<select name="" id="" class="form-control" style="width:20%; display:inline-block;">
+						<option value="">최소 연령 선택</option>
+					</select>
+					<select name="" id="" class="form-control" style="width:20%; display:inline-block;">
+						<option value="">최대 연령 선택</option>
+					</select><br>
+								
 					<input type="number" name="pay" min="8720"
-					class="form-control float-left" style="width: 33%;"
+					class="form-control mt-2" style="width: 33%; height: 50px; font-size: 17px; display:inline-block;"
 					placeholder="※시급 최대치, 비워둘 시 전체 검색"/>
-					<input type="hidden" name="region" id="region" />
+					<input type="hidden" name="region" id="region"/>
 					<p class="clear"></p>
 				</div>
 			</div>				

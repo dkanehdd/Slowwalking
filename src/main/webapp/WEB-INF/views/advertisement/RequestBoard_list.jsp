@@ -112,7 +112,7 @@ $(function() {
 						
 <!-- 							<p style="color: #FFC079">※원하시는 지역을 선택해주세요. 선택하지 않으시면 전체 지역으로 검색됩니다.</p> -->
 							<div class="schArea">
-								<select id='sido' class="form-control float-left" style="width:33%;">
+								<select id='sido' class="form-control "  style="width:20%; display:inline-block;">
 									<option value="">원하는 지역 시/도 선택</option>
 									<option value="서울">서울</option>
 									<option value="강원">강원</option>
@@ -131,13 +131,13 @@ $(function() {
 									<option value="충남">충남</option>
 									<option value="충북">충북</option>
 								</select> 
-								<span id="catetd1" class="area2ck float-left" style="width: 34%; position: unset; margin: 0"> 
+								<span id="catetd1" class="area2ck " style="width: 25%; position: unset; margin: 0;  display:inline-block;">
 									<select id="gugun" class="form-control">
 											<option value="">-구/군-</option>
 									</select>
 								</span>
 								
-								<select class="form-control float-left" id="age" name="age" style="width: 33%;"> 
+								<select class="form-control " id="age" name="age" style="width:20%; display:inline-block;">
 									<option>선호 연령대(무관)</option>
 							    	<option>0~3(영아)</option>
 	 						      	<option>4~7(유아)</option> 
