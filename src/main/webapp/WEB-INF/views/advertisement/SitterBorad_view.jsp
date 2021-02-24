@@ -21,26 +21,27 @@
 <style type="text/css">
 /* 화면 아래에 인터뷰 신청하기 div css */
 ._1nW60 {
-	min-height: 50px;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 10px 18px;
+	min-height: 50px;	
 	background-color: #fff;
-	-ms-flex-align: stretch;
-	align-items: stretch;
 	-webkit-box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
 	position: fixed;
-	left: 400px;
-	right : 400px;
 	bottom: 0;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 14;
 	margin: 0 auto;
+	left: calc((25%-1140px)/2);
+	text-align:center;
+/*  left : 400px;  */
+/* 	right : 400px; */
+/* 	-ms-flex-direction: row; */
+/* 	flex-direction: row; */
+/* 	-ms-flex-pack: justify; */
+/* 	justify-content: space-between; */
+/* 	-ms-flex-align: stretch; */
+/* 	align-items: stretch; */
 }
 .container {
 	padding: 0;
@@ -163,7 +164,7 @@
 				<br />
 				<c:choose>
 					<c:when test="${empty lists}">
-						<div class="card">등록된 후기가 없습니다.</div>
+						<div>등록된 후기가 없습니다.</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lists }" var="row">
@@ -220,7 +221,7 @@
 		
 	</div>
 	<c:if test="${sessionScope.flag eq 'parents' }">
-		<div class="_1nW60 container">
+		<div class="_1nW60 container" style="padding: 10px 18px; background-color: rgba( 255,255,255,0.7);">
 			    <div class="_2KQBU">
 			        <div class="_1Lb4l">
 			            <div class="_26pci">
@@ -243,7 +244,7 @@
 		    </div>
 		</div>
 	</c:if>
-	<input type="hid`den" id="sitter_id" value="${dto.sitter_id }"/>
+	<input type="hidden" id="sitter_id" value="${dto.sitter_id }"/>
 	<input type="hidden" id="activity_time" value="${dto.activity_time }"/>		
 </section>
 <!-- Footer메뉴 -->
