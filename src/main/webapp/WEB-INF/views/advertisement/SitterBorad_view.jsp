@@ -221,7 +221,7 @@
 		
 	</div>
 	<c:if test="${sessionScope.flag eq 'parents' }">
-		<div class="_1nW60 container">
+		<div class="_1nW60 container" style="padding: 10px 18px; background-color: rgba( 255,255,255,0.7);">
 			    <div class="_2KQBU">
 			        <div class="_1Lb4l">
 			            <div class="_26pci">
