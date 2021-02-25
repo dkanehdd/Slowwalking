@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
 <mapper namespace="member.SitterImpl">
 
 	<insert id="insertSitter">
@@ -29,13 +28,13 @@
       </if>
       <choose>
      	<when test='min_age != null and !(min_age eq "".toString()) and max_age != null and !(max_age eq "".toString())'>
-      		AND BIRTHDAY BETWEEN TO_DATE(#{max_age}, 'YYYY/MM/DD') AND TO_DATE(#{min_age}, 'YYYY/MM/DD')
+      		AND BIRTHDAY BETWEEN TO_DATE(#{min_age}, 'YYYY/MM/DD') AND TO_DATE(#{max_age}, 'YYYY/MM/DD')
       	</when>
       	<when test='min_age != null and !(min_age eq "".toString())'>
-      		AND BIRTHDAY <![CDATA[<=]]> TO_DATE(#{min_age}, 'YYYY/MM/DD')
+      		AND BIRTHDAY <![CDATA[>=]]> TO_DATE(#{min_age}, 'YYYY/MM/DD')
       	</when>
       	<when test='max_age != null and !(max_age eq "".toString())'>
-      		AND BIRTHDAY <![CDATA[>=]]> TO_DATE(#{max_age}, 'YYYY/MM/DD')
+      		AND BIRTHDAY <![CDATA[<=]]> TO_DATE(#{max_age}, 'YYYY/MM/DD')
       	</when>
       </choose>
 	  <if test='region != null and !(region eq "".toString())'>
@@ -47,7 +46,7 @@
 	<!-- 트렁크가 나이 구하는 쿼리문 -->
 	<select id="adminSitterlist" resultType="member.SitterMemberDTO">
 		SELECT s.*, m.name, m.image_path, m.starrate,
-			TRUNC(trunc(months_between(sysdate,m.birthday))/12)+1 age 
+			TRUNC( trunc( months_between( sysdate, m.birthday))/12)+1 age 
 		from sittermember s
             inner join member m
                on s.sitter_id=m.id

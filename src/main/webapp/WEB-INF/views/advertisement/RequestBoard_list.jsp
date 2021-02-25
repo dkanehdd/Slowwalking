@@ -85,7 +85,7 @@ $(function() {
 						<!-- 검색시 선택한 태그들 -->
 						<input type="hidden" readonly class="tagInp" name="search" value="search">
 						<input type="hidden" readonly class="tagInp" id="workday_name" name="request_time">
-						<input type="hidden" readonly class="tagInp" id="consultation" name="consultation" value="협의 가능">
+						<input type="hidden" readonly class="tagInp" id="consultation" name="consultation" value="협의가능">
 						<input type="hidden" readonly class="tagInp" name="region" id="region"/>
 						<!-- 더보기 버튼 -->
 						<p class="clear drop dropMore dropClose">상세옵션 <i class="fa fa-chevron-down" aria-hidden="true"></i></p>
@@ -182,6 +182,12 @@ $(function() {
 												<span id="warning" style="vertical-align:middle;">※ 주의사항 참고</span>
 											</c:if>
 										</span>
+										<c:if test="${row.request_time eq '협의가능' }">
+											<span style="width: 85%" class="clear float-left">선호 시간 : ${row.request_date }</span>
+										</c:if>
+										<c:if test="${row.request_time ne '협의가능' }">
+											<span style="width: 85%" class="clear float-left">선호 시간 : ${row.request_date } ${row.request_time }</span>
+										</c:if>
 										<span class="float-right" 
 										style="width: 15%; font-size: 14px; text-align:right;">
 										희망시급 : ${row.pay }

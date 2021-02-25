@@ -11,6 +11,7 @@
 		    FROM requestBoard R inner join member B
 		    on R.id = B.id
 			WHERE advertise = 'on'
+			order by idx desc
 	</select>
 	
 	<select id="myRequestBoard" resultType="advertisement.RequestBoardDTO">
@@ -96,6 +97,7 @@
 		<if test='age != null and !(age eq "".toString())'>
 			AND age = #{age}
 		</if>
+		order by idx desc
 		
 		
 	</select>
