@@ -108,6 +108,11 @@ $(function(){
 		box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 		transition: all 0.3s ease 0s 
 	}
+	.btnCredit{
+		background-color: #444;
+		color: white;
+		width:120px;
+	}
 	.pay-title{
 		font-size: 16px;
 		color:#444;
@@ -217,7 +222,7 @@ $(function(){
 							</div>
 							<!-- 이부분 다름 주의 !!!포인트!!! 끝-->
 							<p class="pay-title">결제수단을 선택하세요</p>
-							<button class="btn rounded-lg btn-light mr-2" style="background-color: #FFCD00;" onclick="on_pay('kakaopay');"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  카카오결제</button>
+							<button class="btnCredit btn rounded-lg btn-light mr-2" onclick="on_pay('kakaopay');"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  카드결제</button>
 						</div>
 						<input type="hidden" id="price" name="price" value="" size="5">
 						<input type="hidden" name="flag" value="" size="5">

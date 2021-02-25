@@ -20,7 +20,7 @@
 <%@ include file="../links/linkOnly2dot.jsp"%>
 <style type="text/css">
 /* 화면 아래에 인터뷰 신청하기 div css */
-._1nW60 {
+._1nW60 {	
 	min-height: 50px;	
 	background-color: #fff;
 	-webkit-box-shadow: 0 -2px 3px 0 hsl(0deg 0% 64%/ 50%);
@@ -32,7 +32,8 @@
 	box-sizing: border-box;
 	z-index: 14;
 	margin: 0 auto;
-	left: calc((25%-1140px)/2);
+	left:0;
+	right:0;
 	text-align:center;
 /*  left : 400px;  */
 /* 	right : 400px; */
