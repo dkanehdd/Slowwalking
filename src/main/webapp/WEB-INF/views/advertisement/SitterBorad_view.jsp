@@ -82,7 +82,7 @@
 					<tbody class="text-center">
 						<tr><!-- 프로필이미지 -->
 							<c:choose>
-							    <c:when test="${not empty row.image_path }">
+							    <c:when test="${not empty dto.image_path }">
 							        <td colspan="2" style="border:none !important;"><img
 									src="../resources/images/${dto.image_path }"
 									style="width: 200px; height: 200px"></td>
