@@ -142,7 +142,7 @@
 						value="토">토</button>
 					<button type="button" ${fn:contains(timeArray, '일') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'} 
 					value="일">일</button> 
-					<button type="button" ${fn:contains(timeArray, '협의 가능') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
+					<button type="button" ${fn:contains(timeArray, '협의가능') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 					value="협의가능" style="width: 90px">협의가능</button>
 					</td>
 						</tr>

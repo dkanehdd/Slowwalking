@@ -54,7 +54,7 @@ $(function() {
 		<div id="back">
 			<div class="container-1" data-aos="fade-down" data-aos-delay="400">
 			<form action="../advertisement/SitterBoard_list?${_csrf.parameterName}=${_csrf.token}"
-			method="post" class="form reqFrm" style="width:100%; margin-bottom: 20px;">
+			method="GET" class="form reqFrm" style="width:100%; margin-bottom: 20px;">
 				<input type="hidden" name="search" value="search">
 				<div class="text-center">				
 					<div class="schArea">
@@ -100,12 +100,9 @@ $(function() {
 								<option value="">-구/군-</option>
 						</select>
 					</span>		
-					<select name="" id="" class="form-control" style="width:20%; display:inline-block;">
-						<option value="">최소 연령 선택</option>
-					</select>
-					<select name="" id="" class="form-control" style="width:20%; display:inline-block;">
-						<option value="">최대 연령 선택</option>
-					</select><br>
+					<input type="number" name="max_age" id="max_age" class="form-control" placeholder="※원하시는 시터의 최소 나이" style="width:20%; display:inline-block;">
+					<input type="number" name="min_age" id="min_age" class="form-control" placeholder="※원하시는 시터의 최대 나이" style="width:20%; display:inline-block;">
+					<br>
 								
 					<input type="number" name="pay" min="8720"
 					class="form-control mt-2" style="width: 33%; height: 50px; font-size: 17px; display:inline-block;"

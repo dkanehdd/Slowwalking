@@ -78,7 +78,7 @@ function workday_make() {
 			i++;
 		}
 	});
-	workday_tyle += ",~"
+	workday_tyle += ","
 	if (i == 0) {
 		$("#workday_name").val("");
 	} else {

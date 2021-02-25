@@ -3,9 +3,8 @@ package com.kosmo.slowwalking;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,8 +12,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 import advertisement.ParameterDTO;
 import advertisement.RequestBoardDTO;
 import advertisement.RequestBoardImpl;
-import member.AdminMemberImpl;
 import member.MypageImpl;
 import member.SitterImpl;
 import member.SitterMemberDTO;
 import mutiBoard.DiaryDTO;
-import mutiBoard.MultiBoardDTO;
 
 @Controller
 public class AdvertisementController {
@@ -64,6 +59,7 @@ public class AdvertisementController {
 			}
 			
 			System.out.println("parameterDTO.getTitle : " + parameterDTO.getTitle());
+			
 			
 			lists = sqlSession.getMapper(RequestBoardImpl.class).requestSearch(parameterDTO);
 		
@@ -234,7 +230,7 @@ public class AdvertisementController {
 			else if(temp.equals("일")) {
 				timeArray.add(temp);
 			}
-			else if(temp.equals("협의 가능")) {
+			else if(temp.equals("협의가능")) {
 				timeArray.add(temp);
 			}
 		}
@@ -253,6 +249,8 @@ public class AdvertisementController {
 		
 		//context 줄바꿈
 		requestBoarddto.setContent(requestBoarddto.getContent().replaceAll("\r\n", "<br/>"));
+		
+		//시간 오후 오전으로 변경
 		
 		//재조합한 시간을 보냄
 		model.addAttribute("time", time);
@@ -438,6 +436,7 @@ public class AdvertisementController {
 			date = date.replaceAll("8", "");
 			date = date.replaceAll("9", "");
 			date = date.replaceAll(":", "");
+			date = date.replaceAll("~", "");
 			
 			System.out.println("숫자가 없어진 date : " + date);
 			
@@ -459,6 +458,7 @@ public class AdvertisementController {
 			dto.setDisability_grade(req.getParameter("disability_grade"));
 			dto.setWarning(req.getParameter("warning"));
 			String age = req.getParameter("age");
+			dto.setAge(age);
 			dto.setStart_work(req.getParameter("start_work"));
 			System.out.println("시작 날짜 : " + dto.getStart_work());
 			dto.setContent(req.getParameter("content"));
@@ -628,6 +628,7 @@ public class AdvertisementController {
 			date = date.replaceAll("8", "");
 			date = date.replaceAll("9", "");
 			date = date.replaceAll(":", "");
+			date = date.replaceAll("~", "");
 			
 			System.out.println("숫자가 없어진 date : " + date);
 			
@@ -768,6 +769,22 @@ public class AdvertisementController {
 	// 시터 리스트 보기 페이지 이동 요청명 (메소드)
 	@RequestMapping("/advertisement/SitterBoard_list")
 	public String SitterBoardList(Model model, HttpServletRequest req, ParameterDTO parameterDTO) {
+		//생일로 나이 구하기
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int minYear;
+		if(parameterDTO.getMax_age() != null && !("".equals(parameterDTO.getMax_age()))) {
+			int maxYear = year - (Integer.parseInt(parameterDTO.getMax_age())-1);
+			parameterDTO.setMax_age(maxYear + "/01/01");
+			System.out.println("최대 년도 : " + parameterDTO.getMax_age());
+		}
+		if(parameterDTO.getMin_age() != null && !("".equals(parameterDTO.getMin_age()))) {
+			System.out.println("빈값일때 어떻게 들어오는지 알기 위한 : " + parameterDTO.getMin_age());
+			minYear = year - (Integer.parseInt(parameterDTO.getMin_age())-1);
+			parameterDTO.setMin_age(minYear + "/01/01");
+			System.out.println("최소 년도 : " + parameterDTO.getMin_age());
+		}
+		
 		//오라클에서 가져온 레코드를 저장하는 lists
 		ArrayList<SitterMemberDTO> lists = new ArrayList<>();
 		//paramterDTO에 map으로 검색자료를 저장할 map

@@ -214,7 +214,7 @@ function checkform() {
 											style="width: 30%; position: unset; margin: 0"> 
 										<select id="gugun"  class="pass form-control" style="width: 30%; display: inline-block;">
 												<option value="">-구/군-</option>
-										</select></span><input type="hid den" name="region"
+										</select></span><input type="hidden" name="region"
 											id="region" />
 									</div>
 								</tr>
@@ -234,10 +234,9 @@ function checkform() {
 										<button type="button" ${fn:contains(timeArray, '토') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
 											value="토">토</button>
 										<button type="button" ${fn:contains(timeArray, '일') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
-											value="일">일</button> <input
-											id="time_type" type="checkbox" name="time_type" value='Y' ${fn:contains(timeArray, '협의 가능') ? 'checked' : ''}><label
-											for="time_type"><span style="margin-left: 25px;">협의
-													가능</span></label>
+											value="일">일</button> 
+										<button type="button" ${fn:contains(timeArray, '협의가능') ? 'class="workday_off workday_on mr1p"' : 'class="workday_off mr1p"'}
+											value="협의가능">협의 가능</button> 
 												<input type="hid den" id="workday_name" name="request_time"
 										value=""> <br /> 
 										<select name='starttime' class="pass form-control"

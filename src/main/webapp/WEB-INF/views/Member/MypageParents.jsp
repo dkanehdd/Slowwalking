@@ -34,7 +34,7 @@ $(function(){
 		$("#innerPage").load("../mypage/membership");
 	});
 	$("#CCTV").on("click",function(){
-		window.open("http://pinocchio.iptime.org:12345/", 'CCTV', 'width=500, height=700');
+		window.open("http://pinocchio.iptime.org:12345/", 'CCTV', 'width=750, height=600');
 	});
 	
 });
