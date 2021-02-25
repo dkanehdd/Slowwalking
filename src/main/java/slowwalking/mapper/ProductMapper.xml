@@ -10,10 +10,10 @@
 	</select>
 
 	<select id="productList" resultType="mutiBoard.ProductDTO">
-		SELECT * FROM shop_products where flag='ticket'
+		SELECT * FROM shop_products where flag='ticket' order by idx
 	</select>
 	<select id="premiumList" resultType="mutiBoard.ProductDTO">
-		SELECT * FROM shop_products where flag='premium'
+		SELECT * FROM shop_products where flag='premium' order by idx
 	</select>
 	<!-- 상품 내용 보기 -->
 	<select id="contentPage" resultType="mutiBoard.ProductDTO">
