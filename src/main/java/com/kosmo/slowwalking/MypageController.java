@@ -1,7 +1,13 @@
 package com.kosmo.slowwalking;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,9 +19,11 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -185,7 +193,7 @@ public class MypageController {
 	//인터뷰 목록 추가
 	@RequestMapping("/mypage/addList")
 	@ResponseBody
-	public Map<String, Object> addInterviewList(HttpServletRequest req, HttpSession session){
+	public Map<String, Object> addInterviewList(HttpServletRequest req, HttpSession session, HttpServletResponse res)  throws UnsupportedEncodingException{
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -214,11 +222,12 @@ public class MypageController {
 					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
 					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(parentsBoard_id);
 					
-					//certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
+					certificationService.certifiedPhoneNumber(pardto.getPhone(), sitdto.getName(), "interview");
 					System.out.println("result:"+result);
 					
 					map.put("message", "success");
 					map.put("count", ticketCount-1);
+					
 				}
 				else {
 					String sitterBoard_id = req.getParameter("sitterBoard_id");
@@ -230,7 +239,7 @@ public class MypageController {
 					MemberDTO sitdto = sqlSession.getMapper(MemberImpl.class).getMember(sitterBoard_id);
 					MemberDTO pardto = sqlSession.getMapper(MemberImpl.class).getMember(user_id);
 					
-					//certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
+					certificationService.certifiedPhoneNumber(sitdto.getPhone(), pardto.getName(), "interview");
 					
 					System.out.println("result:"+result);
 					map.put("message", "success");
@@ -950,4 +959,81 @@ public class MypageController {
 		return result;
 	}
 	
+	
+	public void sendFCM(String name, HttpServletResponse res,HttpServletRequest req) {
+		String ApiKey = "AAAAeBGlyfM:APA91bHnt4YpvZSdkvRz8YgEx2uDTEk6ClppjcH9i5K6IJCoqtVubh0-VjctvwsQr7yNgCvBSXm-QSTbmqeW1q_-ZiWQ4_0WNkShTrmv4aSxqXkySmZmeWlUB0-HIhZwWGvzYBNSnj-4";
+		String fcmURL = "https://fcm.googleapis.com/fcm/send";
+		
+		res.setCharacterEncoding("UTF-8");
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		String notiTitle = "느린걸음";
+		String notiBody = name+"님으로부터 인터뷰요청이 왔습니다. 확인해주세요.";
+		String message = "테스트입니다.";
+		System.out.println(notiTitle+"--"+message);
+
+		try{
+			//디바이스 아이디
+			String deviceId1 = "eUbB3Q9fRlqCqpj8azbZae:APA91bFefDyNXTRfY9syyhvZoksITK0WPvLWV5vTa7-jL_WbOzbWxTVRXaK0VeV7oqANfhYjuue9SFD6Mb-3vuglCkMSFWO1Jtg7hReab2xPbgWnNn6fmIGVjlOH7mNy7uw-RSpjaun3";
+			
+			//디바이스 아이디 담기
+			ArrayList deviceList = new ArrayList();
+			deviceList.add(deviceId1);
+			
+			//연결
+			URL url = new URL(fcmURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "key="+ApiKey);
+			conn.setRequestProperty("Content-Type", "application/json");
+			
+			JSONObject json = new JSONObject();
+			
+			JSONObject noti = new JSONObject();
+			noti.put("title", notiTitle);
+			noti.put("body", notiBody);
+			
+			JSONObject data = new JSONObject();
+			data.put("message", message);
+			
+			json.put("to", deviceId1);//한명한테 보낼때..
+			//json.put("registration_ids", deviceList);//여러명한테 보낼때..
+			
+			json.put("notification", noti);
+			json.put("data", data);
+			
+			try{
+				OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+				System.out.println("JSON="+ json.toString());
+				wr.write(json.toString());
+				wr.flush();
+				
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(conn.getInputStream()));
+				
+				String output;
+				System.out.println("Output from Server ... \n");
+				while((output = br.readLine()) != null){
+					System.out.println(output);
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }

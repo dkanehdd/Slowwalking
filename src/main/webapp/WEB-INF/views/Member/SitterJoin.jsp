@@ -66,7 +66,7 @@
 									style="width: 30%; position: unset; margin: 0"> <select
 									id="gugun1" class="pass form-control">
 										<option value="">-구/군-</option>
-								</select></span> <small style="vertical-align:sub;">1순위 (필수)</small><input type="hid`den" name="residence1"
+								</select></span> <small style="vertical-align:sub;">1순위 (필수)</small><input type="hidden" name="residence1"
 									id="residence1" />
 							</div>
 							<div id="area_box" style="clear: both;">

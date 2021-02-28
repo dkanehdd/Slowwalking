@@ -54,8 +54,8 @@
 		font-weight: 400; 
 	}
 	.workday_on {
-		background: #F77B26;
-	}
+   background: var(--secondary-color);
+}
 	#back{
 		background-color: #DBDBDB;
 		width: 700px;
@@ -289,14 +289,14 @@ $(function(){
 	$('#submit').on("click", function(){
 		$.ajax({
 			url : "../mypage/addList?${_csrf.parameterName}=${_csrf.token}",
-			type : "GET",
+			type : "POST",
 			data : { 
 				idx : $('#idx').val(),
 				id : $('#parents_id').val(),
 				request_time : $('#request_time').val()
 			},
 			dataType : "json", 
-			contentType : "text/html;charset:utf-8;",
+			contentType : "application/x-www-form-urlencoded;charset:utf-8;",
 			success : function(data){
 				if(data.message=='success'){
 					alert("인터뷰 요청이 성공했습니다.\n ( 남은 티켓은 "+data.count+"개입니다. )");

@@ -1,22 +1,22 @@
 package com.kosmo.slowwalking;
 
-import java.security.Principal;
-import java.text.DateFormat;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import advertisement.MyHospitalDTO;
 import advertisement.SearchRadiusImpl;
@@ -35,7 +35,7 @@ public class HomeController {
 	private static final String apiKey = "AIzaSyBydzPIfrdGj3DuawS1kU7Mhq97HxnJf_c";
 	
 	@RequestMapping("/main/main")
-	public String home(HttpSession session, Model model) {
+	public String home(Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		model.addAttribute("apiKey", apiKey);
 		
 		ArrayList<DiaryDTO> lists = sqlSession.getMapper(MypageImpl.class).mainComment();
@@ -49,6 +49,7 @@ public class HomeController {
 		model.addAttribute("lists", lists);
 		
 		
+			
 		return "Main/slowwalking";
 	}
 	

@@ -173,7 +173,7 @@ function checkform() {
 											<button id="time_type" name="time_type" type="button" 
 											style="width: 75px;"
 											class="workday_off mr1p" value="협의가능">협의가능</button>
-											<input type="hid den" id="workday_name" name="request_time"
+											<input type="hidden" id="workday_name" name="request_time"
 											value="월,화,수,목,금"> <br /> <select name='starttime'
 											id='starttime1' style="width: 24%; margin-top: 10px; display: inline-block;"
 											class="form-control">
