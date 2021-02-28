@@ -45,7 +45,7 @@ $(document).ready(
 			<div id="accordion" data-aos="fade-up" data-aos-delay="400">
 				<div class="card">
 					<div class="card-header">
-						<a class="card-link subPTitle" data-toggle="collapse" href="#collapseOne">
+						<a class="card-link subPTitle" data-toggle="collapse" data-aos-delay="400" href="#collapseOne">
 							Q1. 돌봄 비용은 어떻게 지급해야 하나요? <button id="btnCollapse"
 								class="btn btn-link collapsed float-right" type="button"
 								data-toggle="collapse" data-target="#collapseOne"

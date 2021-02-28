@@ -851,6 +851,11 @@ ol, ul {
 	font-size: 1.1em;
 	font-weight:500;
 }
+.collapse{
+	transition:.3s ease-out; 
+	-webkit-transition:.3s ease-out; 
+	-moz-transition:.3s ease-out;
+}
 .table th{
 	vertical-align:middle;
 	background-color:#f7f7f7;
