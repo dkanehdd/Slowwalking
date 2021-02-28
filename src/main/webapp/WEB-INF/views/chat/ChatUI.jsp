@@ -29,8 +29,8 @@ window.onload = function(){
 	chat_id = document.getElementById('chat_id').value;
 	logWindow = document.getElementById('logWindow');
 	rece_id= document.getElementById('rece_id').value;
-	room = document.getElementById('room').value
-	webSocket = new WebSocket('ws://192.168.0.31:8080/slowwalking/EchoServer.do/'+room);
+	room = document.getElementById('room').value;
+	webSocket = new WebSocket('ws://192.168.50.180:8080/slowwalking/EchoServer.do/'+room);
 	webSocket.onopen = function(event) {
 		wsOpen(event);
 	};
