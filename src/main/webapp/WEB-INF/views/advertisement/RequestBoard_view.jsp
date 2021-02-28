@@ -46,7 +46,7 @@
 		background: #fff;
 		margin-top: 7px;
 		width: calc(70%/ 8);
-		color: #595757;
+		color: #333;
 		padding: 6px 0;
 		text-align: center;
 		font-family: Noto Sans KR, sans-serif !important;
